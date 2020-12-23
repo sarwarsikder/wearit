@@ -1,0 +1,4 @@
+#Vertual Environment
+venv
+#IDE And TextEditor In the ignore
+.idea
