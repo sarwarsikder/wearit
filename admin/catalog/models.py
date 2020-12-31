@@ -9,6 +9,7 @@ class Category(models.Model):
     meta_title = models.CharField(max_length=255, null=True)
     meta_description = models.CharField(max_length=255, null=True)
     meta_keyword = models.CharField(max_length=255, null=True)
+    meta_keyword = models.CharField(max_length=255, null=True)
 
     class Meta:
         indexes = [
