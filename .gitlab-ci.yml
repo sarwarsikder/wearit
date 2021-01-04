@@ -12,7 +12,7 @@ before_script:
 
 stages:
   - test
-  #- build
+  - build
   #- deploy
 
 # variables:
