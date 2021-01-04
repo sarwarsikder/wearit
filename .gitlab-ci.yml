@@ -15,13 +15,13 @@ stages:
   #- build
   #- deploy
 
-variables:
-    HEROKU_API_KEY: fffeedc8-716f-44e2-ad2e-d4d6ca09a3e6
-    HEROKU_STAGING_APP: gulshanclub-staging
-    HEROKU_PRODUCTION_APP: gulshanclub
-    POSTGRES_USER: postgres
-    REGISTRY_NAME: registry.gitlab.com/sarwar_sikder/gulshan_club_api
-    CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
+# variables:
+#     HEROKU_API_KEY: fffeedc8-716f-44e2-ad2e-d4d6ca09a3e6
+#     HEROKU_STAGING_APP: gulshanclub-staging
+#     HEROKU_PRODUCTION_APP: gulshanclub
+#     POSTGRES_USER: postgres
+#     REGISTRY_NAME: registry.gitlab.com/wsit/wearit-frontend
+#     CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF
 
 
 test:
