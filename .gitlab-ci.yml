@@ -26,7 +26,7 @@ test:
   stage: test
   script:
     - echo "Starting tests"
-    - docker-compose run web sh -c "python manage.py test"
+    - docker-compose run app sh -c "python manage.py test"
 
 build:
   stage: build
