@@ -48,5 +48,5 @@ deploy_staging:
     - docker pull $CONTAINER_IMAGE
     - docker tag $CONTAINER_IMAGE registry.heroku.com/$HEROKU_STAGING_APP/app
     - docker-compose run deploy_staging sh -c "python manage.py migrate"
-    - docker push registry.heroku.com/$HEROKU_STAGING_APP/web
+    - docker push registry.heroku.com/$HEROKU_STAGING_APP/app
     - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $HEROKU_STAGING_APP
