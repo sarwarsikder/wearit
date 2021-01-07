@@ -24,12 +24,16 @@ variables:
 
 test:
   stage: test
+  only:
+  - staging
   script:
     - echo "Starting tests"
     - docker-compose run web sh -c "python manage.py test"
 
 build:
   stage: build
+  only:
+  - staging
   script:
     - echo "Building the web"
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
