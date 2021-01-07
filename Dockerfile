@@ -16,15 +16,22 @@ RUN apk update \
     && pip install psycopg2 \
     && apk del build-deps
 
-# install dependencies
+
+
+
+#Install dependencies
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
+
 
 # copy project
 RUN mkdir -p /app
 WORKDIR /app
 COPY ./app /app
 
+#Django related  command 
+COPY ./django_entrypoint.sh /django_entrypoint.sh
+RUN chmod +x /django_entrypoint.sh
 
 
 # add and run as non-root user
@@ -33,3 +40,4 @@ USER myuser
 
 # run gunicorn
 CMD python manage.py runserver 0.0.0.0:$PORT
+
