@@ -26,12 +26,12 @@ test:
   stage: test
   script:
     - echo "Starting tests"
-    - docker-compose run app sh -c "python manage.py test"
+    - docker-compose run web sh -c "python manage.py test"
 
 build:
   stage: build
   script:
-    - echo "Building the app"
+    - echo "Building the web"
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
     - docker build -t $CONTAINER_IMAGE .
     - docker push $CONTAINER_IMAGE
@@ -42,11 +42,11 @@ deploy_staging:
   only:
   - staging
   script:
-    - echo "Deploying the app"
+    - echo "Deploying the web"
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
     - docker pull $CONTAINER_IMAGE
-    - docker tag $CONTAINER_IMAGE registry.heroku.com/$HEROKU_STAGING_APP/app
+    - docker tag $CONTAINER_IMAGE registry.heroku.com/$HEROKU_STAGING_APP/web
     - docker-compose run deploy_staging sh -c "python manage.py migrate"
-    - docker push registry.heroku.com/$HEROKU_STAGING_APP/app
-    - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release app --app $HEROKU_STAGING_APP
+    - docker push registry.heroku.com/$HEROKU_STAGING_APP/web
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $HEROKU_STAGING_APP
