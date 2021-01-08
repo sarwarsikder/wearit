@@ -6,10 +6,12 @@ from django.contrib.auth.hashers import make_password
 def add_user(apps, schema_editor):
     User = apps.get_model(*settings.AUTH_USER_MODEL.split('.'))
     User.objects.create(
-        email='migrated@jambonsw.com',
-        password=make_password('s3cr3tp4ssw0rd!'),
-        username='Migrated',
-    )
+        email='sarwar@workspaceit.com',
+        password=make_password('wsit974811'),
+        username='sarwar_sikder',
+        is_superuser=True,
+        is_staff=True,
+        )
 
 
 def remove_user(apps, schema_editor):
