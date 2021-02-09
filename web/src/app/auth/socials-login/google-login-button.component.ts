@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'google-login',
-  template: '<button class="btn btn-warning btn-block" (click)="signInWithGoogle()"><i class="fa fa-google"></i> google</button>'
+  template: '<button class="btn btn-warning btn-block log-social" (click)="signInWithGoogle()"><i class="fa fa-google"></i></button>'
 })
 export class GoogleLoginButtonComponent {
   private Auth: AuthService;

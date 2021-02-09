@@ -21,8 +21,8 @@ export class FeaturedProductsComponent implements OnChanges {
     dots: false,
     arrows: true,
     autoplay: false,
-    nextArrow: '<div class="next-1"><i class="fa fa fa-arrow-circle-o-right"></i></div>',
-    prevArrow: '<div class="prev-1"><i class="fa fa fa-arrow-circle-o-left"></i></div>',
+    nextArrow: '<div class="next-1">></div>',
+    prevArrow: '<div class="prev-1"><</div>',
     responsive: [
       {
         breakpoint: 1024,

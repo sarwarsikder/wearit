@@ -4,7 +4,7 @@
     <div class="box-main-1">
       <div class="title-main">
         <h4 translate>Featured</h4>
-        <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{featured: 1}" translate>View all</a></div>
+        <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{featured: 1}" translate>See All  ></a></div>
       </div>
       <div class="body-box-main">
         <featured-products [options]="{featured: 1}"></featured-products>
@@ -16,7 +16,7 @@
   <div class="container">
     <div class="title-main">
       <h4 translate>Daily Deal</h4>
-      <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{dailyDeal: 1}" translate>View all</a></div>
+      <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{dailyDeal: 1}" translate>See All  ></a></div>
     </div>
     <div class="body-box-main">
       <featured-products [options]="{dailyDeal: 1, showDeal: 1}"></featured-products>
@@ -49,7 +49,7 @@
   <div class="container">
     <div class="title-main">
       <h4 translate>Best Sale</h4>
-      <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{bestSell: 1}" translate>View all</a></div>
+      <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{bestSell: 1}" translate>See All  ></a></div>
     </div>
     <div class="body-box-main">
       <featured-products [options]="{bestSell: 1}"></featured-products>
@@ -60,7 +60,7 @@
   <div class="container">
     <div class="title-main">
       <h4 translate>Hottest</h4>
-      <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{hot: 1}" translate>View all</a></div>
+      <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{hot: 1}" translate>See All  ></a></div>
     </div>
     <div class="body-box-main">
       <featured-products [options]="{hot: 1}"></featured-products>
