@@ -181,14 +181,17 @@ a#scrollUp i {
 }
 
 .shop-menu ul li a {
-  background: #fff;
-  color: #696763;
-  font-family: 'Roboto', 'sans-serif';
+  /* background: #fff; */
+  color: #fff;
+  /* font-family: 'Roboto', 'sans-serif'; */
   font-size: 14px;
   font-weight: 300;
   padding: 0;
   padding-right: 0;
   margin-top: 10px;
+  padding: 5px 10px;
+  border: 1px solid #fff;
+  text-transform: uppercase;
 }
 
 .shop-menu ul li a i {
@@ -202,7 +205,7 @@ a#scrollUp i {
 }
 
 .header-bottom {
-  background: #4c4747 !important;
+  background: #EF4444 !important;
 }
 
 .nav-header {
@@ -314,7 +317,7 @@ ul.sub-menu {
 }
 
 #footer {
-  background: #f0f0e9;
+  background: #FEF2F2;
 }
 
 .footer-top .container {
@@ -2275,7 +2278,8 @@ textarea {
 }
 
 .prod-description {
-  border: 1px solid #ddd;
+  border: 0px;
+  background: #FAFAFA;
   border-top: 0;
   padding: 20px;
   margin-bottom: 40px;
@@ -2299,27 +2303,38 @@ textarea {
 .next-1,
 .prev-1 {
   position: absolute;
-  top: -60px;
-  right: -20px;
+  top: 43%;
+  z-index: 9;
+  right: -10px;
   font-size: 27px;
   color: #999;
   cursor: pointer;
   transition: all 0.3s ease 0s;
+  width: 25px;
+  height: 50px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -1px 1px 3px #b3b3b3;
+  color: #000;
 }
 
 .next-1:hover,
 .prev-1:hover {
-  color: #333;
+  color: #fff;
+  background: #DC2626;
 }
 
 .prev-1 {
-  right: 11px
+  left: -10px;
 }
 
 .header-middle {
   display: table;
   width: 100%;
-  padding: 20px 0px;
+  padding: 5px 0px 20px 0px;
+  background: #DC2626;
 }
 
 .category-top {
@@ -2379,7 +2394,7 @@ textarea {
 
 .search_box {
   margin-top: 23px;
-  margin-left: 40px
+  /* margin-left: 40px */
 }
 
 .search_box input {
@@ -2391,7 +2406,7 @@ textarea {
   height: 35px;
   outline: medium none;
   padding-left: 10px;
-  width: 270px;
+  width: 100%;
   background-image: url('../images/home/searchicon.png');
   background-repeat: no-repeat;
   background-position: right;
@@ -2421,28 +2436,31 @@ textarea {
 }
 
 .category-left {
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   margin-bottom: 30px;
 }
 
 .category-left li {
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
 }
 
 .category-left .category-filter {
-  padding: 10px 15px;
+  padding: 6px 5px;
 }
 
 .category-left li a {
   display: block;
-  padding: 10px 15px;
+  padding: 6px 5px;
   color: #333;
   position: relative;
+}
+.category-left li a:hover{
+  background: #fef2f2;
 }
 
 .category-left .badge {
   position: absolute;
-  padding: 16px;
+  padding: 14px;
   top: 0px;
   right: 0px;
 }

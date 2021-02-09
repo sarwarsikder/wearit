@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'facebook-login',
-  template: '<button class="btn btn-warning btn-block" (click)="signInWithFacebook()"><i class="fa fa-facebook"></i> facebook</button>'
+  template: '<button class="btn btn-warning btn-block log-social" (click)="signInWithFacebook()"><i class="fa fa-facebook"></i></button>'
 })
 export class FacebookLoginButtonComponent {
   private Auth: AuthService;
