@@ -64,3 +64,4 @@ public/files
 
 ## test ##
 coverage
+dist/*
