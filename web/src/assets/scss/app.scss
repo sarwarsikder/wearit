@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,700i');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -268,13 +268,13 @@ img {
 
 .box-product {
   background: #FAFAFA;
-  border: 1px solid #ddd;
+  border:0;
   border-radius: 0px;
   margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 10px;
-  box-shadow: 1px 1px 4px 0px #00000042;
-  padding-top: 10px !important;
+  box-shadow: 2px 1px 5px 0px #6d6d6d3b;
+  padding-top: 0px !important;
 
   img {
     width: 100%;
@@ -294,7 +294,8 @@ img {
     text-overflow: ellipsis;
 
     a {
-      color: #333;
+      color: #000;
+      font-weight: 500;
     }
   }
 
@@ -414,7 +415,7 @@ img {
   border-radius: 0px;
   margin-bottom: 20px;
   box-shadow: 1px 1px 4px 0px #00000042;
-  padding-top: 10px !important;
+  padding-top: 0px !important;
 }
 .card-shop-name{
   font-size: 14px;
@@ -608,8 +609,16 @@ img {
 
 .filter-left h4 {
   border-bottom: 1px solid #ddd;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   padding-bottom: 10px;
+  background: #E8E8E8;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.filter-left{
+  background: #fafafa;
 }
 
 .rate-seller {
@@ -802,5 +811,9 @@ img {
     background: #c3511b;
     border-color: #c3511b;
   }
+}
+
+.list-group-item{
+  background: transparent;
 }
 

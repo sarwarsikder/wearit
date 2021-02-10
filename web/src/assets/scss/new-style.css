@@ -205,7 +205,7 @@ a#scrollUp i {
 }
 
 .header-bottom {
-  background: #EF4444 !important;
+  background: #3a3a3a !important;
 }
 
 .nav-header {
@@ -236,9 +236,9 @@ a#scrollUp i {
 
 .mainmenu ul li a,
 .mainmenu ul li a:not([href]):not([tabindex]) {
-  color: rgba(255, 255, 255, 0.7);
-  font-family: 'sans-serif'0, 'sans-serif'1;
-  font-size: 17px;
+  color: rgba(255, 255, 255, 1);
+  /* font-family: 'sans-serif'0, 'sans-serif'1; */
+  font-size: 14px;
   font-weight: 300;
   padding: 0;
   padding-bottom: 10px;
@@ -317,7 +317,7 @@ ul.sub-menu {
 }
 
 #footer {
-  background: #FEF2F2;
+  background: #fbfbfb;
 }
 
 .footer-top .container {
@@ -2334,7 +2334,7 @@ textarea {
   display: table;
   width: 100%;
   padding: 5px 0px 20px 0px;
-  background: #DC2626;
+  background: #1b1b1b;
 }
 
 .category-top {
@@ -2348,7 +2348,7 @@ textarea {
   padding: 16px 20px;
   color: #fff;
   background-color: #df1a32;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -2490,7 +2490,7 @@ textarea {
   margin-bottom: 20px !important;
 }
 .messaging {
-  margin-top: 30px;
+  margin-top: 0px;
 }
 .input-group-prepend.lang-dropdown {
   line-height: 20px !important;
