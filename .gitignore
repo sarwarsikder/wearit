@@ -5,6 +5,7 @@
 # related ecosystem.
 ################################################
 admin/node_modules
+admin/node_modules/*
 admin/npm-debug.log
 admin/package-lock.json
 admin/.nvmrc
