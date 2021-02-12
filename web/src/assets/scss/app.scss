@@ -268,7 +268,6 @@ img {
 
 .box-product {
   background: #FAFAFA;
-  border: 1px solid #ddd;
   border-radius: 0px;
   margin-bottom: 20px;
   margin-left: 10px;
@@ -294,7 +293,8 @@ img {
     text-overflow: ellipsis;
 
     a {
-      color: #333;
+      color: #000;
+      font-weight: 500;
     }
   }
 
@@ -608,8 +608,16 @@ img {
 
 .filter-left h4 {
   border-bottom: 1px solid #ddd;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   padding-bottom: 10px;
+  background: #E8E8E8;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.filter-left{
+  background: #fafafa;
 }
 
 .rate-seller {

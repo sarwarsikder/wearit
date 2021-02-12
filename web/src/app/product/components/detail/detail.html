@@ -1,3 +1,214 @@
+<<<<<<< HEAD
+<div class="padding-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="row mar-bot-25">
+          <div class="col-md-6">
+            <div class="slider-for product-slider">
+              <img src="/assets/images/noImage.jpg" width="100%" title="No-Image" *ngIf="!product.images.length">
+              <div *ngIf="product.images.length && activeSlide"
+                [ngStyle]="{'background-image': 'url(' + activeSlide.mediumUrl + ')'}" class="slide-img-custom">
+                <lib-ngx-image-zoom [thumbImage]="activeSlide.mediumUrl" [fullImage]="activeSlide.fileUrl" [enableLens]="true"
+                  [lensWidth]="150" [lensHeight]="150" [circularLens]="true">
+                </lib-ngx-image-zoom>
+              </div>
+              <span class="slick-arrow slick-next"
+                (click)="changeSlide(slidePosition + 1);slickModal.slickGoTo(slidePosition)"
+                [hidden]="slidePosition == product.images.length - 1 || product.images.length == 1 || !product.images.length"></span>
+              <span class="slick-arrow slick-prev"
+                (click)="changeSlide(slidePosition - 1);slickModal.slickGoTo(slidePosition)"
+                [hidden]="slidePosition == 0 || product.images.length == 1"></span>
+            </div>
+            <div class="ps-list" [hidden]="!product.images.length">
+              <ngx-slick-carousel class="carousel carousel-row" #slickModal="slick-carousel" [config]="slideConfig">
+                <div ngxSlickItem *ngFor="let slide of product.images, let i = index" class="slide">
+                  <img [src]="slide.thumbUrl" alt="" width="100%" [ngClass]="{'active': slidePosition === i}"
+                    (click)="changeSlide(i)">
+                </div>
+              </ngx-slick-carousel>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="box-detail product-information detail-block">
+              <h2>{{product?.name}}</h2>
+              <div class="rate-seller">
+                <star-rating [rate]="product.ratingAvg" [total]="product?.totalRating"></star-rating>
+              </div>
+              <!-- <div translate class="highlight-info">Shop:
+                <strong>
+                  <a appLocationHref [url]="'/shops/'+ product.shop.alias">
+                    {{product?.shop?.name}}
+                  </a>
+                </strong>
+              </div> -->
+              <div translate class="highlight-info">Instock:
+                <strong>
+                  <span *ngIf="stockQuantity">{{stockQuantity | number}}</span>
+                  <span *ngIf="!stockQuantity" class="badge badge-danger" translate>SOLD OUT!</span>
+                </strong>
+              </div>
+              <div class="highlight-info">
+                <span translate class="mar-right-5">Tax: </span>
+                <strong>
+                  <span *ngIf="product.taxClass && product.taxPercentage"> {{product?.taxClass}}
+                    {{product?.taxPercentage}}%</span>
+                  <span *ngIf="!product.taxPercentage"> 0%</span>
+                </strong>
+              </div>
+              <div [innerHtml]="product?.shortDescription | safeHtml"></div>
+              <hr />
+              <div class="prod-variants">
+                <div class="price-detial" *ngIf="salePrice">
+                  <span class="salePrice-format">{{salePrice | currency | async}}</span>
+                  <label class="shipping-status" *ngIf="product?.freeShip" translate>Free Shipping</label>
+                  <div class="through-line">
+                    {{price | currency | async}} <span class="discount-text">{{discountVal}}% <a translate>OFF</a></span>
+                  </div>
+                </div>
+                <div class="price-detial" *ngIf="!salePrice">
+                  <span class="salePrice-format">{{price | currency | async}}</span>
+                  <label class="shipping-status" *ngIf="product?.freeShip" translate>Free Shipping</label>
+                </div>
+                <div class="mar-bot-15" *ngIf="variants.length">
+                  <button type="button" class="collapse-btn" (click)="openVariant()">Variants <i class="fa fa-bars"
+                      *ngIf="!isShowVar"></i><i class="fa fa-close" *ngIf="isShowVar"></i>
+                  </button>
+                </div>
+                <div class="row" *ngIf="isShowVar">
+                  <div class="col-sm-6 mar-bot-10" *ngFor="let item of variants; let i = index"
+                    (click)="selectVariant(item, i)">
+                    <div class="variant-option">
+                      <p *ngFor="let option of item.options">
+                        <strong>{{option?.displayText || options?.key}}</strong>: {{option?.value}}
+                      </p>
+                      <span class="badge badge-warning stock-brand">
+                        {{item?.stockQuantity | number}}
+                        <span translate>in stock!</span>
+                      </span>
+                      <span class="badge badge-success check-icon" *ngIf="item.isSelected"><i
+                          class="fa fa-check"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="quantity" *ngIf="stockQuantity">
+                <span translate>Quantity:&nbsp;</span> <input (keypress)="onlyNumberKey($event)" type="number" min="1"
+                  max="{{stockQuantity}}" [(ngModel)]="quantity" name="quantity" />
+              </div>
+              <hr>
+              <div class="button-detail">
+                <button class="btn-add-cart btn-cstm add-cart" (click)="addCart()"
+                  *ngIf="product.stockQuantity && !isVariant || isVariant && selectedVariant.stockQuantity" translate>
+                  <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.31343 3.85688C3.57496 3.85688 2.61021 3.85688 1.88707 3.85688C1.31579 3.85688 0.853271 4.31999 0.853271 4.89127V10.3095C0.853271 12.0233 2.2426 13.4126 3.95643 13.4126H8.92149C10.6353 13.4126 12.0247 12.0233 12.0247 10.3095V4.89127C12.0247 4.31999 11.5621 3.85688 10.9909 3.85688C10.2677 3.85688 9.30297 3.85688 8.56449 3.85688M4.31343 3.85688C4.31343 2.87175 4.33321 1 6.38953 1C8.44586 1 8.56449 2.87175 8.56449 3.85688M4.31343 3.85688C5.97357 3.85688 6.90435 3.85688 8.56449 3.85688M4.31343 3.85688H8.56449" stroke="white"/>
+                    <path d="M4.47339 5.43359C4.47329 6.46433 4.57683 8.11351 6.74904 8.11351C8.71437 8.11351 8.92128 6.46433 8.92128 5.43359" stroke="white" stroke-linecap="round"/>
+                  </svg>
+                  SHOP NOW
+                </button>&nbsp;
+                <button class="btn-wishlist btn-cstm" (click)="addWishList(product)" translate>
+                  <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.62754 11.8481C6.76695 11.9642 6.94584 12.0282 7.13138 12.0282C7.31683 12.0282 7.49582 11.9642 7.63513 11.8483C8.16283 11.4094 8.67125 10.9972 9.11991 10.6337L9.12008 10.6336C10.4329 9.5695 11.5666 8.6506 12.3555 7.74521C13.2374 6.7332 13.648 5.77359 13.648 4.72526C13.648 3.70673 13.2809 2.76707 12.6142 2.07925C11.9395 1.3833 11.0137 1 10.0072 1C9.25484 1 8.56585 1.22621 7.95939 1.67231C7.68669 1.87287 7.43686 2.11343 7.21273 2.39076C7.17107 2.44231 7.09171 2.4423 7.05006 2.39075C6.82598 2.11342 6.57609 1.87287 6.30348 1.67231C5.69702 1.22621 5.00803 1 4.2557 1C3.2491 1 2.32336 1.3833 1.64868 2.07925C0.981963 2.76707 0.614746 3.70673 0.614746 4.72526C0.614746 5.77359 1.02552 6.7332 1.90741 7.7453C2.69634 8.65064 3.83021 9.56968 5.14326 10.6339L5.14555 10.6358C5.59341 10.9987 6.10103 11.4102 6.62754 11.8481Z" stroke="black"/>
+                  </svg>                
+                  ADD TO WISHLIST
+                </button> &nbsp;
+                
+                <hr>
+                <div class="text-center" style="display: none;">
+                  <div class="share-icons">
+                    <span translate>Share:</span>
+                    <button shareButton="facebook" [image]="product?.mainImage" [description]="product?.shortDescription"><i
+                        class="fa fa-facebook-square"></i></button>
+                    <button shareButton="twitter" [image]="product?.mainImage" [description]="product?.shortDescription"><i
+                        class="fa fa-twitter-square"></i></button>
+                    <button shareButton="google" [image]="product?.mainImage" [description]="product?.shortDescription"><i
+                        class="fa fa-google"></i></button>
+                    <!-- TODO add more button social btn here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <ul class="nav nav-tabs products-tab">
+              <li class="nav-item">
+                <a class="nav-link" (click)="tab = 'detail'" [ngClass]="{active: tab === 'detail'}"
+                  translate>Information</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="tab = 'shippingPolicy'" [ngClass]="{active: tab === 'shippingPolicy'}"
+                  translate>Shipping
+                  Policy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="tab = 'refundPolicy'" [ngClass]="{active: tab === 'refundPolicy'}"
+                  translate>Refund
+                  Policy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="tab = 'reviews'" [ngClass]="{active: tab === 'reviews'}" translate>Reviews
+                  <span>({{product?.totalRating|number}})</span></a>
+              </li>
+            </ul>
+    
+            <div class="prod-description pt-3 pb-3" [hidden]="tab !== 'detail'">
+              <h5 class="prd-title" translate>Information</h5>
+              <div class="mar-top-15" [innerHTML]="product?.description | safeHtml"></div>
+              <div *ngIf="!product?.description">
+                <p>No description for product!</p>
+              </div>
+              <div class="clear"></div>
+              <h5 translate *ngIf="product?.specifications?.length" class="prd-title">Specifications</h5>
+              <div class="table-responsive">
+                <table class="table table-condensed mar-top-15" *ngIf="product?.specifications?.length">
+                  <tr *ngFor="let spec of product.specifications">
+                    <td width="200">
+                      <strong>{{spec?.key}}</strong>
+                    </td>
+                    <td>{{spec?.value}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+    
+            <div class="pb-3" [hidden]="tab !== 'reviews'">
+              <review-list [options]="{productId: product?._id, type: 'product'}"></review-list>
+            </div>
+    
+            <div class="prod-description pt-3 pb-3" [hidden]="tab !== 'shippingPolicy'">
+              <p class="pre-line">{{product?.shop?.shippingSettings?.shippingPolicy}}</p>
+              <div *ngIf="!product.shop.shippingSettings.shippingPolicy">
+                <p>No shipping policy for product!</p>
+              </div>
+            </div>
+            <div class="prod-description pt-3 pb-3" [hidden]="tab !== 'refundPolicy'">
+              <p class="pre-line">{{product?.shop?.shippingSettings?.refundPolicy}}</p>
+              <div *ngIf="!product.shop.shippingSettings.refundPolicy">
+                <p>No refund policy for product!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="title-main">
+          <h4 translate>Related goods</h4>
+        </div>
+        <div class="body-box-main">
+          <featured-products [options]="{productId: product?._id}"></featured-products>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <send-message-btn [hidden]="product.shop?.ownerId === userID" [recipientId]="product.shop?.ownerId">
+        </send-message-btn>
+        <a appLocationHref [url]="'/shops/'+ product.shop.alias" class="btn-send-block">Go to vendor Store</a>
+      </div>
+    </div>
+  </div>
+</div>
+=======
 <div class="padding-main">
   <div class="container">
     <div class="row">
