@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Input} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService, CartService, AuthService } from '../../../shared/services';
 import { ProductVariantService } from '../../services';
@@ -33,6 +33,8 @@ export class ProductDetailComponent implements OnDestroy {
   public stockQuantity: any = 0;
   public isShowVar: any = false;
   public userID: any;
+  @Input() showDeal: any = 0;
+
 
   constructor(private translate: TranslateService, private route: ActivatedRoute,
     private authService: AuthService, private seoService: SeoService, private variantService: ProductVariantService,
