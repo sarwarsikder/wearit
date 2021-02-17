@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <ul class="list-product row">
+        <ul class="list-product cstm-list-product row">
           <div class="badge badge-warning" translate *ngIf="!total">No products found</div>
           <li class="col-sm-6 col-md-3 list-item-single" *ngFor="let item of items">
             <product-card [product]="item"></product-card>

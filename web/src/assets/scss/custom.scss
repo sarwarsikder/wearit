@@ -1378,10 +1378,10 @@ span {
 }
 
 .sign-box{
-  padding: 30px;
+  // padding: 30px;
   color: #000;
   border: 0px;
-  box-shadow: 0px 0px 7px 1px #e6e6e6;
+  // box-shadow: 0px 0px 7px 1px #e6e6e6;
   border-radius: 0px;
   .box-title{
     text-align: center;
@@ -1605,7 +1605,7 @@ span {
 .list-product{
   .box-product{
     position: relative;
-    margin: 0px;
+    margin: 15px;
     margin-bottom: 30px;
     .btn-add-cart-hollow{
       bottom: 20px;
@@ -1652,5 +1652,123 @@ span {
         height: 150px;
       }
     }
+  }
+}
+
+.filter-shop{
+  h5{
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  input{
+    height: 40px !important;
+  }
+}
+.list-shop{
+  .box-shop{
+    border: 0px !important;
+    // position: relative;
+    .img-prod{
+      height: 135px !important;
+      padding: 0px !important;
+      display: flex;
+      align-items: center;
+      img{
+        height: 135px;
+        object-fit: cover;
+      }
+    }
+    .card-shop-name{
+      margin-top: 5px;
+      font-weight: 500;
+      min-height: 35px;
+    }
+    .pos-line-star{
+      display: none;
+    }
+    .text-box-shop{
+      position: relative;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      button{
+        position: relative;
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+.cstm-list-product {
+  .box-product{
+    margin: 0px !important;
+    margin-bottom: 30px !important;
+  }
+}
+
+.cstm-signup{
+  padding: 0px;
+  label{
+    font-weight: 500;
+    font-size: 16px;
+  }
+  .modal-header{
+    h4{
+      width: 100%;
+    }
+  }
+  .btn-register{
+    background: transparent;
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #000;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    &:hover{
+      background: #000;
+      color: #fff;
+    }
+  }
+  .text-through{
+    text-align: center;
+    position: relative;
+    margin-top: -20px;
+    &::before{
+      content: " ";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      left: 0px;
+      top: 13px;
+      background: #000;
+      z-index: 0;
+    }
+    span{
+      background: #fff;
+      font-size: 14px;
+      position: relative;
+      z-index: 9;
+    }
+  }
+}
+
+.modal-header{
+  border-bottom: 0px;
+}
+
+.chk-cstm{
+  // display: inline-flex;
+  input{
+    width: 18px !important;
+    height: 18px !important;
+    margin-right: 7px;
+    float: left;
   }
 }

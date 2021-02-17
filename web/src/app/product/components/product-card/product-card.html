@@ -19,14 +19,14 @@
       </span>
     </div>
     <div class="clear"></div>
-    <button class="btn-add-cart btn-cstm add-cart btn-add-cart-hollow" (click)="addCart()"
+    <!-- <button class="btn-add-cart btn-cstm add-cart btn-add-cart-hollow" (click)="addCart()"
       *ngIf="product.stockQuantity && !isVariant || isVariant && selectedVariant.stockQuantity" translate>
       <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4.31343 3.85688C3.57496 3.85688 2.61021 3.85688 1.88707 3.85688C1.31579 3.85688 0.853271 4.31999 0.853271 4.89127V10.3095C0.853271 12.0233 2.2426 13.4126 3.95643 13.4126H8.92149C10.6353 13.4126 12.0247 12.0233 12.0247 10.3095V4.89127C12.0247 4.31999 11.5621 3.85688 10.9909 3.85688C10.2677 3.85688 9.30297 3.85688 8.56449 3.85688M4.31343 3.85688C4.31343 2.87175 4.33321 1 6.38953 1C8.44586 1 8.56449 2.87175 8.56449 3.85688M4.31343 3.85688C5.97357 3.85688 6.90435 3.85688 8.56449 3.85688M4.31343 3.85688H8.56449" stroke="white"/>
         <path d="M4.47339 5.43359C4.47329 6.46433 4.57683 8.11351 6.74904 8.11351C8.71437 8.11351 8.92128 6.46433 8.92128 5.43359" stroke="white" stroke-linecap="round"/>
       </svg>
       SHOP NOW
-    </button>
+    </button> -->
     <!-- <star-rating [rate]="product.ratingAvg" [total]="product.totalRating"></star-rating> -->
     <div class="deal-time" *ngIf="product.dailyDeal && product.dealTo && showDeal"><span>Deal to</span>
       {{product.dealTo | date: 'medium'}}</div>
