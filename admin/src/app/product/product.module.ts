@@ -31,6 +31,7 @@ import { OptionService } from "./services/option.service";
 import { ProductService } from "./services/product.service";
 import { ProductVariantService } from "./services/variant.service";
 import { ReviewService } from "./services/review.service";
+import { BrandComponent } from './brand/brand.component';
 
 @NgModule({
   imports: [
@@ -57,6 +58,7 @@ import { ReviewService } from "./services/review.service";
     VariantUpdateModalComponent,
     ProductVariantsComponent,
     ReviewsComponent,
+    BrandComponent,
   ],
   providers: [
     ProductCategoryService,
