@@ -776,6 +776,28 @@ img {
   margin-bottom: 20px;
   display: table;
   width: 100%;
+  background: #F5F5F5;
+  padding: 20px;
+  h4{
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0px;
+  }
+}
+.form-filter{
+  display: flex;
+  flex-direction: row;
+  margin-top: 7px;
+  select{
+    width: 120px;
+    border: 1px solid #333;
+    border-radius: 3px;
+    margin-left: 10px;
+  }
+  label{
+    font-weight: 500;
+  }
+
 }
 
 .list-cart .media-left img {

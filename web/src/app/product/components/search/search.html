@@ -7,24 +7,28 @@
       <div class="col-md-9" *ngIf="!isLoading">
         <div class="filter-search">
           <div class="pull-left">
-            <strong>{{total}}</strong>&nbsp;<span translate>Results</span>
+            <h4>Browse Products</h4>
+            <strong>{{total}}</strong>&nbsp;<span translate>Items Found</span>
           </div>
-          <div class="pull-right form-inline">
-            <select class="select-1" (change)="changeSort('createdAt', $event)" name="createdAt">
-              <option value="" translate>Latest</option>
-              <option value="asc" translate>Oldest to Newest</option>
-              <option value="desc" translate>Newest to Oldest</option>
-            </select>
-            <select class="select-1" (change)="changeSort('salePrice', $event)" name="price">
-              <option value="" translate>Price</option>
-              <option value="asc" translate>Lowest to Highest</option>
-              <option value="desc" translate>Highest to Lowest</option>
-            </select>
+          <div class="pull-right">
+            <div class="form-inline form-filter">
+              <label for="">Sort by:</label>
+              <select class="select-1" (change)="changeSort('createdAt', $event)" name="createdAt">
+                <option value="" translate>Latest</option>
+                <option value="asc" translate>Oldest to Newest</option>
+                <option value="desc" translate>Newest to Oldest</option>
+              </select>
+              <!-- <select class="select-1" (change)="changeSort('salePrice', $event)" name="price">
+                <option value="" translate>Price</option>
+                <option value="asc" translate>Lowest to Highest</option>
+                <option value="desc" translate>Highest to Lowest</option>
+              </select> -->
+            </div>
           </div>
         </div>
         <ul class="list-product row">
           <div class="badge badge-warning" translate *ngIf="!total">No products found</div>
-          <li class="col-sm-6 col-md-4" *ngFor="let item of items">
+          <li class="col-sm-6 col-md-3 list-item-single" *ngFor="let item of items">
             <product-card [product]="item"></product-card>
           </li>
         </ul>
