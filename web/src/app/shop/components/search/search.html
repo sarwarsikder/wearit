@@ -1,11 +1,14 @@
 <div class="padding-main">
   <div class="container">
-    <div class="header-title">
+    <!-- <div class="header-title">
       <h4 translate>Shops</h4>
-    </div>
+    </div> -->
     <div class="row">
-      <div class="col-md-12">
-        <div class="filter-search mar-bot-10">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-9">
+        <div class="filter-search filter-shop mar-bot-10">
           <div class="pull-left form-inline">
             <div class="input-group mb-3">
               <input type="text" class="form-control" name="shopSearch" placeholder="{{'Search shop' | translate}}" (keypress)="keyPress($event)" [(ngModel)]="searchFields.q" />
@@ -28,12 +31,19 @@
           </div>
         </div>
         <div class="filter-search">
-          <div class="pull-right form-inline">
-            <select class="select-1" [(ngModel)]="searchFields.featured" (change)="query()">
-              <option value="" translate>All</option>
-              <option value="1" translate>Featured</option>
-              <option value="0" translate>Non-featured</option>
-            </select>
+          <div class="pull-left">
+            <h4>Browse Products</h4>
+            <strong>{{total}}</strong>&nbsp;<span translate>Items Found</span>
+          </div>
+          <div class="pull-right">
+            <div class="form-inline form-filter">
+              <label for="">Sort by:</label>
+              <select class="select-1" [(ngModel)]="searchFields.featured" (change)="query()">
+                <option value="" translate>All</option>
+                <option value="1" translate>Featured</option>
+                <option value="0" translate>Non-featured</option>
+              </select>
+            </div>
           </div>
         </div>
         <div *ngIf="!total" class="badge badge-warning" translate>No shops found</div>
