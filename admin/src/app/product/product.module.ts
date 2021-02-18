@@ -25,13 +25,17 @@ import {
   VariantUpdateModalComponent,
   ProductVariantsComponent,
 } from "./variants/product-variants.component";
+import { BrandComponent } from './brand/brand.component';
+import { ProductBrandCreateComponent } from './brand/brand.component';
+import { ProductBrandUpdateComponent } from './brand/brand.component';
+
 
 import { ProductCategoryService } from "./services/category.service";
 import { OptionService } from "./services/option.service";
 import { ProductService } from "./services/product.service";
 import { ProductVariantService } from "./services/variant.service";
 import { ReviewService } from "./services/review.service";
-import { BrandComponent } from './brand/brand.component';
+import { BrandService } from "./services/brand.service";
 
 @NgModule({
   imports: [
@@ -59,6 +63,8 @@ import { BrandComponent } from './brand/brand.component';
     ProductVariantsComponent,
     ReviewsComponent,
     BrandComponent,
+    ProductBrandCreateComponent,
+    ProductBrandUpdateComponent
   ],
   providers: [
     ProductCategoryService,
@@ -66,6 +72,8 @@ import { BrandComponent } from './brand/brand.component';
     ProductService,
     ProductVariantService,
     ReviewService,
+    BrandService
+
   ],
   exports: [],
   entryComponents: [VariantUpdateModalComponent],

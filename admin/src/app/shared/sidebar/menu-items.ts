@@ -24,6 +24,8 @@ export const ROUTES: RouteInfo[] = [
       { path: '/products/create', title: 'Product Create', icon: 'fa fa-plus', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
       { path: '/products/categories', title: 'Products categories', icon: 'fa fa-cubes', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
       { path: '/products/categories/create', title: 'Create new category', icon: 'fa fa-plus', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+      { path: '/products/brands/create', title: 'Create new brand', icon: 'fa fa-plus', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+      { path: '/products/brands', title: 'Products Brands', icon: 'fa fa-cubes', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
       { path: '/products/options', title: 'Products options', icon: 'fa fa-cubes', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
       { path: '/products/options/create', title: 'Create new option', icon: 'fa fa-plus', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
     ]

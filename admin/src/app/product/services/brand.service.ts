@@ -18,11 +18,11 @@ export class BrandService {
   }
 
   search(params: any): Promise<any> {
-    return this.restangular.one('products', 'search').get(params).toPromise();
+    return this.restangular.one('brands').get(params).toPromise();
   }
 
   tree(): Promise<any> {
-    return this.restangular.one('brands', 'tree').get().toPromise();
+    return this.restangular.one('brands').get().toPromise();
   }
 
   findOne(id): Promise<any> {
