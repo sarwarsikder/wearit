@@ -124,6 +124,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   open_sign_up(content) {
-    this.modalService.open(content);
+    this.modalService.open(content,  { size: 'lg' });
   }
 }
