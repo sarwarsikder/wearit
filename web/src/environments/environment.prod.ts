@@ -3,7 +3,7 @@ export const environment = {
   version: '0.0.1',
   build: 1,
   platform: 'web',
-  apiBaseUrl: 'https://genstore-api.iospot.top/v1',
+  apiBaseUrl: 'http://localhost:8080/v1',
   apiProxy: '/api/v1',
   sellerUrl: 'https://genstore-seller.iospot.top',
   googleClientId: '917195124089-hp1m6g5fbotlkbipmrejrapt9uh0lhhl.apps.googleusercontent.com',
