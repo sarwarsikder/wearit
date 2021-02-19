@@ -113,17 +113,6 @@
     </div>
   </div>
 </div>
-<div class="padding-main bg-grey">
-  <div class="container">
-    <div class="title-main">
-      <h4 translate>Hottest</h4>
-      <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{hot: 1}" translate>See All  ></a></div>
-    </div>
-    <div class="body-box-main">
-      <featured-products [options]="{hot: 1}"></featured-products>
-    </div>
-  </div>
-</div>
 <div class="padding-main" *ngIf="shops.length">
   <div class="container">
     <div class="title-main">
@@ -140,6 +129,17 @@
         <shop-card [shop]="shop"></shop-card>
       </div>
     </ngx-slick-carousel> -->
+  </div>
+</div>
+<div class="padding-main bg-grey">
+  <div class="container">
+    <div class="title-main">
+      <h4 translate>Product you may like</h4>
+      <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{hot: 1}" translate>See All  ></a></div>
+    </div>
+    <div class="body-box-main">
+      <featured-products [options]="{hot: 1}"></featured-products>
+    </div>
   </div>
 </div>
 <div class="padding-main action-register bg-cover" style="background: url(/assets/images/bg-2.jpg);">
