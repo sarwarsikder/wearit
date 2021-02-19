@@ -209,8 +209,8 @@ a#scrollUp i {
 }
 
 .nav-header {
-  padding-bottom: 10px;
-  padding-top: 10px;
+  /* padding-bottom: 10px; */
+  /* padding-top: 10px; */
   position: relative;
   padding-left: 300px;
 }
@@ -1274,14 +1274,14 @@ h2.title {
 
 .login-form form input,
 .signup-form form input {
-  background: #f0f0e9;
+  background: #efefef;
   border: medium none;
   color: #696763;
   display: block;
   font-family: 'sans-serif'3, 'sans-serif'4;
   font-size: 14px;
   font-weight: 300;
-  height: 40px;
+  height: 45px;
   margin-bottom: 10px;
   outline: medium none;
   padding-left: 10px;
@@ -2348,8 +2348,9 @@ textarea {
   padding: 16px 20px;
   color: #fff;
   background-color: #df1a32;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .label-categories i {
@@ -2499,7 +2500,7 @@ textarea {
   margin-top: 0px;
 }
 .shop-menu .navbar-nav {
-  margin-top: 6px
+  margin-top: 10px
 }
 @media (max-width: 768px) {
   .category-top {
