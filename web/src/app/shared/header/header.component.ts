@@ -5,6 +5,8 @@ import { AuthService, SystemService, CartService } from '../services';
 import { NgbModal, NgbModalOptions, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ComplainComponent } from '../complain/complain.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastyService } from 'ng2-toasty';
+
 
 
 
@@ -48,12 +50,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   };
 
   public submitted: boolean = false;
+
   
 
 
   constructor(private router: Router, private authService: AuthService, private systemService: SystemService,
     private modalService: NgbModal, private translate: TranslateService, private cartService: CartService,
-    config: NgbModalConfig) {
+    config: NgbModalConfig, private toasty: ToastyService, auth: AuthService,) {
     this.userLoadedSubscription = authService.userLoaded$.subscribe(data => this.currentUser = data);
     this.cartLoadedSubscription = cartService.cartChanged$.subscribe(data => this.cart = data);
     this.systemService.configs().then(resp => {
@@ -64,6 +67,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
     config.backdrop = 'static';
     config.keyboard = false;
+    this.Auth = auth;
   }
 
   ngOnInit() {
@@ -77,6 +81,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // prevent memory leak when component destroyed
     this.userLoadedSubscription.unsubscribe();
   }
+
+  sign_in(frm: any) {
+    this.submitted = true;
+    if (frm.invalid) {
+      return;
+    }
+    
+    this.Auth.login(this.credentials).then(() => {
+      const redirectUrl = sessionStorage.getItem('redirectUrl');
+      if (redirectUrl) {
+        sessionStorage.removeItem('redirectUrl');
+        this.router.navigate([redirectUrl]);
+      } else {
+        console.log("TESTING");
+        window.location.reload();
+        this.router.navigate(['/']);
+      }
+    })
+      .catch(() => {
+        this.toasty.error(this.translate.instant('Your account is not activated or register. Please recheck again or contact to our admin to resolve it.'));
+      });
+  }
+
 
   logout() {
     this.authService.removeToken();
