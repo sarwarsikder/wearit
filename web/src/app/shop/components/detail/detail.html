@@ -72,7 +72,7 @@
             <star-rating [rate]="shop?.ratingAvg" [total]="shop?.totalRating"></star-rating>&nbsp;
             <a title="Report the shop" (click)="report()"><i class="fa fa-flag"></i></a>
             <br>
-            <div style="width: 200px;">
+            <div style="width: 200px;" class="vendor-box">
               <send-message-btn [hidden]="shop.ownerId === userID" [recipientId]="shop?.ownerId"></send-message-btn>
             </div>
           </div>
