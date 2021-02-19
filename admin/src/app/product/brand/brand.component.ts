@@ -112,6 +112,8 @@ export class ProductBrandUpdateComponent implements OnInit {
     this.drandService.findOne(this.brandId)
     .then(resp => {
       this.brand = resp.data;
+      delete this.brand['totalProduct'];
+      delete this.brand['meta'];
       if (typeof this.brand.logo === 'string') {
         this.imageUrl = this.brand.logo;
       } else if (this.brand.logo) {
