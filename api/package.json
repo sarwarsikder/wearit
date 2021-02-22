@@ -4,7 +4,8 @@
   "description": "Genstore-api",
   "main": "server/www.js",
   "engines": {
-    "node": "8.9.0"
+    "node": "8.9.0",
+    "npm": "6.14.6"
   },
   "dependencies": {
     "@types/memwatch-next": "^0.3.2",
