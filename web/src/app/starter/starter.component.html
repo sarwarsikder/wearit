@@ -26,6 +26,15 @@
     </div>
     <div class="box-main-1">
       <div class="title-main">
+        <h4 translate>Brands</h4>
+        <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{featured: 1}" translate>See All  ></a></div>
+      </div>
+      <div class="body-box-main">
+        <brands [options]="{featured: 1}"></brands>
+      </div>
+    </div>
+    <div class="box-main-1">
+      <div class="title-main">
         <h4 translate>Featured</h4>
         <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{featured: 1}" translate>See All  ></a></div>
       </div>

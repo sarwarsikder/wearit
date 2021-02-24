@@ -14,6 +14,8 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchSidebarComponent } from './components/search-sidebar/search-sidebar.component';
+import { BrandsComponent} from './components/brands/brands.component';
+import { BrandCardComponent} from './components/brand-card/brand-card.component'
 
 import { CategoryService, ProductService, ProductVariantService } from './services';
 import { ReviewService, GoogleAnalyticsService } from '../shared/services';
@@ -25,6 +27,7 @@ import { CurrencyPipe } from '../shared/pipes';
 
 import { UtilsModule } from '../utils/utils.module';
 import { MessageModule } from '../message/message.module';
+import { from } from 'rxjs';
 
 @NgModule({
   imports: [
@@ -45,7 +48,9 @@ import { MessageModule } from '../message/message.module';
     ProductCardComponent,
     SearchSidebarComponent,
     SearchComponent,
-    CurrencyPipe
+    BrandsComponent,
+    BrandCardComponent,
+    CurrencyPipe,
   ],
   providers: [
     CategoryService, ProductService, ProductResolver, SearchResolver,
@@ -55,6 +60,8 @@ import { MessageModule } from '../message/message.module';
     FeaturedProductsComponent,
     ProductCardComponent,
     SearchSidebarComponent,
+    BrandsComponent,
+    BrandCardComponent,
     SearchComponent
   ]
 })

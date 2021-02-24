@@ -37,7 +37,8 @@ const schema = new Schema({
   timestamps: {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
-  }
+  },
+  toJSON: { virtuals: true }
 });
 
 module.exports = schema;

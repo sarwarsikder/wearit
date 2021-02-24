@@ -7,6 +7,7 @@ import { ToastyService } from 'ng2-toasty';
 import * as _ from 'lodash';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
+import { BrandService } from '../services/brand.service';
 
 @Component({
   selector: 'product-create',
@@ -58,6 +59,7 @@ export class ProductCreateComponent implements OnInit {
     multiple: true
   };
   public seller: any;
+  public brand: any;
   public searching: any = false;
   public searchFailed: any = false;
   public fileOptions: any = {};
@@ -93,7 +95,35 @@ export class ProductCreateComponent implements OnInit {
       )
     )
 
-  constructor(private router: Router, private categoryService: ProductCategoryService,
+    formatter_brand = (x: {
+      name: string,
+      owner: {
+        name: string
+      }
+    }) => {
+      
+    }
+
+    search_brand = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap(() => this.searching = true),
+      switchMap(term =>
+        this.drandService.search({ name: term }).then((res) => {
+          if (res) {
+            this.searchFailed = false;
+            this.searching = false;
+            return res.data.items;
+          }
+          this.searchFailed = true;
+          this.searching = false;
+          return of([]);
+        })
+      )
+    )
+
+  constructor(private router: Router, private categoryService: ProductCategoryService, private drandService: BrandService,
     private productService: ProductService, private toasty: ToastyService, private location: LocationService) {
   }
 
@@ -136,6 +166,10 @@ export class ProductCreateComponent implements OnInit {
       this.product.shopId = this.seller._id;
     } else if (!this.seller) {
       return this.toasty.error('Please select Seller');
+    }
+
+    if (this.brand) {
+      this.product.brandId = this.brand._id;
     }
 
     if (this.product.type === 'digital' && !this.product.digitalFileId) {

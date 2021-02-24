@@ -10,6 +10,7 @@ const validateSchema = Joi.object().keys({
   ordering: Joi.number().allow([null, '']).optional(),
   categoryId: Joi.string().allow([null, '']).optional(),
   shopId: Joi.string().allow([null, '']).optional(),
+  brandId: Joi.string().allow([null, '']).optional(),
   price: Joi.number().optional(),
   salePrice: Joi.number().allow([null]).optional(),
   mainImage: Joi.string().allow([null, '']).optional(),
@@ -183,6 +184,10 @@ exports.search = async (req, res, next) => {
           $in: !root ? [category._id] : Helper.Utils.flatten(root).map(item => item._id)
         };
       }
+    }
+
+    if (req.query.brandId) {
+      query.brandId = req.user.brandId;
     }
 
     let defaultSort = true;
