@@ -79,3 +79,8 @@ server {
   proxy_set_header X-Forwarded-Proto $scheme;
 }
 ```
+
+
+## Heroku Buildpack Build pack  new graphicmagik added
+https://github.com/mcollina/heroku-buildpack-graphicsmagick.git
+https://github.com/HiMamaInc/heroku-buildpack-imagemagick-heif.git

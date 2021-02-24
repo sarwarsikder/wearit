@@ -34,6 +34,7 @@ export class AuthService {
             this.removeToken();
             throw 'Invalid role!';
           }
+          console.log("TESTING");
 
           this.currentUser = resp.data;
           localStorage.setItem('isLoggedin', 'yes');
