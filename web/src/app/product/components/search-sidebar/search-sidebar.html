@@ -1,16 +1,36 @@
+
+  <div class="title-main">
+    <h2><span translate>Brands</span></h2>
+  </div>
+  <ul class="category-left category-shop-left">
+    <li>
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId, shopId: routeId.shopId, brandId: ''}"
+        [ngClass]="{'active-a': routeId.shopId == ''}">
+        <span translate>All Brands</span>
+      </a>
+    </li>
+    <li *ngFor="let item of brands">
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId,shopId: routeId.shopId, brandId: item._id}"
+        [ngClass]="{'active-a': item._id === routeId.brandId}">
+        {{item.name}}
+      </a>
+    </li>
+  </ul>
+
+
 <div class="left-sidebar">
   <div class="title-main">
     <h2 translate>Categories</h2>
   </div>
   <ul class="category-left">
     <li>
-      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: '', shopId: routeId.shopId}"
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: '', shopId: routeId.shopId, brandId: routeId.brandId}"
         [ngClass]="{'active-a': routeId.categoryId == ''}">
         <span translate>All Categories</span>
       </a>
     </li>
     <li *ngFor="let category of tree">
-      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: category._id, shopId: routeId.shopId}"
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: category._id, shopId: routeId.shopId, brandId: routeId.brandId}"
         [ngClass]="{collapsed: !category.showChildren, 'active-a': category._id === routeId.categoryId}">
         {{category.name}}
         <span class="badge pull-right" *ngIf="category?.children?.length" (click)="category.showChildren = !category.showChildren">
@@ -33,13 +53,13 @@
   </div>
   <ul class="category-left category-shop-left">
     <li>
-      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId, shopId: ''}"
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId, shopId: '', brandId: routeId.brandId}"
         [ngClass]="{'active-a': routeId.shopId == ''}">
         <span translate>All Shop</span>
       </a>
     </li>
     <li *ngFor="let item of shops">
-      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId, shopId: item._id}"
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId, shopId: item._id, brandId: routeId.brandId}"
         [ngClass]="{'active-a': item._id === routeId.shopId}">
         {{item.name}}
       </a>

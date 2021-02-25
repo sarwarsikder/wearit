@@ -4,7 +4,11 @@ import { ProductService } from '../services/product.service';
 import { LocationService } from '../../shared/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
+
 import * as _ from 'lodash';
+import { BrandService } from '../services/brand.service';
 
 @Component({
   selector: 'product-update',
@@ -31,12 +35,45 @@ export class ProductUpdateComponent implements OnInit {
   public freeState: any;
   public freeCity: any;
   public dealDate: any;
+  public brand: any;
   public imagesOptions: any = {
     multiple: true
   };
   public isUpdate: any = true;
   public fileOptions: any = {};
-  constructor(private router: Router, private route: ActivatedRoute, private categoryService: ProductCategoryService,
+
+  public searching: any = false;
+  public searchFailed: any = false;
+
+  formatter_brand = (x: {
+    name: string,
+    owner: {
+      name: string
+    }
+  }) => {
+    
+  }
+
+  search_brand = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(500),
+    distinctUntilChanged(),
+    tap(() => this.searching = true),
+    switchMap(term =>
+      this.drandService.search({ name: term }).then((res) => {
+        if (res) {
+          this.searchFailed = false;
+          this.searching = false;
+          return res.data.items;
+        }
+        this.searchFailed = true;
+        this.searching = false;
+        return of([]);
+      })
+    )
+  )
+
+  constructor(private router: Router, private route: ActivatedRoute, private categoryService: ProductCategoryService,private drandService: BrandService,
     private productService: ProductService, private toasty: ToastyService, private location: LocationService) {
     if (route.snapshot.queryParams.tab) {
       this.tab = route.snapshot.queryParams.tab;
@@ -91,6 +128,10 @@ export class ProductUpdateComponent implements OnInit {
 
     if (this.product.type === 'digital' && !this.product.digitalFileId) {
       return this.toasty.error('Please select Digital file path!');
+    }
+
+    if (this.brand) {
+      this.product.brandId = this.brand._id;
     }
 
     this.product.restrictFreeShipAreas = [];

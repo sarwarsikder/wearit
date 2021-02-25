@@ -1,5 +1,5 @@
 <div class="box-product" >
-    <div class="img-prod"><a [routerLink]="['/products/search']" [queryParams]="{featured: 1}">
+    <div class="img-prod"><a [routerLink]="['/products/search']" [queryParams]="{brandId: brand?.id}">
         <img [src]="brand?.logo?.thumbUrl"></a>
     </div>
     <div class="text-product">
@@ -7,7 +7,7 @@
           title="{{brand?.name}}">{{brand?.name}}</a>
         </div>
     </div>
-    <button class="btn-add-cart btn-cstm add-cart btn-add-cart-hollow">
+    <button class="btn-add-cart btn-cstm add-cart btn-add-cart-hollow" [routerLink]="['/products/search']" [queryParams]="{brandId: brand?.id}">
         <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M3.99725 3.53175C3.3362 3.53175 2.47262 3.53175 1.8253 3.53175C1.31392 3.53175 0.899902 3.9463 0.899902 4.45767V9.22222C0.899902 10.7563 2.14356 12 3.67768 12H8.12212C9.65625 12 10.8999 10.7563 10.8999 9.22223V4.45767C10.8999 3.9463 10.4859 3.53175 9.97451 3.53175C9.32719 3.53175 8.4636 3.53175 7.80256 3.53175M3.99725 3.53175C3.99725 2.65873 4.01495 1 5.85565 1C7.69636 1 7.80256 2.65873 7.80256 3.53175M3.99725 3.53175C5.48331 3.53175 6.31649 3.53175 7.80256 3.53175M3.99725 3.53175H7.80256" stroke="#1C1C1C" stroke-width="0.5"/>
           <path d="M4.14063 4.93359C4.14054 5.84703 4.23322 7.30852 6.17766 7.30852C7.77613 7.30852 7.92067 5.84703 7.92067 4.93359" stroke="#1C1C1C" stroke-width="0.5" stroke-linecap="round"/>

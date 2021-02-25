@@ -168,18 +168,18 @@
                   </div>
                 </div>
 
-                <!-- <div class="col-md-6">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label>Brand</label>
-                    <input type="text" name="brand" class="form-control" [class.is-invalid]="searchFailed" *ngIf="!isUpdate" [(ngModel)]="brand" [ngbTypeahead]="search_brand" placeholder="Search brand" [resultTemplate]="rt" [inputFormatter]="formatter_brand" />
-                    <input type="text" name="brand" class="form-control" *ngIf="isUpdate" readonly [(ngModel)]="product.brand.name" />
+                    <input type="text" name="brand" class="form-control" [class.is-invalid]="searchFailed" *ngIf="!product.brand" [(ngModel)]="brand" [ngbTypeahead]="search_brand" placeholder="Search brand" [resultTemplate]="rt" [inputFormatter]="formatter_brand" />
+                    <input type="text" name="brand" class="form-control" *ngIf="product.brand" readonly [(ngModel)]="product.brand.name" />
                     <span *ngIf="searching">searching...</span>
                     <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
                     <ng-template #rt let-r="result" let-t="term">
                       <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
                     </ng-template>
                   </div>
-                </div> -->
+                </div>
 
                 <div class="col-md-6">
                 </div>

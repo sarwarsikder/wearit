@@ -187,7 +187,9 @@ exports.search = async (req, res, next) => {
     }
 
     if (req.query.brandId) {
-      query.brandId = req.user.brandId;
+      console.log("TEST");
+      console.log(req.query.brandId);
+      query.brandId = req.query.brandId;
     }
 
     let defaultSort = true;
@@ -282,6 +284,10 @@ exports.details = async (req, res, next) => {
       .populate({
         path: 'category',
         select: '_id name mainImage totalProduct parentId'
+      })
+      .populate({
+        path: 'brand',
+        select: '_id name alias description logo'
       })
       .populate({
         path: 'shop',

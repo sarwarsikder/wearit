@@ -38,7 +38,9 @@ const schema = new Schema({
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   },
-  toJSON: { virtuals: true }
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
+
 });
 
 module.exports = schema;
