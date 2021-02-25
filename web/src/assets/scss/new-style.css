@@ -200,8 +200,9 @@ a#scrollUp i {
 }
 
 .shop-menu ul li a:hover {
-  color: #fe980f;
-  background: #fff;
+  color: #ffffff;
+  background: #000;
+  border: 1px solid #000;
 }
 
 .header-bottom {
