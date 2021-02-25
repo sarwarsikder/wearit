@@ -37,4 +37,8 @@ export class ProductService {
   findSeller(params: any): Promise<any> {
     return this.restangular.one('shops', 'search').get(params).toPromise();
   }
+
+  findBrand(params: any): Promise<any> {
+    return this.restangular.one('brands', 'search').get(params).toPromise();
+  }
 }

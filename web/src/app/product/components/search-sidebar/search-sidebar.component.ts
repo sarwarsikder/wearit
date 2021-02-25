@@ -13,6 +13,7 @@ export class SearchSidebarComponent implements OnInit {
   @Output() updateFields = new EventEmitter();
   public tree: any = [];
   public shops: any = [];
+  public brands: any = [];
   public items: any = [];
   public page: any = 1;
   public itemsPerPage: any = 12;
@@ -27,20 +28,29 @@ export class SearchSidebarComponent implements OnInit {
   public filterAll = false;
   public routeId: any = {
     categoryId: '',
-    shopId: ''
+    shopId: '',
+    brandId: ''
   };
 
   constructor(private route: ActivatedRoute, private categoryService: CategoryService,
-    private shopService: ShopService) {
+    private shopService: ShopService,  private productService: ProductService) {
     this.route.queryParams.subscribe(data => {
       this.routeId.categoryId = data && data.categoryId ? data.categoryId : '';
       this.routeId.shopId =  data && data.shopId ? data.shopId : '';
+      this.routeId.brandId =  data && data.brandId ? data.brandId : '';
     });
   }
 
   ngOnInit() {
+    const params = Object.assign({
+      page: this.page,
+      take: this.itemsPerPage,
+    }, );
     this.categoryService.tree().then(resp => this.tree = resp);
     this.shopService.search({ take: 20, featured: 1 }).then(resp => this.shops = resp.data.items);
+    this.productService.brands(params).then((res) => {
+      this.brands = res.data.items;
+    });
   }
 
   filter() {

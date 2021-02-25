@@ -24,6 +24,7 @@ export class CategoryService {
     this.loadingTree = this.restangular.one('products/categories', 'tree')
       .get().toPromise()
       .then(resp => {
+        console.log(resp.data)
         window.appData.categories = resp.data;
         this.loadingTree = null;
         return resp.data;

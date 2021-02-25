@@ -10,11 +10,11 @@ exports.middleware = {
 };
 
 exports.model = {
+  Brand: require('./models/brand'),
   Product: require('./models/product'),
   ProductCategory: require('./models/category'),
   ProductOption: require('./models/options'),
   ProductVariant: require('./models/variant'),
-  Brand: require('./models/brand'),
   Wishlist: require('./models/wishlist')
 };
 

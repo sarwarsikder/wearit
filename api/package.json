@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Genstore-api",
   "main": "server/www.js",
+  "dev": "nodemon server/www.js",
   "engines": {
     "node": "8.9.0",
     "npm": "6.14.6"

@@ -10,6 +10,7 @@ const validateSchema = Joi.object().keys({
   ordering: Joi.number().allow([null, '']).optional(),
   categoryId: Joi.string().allow([null, '']).optional(),
   shopId: Joi.string().allow([null, '']).optional(),
+  brandId: Joi.string().allow([null, '']).optional(),
   price: Joi.number().optional(),
   salePrice: Joi.number().allow([null]).optional(),
   mainImage: Joi.string().allow([null, '']).optional(),
@@ -185,6 +186,12 @@ exports.search = async (req, res, next) => {
       }
     }
 
+    if (req.query.brandId) {
+      console.log("TEST");
+      console.log(req.query.brandId);
+      query.brandId = req.query.brandId;
+    }
+
     let defaultSort = true;
     if (['seller', 'admin'].indexOf(req.headers.platform) === -1) {
       query.isActive = true;
@@ -277,6 +284,10 @@ exports.details = async (req, res, next) => {
       .populate({
         path: 'category',
         select: '_id name mainImage totalProduct parentId'
+      })
+      .populate({
+        path: 'brand',
+        select: '_id name alias description logo'
       })
       .populate({
         path: 'shop',
