@@ -1865,6 +1865,7 @@ span {
   }
   .error{
     font-size: 11px !important;
+    line-height: 14px;
   }
 }
 
@@ -2120,4 +2121,21 @@ input.stv-radio-tab {
   .prev-1{
     top: 35%;
   }
+}
+
+.confirm-btn{
+  background: #000;
+  border: 0px;
+  border-radius: 0px;
+  &:hover{
+    background: #444;
+  }
+}
+.cancel-btn{
+  border-radius: 0px;
+}
+
+.form-control{
+  border: 1px solid #c5c5c5 !important;
+  border-radius: 0px !important;
 }

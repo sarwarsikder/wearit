@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   version: '0.0.1',
   build: 27,
-  apiBaseUrl: 'http://localhost:8080/v1',
+  apiBaseUrl: 'https://genstore.info/api/v1',
   apiProxy: '',
   sellerUrl: 'https://genstore.info/api',
   platform: 'web',
