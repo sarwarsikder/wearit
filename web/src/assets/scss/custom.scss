@@ -2054,6 +2054,54 @@ input.stv-radio-tab {
   }
 }
 
+.price-range-block{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  input{
+    width: 80%;
+    margin-left: 7px;
+    border: 1px solid #ccc;
+    height: 35px;
+    border-radius: 0px;
+    padding-left: 10px;
+    &:first-of-type{
+      margin-left: 0px;
+      margin-right: 7px;
+    }
+  }
+}
+.btn-apply{
+  background: #000;
+  color: #fff;
+  width: 100%;
+  border: 0px;
+  margin-top: 10px;
+  font-size: 12px;
+  padding: 7px 15px;
+  margin-bottom: 20px;
+}
+
+.brands{
+  margin-bottom: -60px;
+  .text-product{
+    display: none;
+  }
+  .next-1{
+    top: 33%
+  }
+  .prev-1{
+    top: 33%
+  }
+  .img-prod{
+    height: 240px;
+    img{
+      height: 240px !important;
+    }
+  }
+}
+
 .offer-card{
   height: 200px;
   margin: 10px;

@@ -24,35 +24,38 @@
     </div>
   </div>
 </div>
-<div class="box-main-1">
+<div class="box-main-1" *ngIf="category">
   <div class="container">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4"  *ngIf="category[0]">
         <div class="card-box">
-          <h4>Furniture</h4>
-          <img src="/assets/images/home/furniture.png" alt="">
+          <h4>{{category[0]?.name}}</h4>
+          <a [routerLink]="['/products/search']" [queryParams]="{categoryId: category[0]?.id}">
+            <img [src]="category[0]?.mainImage?.thumbUrl" alt=""></a>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" *ngIf="category[1]">
         <div class="row">
           <div class="col-md-12">
             <div class="card-box small">
-              <h4>Technology</h4>
-              <img src="/assets/images/home/technology.png" alt="">
+              <h4>{{category[1]?.name}}</h4><a [routerLink]="['/products/search']" [queryParams]="{categoryId: category[1]?.id}">
+              <img [src]="category[1]?.mainImage?.thumbUrl" alt=""></a>
             </div>
           </div>
-          <div class="col-md-12">
+          <div class="col-md-12" *ngIf="category[2]">
             <div class="card-box small">
-              <h4>Cloths</h4>
-              <img src="/assets/images/home/cloth.png" alt="">
+              <h4>{{category[2]?.name}}</h4>
+              <a [routerLink]="['/products/search']" [queryParams]="{categoryId: category[2]?.id}">
+                <img [src]="category[2]?.mainImage?.thumbUrl" alt=""></a>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4" *ngIf="category[3]">
         <div class="card-box">
-          <h4>Accessories</h4>
-          <img src="/assets/images/home/accessories.png" alt="">
+          <h4>{{category[3]?.name}}</h4>
+          <a [routerLink]="['/products/search']" [queryParams]="{categoryId: category[3]?.id}">
+            <img [src]="category[3]?.mainImage?.thumbUrl" alt=""></a>
         </div>
       </div>
     </div>
@@ -131,10 +134,10 @@
     </div>
   </div>
 </div>
-<div class="padding-main action-register bg-cover" style="background: url(/assets/images/bg-2.jpg);">
+<!-- <div class="padding-main action-register bg-cover" style="background: url(/assets/images/bg-2.jpg);">
   <div class="container">
     <h2> <span translate>Start selling on</span> {{siteName}} </h2>
     <p translate>Milions of shoppers can’t wait to see what you have in store.</p>
     <a [href]="sellerUrl" target="_blank" class="button-action" translate>Become A Seller</a>
   </div>
-</div>
+</div> -->

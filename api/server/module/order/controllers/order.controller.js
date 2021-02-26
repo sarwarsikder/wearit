@@ -24,11 +24,11 @@ const validateSchema = Joi.object().keys({
   zipCode: Joi.string().allow([null, '']).optional(),
   country: Joi.string().allow([null, '']).optional(),
   userCurrency: Joi.string().optional(),
-  phoneVerifyCode: Joi.string().allow([null, '']).when('paymentMethod', {
-    is: 'cod',
-    then: Joi.required(),
-    otherwise: Joi.optional()
-  })
+  // phoneVerifyCode: Joi.string().allow([null, '']).when('paymentMethod', {
+  //   is: 'cod',
+  //   then: Joi.required(),
+  //   otherwise: Joi.optional()
+  // })
 });
 
 /**
