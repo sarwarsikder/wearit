@@ -92,7 +92,45 @@
                   </div>
                 </div>
               </div>
-    
+              <div class="color-variant">
+                 <div class="color-choose">
+                  <p class="fsize-label">Color : </p>
+                  <p>
+                    <input type="radio" id="test1" name="radio-group" checked>
+                    <label for="test1">Red</label>
+                  </p>
+                  <p>
+                    <input type="radio" id="test2" name="radio-group">
+                    <label for="test2">Grey</label>
+                  </p>
+                  <p>
+                    <input type="radio" id="test3" name="radio-group">
+                    <label for="test3">Black</label>
+                  </p>
+                </div>
+
+              </div>
+              <div class="size-variant">
+
+                <p class="size-holder">
+                  <strong  class="fsize-label" for="">Size : </strong>
+                  <input type="radio" id="small" name="size" value="" />
+                  <label for="small">S</label>
+
+                  <input type="radio" id="medium" name="size" value="" />
+                  <label for="medium">M</label>
+
+                  <input type="radio" id="large" name="size" value="" />
+                  <label for="large">L</label>
+
+                  <input type="radio" id="extraLarge" name="size" value="" />
+                  <label for="extraLarge">XL</label>
+                </p>
+              </div>
+              <div class="quantity-spinner">
+                <label for="" class="fsize-label">Quantity:</label>
+                <button class="">-</button><input type="text" value="1" /><button class="">+</button>
+              </div>
               <div class="quantity" *ngIf="stockQuantity">
                 <span translate>Quantity:&nbsp;</span> <input (keypress)="onlyNumberKey($event)" type="number" min="1"
                   max="{{stockQuantity}}" [(ngModel)]="quantity" name="quantity" />
