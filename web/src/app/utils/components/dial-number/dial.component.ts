@@ -10,8 +10,8 @@ export class DialCodeComponent implements OnInit {
   @Output() selectCode = new EventEmitter();
 
   public dialCodes: any = [];
-  public dialCode: any = '+1';
-  public flag: string = '/assets/images/flags/us.svg';
+  public dialCode: any = '+88';
+  public flag: string = '/assets/images/flags/bd.svg';
 
   constructor(private authService: AuthService) { }
   ngOnInit() {

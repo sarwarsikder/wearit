@@ -270,7 +270,7 @@
                     <label translate class="required">Country</label>
                     <select class="form-control" required name="country" #country="ngModel" [(ngModel)]="userInfo.country">
                       <option value="">Select your country</option>
-                      <option [value]="country.isoCode" *ngFor="let country of countries">{{country.name}}</option>
+                      <option [ngValue]="country.sortname" [selected]="country.sortname =='BD'" *ngFor="let country of countries[0].countries">{{country.name}}</option>
                     </select>
                     <div *ngIf="country.errors && (country.dirty || country.touched || isSubmitted)">
                       <p [hidden]="!country.errors.pattern" class="error" translate> 'Country' field must contain only

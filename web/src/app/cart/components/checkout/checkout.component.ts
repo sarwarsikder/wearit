@@ -84,7 +84,10 @@ export class CheckoutComponent implements OnInit {
     this.stripeTest = this.fb.group({
       cardName: ['', [Validators.required]]
     });
-    this.locationService.countries().then(resp => this.countries = resp.data);
+    this.locationService.countries().then(
+      resp => this.countries = resp.data
+    );
+   
   }
 
   remove(index: number) {
