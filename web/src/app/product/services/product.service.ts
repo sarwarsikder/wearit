@@ -42,4 +42,9 @@ export class ProductService {
   brands(params: any): Promise<any> {
     return this.restangular.one('brands').get(params).toPromise();
   }
+
+  offer(params: any): Promise<any> {
+    console.log("TEST");
+    return this.restangular.one('offers').get(params).toPromise();
+  }
 }

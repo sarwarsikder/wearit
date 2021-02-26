@@ -17,6 +17,9 @@ import { SearchSidebarComponent } from './components/search-sidebar/search-sideb
 import { BrandsComponent} from './components/brands/brands.component';
 import { BrandCardComponent} from './components/brand-card/brand-card.component'
 
+import { OfferComponent } from './components/offer/offer.component';
+import { OfferCardComponent } from './components/offer-card/offer-card.component';
+
 import { CategoryService, ProductService, ProductVariantService } from './services';
 import { ReviewService, GoogleAnalyticsService } from '../shared/services';
 import { WishlistService } from '../profile/services';
@@ -25,9 +28,9 @@ import { ProductResolver } from './resolvers/product.resolver';
 import { SearchResolver } from './resolvers/search.resolver';
 import { CurrencyPipe } from '../shared/pipes';
 
-import { UtilsModule } from '../utils/utils.module';
 import { MessageModule } from '../message/message.module';
 import { from } from 'rxjs';
+import { UtilsModule } from '../utils/utils.module';
 
 @NgModule({
   imports: [
@@ -49,6 +52,8 @@ import { from } from 'rxjs';
     SearchSidebarComponent,
     SearchComponent,
     BrandsComponent,
+    OfferComponent,
+    OfferCardComponent,
     BrandCardComponent,
     CurrencyPipe,
   ],
@@ -62,7 +67,11 @@ import { from } from 'rxjs';
     SearchSidebarComponent,
     BrandsComponent,
     BrandCardComponent,
-    SearchComponent
+    OfferComponent,
+    OfferCardComponent,
+    SearchComponent,
+  
+    
   ]
 })
 export class ProductModule { }

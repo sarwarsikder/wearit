@@ -94,7 +94,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         sessionStorage.removeItem('redirectUrl');
         this.router.navigate([redirectUrl]);
       } else {
-        console.log("TESTING");
         window.location.reload();
         this.router.navigate(['/']);
       }

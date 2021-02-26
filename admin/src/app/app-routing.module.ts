@@ -27,6 +27,7 @@ export const Approutes: Routes = [
       { path: 'products', loadChildren: './product/product.module#ProductModule' },
       { path: 'shops', loadChildren: './shop/shop.module#ShopModule' },
       { path: 'banners', loadChildren: './banner/banner.module#BannerModule' },
+      { path: 'offers', loadChildren: './offer/offer.module#OfferModule' },
       { path: 'refunds', loadChildren: './refund/refund.module#RefundModule' },
       { path: 'posts', loadChildren: './posts/post.module#PostModule' },
       { path: 'complaints', loadChildren: './complaint/complaint.module#ComplaintModule' },
