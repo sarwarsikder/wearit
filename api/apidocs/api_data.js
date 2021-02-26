@@ -3937,6 +3937,381 @@ define({ "api": [
     }
   },
   {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "delete",
+    "url": "/v1/offers/:id",
+    "title": "Remove a offer",
+    "description": "<p>Remove a offer</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>offer id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>offer title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "content",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "ordering",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>Position of the offer. like <code>home</code>, <code>category</code>...</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "mediaId",
+            "description": "<p>File Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "link",
+            "description": "<p>Link of the offer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "meta",
+            "description": "<p>any custom meta data</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "DeleteV1OffersId"
+  },
+  {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/offers/:id",
+    "title": "Get offer details",
+    "description": "<p>Get offer details</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Offer id</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "GetV1OffersId"
+  },
+  {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/offers/random?:title&:locatione&take",
+    "title": "Get random offers",
+    "description": "<p>Get random offer</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "title",
+            "description": "<p>title of offer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>offer position</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "take",
+            "description": "<p>num of item should return</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "GetV1OffersRandomTitleLocationeTake"
+  },
+  {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/offers?:title&:location&page&take",
+    "title": "Get list Offers",
+    "description": "<p>Get list offers</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "title",
+            "description": "<p>title of offer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>offer position</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "GetV1OffersTitleLocationPageTake"
+  },
+  {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "post",
+    "url": "/v1/offers",
+    "title": "Create new offer",
+    "description": "<p>Create new offer</p>",
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "PostV1Offers",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>offer title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "content",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "ordering",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>Position of the offer. like <code>home</code>, <code>category</code>...</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "mediaId",
+            "description": "<p>File Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "link",
+            "description": "<p>Link of the offer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "meta",
+            "description": "<p>any custom meta data</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "put",
+    "url": "/v1/offer/:id",
+    "title": "Update a offer",
+    "description": "<p>Update a offers</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>offer id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>offer title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "content",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "ordering",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>Position of the offer. like <code>home</code>, <code>category</code>...</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "mediaId",
+            "description": "<p>File Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "link",
+            "description": "<p>Link of the offer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "meta",
+            "description": "<p>any custom meta data</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "PutV1OfferId",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "group": "Order",
     "version": "1.0.0",
     "name": "Create_new_order",

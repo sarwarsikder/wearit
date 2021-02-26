@@ -43,6 +43,12 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
+    path: '/offers', title: 'Offers', icon: 'fa fa-image', class: 'has-arrow', label: '', labelClass: '', extralink: false, submenu: [
+      { path: '/offers', title: 'Offers', icon: 'fa fa-image', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+      { path: '/offers/create', title: 'New offer', icon: 'fa fa-plus', class: '', label: '', labelClass: '', extralink: false, submenu: [] }
+    ]
+  },
+  {
     path: '/posts', title: 'Posts', icon: 'fa fa-pagelines', class: 'has-arrow', label: '', labelClass: '', extralink: false, submenu: [
       { path: '/posts', title: 'Listing', icon: 'fa fa-pagelines', class: '', label: '', labelClass: '', extralink: false, submenu: [] }
       // { path: '/posts/create', title: 'New post', icon: 'fa fa-plus', class: '', label: '', labelClass: '', extralink: false, submenu: [] }

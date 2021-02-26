@@ -3,21 +3,22 @@ import { Component, OnInit } from '@angular/core';
 import { UtilService } from '../../../shared/services/utils.service';
 import { ProductService } from '../../services/product.service';
 
+
 @Component({
-  selector: 'brands',
-  templateUrl: './brands.component.html',
+  selector: 'offers',
+  templateUrl: './offer.component.html',
 })
-export class BrandsComponent implements OnChanges {
+export class OfferComponent implements OnChanges {
   @Input() options: any = '';
   public items: any = [];
   public page: any = 1;
-  public itemsPerPage: any = 8;
+  public itemsPerPage: any = 3;
   public searchFields: any = {};
   public sort: any = 'random';
   public sortType: any = '';
   public slideConfig: any = {
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 2,
+    slidesToScroll: 2,
     dots: false,
     arrows: true,
     autoplay: false,
@@ -52,16 +53,16 @@ export class BrandsComponent implements OnChanges {
       // instead of a settings object
     ]
   };
-
-
-  constructor(private util: UtilService, private productService: ProductService) { }
+  constructor(private util: UtilService, private productService: ProductService) { 
+    this.offers();
+  }
   ngOnChanges(changes: SimpleChanges): void {
-    this.brands();
-    console.log("TEST_one");
-
+    console.log("TEST");
+    this.offers();
+    console.log("TEST");
   }
 
-  brands(){
+  offers(){
     this.util.setLoading(true);
     const params = Object.assign({
       page: this.page,
@@ -70,10 +71,11 @@ export class BrandsComponent implements OnChanges {
       sortType: this.sortType
     }, this.options);
 
-    this.productService.brands(params).then((res) => {
+    this.productService.offer(params).then((res) => {
       this.items = res.data.items;
+      console.log(this.items);
       this.util.setLoading(false);
     }).catch(() => this.util.setLoading(false));
   }
-}
 
+}
