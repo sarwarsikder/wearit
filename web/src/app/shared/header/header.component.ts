@@ -50,6 +50,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   };
 
   public submitted: boolean = false;
+  public modalReference: any; 
+  public modalReferenceSignUp: any; 
+
+
 
   
 
@@ -68,6 +72,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     config.backdrop = 'static';
     config.keyboard = false;
     this.Auth = auth;
+    
   }
 
   ngOnInit() {
@@ -82,6 +87,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userLoadedSubscription.unsubscribe();
   }
 
+  selectDial(event) {
+    this.dialCode = event;
+  }
+
+  public onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+  }
+
   sign_in(frm: any) {
     this.submitted = true;
     if (frm.invalid) {
@@ -94,12 +107,49 @@ export class HeaderComponent implements OnInit, OnDestroy {
         sessionStorage.removeItem('redirectUrl');
         this.router.navigate([redirectUrl]);
       } else {
-        window.location.reload();
         this.router.navigate(['/']);
       }
+      this.modalReference.dismiss();
     })
       .catch(() => {
         this.toasty.error(this.translate.instant('Your account is not activated or register. Please recheck again or contact to our admin to resolve it.'));
+      });
+  }
+
+  public submit(frm: any) {
+    this.submitted = true;
+
+    if (frm.invalid) {
+      return;
+    }
+
+    if (this.account.password !== this.input.rePassword) {
+      return this.toasty.error(this.translate.instant('Confirm password doest not match'));
+    }
+
+    this.account.name = this.name.firstName + " " + this.name.lastName;
+    this.account.phoneNumber = `${this.dialCode}${this.account.phoneNumber}`;
+
+    this.Auth.register(this.account)
+      .then(resp => {
+        this.toasty.success(this.translate.instant('Your account has been created, please verify your email then login'));
+        this.router.navigate(['/auth/login']);
+      })
+      .catch(err => {
+        this.account = {
+          email: '',
+          password: '',
+          phoneNumber: '',
+          name: ''
+        };
+        this.name = {
+          firstName: '',
+          lastName: ''
+        };
+        this.input = {
+          rePassword: ''
+        };
+        this.toasty.error(this.translate.instant(err.data.data.message));
       });
   }
 
@@ -146,10 +196,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   open(content) {
-    this.modalService.open(content);
+    this.modalService.dismissAll();
+    this.modalReference = this.modalService.open(content,  { size: 'lg' });
   }
 
   open_sign_up(content) {
-    this.modalService.open(content,  { size: 'lg' });
+    this.modalService.dismissAll();
+    this.modalReferenceSignUp = this.modalService.open(content,  { size: 'lg' });
   }
 }

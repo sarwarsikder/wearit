@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SeoService } from '../shared/services';
 import { ShopService } from '../shop/services/shop.service';
 import { SystemService } from '../shared/services';
+import { CategoryService } from '../product/services';
 
 declare var $: any;
 
@@ -14,9 +15,11 @@ export class StarterComponent implements OnInit {
   public siteName: String = '';
   public sellerUrl: String = '';
   public appConfig: any = {};
+  public category: any = [];
 
-  constructor(private seoService: SeoService, private util: UtilService,
+  constructor(private seoService: SeoService, private util: UtilService,private categoryService: CategoryService,
     private shopService: ShopService, private systemService: SystemService) {
+
     this.sellerUrl = window.appConfig.sellerUrl;
     this.systemService.configs().then(resp => {
       if (resp) {
@@ -28,6 +31,18 @@ export class StarterComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.categoryService.tree()
+    .then(resp => {
+      this.category = resp;
+    });
+
+    console.log("Category");
+      console.log(this.category);
+      console.log("Category One");
+
+   
+
     this.util.setLoading(true);
     this.shopService.search({
       take: 4,
