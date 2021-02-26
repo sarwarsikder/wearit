@@ -2104,3 +2104,20 @@ input.stv-radio-tab {
     }
   }
 }
+
+.offer-card{
+  height: 200px;
+  margin: 10px;
+  img{
+    object-fit: cover;
+    width: 100%;
+  }
+}
+.offer-slider{
+  .next-1{
+    top: 35%;
+  }
+  .prev-1{
+    top: 35%;
+  }
+}
