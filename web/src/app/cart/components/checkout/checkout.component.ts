@@ -161,6 +161,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   submit(frm: any) {
+    console.log("TEST");
     this.isSubmitted = true;
     if (frm.invalid) {
       return this.toasty.error(this.translate.instant('Please submit valid form'));
@@ -201,23 +202,24 @@ export class CheckoutComponent implements OnInit {
 
 
     if (this.userInfo.paymentMethod === 'cod') {
-      const phoneNumber = `${this.dialCode}${this.phoneNumber}`;
-      this.orderService.checkPhone(phoneNumber)
-        .then(resp => {
-          const modalRef = this.modalService.open(CodVerifyModalComponent, {
-            backdrop: 'static',
-            keyboard: false
-          });
-          modalRef.componentInstance.phoneNumber = phoneNumber;
-          modalRef.result.then(result => {
-            this.userInfo.phoneVerifyCode = result.verifyCode;
-            if (!this.userInfo.phoneVerifyCode) {
-              return this.toasty.error(this.translate.instant('Look like you dont get any verify code, please click the link above to retry again.'));
-            }
-            this.doPost();
-          }, () => { });
-        })
-        .catch((err) => this.toasty.error(this.translate.instant('An error occurred, please recheck your phone number!')));
+      this.doPost();
+      // const phoneNumber = `${this.dialCode}${this.phoneNumber}`;
+      // this.orderService.checkPhone(phoneNumber)
+      //   .then(resp => {
+      //     const modalRef = this.modalService.open(CodVerifyModalComponent, {
+      //       backdrop: 'static',
+      //       keyboard: false
+      //     });
+      //     modalRef.componentInstance.phoneNumber = phoneNumber;
+      //     modalRef.result.then(result => {
+      //       this.userInfo.phoneVerifyCode = result.verifyCode;
+      //       if (!this.userInfo.phoneVerifyCode) {
+      //         return this.toasty.error(this.translate.instant('Look like you dont get any verify code, please click the link above to retry again.'));
+      //       }
+      //       this.doPost();
+      //     }, () => { });
+      //   })
+      //   .catch((err) => this.toasty.error(this.translate.instant('An error occurred, please recheck your phone number!')));
     } else if (this.userInfo.paymentMethod === 'stripe') {
       const name = this.stripeTest.get('cardName').value;
       if (!name) {

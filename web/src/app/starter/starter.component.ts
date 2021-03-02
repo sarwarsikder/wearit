@@ -36,13 +36,7 @@ export class StarterComponent implements OnInit {
     .then(resp => {
       this.category = resp;
     });
-
-    console.log("Category");
-      console.log(this.category);
-      console.log("Category One");
-
-   
-
+  
     this.util.setLoading(true);
     this.shopService.search({
       take: 4,

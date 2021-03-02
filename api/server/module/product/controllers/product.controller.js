@@ -169,7 +169,8 @@ exports.search = async (req, res, next) => {
   try {
     let query = Helper.App.populateDbQuery(req.query, {
       text: ['name', 'alias', 'shortDescription'],
-      boolean: ['featured', 'isActive', 'hot', 'bestSell', 'dailyDeal', 'discounted', 'soldOut']
+      boolean: ['featured', 'isActive', 'hot', 'bestSell', 'dailyDeal', 'discounted', 'soldOut'],
+      number:['price']
     });
 
     if (req.query.categoryId) {
@@ -187,8 +188,6 @@ exports.search = async (req, res, next) => {
     }
 
     if (req.query.brandId) {
-      console.log("TEST");
-      console.log(req.query.brandId);
       query.brandId = req.query.brandId;
     }
 
@@ -211,6 +210,19 @@ exports.search = async (req, res, next) => {
       query.name = { $regex: req.query.q.trim(), $options: 'i' };
     }
 
+    if (req.query.low_price) {
+       console.log(req.query.high_price);
+        query.price > req.query.low_price;
+        req.query.low_price <  query.price > req.query.high_price;
+
+    }
+
+  //   if (req.query.high_price) {
+  //     console.log(req.query.high_price);
+  //     query.price < req.query.high_price;
+  //  }
+
+
     if (query.dailyDeal && ['false', '0'].indexOf(query.dailyDeal) === -1) {
       query.dailyDeal = true;
     }
@@ -219,6 +231,8 @@ exports.search = async (req, res, next) => {
       shopFeatured: -1
     });
     const count = await DB.Product.count(query);
+
+    
 
     if (req.query.sort === 'random') {
       const randomData = await DB.Product.aggregate([{
@@ -237,7 +251,14 @@ exports.search = async (req, res, next) => {
       }
     }
 
+    console.log("TEST");
+    console.log(req.query.low_price);
+    console.log(req.query.high_price);
+    console.log("TEST ONE");
+
+
     const items = await DB.Product.find(query)
+      // .where('price').gt(req.query.low_price).lt(req.query.high_price)
       .populate({
         path: 'mainImage',
         select: '_id filePath mediumPath thumbPath uploaded type'

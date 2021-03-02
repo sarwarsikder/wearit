@@ -34,6 +34,8 @@ import { AppComponent } from './app.component';
 import { SpinnerComponent } from './shared/spinner.component';
 
 import { ConfigResolver } from './shared/resolver';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
 
 // Function for setting the default restangular configuration
 export function RestangularConfigFactory(RestangularProvider) {
@@ -102,7 +104,8 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     NgxStripeModule.forRoot(),
     UtilsModule,
-    MediaModule
+    MediaModule,
+    AutocompleteLibModule
   ],
   providers: [{
     provide: LocationStrategy,

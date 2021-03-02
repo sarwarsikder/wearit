@@ -46,7 +46,7 @@ exports.create = async (req, res, next) => {
       await Service.Order.verifyPhoneCheck({
         phoneNumber: validate.value.phoneNumber,
         userId: req.user ? req.user._id : null,
-        code: validate.value.phoneVerifyCode
+        // code: validate.value.phoneVerifyCode
       });
     }
 

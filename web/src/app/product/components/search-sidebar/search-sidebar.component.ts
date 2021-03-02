@@ -23,7 +23,9 @@ export class SearchSidebarComponent implements OnInit {
     bestSell: false,
     dailyDeal: false,
     discounted: false,
-    soldOut: false
+    soldOut: false,
+    low_price:'',
+    high_price:''
   };
   public filterAll = false;
   public routeId: any = {
@@ -54,7 +56,8 @@ export class SearchSidebarComponent implements OnInit {
   }
 
   filter() {
-    if (this.filterAll ||
+    console.log(this.searchFields.low_price);
+    if (this.filterAll || (this.searchFields.low_price && this.searchFields.high_price) ||
       (!this.searchFields.featured &&
         !this.searchFields.hot &&
         !this.searchFields.bestSell &&
@@ -66,7 +69,9 @@ export class SearchSidebarComponent implements OnInit {
         bestSell: false,
         dailyDeal: false,
         discounted: false,
-        soldOut: false
+        soldOut: false,
+        low_price: this.searchFields.low_price ,
+        high_price: this.searchFields.high_price 
       };
     }
     this.updateFields.emit(this.searchFields);
