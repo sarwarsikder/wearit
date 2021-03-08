@@ -9,7 +9,7 @@ export const environment = {
   build: 27,
   apiBaseUrl: 'http://localhost:8080/v1',
   apiProxy: '',
-  sellerUrl: 'https://genstore.info/api',
+  sellerUrl: 'http://localhost:8080/api',
   platform: 'web',
   googleClientId: '917195124089-hp1m6g5fbotlkbipmrejrapt9uh0lhhl.apps.googleusercontent.com',
   facebookAppId: '113570925979091',

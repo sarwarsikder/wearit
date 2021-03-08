@@ -73,6 +73,9 @@ export class CheckoutComponent implements OnInit {
         this.userInfo.paymentMethod = 'stripe';
       }
     }
+    console.log("TEST ONE");
+    console.log(this.paymentGateway);
+    console.log("TEST TWO");
 
     this.userInfo.userCurrency = config ? config.customerCurrency : 'USD';
   }
