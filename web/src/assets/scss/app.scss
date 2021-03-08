@@ -625,10 +625,11 @@ img {
   border-bottom: 1px solid #ddd;
   margin-bottom: 0px;
   padding-bottom: 10px;
-  background: #E8E8E8;
+  background: #000;
   padding: 15px;
   font-size: 20px;
   font-weight: 500;
+  color: #fff;
 }
 
 .filter-left{
@@ -849,3 +850,74 @@ img {
   }
 }
 
+.filter-left{
+  .list-categories{
+    padding: 0px;
+  }
+  .cate-list-items{
+    font-weight: 500;
+    background: transparent;
+    border-bottom: 0px;
+    padding: 0px;
+    padding-left: 0px !important;
+    a{
+      display: block;
+      padding: 0.75rem 1em;
+      &:hover{
+        background: #fef2f2;
+        color: red !important;
+        svg{
+          path{
+            fill: red;
+          }
+        }
+      }
+    }
+  }
+  svg{
+    width: 24px;
+    height: 24px;
+    margin-top: -1px;
+    margin-right: 10px;
+  }
+}
+
+.block-action{
+  display: block;
+  .btn{
+    width: 100%;
+  }
+}
+.remove-container{
+  position: relative;
+  .block-action{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    .btn-danger{
+      background: transparent;
+      border: 0px;
+      padding: 0px;
+      background: #ef4444;
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      svg{
+        path{
+          fill: #ffc6c6;
+        }
+      }
+    }
+  }
+}
+.btn-send{
+  background: #000;
+  border: 1px solid #000;
+  &:hover{
+    background: #333;
+    border-color: #333;
+  }
+}

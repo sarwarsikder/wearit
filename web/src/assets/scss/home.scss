@@ -299,7 +299,17 @@
 
 .ng-autocomplete {
   width:auto !important;
-  max-width: 600px;
-  display: table;
+  // max-width: 600px;
+  display: flex;
   margin: 0 auto;
+  flex-grow: 1;
+  .autocomplete-container{
+    width: 100%;
+    box-shadow: none;
+    .input-container{
+      input{
+        height: 35px;
+      }
+    }
+  }
 }

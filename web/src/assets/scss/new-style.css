@@ -2304,7 +2304,7 @@ textarea {
 .next-1,
 .prev-1 {
   position: absolute;
-  top: 43%;
+  top:38%;
   z-index: 9;
   right: -10px;
   font-size: 27px;

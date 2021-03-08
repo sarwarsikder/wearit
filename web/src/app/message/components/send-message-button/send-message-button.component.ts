@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'send-message-btn',
-  template: '<button class="btn-send-block" translate (click)="sendMessage()">Send message</button>'
+  template: '<button class="btn-send-block" translate (click)="sendMessage()">Contact us</button>'
 })
 export class SendMessageButtonComponent {
   @Input() recipientId: string;

@@ -1250,6 +1250,10 @@ span.no-span {
       background: #0e0e0e;
       border-radius: 0px;
       padding: 15px 15px;
+      &:hover{
+        border-color: #000000 #000000 #000000;
+        background: #333;
+      }
       &.active{
         border: 0px;
         background: #eaeaea;
@@ -1558,7 +1562,8 @@ span {
     object-fit: cover;
   }
   &.small{
-    min-height: 185px;
+    min-height: 190px;
+    height: 190px;
     &:first-of-type{
       margin-bottom: 30px;
     }
@@ -2138,4 +2143,29 @@ input.stv-radio-tab {
 .form-control{
   border: 1px solid #c5c5c5 !important;
   border-radius: 0px !important;
+}
+
+.cstm-dropdown-al{
+  border-radius: 0px;
+  border: 0px !important;
+  box-shadow: 4px 5px 27px 2px #00000026 !important;
+  .dropdown-item{
+    border-bottom: 0px !important;
+    padding: 7px 12px !important;
+    color: #000 !important;
+    font-weight: 500 !important;
+    &:hover{
+      color: red !important;
+      svg{
+        path{
+          fill: red;
+        }
+      }
+    }
+    svg{
+      width: 18px;
+      height: 18px;
+      margin-right: 10px;
+    }
+  }
 }
