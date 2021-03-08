@@ -7,7 +7,7 @@
         <div class="row">
           <div class="package-detail">
             <h4>Package 2</h4>
-            <p>Shipper by <strong>Md.Sumon Biswas</strong></p>
+            <!-- <p>Shipper by <strong>Md.Sumon Biswas</strong></p> -->
           </div>
           <div class="table-responsive cart_info">
             <table class="table table-condensed">
@@ -126,7 +126,7 @@
         <div class="col-sm-12" *ngIf="userInfo.paymentMethod === 'stripe'">
           <div [formGroup]="stripeTest">
             <div class="form-group">
-              <label translate>Card holder name</label>
+              <strong class="strong-decord" translate>Card holder name</strong>
               <input type="text" formControlName="cardName" placeholder="Jane Doe" class="form-control" name="cardHolderName" />
             </div>
             <div class="form-group">
@@ -136,7 +136,7 @@
         </div>
         <div class="col-sm-12">
           <div class="form-group">
-            <label translate>Coupon</label>
+            <strong class="strong-decor" translate>Coupon</strong>
             <div class="mb-3">
               <div class="input-group">
                 <input name="coupon" [(ngModel)]="coupon" class="form-control" placeholder="{{'Enter coupon code here' | translate}}">
@@ -151,7 +151,7 @@
 
           </div>
           <div class="form-group">
-            <label translate>Summary</label>
+            <strong class="strong-decor" translate>Summary</strong>
             <p>
               <strong translate>Tax</strong>
               <span class="badge badge-success" *ngIf="!totalTaxPrice" translate>Free</span>
@@ -185,7 +185,7 @@
           </div>
           <div class="row">
             <div class="col-md-12" style="padding: 0px;">
-              <div class="row total_area">
+              <div class="row total_area order-stats-form">
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label translate class="required">First Name</label>
