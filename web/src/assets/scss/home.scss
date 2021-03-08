@@ -296,3 +296,10 @@
     color: #fff;
   }
 }
+
+.ng-autocomplete {
+  width:auto !important;
+  max-width: 600px;
+  display: table;
+  margin: 0 auto;
+}

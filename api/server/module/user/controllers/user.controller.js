@@ -24,6 +24,11 @@ exports.create = async (req, res, next) => {
       data.role = 'user';
     }
 
+    //Demo user verification
+
+    data.isActive=true;
+    data.emailVerified=true;
+
     const user = await Service.User.create(data);
     res.locals.user = user;
     return next();

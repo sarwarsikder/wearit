@@ -6,6 +6,11 @@ import { NgbModal, NgbModalOptions, NgbModalConfig } from '@ng-bootstrap/ng-boot
 import { ComplainComponent } from '../complain/complain.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastyService } from 'ng2-toasty';
+import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Rx';
+import { of } from 'rxjs';
+import { ProductService } from '../../product/services';
+
 
 
 
@@ -53,6 +58,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public modalReference: any; 
   public modalReferenceSignUp: any; 
 
+  keyword = 'name';
+  public search_results = [];
+  public product;
+
 
 
   
@@ -60,7 +69,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private authService: AuthService, private systemService: SystemService,
     private modalService: NgbModal, private translate: TranslateService, private cartService: CartService,
-    config: NgbModalConfig, private toasty: ToastyService, auth: AuthService,) {
+    config: NgbModalConfig, private toasty: ToastyService, auth: AuthService,private productService: ProductService,) {
     this.userLoadedSubscription = authService.userLoaded$.subscribe(data => this.currentUser = data);
     this.cartLoadedSubscription = cartService.cartChanged$.subscribe(data => this.cart = data);
     this.systemService.configs().then(resp => {
@@ -178,22 +187,88 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.flag = `/assets/images/flags/${this.userLang}.svg`;
   }
 
+  // keyPress(event: any) {
+  //   if (event.charCode === 13) {
+  //     this.search();
+  //   }else{
+  //     this.search();
+  //   }
+  // }
+
+  // search() {
+  //   if (!this.q.trim()) {
+  //     return;
+  //   }
+
+  //   // nativate to search page
+  //   this.router.navigate(['/products/search'], {
+  //     queryParams: { q: this.q }
+  //   });
+  // }
+
   keyPress(event: any) {
-    if (event.charCode === 13) {
-      this.search();
+    if(typeof(this.q) == 'object'){
+      console.log(typeof(this.q)+ "OBJECT");
+      this.product = this.q;
+      this.search(this.product.name);
+    }else{
+      console.log(typeof(this.q)+ "STRING");
+      this.search(this.q);
     }
+
+
+    // if (event.charCode === 13) {
+    //   this.search(event);
+    // }else{
+    //   this.search(event);
+    // }
   }
 
-  search() {
-    if (!this.q.trim()) {
+  search(search: string) {
+    console.log("SEACH FAC");
+    console.log(search);
+
+    if (!this.search) {
       return;
     }
 
     // nativate to search page
     this.router.navigate(['/products/search'], {
-      queryParams: { q: this.q }
+      queryParams: { q: search }
     });
   }
+
+  selectEvent(item) {
+    // do something with selected item
+    if (!item) {
+      return;
+    }
+    // nativate to search page
+    this.router.navigate(['/products/search'], {
+      queryParams: { q: item.name }
+    });
+  }
+
+  onChangeSearch(search: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+    console.log(search);
+
+    this.router.navigate(['/products/search'], {
+      queryParams: { q: search }
+    });
+
+    this.productService.search({ name: search }).then((res) => {
+      if (res) {
+        this.search_results  = res.data.items;
+      }
+    })
+  }
+
+  onFocused(e) {
+    // do something
+  }
+
 
   open(content) {
     this.modalService.dismissAll();
