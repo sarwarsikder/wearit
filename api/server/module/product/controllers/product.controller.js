@@ -230,7 +230,24 @@ exports.search = async (req, res, next) => {
     const sort = Object.assign(Helper.App.populateDBSort(req.query), defaultSort ? {} : {
       shopFeatured: -1
     });
-    const count = await DB.Product.count(query);
+
+    low_price=req.query.low_price;
+    high_price=req.query.high_price;
+    console.log('LOW');
+
+    if(low_price===null || low_price==='' || !req.query.low_price){
+       console.log('LOW One');
+       low_price=0;
+    }
+
+    if(high_price===null || high_price===''  || !req.query.high_price){
+      console.log("HIGH");
+      high_price=5000000;
+    }
+
+
+
+    const count = await DB.Product.count(query).where('price').gte(low_price).lte(high_price);
 
     
 
@@ -250,15 +267,10 @@ exports.search = async (req, res, next) => {
         };
       }
     }
-
-    console.log("TEST");
-    console.log(req.query.low_price);
-    console.log(req.query.high_price);
-    console.log("TEST ONE");
-
+    
+    
 
     const items = await DB.Product.find(query)
-      // .where('price').gt(req.query.low_price).lt(req.query.high_price)
       .populate({
         path: 'mainImage',
         select: '_id filePath mediumPath thumbPath uploaded type'
@@ -268,6 +280,7 @@ exports.search = async (req, res, next) => {
         select: '_id name mainImage totalProduct parentId'
       })
       .populate('shop')
+      .where('price').gte(low_price).lte(high_price)
       .collation({ locale: 'en' })
       .sort(sort)
       .skip(page * take)

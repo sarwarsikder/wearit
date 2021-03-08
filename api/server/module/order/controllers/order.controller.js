@@ -37,18 +37,18 @@ const validateSchema = Joi.object().keys({
 exports.create = async (req, res, next) => {
   try {
     const validate = Joi.validate(req.body, validateSchema);
-    if (validate.error) {
-      return next(PopulateResponse.validationError(validate.error));
-    }
+    // if (validate.error) {
+    //   return next(PopulateResponse.validationError(validate.error));
+    // }
 
-    // verify code
-    if (validate.value.paymentMethod === 'cod') {
-      await Service.Order.verifyPhoneCheck({
-        phoneNumber: validate.value.phoneNumber,
-        userId: req.user ? req.user._id : null,
-        // code: validate.value.phoneVerifyCode
-      });
-    }
+    // // verify code
+    // if (validate.value.paymentMethod === 'cod') {
+    //   await Service.Order.verifyPhoneCheck({
+    //     phoneNumber: validate.value.phoneNumber,
+    //     userId: req.user ? req.user._id : null,
+    //     // code: validate.value.phoneVerifyCode
+    //   });
+    // }
 
     // assign user agent and IP address here
     const userIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;

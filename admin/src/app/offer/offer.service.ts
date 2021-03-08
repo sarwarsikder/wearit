@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import _ = require('lodash');
+import * as _ from 'lodash';
 import { Restangular } from 'ngx-restangular';
 
 @Injectable({
