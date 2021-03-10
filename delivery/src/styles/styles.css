@@ -199,8 +199,8 @@ hr.margin-control {
 
 .upload-btn-wrapper.attach-file {
   position: relative;
-  width: 150px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
   border-radius: 0px;
   border: 0px;
   bottom: 0px;
@@ -307,3 +307,19 @@ hr.margin-control {
   background: transparent;
 }
 /*# sourceMappingURL=styles.css.map */
+
+._ngcontent-kfh-c110 h1,h2{
+  font-size: 1rem;
+}
+
+[_nghost-hbw-c104]
+{
+  align-items: center;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  width: 100%;
+  padding: 0px 20px;
+  position: relative;
+}
