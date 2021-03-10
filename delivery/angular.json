@@ -3,13 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "delivery": {
+    "delivery-panel": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -17,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/delivery",
+            "outputPath": "dist/delivery-panel",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,7 +24,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles/styles.css"
             ],
             "scripts": []
           },
@@ -65,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "delivery:build"
+            "browserTarget": "delivery-panel:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "delivery:build:production"
+              "browserTarget": "delivery-panel:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "delivery:build"
+            "browserTarget": "delivery-panel:build"
           }
         },
         "test": {
@@ -91,7 +88,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": []
           }
@@ -113,16 +110,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "delivery:serve"
+            "devServerTarget": "delivery-panel:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "delivery:serve:production"
+              "devServerTarget": "delivery-panel:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "delivery"
+  "defaultProject": "delivery-panel"
 }
