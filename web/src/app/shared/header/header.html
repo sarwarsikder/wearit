@@ -123,12 +123,12 @@
         </div> -->
         <ul class="nav navbar-nav pull-right " *ngIf="!currentUser">
           <li>
-            <!-- <a [routerLink]="['/auth/signup']"><span translate>Sign up</span></a> -->
-            <a (click)="open_sign_up(content_sign_up)"><span translate>Sign up</span></a>
+            <a [routerLink]="['/auth/signup']"><span translate>Sign up</span></a>
+            <!-- <a (click)="open_sign_up(content_sign_up)"><span translate>Sign up</span></a> -->
           </li>
           <li>
-            <!-- <a [routerLink]="['/auth/login']"><span translate>Login</span></a> -->
-            <a (click)="open(content)"><span translate>Login</span></a>
+            <a [routerLink]="['/auth/login']"><span translate>Login</span></a>
+            <!-- <a (click)="open(content)"><span translate>Login</span></a> -->
           </li>
         </ul>
         <div class="dropdown pull-right user-dropdown" *ngIf="currentUser" ngbDropdown>
