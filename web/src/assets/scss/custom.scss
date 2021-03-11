@@ -1022,15 +1022,15 @@ span.no-span {
   }
 
   .inbox_people {
-    background: #f8f8f8 none repeat scroll 0 0;
+    background: #fff7f7 none repeat scroll 0 0;
     float: left;
     overflow: hidden;
     width: 40%;
-    border-right: 1px solid #c4c4c4;
+    border-right: 1px solid #ffdcdc;
   }
 
   .inbox_msg {
-    border: 1px solid #c4c4c4;
+    border: 1px solid #ffdcdc;
     clear: both;
     overflow: hidden;
   }
@@ -1047,14 +1047,14 @@ span.no-span {
   .srch_bar {
     display: inline-block;
     text-align: right;
-    width: 50%;
+    width: 100%;
     padding: 0;
   }
 
   .headind_srch {
     padding: 10px 29px 10px 20px;
     overflow: hidden;
-    border-bottom: 1px solid #c4c4c4;
+    border-bottom:1px solid #ffdcdc;
   }
 
   .recent_heading h4 {
@@ -1064,7 +1064,7 @@ span.no-span {
   }
 
   .srch_bar {
-    border: 1px solid #cdcdcd;
+    border:0px ;
     border-width: 0 0 1px 0;
     float: right;
 
@@ -1072,10 +1072,15 @@ span.no-span {
       border: none;
       width: 80%;
       padding: 2px 0 4px 6px;
-      background: none;
+      background: #fff;
     }
 
     .input-group-addon {
+      
+      margin: 0 0 0 0px;
+      padding: 3px 15px;
+      background: #000;
+
       button {
         background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
         border: medium none;
@@ -1084,7 +1089,7 @@ span.no-span {
         font-size: 18px;
       }
 
-      margin: 0 0 0 7px;
+      margin: 0 0 0 0px;
     }
   }
 
@@ -1093,9 +1098,10 @@ span.no-span {
       font-size: 15px;
       color: #464646;
       margin: 0 0 8px 0;
+      font-weight: 500;
 
       span {
-        font-size: 13px;
+        font-size: 12px;
         float: right;
       }
     }
@@ -1142,7 +1148,7 @@ span.no-span {
   }
 
   .active_chat {
-    background: #ebebeb;
+    background: #ffdada;
   }
 
   .incoming_msg_img {
@@ -1158,9 +1164,9 @@ span.no-span {
   }
 
   .received_withd_msg p {
-    background: #ebebeb none repeat scroll 0 0;
+    background: #656565 none repeat scroll 0 0;
     border-radius: 3px;
-    color: #646464;
+    color: #ffffff;
     font-size: 14px;
     margin: 0;
     padding: 5px 10px 5px 12px;
@@ -1168,10 +1174,11 @@ span.no-span {
   }
 
   .time_date {
-    color: #747474;
+    color: #717171;
     display: block;
-    font-size: 12px;
-    margin: 8px 0 0;
+    font-size: 10px;
+    margin: 2px 0 0;
+    font-style: italic;
   }
 
   .received_withd_msg {
@@ -1185,7 +1192,7 @@ span.no-span {
   }
 
   .sent_msg p {
-    background: #05728f none repeat scroll 0 0;
+    background: #000000 none repeat scroll 0 0;
     border-radius: 3px;
     font-size: 14px;
     margin: 0;
@@ -1219,9 +1226,9 @@ span.no-span {
   }
 
   .msg_send_btn {
-    background: #05728f none repeat scroll 0 0;
+    background: #dc2626 none repeat scroll 0 0;
     border: medium none;
-    border-radius: 50%;
+    border-radius: 6px;
     color: #fff;
     cursor: pointer;
     font-size: 17px;
@@ -1229,7 +1236,7 @@ span.no-span {
     position: absolute;
     right: 0;
     top: 11px;
-    width: 33px;
+    width: 38px;
   }
 
   .msg_history {
@@ -2186,4 +2193,76 @@ input.stv-radio-tab {
     margin-bottom: 8px;
     display: block;
     text-transform: uppercase;
+}
+
+.svg-container{
+  svg{
+    width: 180px;
+    height: 340px;
+  }
+}
+
+.success-container{
+  h3{
+    font-weight: 600;
+    margin-top: 35px;
+    margin-bottom: 30px;
+  }
+  .lead{
+    font-size: 18px;
+    /* margin-bottom: 132px; */
+    font-weight: 400;
+    padding: 0px 30px;
+    width: 80%;
+    margin: 30px auto 40px auto;
+    a{
+      font-weight: 600;
+      color: #ef4444;
+    }
+    .btn{
+      color: #fff;
+      background: #000;
+      padding: 15px 60px;
+    }
+  }
+}
+.update-profile{
+  background: #fff;
+  li{
+    border: 0px;
+  }
+}
+.btn-black{
+  background: #000 !important;
+  &:hover{
+    background: #333 !important;
+  }
+}
+.extra-head{
+  font-weight: 600;
+  font-size: 24px;
+  border-bottom: 4px solid #000;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  text-transform: capitalize;
+}
+.table-cstm-order{
+  th{
+    background: #000;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 600;
+  }
+  td{
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+input{
+  &:focus{
+    outline: none !important;
+    box-shadow: none !important;
+  }
 }
