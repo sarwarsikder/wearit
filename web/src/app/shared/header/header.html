@@ -101,9 +101,12 @@
         </div>
         <div class="pull-right wish-top">
           <a appLocationHref [url]="'/profile/wishlist'">
-            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg *ngIf="whishListTotal==0"  width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3.75 15C0.9375 11.25 1.875 5.62503 6.5625 3.75003C11.25 1.87503 14.0625 5.62503 15 7.50003C15.9375 5.62503 19.6875 1.87503 24.375 3.75003C29.0625 5.62503 29.0625 11.25 26.25 15C23.4375 18.75 15 26.25 15 26.25C15 26.25 6.5625 18.75 3.75 15Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
+            <svg *ngIf="whishListTotal!=0" width="30" height="30" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.06253 16.3331C-0.604193 11.4441 0.618049 4.11071 6.72926 1.66623C12.8405 -0.778259 16.5072 4.11071 17.7294 6.5552C18.9517 4.11071 23.8407 -0.778259 29.9519 1.66623C36.0631 4.11071 36.0631 11.4441 32.3963 16.3331C28.7296 21.2221 17.7294 31 17.7294 31C17.7294 31 6.72926 21.2221 3.06253 16.3331Z" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
           </a>
          </div>
         <!-- <div class="input-group-prepend lang-dropdown pull-right">
