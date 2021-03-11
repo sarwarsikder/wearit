@@ -1,15 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
-import { AuthService, SystemService, CartService } from '../services';
+import { AuthService, SystemService, CartService, UtilService } from '../services';
 import { NgbModal, NgbModalOptions, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ComplainComponent } from '../complain/complain.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastyService } from 'ng2-toasty';
-import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs/Rx';
-import { of } from 'rxjs';
 import { ProductService } from '../../product/services';
+import { WishlistService } from '../../profile/services/wishlist.service';
 
 
 
@@ -62,13 +60,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public search_results = [];
   public product;
 
+  public items: any = [];
+  public whishListTotal: any = 0;
+  public page: number = 1;
+  public itemsPerPage: number = 1;
+  public searchFields: any = {};
+
 
 
   
 
 
-  constructor(private router: Router, private authService: AuthService, private systemService: SystemService,
-    private modalService: NgbModal, private translate: TranslateService, private cartService: CartService,
+  constructor(private router: Router, private authService: AuthService, private systemService: SystemService, private utilService: UtilService,
+    private modalService: NgbModal, private translate: TranslateService, private cartService: CartService,private wishlistService: WishlistService,
     config: NgbModalConfig, private toasty: ToastyService, auth: AuthService,private productService: ProductService,) {
     this.userLoadedSubscription = authService.userLoaded$.subscribe(data => this.currentUser = data);
     this.cartLoadedSubscription = cartService.cartChanged$.subscribe(data => this.cart = data);
@@ -88,6 +92,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.cart = this.cartService.get();
     if (this.authService.isLoggedin()) {
       this.authService.getCurrentUser().then(resp => this.currentUser = resp);
+      this.whishList();
     }
   }
 
@@ -102,6 +107,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public onlyNumberKey(event) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+  }
+
+  whishList() {
+    this.utilService.setLoading(true);
+    const params = Object.assign({
+      page: this.page,
+      take: this.itemsPerPage
+    }, this.searchFields);
+
+    this.wishlistService.list(params).then((res) => {
+      this.whishListTotal = res.data.count;
+      this.utilService.setLoading(false);
+    }).catch(err => {
+      this.toasty.error(this.translate.instant('Something went wrong, please try again!'));
+      this.utilService.setLoading(false);
+    });
   }
 
   sign_in(frm: any) {
