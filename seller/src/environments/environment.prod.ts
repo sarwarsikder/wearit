@@ -7,8 +7,8 @@ export const environment = {
   googleClientId: '946463315327-0l0svqeglss2jrulg19t9hs5slem6247.apps.googleusercontent.com',
   facebookAppId: '113570925979091',
   stripeKey: 'pk_test_Z3rf3HSfsokHl4lLFTBxhZrZ',
-  paymentRedirectSuccessUrl: 'https://genstore-seller.iospot.top/payments/success',
-  paymentRedirectCancelUrl: 'https://genstore-seller.iospot.top',
+  paymentRedirectSuccessUrl: 'https://wearit-web.herokuapp.com/payments/success',
+  paymentRedirectCancelUrl: 'https://wearit-web.herokuapp.com',
   platform: 'seller',
   pusher: {
     appId: 591974,

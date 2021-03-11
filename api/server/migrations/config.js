@@ -3,7 +3,7 @@ module.exports = async () => DB.Config.find({})
   .then(() => DB.Config.create(
     {
       key: 'siteName',
-      value: 'Genstore',
+      value: 'Wearit',
       name: 'Site name',
       public: true
     }, {
