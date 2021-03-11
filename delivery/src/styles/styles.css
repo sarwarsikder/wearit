@@ -312,14 +312,33 @@ hr.margin-control {
   font-size: 1rem;
 }
 
-[_nghost-hbw-c104]
+.file-drop-signup
 {
-  align-items: center;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  margin: 10px;
+  
+  height: 20% !important;
   width: 100%;
-  padding: 0px 20px;
-  position: relative;
+  max-width: unset !important;
+  min-height: unset !important;
+  min-width: unset !important;
+  background: #49504C !important;
+  color: white !important;
+}
+
+.image-drop-signup
+{
+  
+  height: 89% !important;
+  width: 100%;
+  max-width: unset !important;
+  min-height: unset !important;
+  min-width: unset !important;
+}
+
+.upload-btn-wrapper img
+{
+  opacity: 1 !important;
+}
+
+.error{
+  color: red !important;
 }

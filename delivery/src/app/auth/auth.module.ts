@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { NgxDropzoneModule } from "ngx-dropzone";
 
 import { AuthRoutingModule } from './auth-routing.module';
@@ -12,7 +13,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    FormsModule
   ]
 })
 export class AuthModule { }

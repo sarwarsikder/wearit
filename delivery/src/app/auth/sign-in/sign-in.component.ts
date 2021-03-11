@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../shared/services';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  private Auth: AuthService;
+  constructor(public router: Router, auth: AuthService, private toastr: ToastrService) {
+    this.Auth = auth;
+   }
 
   ngOnInit(): void {
+  }
+
+  public credentials = {
+    email: '',
+    password: ''
+  };
+  public submitted: boolean = false;
+
+  public submit(frm: any) {
+    this.submitted = true;
+    
+    if (frm.invalid) {
+      return;
+    }
+
+    this.Auth.login(this.credentials).then(() => {
+      const redirectUrl = sessionStorage.getItem('redirectUrl');
+      if (redirectUrl) {
+        sessionStorage.removeItem('redirectUrl');
+        this.router.navigate([redirectUrl]);
+      } else {
+        this.router.navigate(['/dashboard']);
+      }
+    })
+      .catch(() => {
+        this.toastr.error("Your account is not activated or register. Please recheck again or contact to our admin to resolve it.");
+      });
   }
 
 }
