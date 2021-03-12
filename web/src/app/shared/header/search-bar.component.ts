@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../product/services';
 
+
 @Component({
   selector: 'search-bar',
   templateUrl: './search-bar.html'
