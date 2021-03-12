@@ -1,8 +1,7 @@
-<div class="header-bottom">
+<!-- <div class="header-bottom">
   <div class="container">
     <div class="nav-header">
       <div class="category-top">
-        <!-- Click add class open-->
         <div  class="label-categories"><i class="fa fa-bars"></i>
           <span translate>Categories</span>
           </div>
@@ -38,7 +37,7 @@
         </div>
           
         </li>
-          <!-- <li><a [routerLink]="['/']" [ngClass]="{'active': router.url === '/'}" translate>Home</a></li> -->
+          <li><a [routerLink]="['/']" [ngClass]="{'active': router.url === '/'}" translate>Home</a></li> This will get commented outs
           <li><a appLocationHref [url]="'/products/search'" [ngClass]="{'active': router.url === '/products/search'}"
               translate>Products</a></li>
           <li><a appLocationHref [url]="'/shops/search'" [ngClass]="{'active': router.url === '/shops/search'}"
@@ -49,4 +48,70 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 nav-cstm-red">
+
+<div class="container">
+    <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+      &#9776;
+    </button>
+  
+    <!-- Step 2: Add the ngbCollapse directive to the element below. -->
+
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item has-drop-new">
+          <div class="category-top">
+            <div  class="label-categories"><i class="fa fa-bars"></i>
+              <span translate>Categories</span>
+              </div>
+              <div class="show-categories">
+                <ul>
+                  <li *ngFor="let item of tree">
+                    <a class="dropdown-item" [routerLink]="['/products/search']" 
+                    [queryParams]="{categoryId: 'item._id'}" (click)="search(item)">{{item.name}}</a>
+                  </li>
+                </ul>
+              </div>
+    
+          </div>
+        </li>
+        <!-- <li class="nav-item active">
+          <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">Examples</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'.'" (click)="isMenuCollapsed = true">About</a>
+        </li> -->
+        <li  *ngFor="let item of tree" class="nav-item"> <a class="nav-link" [routerLink]="['/products/search']" 
+          [queryParams]="{categoryId: 'item._id'}" (click)="search(item)">{{item.name}}</a>
+          <div class="drop-new-menu">
+            <ul class="items-drop">
+              <li>
+                <a>
+                  <svg width="26" height="36" viewBox="0 0 26 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M25.1927 26.9067L21.5926 4.10645C21.5748 3.99352 21.5251 3.88803 21.4494 3.8024C21.3736 3.71676 21.275 3.65454 21.1651 3.62307L16.3944 2.26008L15.5484 0.35633C15.5012 0.250263 15.4243 0.160145 15.327 0.0968989C15.2297 0.0336528 15.1161 -6.66908e-06 15 9.9113e-10H10.2C10.0839 -6.66908e-06 9.97031 0.0336528 9.87299 0.0968989C9.77566 0.160145 9.69877 0.250263 9.65163 0.35633L8.80555 2.26015L4.03489 3.62315C3.92498 3.65462 3.82635 3.71684 3.75062 3.80247C3.67488 3.88811 3.62518 3.9936 3.60738 4.10653L0.00733403 26.9068C-0.00617873 26.9924 -0.000975561 27.08 0.0225852 27.1634C0.0461459 27.2468 0.0875046 27.3242 0.143815 27.3901C0.200125 27.456 0.270049 27.5089 0.348773 27.5452C0.427497 27.5815 0.513152 27.6003 0.599842 27.6004H3.51198L2.41246 32.878C2.38545 33.0077 2.4021 33.1426 2.45981 33.2618C2.51752 33.3811 2.61306 33.4778 2.73152 33.5371C2.93237 33.6379 7.71443 36.0005 12.6 36.0005C17.4856 36.0005 22.2676 33.6379 22.4685 33.5371C22.5869 33.4778 22.6825 33.3811 22.7402 33.2618C22.7979 33.1426 22.8145 33.0077 22.7875 32.878L21.688 27.6004H24.6001C24.6868 27.6003 24.7725 27.5815 24.8512 27.5452C24.93 27.5089 24.9999 27.456 25.0562 27.3901C25.1125 27.3241 25.1539 27.2468 25.1774 27.1634C25.201 27.0799 25.2062 26.9924 25.1927 26.9067ZM20.3285 4.63221L18.6834 15.6002H15.4527L14.174 11.1251L17.8736 6.36841C17.9403 6.28273 17.9825 6.18055 17.9957 6.07277C18.0089 5.96499 17.9927 5.85565 17.9486 5.7564L17.0299 3.69005L20.3285 4.63221ZM13.2 18.0002V16.8002H18.6001V18.0002H13.2ZM6.59992 16.8002H9.59996V18.0002H6.59992V16.8002ZM10.8 16.8002H12V18.0002H10.8V16.8002ZM8.48657 5.93258L10.1199 2.25753L12.0266 7.97763L13.4522 12.9671L8.48657 5.93258ZM13.2908 8.03365L13.308 7.97365L15.096 2.29323L16.7058 5.91517L13.7657 9.69522L13.2908 8.03365ZM12.6525 6.06008L11.0325 1.20002H14.1825L12.6525 6.06008ZM8.17021 3.69005L7.2516 5.7564C7.20943 5.85131 7.19261 5.95554 7.2028 6.0589C7.21299 6.16226 7.24983 6.26121 7.30973 6.34606L12.2356 13.3243C12.1123 13.4184 12.0304 13.5567 12.0069 13.71C11.9834 13.8633 12.0203 14.0197 12.1097 14.1464C12.1991 14.2731 12.3342 14.3602 12.4865 14.3894C12.6388 14.4187 12.7965 14.3877 12.9265 14.3031L13.842 15.6002H6.51667L4.87145 4.63221L8.17021 3.69005ZM1.302 26.4003L4.18489 8.1436L5.3999 16.2452V18.5385L3.76196 26.4003H1.302ZM3.68426 32.6574L6.48779 19.2002H14.4V34.6918C13.8026 34.7626 13.2016 34.7988 12.6 34.8004C8.79835 34.8004 4.93347 33.2179 3.68426 32.6574ZM15.6 34.5128V19.2002H18.7126L21.5162 32.6577C20.5999 33.0692 18.2767 34.0303 15.6 34.5128ZM21.438 26.4003L19.8001 18.5383V16.2448L21.0151 8.14345L23.898 26.4003H21.438Z" fill="black"/>
+                    <path d="M12.5995 21.6004C12.9309 21.6004 13.1995 21.3318 13.1995 21.0004C13.1995 20.669 12.9309 20.4004 12.5995 20.4004C12.2681 20.4004 11.9995 20.669 11.9995 21.0004C11.9995 21.3318 12.2681 21.6004 12.5995 21.6004Z" fill="black"/>
+                    <path d="M12.5995 25.2C12.9309 25.2 13.1995 24.9314 13.1995 24.6C13.1995 24.2686 12.9309 24 12.5995 24C12.2681 24 11.9995 24.2686 11.9995 24.6C11.9995 24.9314 12.2681 25.2 12.5995 25.2Z" fill="black"/>
+                    <path d="M12.5995 28.7996C12.9309 28.7996 13.1995 28.531 13.1995 28.1996C13.1995 27.8682 12.9309 27.5996 12.5995 27.5996C12.2681 27.5996 11.9995 27.8682 11.9995 28.1996C11.9995 28.531 12.2681 28.7996 12.5995 28.7996Z" fill="black"/>
+                  </svg>
+                  <span>Clothing</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        
+        </li>
+        <li class="nav-item"><a class="nav-link" appLocationHref (click)="isMenuCollapsed = true" [url]="'/products/search'" [ngClass]="{'active': router.url === '/products/search'}"
+          translate>Products</a></li>
+        <li class="nav-item"><a class="nav-link" appLocationHref (click)="isMenuCollapsed = true" [url]="'/shops/search'" [ngClass]="{'active': router.url === '/shops/search'}"
+          translate>Shops</a></li>
+      </ul>
+    </div>
 </div>
+</nav>
+
