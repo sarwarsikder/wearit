@@ -134,6 +134,7 @@ hr.margin-control {
 .panel-info .image-container img {
   border: 2px solid #fff;
   border-radius: 50%;
+  height: 100%;
 }
 
 .panel-info .info-container {

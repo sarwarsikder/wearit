@@ -16,6 +16,9 @@ export class SignInComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    if (this.Auth.isLoggedin()) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   public credentials = {
@@ -31,7 +34,8 @@ export class SignInComponent implements OnInit {
       return;
     }
 
-    this.Auth.login(this.credentials).then(() => {
+    this.Auth.login(this.credentials).then((resp) => {
+      
       const redirectUrl = sessionStorage.getItem('redirectUrl');
       if (redirectUrl) {
         sessionStorage.removeItem('redirectUrl');
@@ -40,9 +44,14 @@ export class SignInComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       }
     })
-      .catch(() => {
-        this.toastr.error("Your account is not activated or register. Please recheck again or contact to our admin to resolve it.");
-      });
+      .catch((error) => {
+        
+        if(error.data != undefined)
+        {
+          this.toastr.error(error.data.message);
+        }
+          // this.toastr.error("Your account is not activated or register. Please recheck again or contact to our admin to resolve it.");
+        });
   }
 
 }

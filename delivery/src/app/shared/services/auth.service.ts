@@ -22,14 +22,51 @@ export class AuthService {
   login(credentials: any): Promise<any> {
     return this.restangular.all('auth/login').post(credentials).toPromise()
       .then((resp) => {
-        localStorage.setItem('accessToken', resp.data.token);
-        return this.restangular.one('users', 'me').get().toPromise()
-          .then(resp => {
-            this.currentUser = resp.data;
-            localStorage.setItem('isLoggedin', 'yes');
-            this.userLoaded.next(resp.data);
-            return resp.data;
-          });
+        
+        if(resp.code == 400)
+        {
+            return resp;
+        }
+        else
+        {
+          localStorage.setItem('accessToken', resp.data.token);
+          return this.restangular.one('users', 'me').get().toPromise()
+            .then(resp => {
+              this.currentUser = resp.data;
+              localStorage.setItem('isLoggedin', 'yes');
+              this.userLoaded.next(resp.data);
+              return resp.data;
+            });
+        }
       });
+  }
+
+  register(info: any): Promise<any> {
+    return this.restangular.all('auth/register').post(info).toPromise();
+  }
+
+  me(): Promise<any> {
+    return this.restangular.one('users', 'me').get().toPromise();
+  }
+
+  getAccessToken(): any {
+    if (!this.accessToken) {
+      this.accessToken = localStorage.getItem('accessToken');
+    }
+
+    return this.accessToken;
+  }
+
+  forgot(email: string): Promise<any> {
+    return this.restangular.all('auth/forgot').post({ email }).toPromise();
+  }
+
+  removeToken() {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('isLoggedin');
+  }
+
+  isLoggedin() {
+    return localStorage.getItem('isLoggedin') === 'yes';
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../shared/services';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,7 +10,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private toastr: ToastrService) { }
+  private Auth: AuthService;
+  constructor(public router: Router, auth: AuthService ,private toastr: ToastrService) { 
+    this.Auth = auth;
+    this.Auth.removeToken();
+  }
 
   ngOnInit(): void {
   }
@@ -16,11 +22,19 @@ export class SignUpComponent implements OnInit {
   public account: any = {
     email: '',
     password: '',
-    phoneNumber: '',
+    phone: '',
     name: '',
+    address: '',
     isFileUploaded: false,
-    isProfilePicUpdated: false
+    isProfilePicUpdated: false,
+    photo: null,
+    nid: null
   };
+
+  public file: any = {
+    
+  }
+  
   public name: any = {
     firstName: '',
     lastName: ''
@@ -29,6 +43,10 @@ export class SignUpComponent implements OnInit {
     rePassword: ''
   };
   public submitted: boolean = false;
+
+  files: File[] = [];
+  pictures: File[] = [];
+  firstUploadRemove = 0;
 
   public submit(frm: any) {
     this.submitted = true;
@@ -39,20 +57,51 @@ export class SignUpComponent implements OnInit {
 
     if (this.account.password !== this.input.rePassword) {
       this.toastr.error('Confirm password doest not match');
+      return;
     }
 
-    if (!this.account.isFileUploaded) {
-      this.toastr.error('NID / Passporet is required');
-    }
+    // if (!this.account.isFileUploaded) {
+    //   this.toastr.error('NID / Passporet is required');
+    //   return;
+    // }
 
     this.account.name = this.name.firstName + " " + this.name.lastName;
 
-    console.log(this.account);
-  }
+    console.log(this.account)
+    var formData = new FormData();
 
-  files: File[] = [];
-  pictures: File[] = [];
-  firstUploadRemove = 0;
+    formData.append("email", this.account.email);
+    formData.append("name", this.account.name);
+    formData.append("password", this.account.password);
+    formData.append("nid", this.account.nid);
+    formData.append("photo", this.account.photo);
+    formData.append("type", "delivery");
+    formData.append("phoneNumber", this.account.phone);
+
+    this.Auth.register(formData)
+      .then(resp => {
+        this.toastr.success('Your account has been created, please verify your email then login');
+        this.router.navigate(['/auth/login']);
+      })
+      .catch(err => {
+        this.account = {
+          email: '',
+          password: '',
+          phoneNumber: '',
+          name: ''
+        };
+        this.name = {
+          firstName: '',
+          lastName: ''
+        };
+        this.input = {
+          rePassword: ''
+        };
+        this.files = [];
+        this.pictures = [];
+        this.toastr.error(err.data.message);
+      });
+  }
 
 	onSelect(event, type) {
 		//console.log(event);
@@ -60,12 +109,12 @@ export class SignUpComponent implements OnInit {
     {
 		  this.files.push(...event.addedFiles);
       this.account.isFileUploaded = true;
-      this.account.nid = event.addedFiles;
+      this.account.nid = event.addedFiles[0];
     }
     else{
       this.pictures.push(...event.addedFiles);
       this.account.isProfilePicUpdated = true;
-      this.account.picture = event.addedFiles;
+      this.account.photo = event.addedFiles[0];
     }
 	}
 
@@ -82,7 +131,7 @@ export class SignUpComponent implements OnInit {
     else{
       this.pictures.splice(this.pictures.indexOf(event), 1);
       this.account.isProfilePicUpdated = false;
-      this.account.picture = null;
+      this.account.photo = null;
     }
 	}
 
