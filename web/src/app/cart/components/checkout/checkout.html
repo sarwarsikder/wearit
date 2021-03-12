@@ -41,7 +41,7 @@
                       <span>{{option.displayText || option.optionKey}}</span>: <span>{{option.value}}</span>
                     </p>
                     <p> {{item.product?.shortDescription}} </p>
-                    <p><span translate>Product ID</span>: {{item.product?._id}}</p>
+                    <!-- <p><span translate>Product ID</span>: {{item.product?._id}}</p> -->
                   </td>
                   <!-- <td class="cart_price">
                     <span>
@@ -265,12 +265,13 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="col-sm-6">
+                <div class="col-sm-6">
                   <div class="form-group">
                     <label translate class="required">Country</label>
                     <select class="form-control" required name="country" #country="ngModel" [(ngModel)]="userInfo.country">
                       <option value="">Select your country</option>
-                      <option [ngValue]="country.sortname" [selected]="country.sortname =='BD'" *ngFor="let country of countries[0].countries">{{country.name}}</option>
+                      <option value="BD">Bangladesh</option>
+                      <!-- <option [ngValue]="country.sortname" [selected]="country.sortname =='BD'" *ngFor="let country of countries[0].countries">{{country.name}}</option> -->
                     </select>
                     <div *ngIf="country.errors && (country.dirty || country.touched || isSubmitted)">
                       <p [hidden]="!country.errors.pattern" class="error" translate> 'Country' field must contain only
@@ -278,7 +279,7 @@
                       <p [hidden]="!country.errors.required" class="error" translate> Please select your country </p>
                     </div>
                   </div>
-                </div> -->
+                </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label translate class="required">Zip Code</label>

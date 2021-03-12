@@ -35,6 +35,8 @@ import { SpinnerComponent } from './shared/spinner.component';
 
 import { ConfigResolver } from './shared/resolver';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { WishlistService } from './profile/services';
+
 
 
 // Function for setting the default restangular configuration
@@ -115,7 +117,8 @@ export function createTranslateLoader(http: HttpClient) {
     SystemService,
     AuthGuard,
     ConfigResolver,
-    ComplainService
+    ComplainService,
+    WishlistService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ComplainComponent]

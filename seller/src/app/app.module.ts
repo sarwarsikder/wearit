@@ -38,6 +38,8 @@ import { SpinnerComponent } from './shared/spinner.component';
 
 import { MediaModule } from './media/media.module';
 import { UtilsModule } from './utils/utils.module';
+import { SocialAuthService } from 'angularx-social-login';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -125,7 +127,9 @@ export function createTranslateLoader(http: HttpClient) {
     },
     AuthService,
     AuthGuard,
-    ConfigResolver
+    ConfigResolver,
+    SocialAuthService
+    
   ],
   bootstrap: [AppComponent]
 })

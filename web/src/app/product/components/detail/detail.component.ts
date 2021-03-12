@@ -1,7 +1,7 @@
 import { Component, OnDestroy, Input} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService, CartService, AuthService } from '../../../shared/services';
-import { ProductVariantService } from '../../services';
+import { ProductService, ProductVariantService } from '../../services';
 import { WishlistService } from '../../../profile/services';
 import { ToastyService } from 'ng2-toasty';
 import { TranslateService } from '@ngx-translate/core';
@@ -35,8 +35,17 @@ export class ProductDetailComponent implements OnDestroy {
   public userID: any;
   @Input() showDeal: any = 0;
 
+  public shop: any;
+  public products = [];
+  public take: any = 12;
+  public totalProducts: any = 0;
+  public isLoading: Boolean = false;
+  public searchFields: any = {
+    q: ''
+  };
 
-  constructor(private translate: TranslateService, private route: ActivatedRoute,
+
+  constructor(private translate: TranslateService, private route: ActivatedRoute,private productService: ProductService,
     private authService: AuthService, private seoService: SeoService, private variantService: ProductVariantService,
     public share: ShareButtons, private wishlistService: WishlistService, private toasty: ToastyService,
     private cartService: CartService) {
@@ -46,9 +55,18 @@ export class ProductDetailComponent implements OnDestroy {
 
     this.product = route.snapshot.data.product;
 
+    
+
+    if(this.product.shop){
+      this.shop=this.product.shop;
+      this.shop.id = this.product.shop._id;
+      this.query();
+    }
+
     if (this.product.shop && this.product.shop.gaCode) {
       seoService.trackPageViewForShop(this.product.shop._id, this.product.shop.gaCode);
     }
+
     this.productSubscription = this.route.data.subscribe(data => {
       this.product = data.product;
       this.updateSeo();
@@ -64,6 +82,36 @@ export class ProductDetailComponent implements OnDestroy {
       this.setPrice(this.product);
       this.getVariants();
     });
+
+
+  }
+
+  query() {
+    const params = Object.assign({
+      shopId: this.shop.id,
+      page: this.page,
+      take: this.take
+    }, this.searchFields);
+
+    this.productService.search(params).then((res) => {
+      let index = res.data.items.indexOf(this.product);
+      res.data.items.splice(index,1);
+      this.products = this.shuffle(res.data.items);
+      this.totalProducts = res.data.count;
+      const n = 2;
+      this.products =  this.products
+      .map(x => ({ x, r: Math.random() }))
+      .sort((a, b) => a.r - b.r)
+      .map(a => a.x)
+      .slice(0, n);
+
+      })
+      .catch(() => this.toasty.error(this.translate.instant('Something went wrong, please try again!')));
+  }
+  
+
+  shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
   }
 
   updateSeo() {
