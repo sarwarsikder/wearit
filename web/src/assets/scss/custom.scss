@@ -2171,6 +2171,15 @@ input.stv-radio-tab {
         }
       }
     }
+    &:active{
+      background: #000;
+      color: #fff;
+      svg{
+        path{
+          fill: #fff;
+        }
+      }
+    }
     svg{
       width: 18px;
       height: 18px;
@@ -2265,4 +2274,8 @@ input{
     outline: none !important;
     box-shadow: none !important;
   }
+}
+.btn-red-sm{
+  font-size: 11px !important;
+  border: 0px !important;
 }
