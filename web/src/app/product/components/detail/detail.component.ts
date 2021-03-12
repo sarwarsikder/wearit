@@ -44,6 +44,9 @@ export class ProductDetailComponent implements OnDestroy {
     q: ''
   };
 
+  public whishListTotal: any = 0;
+
+
 
   constructor(private translate: TranslateService, private route: ActivatedRoute,private productService: ProductService,
     private authService: AuthService, private seoService: SeoService, private variantService: ProductVariantService,
@@ -176,6 +179,7 @@ export class ProductDetailComponent implements OnDestroy {
     this.wishlistService.create({ productId: item._id })
       .then(resp => this.toasty.success(this.translate.instant('Added to wishlist successfully.')))
       .catch(err => this.toasty.error(err.data.data.message || this.translate.instant('Error occured, please try again later.')));
+      this.whishListTotal = 1;
   }
 
   addCart() {
