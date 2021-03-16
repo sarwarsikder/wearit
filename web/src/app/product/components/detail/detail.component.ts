@@ -7,6 +7,9 @@ import { ToastyService } from 'ng2-toasty';
 import { TranslateService } from '@ngx-translate/core';
 import { ShareButtons } from '@ngx-share/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
+import { WishListService } from '../../../shared/services/wish-list.service';
+
 
 @Component({
   templateUrl: './detail.html'
@@ -44,14 +47,10 @@ export class ProductDetailComponent implements OnDestroy {
     q: ''
   };
 
-  public whishListTotal: any = 0;
-
-
-
   constructor(private translate: TranslateService, private route: ActivatedRoute,private productService: ProductService,
     private authService: AuthService, private seoService: SeoService, private variantService: ProductVariantService,
     public share: ShareButtons, private wishlistService: WishlistService, private toasty: ToastyService,
-    private cartService: CartService) {
+    private cartService: CartService,private wishListService: WishListService) {
     if (this.authService.isLoggedin()) {
       this.authService.getCurrentUser().then(res => this.userID = res._id);
     }
@@ -85,8 +84,6 @@ export class ProductDetailComponent implements OnDestroy {
       this.setPrice(this.product);
       this.getVariants();
     });
-
-
   }
 
   query() {
@@ -176,10 +173,17 @@ export class ProductDetailComponent implements OnDestroy {
     if (!this.authService.isLoggedin()) {
       return this.toasty.error(this.translate.instant('Please login before adding to wishlist.'));
     }
+    console.log("Add WiseList");
+    console.log(item._id);
     this.wishlistService.create({ productId: item._id })
-      .then(resp => this.toasty.success(this.translate.instant('Added to wishlist successfully.')))
+      .then(resp => {
+        console.log(resp.data._id);
+        this.toasty.success(this.translate.instant('Added to wishlist successfully.'));
+        this.wishListService.add({
+          productId: resp.data._id
+        });
+      })
       .catch(err => this.toasty.error(err.data.data.message || this.translate.instant('Error occured, please try again later.')));
-      this.whishListTotal = 1;
   }
 
   addCart() {
