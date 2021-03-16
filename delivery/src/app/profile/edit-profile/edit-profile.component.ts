@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../shared/services';
 
 @Component({
@@ -14,7 +16,7 @@ export class EditProfileComponent implements OnInit {
   public info: any = {};
   public submitted: boolean = false;
 
-  constructor( auth: AuthService) {
+  constructor( public router: Router, auth: AuthService ,private toastr: ToastrService) {
     this.Auth = auth;
     if (this.Auth.isLoggedin()) {
       this.Auth.me().then((resp) => {
@@ -30,16 +32,44 @@ export class EditProfileComponent implements OnInit {
   files: File[] = [];
   picture: File[] = [];
 
+  public submit(frm: any) {
+    this.submitted = true;
+    
+    if (frm.invalid) {
+      return;
+    }
+
+    var formData = new FormData();
+
+    formData.append("name", this.info.name);
+    formData.append("password", this.info.password);
+    formData.append("nid", this.info.nid);
+    formData.append("photo", this.info.photo);
+    formData.append("type", "delivery");
+    formData.append("phoneNumber", this.info.address);
+
+    this.Auth.updateMe(formData)
+      .then(resp => {
+        this.toastr.success('Update info successful');
+        this.router.navigate(['/profile']);
+      })
+      .catch(err => {
+        
+      });
+  }
+
   onSelect(event, type) {
 		//console.log(event);
     
 		this.files.push(...event.addedFiles);
+    this.info.nid = event.addedFiles[0];
 	}
 
 	onRemove(event, type) {
 		//console.log(event);
 		
 		this.files.splice(this.files.indexOf(event), 1);
+    this.info.nid = null;
 	}
 
   handleProfilePic(event) {
@@ -54,6 +84,7 @@ export class EditProfileComponent implements OnInit {
     }
     
     this.picture.push(event.target.files[0]);
+    this.info.photo = event.target.files[0];
 }
 
 }

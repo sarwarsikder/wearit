@@ -49,6 +49,13 @@ export class AuthService {
     return this.restangular.one('users', 'me').get().toPromise();
   }
 
+  updateMe(data): Promise<any> {
+    return this.restangular.all('users').customPUT(data).toPromise().then(resp => {
+      this.currentUser = resp.data;
+      this.userLoaded.next(resp.data);
+    });
+  }
+
   getAccessToken(): any {
     if (!this.accessToken) {
       this.accessToken = localStorage.getItem('accessToken');
