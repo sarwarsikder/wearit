@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastyService } from 'ng2-toasty';
 import { ProductService } from '../../product/services';
 import { WishlistService } from '../../profile/services/wishlist.service';
+import { WishListService } from '../services/wish-list.service';
 
 
 
@@ -61,10 +62,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public product;
 
   public items: any = [];
-  public whishListTotal: any = 0;
   public page: number = 1;
   public itemsPerPage: number = 1;
   public searchFields: any = {};
+
+  private wishListLoadedSubscription: Subscription;
+  public whishListJson: any = [];
+
+
 
 
 
@@ -73,7 +78,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private authService: AuthService, private systemService: SystemService, private utilService: UtilService,
     private modalService: NgbModal, private translate: TranslateService, private cartService: CartService,private wishlistService: WishlistService,
-    config: NgbModalConfig, private toasty: ToastyService, auth: AuthService,private productService: ProductService,) {
+    config: NgbModalConfig, private toasty: ToastyService, auth: AuthService,private productService: ProductService,private wishListService: WishListService) {
     this.userLoadedSubscription = authService.userLoaded$.subscribe(data => this.currentUser = data);
     this.cartLoadedSubscription = cartService.cartChanged$.subscribe(data => this.cart = data);
     this.systemService.configs().then(resp => {
@@ -85,11 +90,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     config.backdrop = 'static';
     config.keyboard = false;
     this.Auth = auth;
+
+    this.wishListLoadedSubscription = wishListService.wishListChanged$.subscribe(data => this.whishListJson = data);
+
     
   }
 
   ngOnInit() {
     this.cart = this.cartService.get();
+    this.whishListJson = this.wishListService.get();
     if (this.authService.isLoggedin()) {
       this.authService.getCurrentUser().then(resp => this.currentUser = resp);
       this.whishList();
@@ -117,7 +126,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }, this.searchFields);
 
     this.wishlistService.list(params).then((res) => {
-      this.whishListTotal = res.data.count;
       this.utilService.setLoading(false);
     }).catch(err => {
       this.toasty.error(this.translate.instant('Something went wrong, please try again!'));

@@ -1,7 +1,7 @@
 define({
-  "name": "Genstore API",
+  "name": "Wearit API",
   "version": "1.0.0",
-  "description": "Genstore-api",
+  "description": "Wearit-api",
   "sampleUrl": false,
   "defaultVersion": "0.0.0",
   "apidoc": "0.3.0",

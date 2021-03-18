@@ -9,6 +9,7 @@ import { CategoryService } from '../../product/services';
 })
 export class SearchbarComponent implements OnInit {
   public tree: any = [];
+  public isMenuCollapsed:any = '';
 
   constructor(public router: Router, private categoryService: CategoryService) { }
 
