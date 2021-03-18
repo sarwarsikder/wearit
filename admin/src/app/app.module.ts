@@ -37,6 +37,8 @@ import { SpinnerComponent } from "./shared/spinner.component";
 import { MediaModule } from "./media/media.module";
 import { ConfigResolver } from "./shared/resolver";
 
+
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 2,
