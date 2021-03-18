@@ -7,12 +7,12 @@
         <img *ngIf="type === 'user' || type ==='shop'" src="assets/images/icon/staff.png">
         <img *ngIf="type === 'product'" src="assets/images/icon/expense.png">
       </div> -->
-      <div class="align-self-center inline-block">
+      <div class="align-self-center inline-block stat-title">
         <h5 class="text-highlight m-t-10">
           <span *ngIf="type === 'order'"><a [routerLink]="['/orders/list']">Orders</a></span>
           <span *ngIf="type === 'product'"><a [routerLink]="['/products']">Products</a></span>
           <span *ngIf="type === 'user'"><a [routerLink]="['/users/list']">Users</a></span>
-          <span *ngIf="type === 'shop'"><a [routerLink]="['/shops']">Shops</a></span> Statistic</h5>
+          <span *ngIf="type === 'shop'"><a [routerLink]="['/shops']">Shops</a></span> Stats</h5>
         <div *ngIf="type === 'shop'" class="card-fancy">
           <p class="inline-block">
             Total <span class="label label-danger">{{stat?.all}}</span>

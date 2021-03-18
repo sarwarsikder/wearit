@@ -7,6 +7,8 @@
   padding-top: 0px;
   background: #DC2626 !important;
   box-shadow: unset;
+  box-shadow: 0px 2px 6px 0px #6b6b6b;
+  border-right: 2px solid #ff6c6c;
 }
 
 .sidebar-cstm{
@@ -97,6 +99,14 @@
       min-width: 150px;
     }
   }
+  tr.sub-th{
+    th{
+      background: #dedede;
+    }
+    td{
+      background: #dedede;
+    }
+  }
 }
 
 .error {
@@ -167,6 +177,13 @@
 .title-main{
   font-weight: 600;
   margin-bottom: 0px;
+  position: relative;
+  span{
+    background: #000;
+    color: #fff;
+    padding: 4px 8px;
+    font-weight: 500;
+  }
 }
 
 .card-fancy{
@@ -208,4 +225,85 @@
       background: #f59406;
     }
   }
+}
+
+.table{
+  thead{
+    th{
+      background: #e4e4e4;
+      color: #000;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+  }
+  td{
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+.form-control{
+  background: #efefef;
+  font-size: 13px;
+}
+.input-group-prepend .btn, .input-group-append .btn {
+  position: relative;
+  z-index: 2;
+  height: 38px;
+}
+
+.card-body{
+  position: relative;
+  border-top: 4px solid #ffdcdc;
+  box-shadow: 4px 10px 23px 4px #e0e0e0;
+  &:before{
+    content: " ";
+    width: 100px;
+    height: 2px;
+    // background: #ff83ab;
+    position: absolute;
+    top: -1px;
+    left: 0px;
+  }
+}
+.stat-title{
+  h5{
+    font-weight: 400;
+    a{
+      color: #000;
+      font-weight: 800;
+    }
+  }
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #ffffff;
+  background-color: #3e3e3e;
+}
+
+.nav-top-cus.flex-column a.nav-link:hover {
+  color: #fff;
+  background: #000000;
+}
+
+.btn-primary, .btn-primary.disabled{
+  background: #333;
+  border-color: #333;
+}
+// .req-pay-container{
+//   background: #e6e6e6;
+// }
+.req-pay-container{
+  display: flex;
+}
+
+.req-pay-container .input-group{
+  display: flex;
+  align-items: center;
+}
+.req-pay-container .input-group label{
+  color: #000;
+  margin-bottom: 0px;
+  font-weight: 600;
 }

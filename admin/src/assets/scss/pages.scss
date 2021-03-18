@@ -241,13 +241,18 @@ File: scss
     li {
       margin-top: 0px;
       margin-bottom: 0px;
+      font-weight: 600;
+      a{
+        color: #000;
+        
+      }
     }
 
     .breadcrumb-item+.breadcrumb-item::before {
       content: "\e649";
       font-family: themify;
       color: $light-text;
-      font-size: 11px;
+      font-size: 15px;
     }
 
     .breadcrumb-item.active {
@@ -361,6 +366,7 @@ File: scss
   right: 0;
   border-top: 1px solid $border;
   background: $white;
+  padding-left: 250px;
 }
 
 
