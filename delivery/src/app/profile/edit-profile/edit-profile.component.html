@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="info-container">
-                                <form action="">
+                                <form #frm="ngForm" (submit)="submit(frm)">
                                     <label for="">Name</label>
                                     <input type="text" class="form-control" id="name"
                                      #name="ngModel" name="name" required [(ngModel)]="info.name" />
@@ -35,18 +35,23 @@
                                         <p [hidden]="!name.errors.required" class="error" > Name is required </p>
                                     </div>
                                     <label for="">Address</label>
-                                    <textarea name="" class="form-control" id="" cols="30" rows="10"></textarea>
+                                    <textarea name="" class="form-control" id="address" cols="30" rows="10"
+                                    #address="ngModel" name="address" [(ngModel)]="info.address"></textarea>
                                     <label for="">Phone Number</label>
+
                                     <input type="text" class="form-control" id="name"
                                      #phoneNumber="ngModel" name="phoneNumber" required [(ngModel)]="info.phoneNumber" />
                                     <div *ngIf="phoneNumber.errors && (phoneNumber.dirty || phoneNumber.touched || submitted)">
                                         <p [hidden]="!phoneNumber.errors.required" class="error" > Phone is required </p>
                                     </div>
-                                    <label for="">Password</label>
+                                    <label for="">Password<span class="ng-star-required"> *</span></label>
                                     <input type="password" class="form-control" id="name"
-                                     #password="ngModel" name="password" required [(ngModel)]="info.password" />
+                                     #password="ngModel" name="password" [minlength]="6" required [(ngModel)]="info.password" />
                                     <div *ngIf="password.errors && (password.dirty || password.touched || submitted)">
                                         <p [hidden]="!password.errors.required" class="error" > Password is required </p>
+                                        <p [hidden]="!password.errors.minlength" class="error" translate>
+                                            Password must be at least 6 characters!
+                                          </p>
                                     </div>
                                     <div class="">
                                         <label for="" class="">Document</label>
@@ -64,7 +69,7 @@
                                                 </ngx-dropzone-preview>
                                             </ngx-dropzone>
                                         </div>
-                                        <button class="btn-general">Save Changes</button>
+                                        <button type="submit" class="btn-general">Save Changes</button>
                                     </div>
 
                                 </form>

@@ -7,7 +7,7 @@
                     <h3 class="title-head">Please login to continue</h3>
                     <form #frm="ngForm" (submit)="submit(frm)">
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email address</label>
+                            <label for="email" class="form-label">Email address<span class="ng-star-required"> *</span></label>
                             <input type="text" class="form-control" id="email" aria-describedby="emailHelp"
                             placeholder="{{'Enter your email'}}" #email="ngModel" name="email"
                             pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required [(ngModel)]="credentials.email" />
@@ -20,7 +20,7 @@
                             <div class="form-text">We'll never share your email with anyone else.</div>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">Password<span class="ng-star-required"> *</span></label>
                             <input type="password" class="form-control" id="password"
                             placeholder="{{'Enter your password'}}" #password="ngModel" name="password" 
                             [minlength]="6" required [(ngModel)]="credentials.password" />
