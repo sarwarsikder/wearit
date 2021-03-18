@@ -1,10 +1,29 @@
 .horizontal-nav .left-sidebar {
-  position: relative;
-  width: 100%;
-  height: auto;
+  position: fixed;
+  width: 220px;
+  left: 0px;
+  top: 0px;
+  height: 100%;
   padding-top: 0px;
-  background: transparent !important;
+  background: #DC2626 !important;
   box-shadow: unset;
+}
+
+.sidebar-cstm{
+  width: 100%;
+}
+.scroll-sidebar{
+  display: flex;
+  .sidebar-nav{
+    padding: 0px !important;
+    width: 100% !important;
+    margin-top: 100px;
+  }
+  #sidebarnav{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 }
 
 .topbar .top-navbar {
@@ -21,15 +40,16 @@
 
 .horizontal-nav .sidebar-nav #sidebarnav>li>ul {
   position: absolute;
-  left: 0px;
+  left: 100%;
   width: 220px;
   max-height: 350px;
   overflow-y: auto;
   padding-bottom: 10px;
   z-index: 1001;
-  background: #edf0f5;
+  background: #484848;
   display: none;
   padding-left: 1px;
+  top: 0px;
 }
 
 .star {
@@ -141,5 +161,51 @@
   .fr-toolbar.fr-top {
     position: absolute;
     width: 100%;
+  }
+}
+
+.title-main{
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.card-fancy{
+  display: flex;
+  flex-wrap: wrap;
+  p{
+
+    flex: 1 0 20%;
+    margin: 5px;
+    background: #2cc7e0;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    align-items: center;
+    max-width: 360px;
+    span{
+      background: transparent;
+      font-size: 35px;
+    }
+
+  }
+  &.green-zone{
+    p{
+      background: #45c372;
+    }
+  }
+  &.purple-zone{
+    p{
+      background: #8e5eec;
+    }
+  }
+  &.orange-zone{
+    p{
+      background: #f59406;
+    }
   }
 }

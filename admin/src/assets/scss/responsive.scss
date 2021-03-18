@@ -41,7 +41,7 @@ File: scss
   }
 
   .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover {
-    background: #edf0f5;
+    background: #1C1C1C;
   }
 
   .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover ul.collapse {
@@ -50,6 +50,10 @@ File: scss
 
   .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li a {
     padding: 12px 15px;
+    color: #fff !important;
+  }
+  .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li a i{
+    color: #fff !important;
   }
 }
 
