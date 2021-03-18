@@ -6,7 +6,7 @@
           <div class="panel-heading resume-heading">
             <div class="row">
               <div class="col-lg-12">
-                <h3 translate>General information</h3>
+                <h3 class="extra-head">General information</h3>
                 <ul class="list-group">
                   <li class="list-group-item">
                     <div class="row">
@@ -84,7 +84,7 @@
                   </li>
                 </ul>
                 <br>
-                <h3 translate>Shipping details</h3>
+                <h3 class="extra-head">Shipping details</h3>
                 <ul class="list-group">
                   <li class="list-group-item">
                     <div class="row">
@@ -146,9 +146,9 @@
                   </li>
                 </ul>
                 <br>
-                <h3 translate>Products</h3>
+                <h3 class="extra-head">Products</h3>
                 <div class="table-responsive">
-                  <table class="table border-1 table-condensed">
+                  <table class="table border-1 table-condensed table-cstm-order">
                     <thead>
                       <tr>
                         <th translate>
@@ -231,9 +231,9 @@
                           <price-currency [price]="item.userTotalPrice" [currency]="item.userCurrency"></price-currency>
                         </td>
                         <td>
-                          <button class="btn btn-warning" (click)="openRefund(item)" translate style="margin-bottom: 10px">Request
+                          <button class="btn btn-warning btn-red-sm btn-black" (click)="openRefund(item)" translate style="margin-bottom: 10px">Request
                             Refund</button><br>
-                          <button class="btn btn-danger" (click)="exportPDF(item)" translate>Export Data</button>
+                          <button class="btn btn-danger btn-red-sm btn-black" (click)="exportPDF(item)" translate>Export Data</button>
                         </td>
                       </tr>
                     </tbody>

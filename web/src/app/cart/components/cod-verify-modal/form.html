@@ -6,7 +6,7 @@
 </div>
 <div class="modal-body">
   <input type="text" [(ngModel)]="verifyCode" name="verifyCode" placeholder="Enter your code" class="form-control" />
-  <p class="help help-block" translate>A verify code has been sent to your phone number. Please enter it exactly to the box.</p>
-  <p><button class="btn btn-success" (click)="confirm()" translate>Confirm</button>&nbsp; <button class="btn btn-warning" (click)="activeModal.close('Cancel')" translate>Cancel</button>&nbsp; </p>
-  <p class="verify-text" translate>Don't get any verify COD number, <a (click)="reSendVerifyNumber()">click here</a> </p>
+  <p class="help help-block" style="font-size: 12px;padding: 4px;margin-top: 5px;" translate>A verify code has been sent to your phone number. Please enter it exactly to the box.</p>
+  <p><button class="btn btn-success confirm-btn" (click)="confirm()" translate>Confirm</button>&nbsp; <button class="btn btn-warning cancel-btn" (click)="activeModal.close('Cancel')" translate>Cancel</button>&nbsp; </p>
+  <p class="verify-text" style="padding-left: 0px;" translate>Don't get any verify COD number, <a (click)="reSendVerifyNumber()">click here</a> </p>
 </div>

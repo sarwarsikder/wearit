@@ -1,7 +1,7 @@
 {
-  "name": "genstore-api",
+  "name": "Wearit-api",
   "version": "1.0.0",
-  "description": "Genstore-api",
+  "description": "Wearit-api",
   "main": "server/www.js",
   "dev": "nodemon server/www.js",
   "engines": {

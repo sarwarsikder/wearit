@@ -8,5 +8,20 @@ if (environment.production) {
   enableProdMode();
 }
 
+declare global {
+  interface Window {
+    
+    appConfig: any;
+    appData: any;
+    ga: any;
+  }
+}
+
+//export version and build number to global
+window.appConfig = environment;
+
+// init data for the app
+window.appData = {};
+
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));

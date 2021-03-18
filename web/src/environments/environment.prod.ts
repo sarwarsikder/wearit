@@ -8,8 +8,8 @@ export const environment = {
   sellerUrl: 'https://wearit-seller.herokuapp.com/',
   googleClientId: '917195124089-hp1m6g5fbotlkbipmrejrapt9uh0lhhl.apps.googleusercontent.com',
   facebookAppId: '113570925979091',
-  paymentRedirectSuccessUrl: 'http://genstore.iospot.top/cart/checkout/success',
-  paymentRedirectCancelUrl: 'http://genstore.iospot.top/cart/checkout/cancel',
+  paymentRedirectSuccessUrl: 'https://wearit-web.herokuapp.com/cart/checkout/success',
+  paymentRedirectCancelUrl: 'https://wearit-web.herokuapp.com/cart/checkout/cancel',
   stripeKey: 'pk_test_Z3rf3HSfsokHl4lLFTBxhZrZ',
   pusher: {
     appId: 591974,

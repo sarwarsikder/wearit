@@ -9,6 +9,7 @@ export const environment = {
   build: 27,
   apiBaseUrl: 'http://localhost:8080/v1',
   apiProxy: '',
+  // sellerUrl: 'https://wearit-shop-api.herokuapp.com/api',
   sellerUrl: 'https://wearit-seller.herokuapp.com/',
   platform: 'web',
   googleClientId: '917195124089-hp1m6g5fbotlkbipmrejrapt9uh0lhhl.apps.googleusercontent.com',

@@ -5,6 +5,7 @@ import { UtilService } from '../../../shared/services';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs/Subscription';
 import * as _ from 'lodash';
+import { WishListService } from '../../../shared/services/wish-list.service';
 
 @Component({
   selector: 'wishlist-listing',
@@ -24,7 +25,8 @@ export class WishListComponent implements OnInit, OnDestroy {
     private toasty: ToastyService,
     private wishlistService: WishlistService,
     private translate: TranslateService,
-    private utilService: UtilService
+    private utilService: UtilService,
+    private wishListService: WishListService
   ) {
     this.loadingSubscription = utilService.appLoading$.subscribe(loading => this.isLoading = loading);
   }
@@ -60,6 +62,7 @@ export class WishListComponent implements OnInit, OnDestroy {
         .then(() => {
           this.toasty.success(this.translate.instant('Item has been removed!'));
           this.items.splice(index, 1);
+          this.wishListService.remove({ productId: itemId});
         })
         .catch((err) => this.toasty.error(this.translate.instant(err.data.message || 'Something went wrong, please try again!')));
     }

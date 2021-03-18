@@ -10,10 +10,11 @@
                                 <img [src]="userImage" class="img-fluid" [alt]="imageAlt">
                             </div>
                             <div class="info-container">
-                                <p class="name">Sumon Biswas</p>
-                                <p class="other-info"><label>Address:</label>12/KA,F/A, Mukti Niketon, Road#3,Shyamoli, Dhaka 1207</p>
-                                <p class="other-info"><label>Phone: </label>01717761087</p>
-                                <p class="other-info"><label>Trade: </label>EMP-265484554</p>
+                                <p class="name">{{info.name}}</p>
+                                <p class="other-info" ><label>Address:</label>{{info.address}}</p>
+                                <p class="other-info"><label>Email: </label>{{info.email}}</p>
+                                <p class="other-info"><label>Phone: </label>{{info.phoneNumber}}</p>
+                                <!-- <p class="other-info"><label>Trade: </label>EMP-265484554</p> -->
                                 <button routerLink="edit" class="btn-general">Edit Information</button>
                             </div>
                         </div>
