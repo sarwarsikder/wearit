@@ -134,6 +134,7 @@ hr.margin-control {
 .panel-info .image-container img {
   border: 2px solid #fff;
   border-radius: 50%;
+  height: 100%;
 }
 
 .panel-info .info-container {
@@ -199,8 +200,8 @@ hr.margin-control {
 
 .upload-btn-wrapper.attach-file {
   position: relative;
-  width: 150px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
   border-radius: 0px;
   border: 0px;
   bottom: 0px;
@@ -307,3 +308,38 @@ hr.margin-control {
   background: transparent;
 }
 /*# sourceMappingURL=styles.css.map */
+
+._ngcontent-kfh-c110 h1,h2{
+  font-size: 1rem;
+}
+
+.file-drop-signup
+{
+  
+  height: 20% !important;
+  width: 100%;
+  max-width: unset !important;
+  min-height: unset !important;
+  min-width: unset !important;
+  background: #49504C !important;
+  color: white !important;
+}
+
+.image-drop-signup
+{
+  
+  height: 89% !important;
+  width: 100%;
+  max-width: unset !important;
+  min-height: unset !important;
+  min-width: unset !important;
+}
+
+.upload-btn-wrapper img
+{
+  opacity: 1 !important;
+}
+
+.error{
+  color: red !important;
+}

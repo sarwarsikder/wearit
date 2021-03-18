@@ -3,14 +3,22 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  version: '0.0.1',
+  build: 27,
+  apiBaseUrl: 'http://192.168.1.22:8080/v1',
+  apiProxy: '',
+  sellerUrl: 'http://localhost:9000/api',
+  platform: 'delivery',
+  googleClientId: '917195124089-hp1m6g5fbotlkbipmrejrapt9uh0lhhl.apps.googleusercontent.com',
+  facebookAppId: '113570925979091',
+  paymentRedirectSuccessUrl: 'http://localhost:4200/cart/checkout/success',
+  paymentRedirectCancelUrl: 'http://localhost:4200/cart/checkout/cancel',
+  stripeKey: 'pk_test_Z3rf3HSfsokHl4lLFTBxhZrZ',
+  pusher: {
+    appId: 591974,
+    key: '8cbf727dad3c8ce84888',
+    cluster: 'ap1'
+  },
+  showBuild: true
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
