@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+body{
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 14px !important;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 500;
+}
+
 .horizontal-nav .left-sidebar {
   position: fixed;
   width: 220px;
@@ -13,13 +24,22 @@
 
 .sidebar-cstm{
   width: 100%;
+  .logo-admin{
+    padding-left: 12px;
+    padding-top: 10px;
+    background: #a52626;
+    padding-bottom: 10px;
+    img{
+      width: 40px;
+    }
+  }
 }
 .scroll-sidebar{
   display: flex;
   .sidebar-nav{
     padding: 0px !important;
     width: 100% !important;
-    margin-top: 100px;
+    margin-top: 10px;
   }
   #sidebarnav{
     display: flex;
@@ -192,37 +212,47 @@
   p{
 
     flex: 1 0 20%;
+    display: flex;
+    flex-direction: column;
     margin: 5px;
-    background: #2cc7e0;
+    background: #802eda;
     padding: 10px;
     border-radius: 5px;
-    color: #fff;
-    font-size: 18px;
+    color: #ffffffba;
+    font-size: 15px;
     font-weight: 600;
     display: flex;
     justify-content: space-between;
     height: 80px;
-    align-items: center;
+    align-items: left;
     max-width: 360px;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+    line-height: 25px;
     span{
       background: transparent;
       font-size: 35px;
+      display: block;
+      border-top: 1px solid #ffffff52;
+      border-radius: 0px;
+      line-height: 40px;
+      padding: 0px;
     }
 
   }
   &.green-zone{
     p{
-      background: #45c372;
+      background: #1eb181;
     }
   }
   &.purple-zone{
     p{
-      background: #8e5eec;
+      background: #802eda;
     }
   }
   &.orange-zone{
     p{
-      background: #f59406;
+      background: #ff5722;
     }
   }
 }
@@ -306,4 +336,16 @@
   color: #000;
   margin-bottom: 0px;
   font-weight: 600;
+}
+
+.card-blank{
+  background: #fff;
+  padding: 15px;
+  border: 1px solid #e6e6e6 !important;
+  .card-body{
+    padding: 0px;
+    background: transparent !important;
+    box-shadow: none;
+    border-top: 0px;
+  }
 }
