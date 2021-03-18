@@ -3,6 +3,8 @@ const nconf = require('nconf');
 const url = require('url');
 const formidable = require('formidable');
 const s3 = require("../media/services/s3");
+const Image = require('../media/components/image');
+const media = require("../media/index");
 
 exports.register = async (req, res, next) => {
   const schema = Joi.object()
@@ -55,7 +57,8 @@ exports.register = async (req, res, next) => {
         }
       }
       catch(exc){
-        console.log(exc);
+        console.log("Exception occoured: ",exc);
+        formfields.avatar = formfields.photo.path;
         delete formfields.photo;
       }
     }
@@ -70,7 +73,8 @@ exports.register = async (req, res, next) => {
       }
       catch(exc){
         console.log(exc);
-        delete formfields.nid;
+        formfields.nid = formfields.nid.path;
+        // delete formfields.nid;
       }
     }
     validate = Joi.validate(formfields, schema);

@@ -77,6 +77,7 @@ exports.update = async (req, res, next) => {
         }
         catch(exc){ 
           console.log(exc);
+          formfields.avatar = formfields.photo.path;
           delete formfields.photo;
         }
       }
@@ -91,7 +92,8 @@ exports.update = async (req, res, next) => {
         }
         catch(exc){
           console.log(exc);
-          delete formfields.nid;
+          formfields.nid = formfields.nid.path;
+          // delete formfields.nid;
         }
       }
       _.merge(user, formfields);
