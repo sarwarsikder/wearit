@@ -46,18 +46,30 @@ exports.register = async (req, res, next) => {
       }); // form.parse
     });
     if(formfields && formfields.photo){
-      const file = await s3.uploadFile(formfields.photo.path);
-      if(file.url){
-        formfields.photo = file.url;
-      }else{
+      try{
+        const file = await s3.uploadFile(formfields.photo.path);
+        if(file.url){
+          formfields.photo = file.url;
+        }else{
+          delete formfields.photo;
+        }
+      }
+      catch(exc){
+        console.log(exc);
         delete formfields.photo;
       }
     }
     if(formfields && formfields.nid){
-      const file = await s3.uploadFile(formfields.nid.path);
-      if(file.url){
-        formfields.nid = file.url;
-      }else{
+      try{
+        const file = await s3.uploadFile(formfields.nid.path);
+        if(file.url){
+          formfields.nid = file.url;
+        }else{
+          delete formfields.nid;
+        }
+      }
+      catch(exc){
+        console.log(exc);
         delete formfields.nid;
       }
     }
