@@ -7,6 +7,7 @@ export const environment = {
   version: '0.0.1',
   build: 27,
   apiBaseUrl: 'http://192.168.1.22:8080/v1',
+  apiUrl: 'http://192.168.1.22:8080',
   apiProxy: '',
   sellerUrl: 'http://localhost:9000/api',
   platform: 'delivery',

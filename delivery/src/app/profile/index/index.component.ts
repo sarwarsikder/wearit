@@ -9,7 +9,7 @@ import { AuthService } from '../../shared/services';
 })
 export class IndexComponent implements OnInit {
 
-  userImage = ""
+  userImage = "assets/images/avatar.png"
   imageAlt = "userImage"
 
   public info: any = {};
