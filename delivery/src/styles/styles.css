@@ -137,6 +137,26 @@ hr.margin-control {
   height: 100%;
 }
 
+.panel-info .nid-container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  background: #E8E8E8;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.panel-info .nid-container img {
+  
+  height: 200px;
+  width: 250px;
+}
+
 .panel-info .info-container {
   padding-left: 40px;
   -webkit-box-flex: 1;

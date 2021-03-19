@@ -23,11 +23,11 @@
                             <label for="password" class="form-label">Password<span class="ng-star-required"> *</span></label>
                             <input type="password" class="form-control" id="password"
                             placeholder="{{'Enter your password'}}" #password="ngModel" name="password" 
-                            [minlength]="6" required [(ngModel)]="credentials.password" />
+                            [minlength]="8" required [(ngModel)]="credentials.password" />
                             <div *ngIf="password.errors && (password.dirty || password.touched || submitted)">
                                 <p [hidden]="!password.errors.required" class="error" > password is required </p>
                                 <p [hidden]="!password.errors.minlength" class="error" translate>
-                                    Password must be at least 6 characters!
+                                    Password must be at least 8 characters!
                                   </p>
                             </div>
                         </div>

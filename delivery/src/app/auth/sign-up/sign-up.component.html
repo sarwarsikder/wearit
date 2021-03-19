@@ -25,9 +25,10 @@
                         <div class="mb-3">
                             <label for="email" class="form-label required">Email address<span class="ng-star-required"> *</span></label>
                             <input type="text" class="form-control" id="email" aria-describedby="emailHelp"
-                            placeholder="{{'Enter your email'}}" #email="ngModel" name="email" required [(ngModel)]="account.email" />
+                            placeholder="{{'Enter your email'}}" #email="ngModel" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" required [(ngModel)]="account.email" />
                             <div *ngIf="email.errors && (email.dirty || email.touched || submitted)">
                                 <p [hidden]="!email.errors.required" class="error" > Email is required </p>
+                                <p [hidden]="!email.errors.pattern" class="error" translate> Email format is wrong </p>
                             </div>
                             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                         </div>
@@ -50,11 +51,11 @@
                         <div class="mb-3">
                             <label for="password" class="form-label required">Password<span class="ng-star-required"> *</span></label>
                             <input type="password" class="form-control" id="password"
-                            placeholder="{{'Enter your password'}}" #password="ngModel" name="password" required [minlength]="6" [(ngModel)]="account.password" />
+                            placeholder="{{'Enter your password'}}" #password="ngModel" name="password" required [minlength]="8" [(ngModel)]="account.password" />
                             <div *ngIf="password.errors && (password.dirty || password.touched || submitted)">
                                 <p [hidden]="!password.errors.required" class="error" > password is required </p>
                                 <p [hidden]="!password.errors.minlength" class="error">
-                                    Password must be at least 6 characters!
+                                    Password must be at least 8 characters!
                                 </p>
                             </div>
                         </div>
@@ -72,14 +73,20 @@
                         <div class="mb-3">
                             <label for="" class="form-label  required">NID/Passport ID<span class="ng-star-required"> *</span></label>
                             <div class="upload-btn-wrapper attach-file">
-                                <ngx-dropzone style="height: unset !important;"
+                                <div class="custom-dropzone" ngx-dropzone
                                 [multiple]="false"
-                                 (change)="onSelect($event, 'file')" [accept]="'.pdf'">
-                                    <ngx-dropzone-label>Drop your NID / Passport here</ngx-dropzone-label>
-                                    <ngx-dropzone-preview class="file-drop-signup" *ngFor="let f of files" [removable]="true" (removed)="onRemove(f, 'file')">
-                                        <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
-                                    </ngx-dropzone-preview>
-                                </ngx-dropzone>
+                                [accept]="'image/jpeg,image/jpg,image/png,image/gif'" 
+                                (change)="onSelect($event, 'file')">
+                                    <ngx-dropzone-label>
+                                        <div>
+                                            <h2>Drop your NID / Passport
+                                            </h2>
+                                        </div>
+                                    </ngx-dropzone-label>
+                                    <ngx-dropzone-image-preview class="image-drop-signup" ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f, 'file')">
+                                        <!-- <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label> -->
+                                    </ngx-dropzone-image-preview>
+                                </div>
                             </div>
                             
                             <div *ngIf="!account.isFileUploaded && (submitted || firstUploadRemove > 0)">
