@@ -5,6 +5,7 @@ const path = require('path');
 const Image = require('../../media/components/image');
 const formidable = require('formidable');
 const s3 = require("../../media/services/s3");
+const ip = require('ip');
 
 /**
  * Create a new user
@@ -81,7 +82,7 @@ exports.update = async (req, res, next) => {
           let avatarDir =  '/avatar/'+formfields.photo.name;
           let newPath = path.join(process.env.APP_ROOT_DIR, 'public')+avatarDir;
           let rawData = fs.readFileSync(oldPath);
-          formfields.avatar = avatarDir;
+          formfields.avatar = req.protocol+'://'+ip.address()+':'+process.env.PORT+avatarDir;
           fs.writeFile(newPath, rawData, function(err){ 
               if(err) {
                 console.log("Exception occoured while uploading locally: ", err) 
@@ -105,7 +106,7 @@ exports.update = async (req, res, next) => {
           let nidDir =  '/files/'+formfields.nid.name;
           let newPath = path.join(process.env.APP_ROOT_DIR, 'public')+nidDir;
           let rawData = fs.readFileSync(oldPath) 
-          formfields.nid = nidDir;
+          formfields.nid = req.protocol+'://'+ip.address()+':'+process.env.PORT+nidDir;
           fs.writeFile(newPath, rawData, function(err){ 
               if(err) {
                 console.log("Exception occoured while uploading locally: ", err) 
