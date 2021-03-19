@@ -2,7 +2,7 @@
 
     <form #frm="ngForm" (submit)="submit(frm)">
       <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
       <article class="card-body cart-details" id="cart_items">
         <div class="row">
           <div class="package-detail">
@@ -40,7 +40,7 @@
                     <p *ngFor="let option of item.variant?.options">
                       <span>{{option.displayText || option.optionKey}}</span>: <span>{{option.value}}</span>
                     </p>
-                    <p> {{item.product?.shortDescription}} </p>
+                    <!-- <p> {{item.product?.shortDescription}} </p> -->
                     <!-- <p><span translate>Product ID</span>: {{item.product?._id}}</p> -->
                   </td>
                   <!-- <td class="cart_price">
@@ -150,7 +150,7 @@
             </div>
 
           </div>
-          <div class="form-group">
+          <div class="form-group fill-txt-color">
             <strong class="strong-decor" translate>Summary</strong>
             <p>
               <strong translate>Tax</strong>
@@ -171,13 +171,13 @@
               <span style="font-size: 22px;font-weight: 600;" *ngIf="totalPrice && cart">{{totalPrice | priceCurrency: cart.userCurrency}}</span>
             </p>
             <p class="text-left">
-              <button class="btn btn-warning btn-pay-now" type="submit" translate>Pay Now</button>
+              <button class="btn btn-warning btn-pay-now" type="submit" translate>Confirm Order</button>
             </p>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-3 address-block">
+    <div class="col-md-4 address-block">
       <section id="do_action" *ngIf="cart?.products?.length">
         <div class="">
           <div class="heading">
@@ -231,7 +231,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6">
+                <!-- <div class="col-sm-6">
                   <div class="form-group">
                     <label translate class="required">Street Address</label>
                     <input class="form-control" [(ngModel)]="userInfo.streetAddress" required name="streetAddress"
@@ -241,8 +241,8 @@
                         address </p>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6">
+                </div> -->
+                <!-- <div class="col-sm-6">
                   <div class="form-group">
                     <label translate class="required">City</label>
                     <input class="form-control" [(ngModel)]="userInfo.city" required name="city" #city="ngModel" pattern="[A-Za-z\s]+" />
@@ -252,8 +252,8 @@
                       <p [hidden]="!city.errors.required" class="error" translate> Please enter your city </p>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6">
+                </div> -->
+                <!-- <div class="col-sm-6">
                   <div class="form-group">
                     <label translate class="required">State</label>
                     <input class="form-control" [(ngModel)]="userInfo.state" required name="state" #state="ngModel"
@@ -264,12 +264,12 @@
                       <p [hidden]="!state.errors.required" class="error" translate> Please enter your state </p>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6">
+                </div> -->
+                <div class="col-sm-12">
                   <div class="form-group">
-                    <label translate class="required">Country</label>
+                    <label translate class="required">City</label>
                     <select class="form-control" required name="country" #country="ngModel" [(ngModel)]="userInfo.country">
-                      <option value="">Select your country</option>
+                      <option value="">Select your City</option>
                       <option value="BD">Bangladesh</option>
                       <!-- <option [ngValue]="country.sortname" [selected]="country.sortname =='BD'" *ngFor="let country of countries[0].countries">{{country.name}}</option> -->
                     </select>
@@ -280,7 +280,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6">
+                <!-- <div class="col-sm-6">
                   <div class="form-group">
                     <label translate class="required">Zip Code</label>
                     <input class="form-control" [(ngModel)]="userInfo.zipCode" required name="zipCode" #zipCode="ngModel"
@@ -289,12 +289,12 @@
                       <p [hidden]="!zipCode.errors.required" class="error" translate> Please enter zip code! </p>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6">
+                </div> -->
+                <div class="col-sm-12">
                   <div class="form-group">
                     <label translate class="required">Shipping Address</label>
-                    <input class="form-control" [(ngModel)]="userInfo.shippingAddress" required name="shippingAddress"
-                      #shippingAddress="ngModel" />
+                    <textarea class="form-control" [(ngModel)]="userInfo.shippingAddress" required name="shippingAddress"
+                      #shippingAddress="ngModel"></textarea>
                     <div *ngIf="shippingAddress.errors && (shippingAddress.dirty || shippingAddress.touched || isSubmitted)">
                       <p [hidden]="!shippingAddress.errors.required" class="error" translate> Please enter shipping
                         address! </p>
