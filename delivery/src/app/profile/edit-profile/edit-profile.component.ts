@@ -21,6 +21,8 @@ export class EditProfileComponent implements OnInit {
     if (this.Auth.isLoggedin()) {
       this.Auth.me().then((resp) => {
         this.info = resp.data;
+        this.info.nid = null;
+        this.info.photo = null;
         this.info.password = '';
       });
     }
@@ -42,11 +44,13 @@ export class EditProfileComponent implements OnInit {
     var formData = new FormData();
 
     formData.append("name", this.info.name);
+    formData.append("email", this.info.email);
+    formData.append("address", this.info.address);
+    formData.append("phoneNumber", this.info.phoneNumber);
     formData.append("password", this.info.password);
     formData.append("nid", this.info.nid);
     formData.append("photo", this.info.photo);
     formData.append("type", "delivery");
-    formData.append("phoneNumber", this.info.address);
 
     this.Auth.updateMe(formData)
       .then(resp => {

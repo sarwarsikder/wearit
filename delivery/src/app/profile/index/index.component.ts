@@ -9,7 +9,7 @@ import { AuthService } from '../../shared/services';
 })
 export class IndexComponent implements OnInit {
 
-  userImage = "assets/images/user.png"
+  userImage = ""
   imageAlt = "userImage"
 
   public info: any = {};
@@ -20,11 +20,13 @@ export class IndexComponent implements OnInit {
     if (this.Auth.isLoggedin()) {
       this.Auth.me().then((resp) => {
         this.info = resp.data;
+        this.userImage = this.info.avatarUrl;
       });
     }
    }
 
   ngOnInit(): void {
+
   }
 
 }

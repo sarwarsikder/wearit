@@ -72,7 +72,7 @@ export class SignUpComponent implements OnInit {
 
     formData.append("email", this.account.email);
     formData.append("name", this.account.name);
-    formData.append("name", this.account.address);
+    formData.append("address", this.account.address);
     formData.append("password", this.account.password);
     formData.append("nid", this.account.nid);
     formData.append("photo", this.account.photo);
@@ -82,7 +82,7 @@ export class SignUpComponent implements OnInit {
     this.Auth.register(formData)
       .then(resp => {
         this.toastr.success('Your account has been created, please verify your email then login');
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['/auth/sign-in']);
       })
       .catch(err => {
         this.account = {
