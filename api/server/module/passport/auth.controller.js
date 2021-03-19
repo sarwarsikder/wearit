@@ -3,8 +3,8 @@ const nconf = require('nconf');
 const url = require('url');
 const formidable = require('formidable');
 const s3 = require("../media/services/s3");
-const Image = require('../media/components/image');
-const media = require("../media/index");
+const fs = require('fs'); 
+const path = require('path') 
 
 exports.register = async (req, res, next) => {
   const schema = Joi.object()
@@ -57,8 +57,17 @@ exports.register = async (req, res, next) => {
         }
       }
       catch(exc){
-        console.log("Exception occoured: ",exc);
-        formfields.avatar = formfields.photo.path;
+        // console.log("Exception occoured: ",exc);
+        let oldPath = formfields.photo.path; 
+        let avatarDir =  '/avatar/'+formfields.photo.name;
+        let newPath = path.join(process.env.APP_ROOT_DIR, 'public')+avatarDir;
+        let rawData = fs.readFileSync(oldPath);
+        formfields.avatar = avatarDir;
+        fs.writeFile(newPath, rawData, function(err){ 
+            if(err) {
+              console.log("Exception occoured while uploading locally: ", err) 
+            }
+        }) 
         delete formfields.photo;
       }
     }
@@ -72,9 +81,17 @@ exports.register = async (req, res, next) => {
         }
       }
       catch(exc){
-        console.log(exc);
-        formfields.nid = formfields.nid.path;
-        // delete formfields.nid;
+        // console.log(exc);
+        let oldPath = formfields.nid.path; 
+        let nidDir =  '/files/'+formfields.nid.name;
+        let newPath = path.join(process.env.APP_ROOT_DIR, 'public')+nidDir;
+        let rawData = fs.readFileSync(oldPath) 
+        formfields.nid = nidDir;
+        fs.writeFile(newPath, rawData, function(err){ 
+            if(err) {
+              console.log("Exception occoured while uploading locally: ", err) 
+            }
+        }); 
       }
     }
     validate = Joi.validate(formfields, schema);

@@ -76,9 +76,18 @@ exports.update = async (req, res, next) => {
           }
         }
         catch(exc){ 
-          console.log(exc);
-          formfields.avatar = formfields.photo.path;
-          delete formfields.photo;
+          // console.log(exc);
+          let oldPath = formfields.photo.path; 
+          let avatarDir =  '/avatar/'+formfields.photo.name;
+          let newPath = path.join(process.env.APP_ROOT_DIR, 'public')+avatarDir;
+          let rawData = fs.readFileSync(oldPath);
+          formfields.avatar = avatarDir;
+          fs.writeFile(newPath, rawData, function(err){ 
+              if(err) {
+                console.log("Exception occoured while uploading locally: ", err) 
+              }
+              delete formfields.photo;
+          }) 
         }
       }
       if(formfields && formfields.nid){
@@ -91,8 +100,17 @@ exports.update = async (req, res, next) => {
           }
         }
         catch(exc){
-          console.log(exc);
-          formfields.nid = formfields.nid.path;
+          // console.log(exc);
+          let oldPath = formfields.nid.path; 
+          let nidDir =  '/files/'+formfields.nid.name;
+          let newPath = path.join(process.env.APP_ROOT_DIR, 'public')+nidDir;
+          let rawData = fs.readFileSync(oldPath) 
+          formfields.nid = nidDir;
+          fs.writeFile(newPath, rawData, function(err){ 
+              if(err) {
+                console.log("Exception occoured while uploading locally: ", err) 
+              }
+          }); 
           // delete formfields.nid;
         }
       }
