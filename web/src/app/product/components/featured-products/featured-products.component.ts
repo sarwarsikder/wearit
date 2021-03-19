@@ -16,8 +16,8 @@ export class FeaturedProductsComponent implements OnChanges {
   public sort: any = 'random';
   public sortType: any = '';
   public slideConfig: any = {
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 6,
+    slidesToScroll: 6,
     dots: false,
     arrows: true,
     autoplay: false,
@@ -27,8 +27,8 @@ export class FeaturedProductsComponent implements OnChanges {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 4,
+          slidesToScroll: 4,
           infinite: true,
           dots: true
         }
