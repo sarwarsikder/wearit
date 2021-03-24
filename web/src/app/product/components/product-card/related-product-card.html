@@ -1,0 +1,51 @@
+<div class="box-product">
+  <div class="img-prod"><a appLocationHref [url]="'/products/' + product.alias">
+      <img [src]="product?.mainImage?.thumbUrl | checkImage"></a>
+  </div>
+  <div class="text-product">
+    <div class="name-product"><a appLocationHref [url]="'/products/' + product.alias"
+        title="{{product?.name}}">{{product?.name}}</a></div>
+    <div class="price-product" *ngIf="salePrice">
+      <span>
+        <price-convert [price]="salePrice"></price-convert>
+      </span> <br />
+      <span class="line-through">
+        <price-convert [price]="price"></price-convert>
+      </span>
+    </div>
+    <div class="price-product" *ngIf="!salePrice">
+      <span>
+        <price-convert [price]="price"></price-convert>
+      </span>
+
+    </div>
+    <div class="wish-area">
+      <button>
+        <svg width="35" height="30" viewBox="0 0 35 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.1717 30L16.5657 29.4949C3.53535 18.8889 0 15.1515 0 9.09091C0 4.0404 4.0404 0 9.09091 0C13.2323 0 15.5556 2.32323 17.1717 4.14141C18.7879 2.32323 21.1111 0 25.2525 0C30.303 0 34.3434 4.0404 34.3434 9.09091C34.3434 15.1515 30.8081 18.8889 17.7778 29.4949L17.1717 30ZM9.09091 2.0202C5.15151 2.0202 2.0202 5.15151 2.0202 9.09091C2.0202 14.2424 5.25252 17.6768 17.1717 27.3737C29.0909 17.6768 32.3232 14.2424 32.3232 9.09091C32.3232 5.15151 29.1919 2.0202 25.2525 2.0202C21.7172 2.0202 19.798 4.14141 18.2828 5.85859L17.1717 7.17172L16.0606 5.85859C14.5455 4.14141 12.6263 2.0202 9.09091 2.0202Z" fill="black"/>
+        </svg>            
+      </button>
+      <div class="rating-new">
+        <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 15.27L16.18 19L14.54 11.97L20 7.24L12.81 6.63L10 0L7.19 6.63L0 7.24L5.46 11.97L3.82 19L10 15.27Z" fill="black"/>
+        </svg>
+        0.0 (1)           
+      </div>
+    </div>
+    <div class="clear"></div>
+    <!-- <button class="btn-add-cart btn-cstm add-cart btn-add-cart-hollow" (click)="addCart()"
+      *ngIf="product.stockQuantity && !isVariant || isVariant && selectedVariant.stockQuantity" translate>
+      <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.31343 3.85688C3.57496 3.85688 2.61021 3.85688 1.88707 3.85688C1.31579 3.85688 0.853271 4.31999 0.853271 4.89127V10.3095C0.853271 12.0233 2.2426 13.4126 3.95643 13.4126H8.92149C10.6353 13.4126 12.0247 12.0233 12.0247 10.3095V4.89127C12.0247 4.31999 11.5621 3.85688 10.9909 3.85688C10.2677 3.85688 9.30297 3.85688 8.56449 3.85688M4.31343 3.85688C4.31343 2.87175 4.33321 1 6.38953 1C8.44586 1 8.56449 2.87175 8.56449 3.85688M4.31343 3.85688C5.97357 3.85688 6.90435 3.85688 8.56449 3.85688M4.31343 3.85688H8.56449" stroke="white"/>
+        <path d="M4.47339 5.43359C4.47329 6.46433 4.57683 8.11351 6.74904 8.11351C8.71437 8.11351 8.92128 6.46433 8.92128 5.43359" stroke="white" stroke-linecap="round"/>
+      </svg>
+      SHOP NOW
+    </button> -->
+    <!-- <star-rating [rate]="product.ratingAvg" [total]="product.totalRating"></star-rating> -->
+    <div class="deal-time" *ngIf="product.dailyDeal && product.dealTo && showDeal"><span>Deal to</span>
+      {{product.dealTo | date: 'medium'}}</div>
+
+    <!-- <div class="deal-time custom" *ngIf="!isOwner"><span translate>Sold by</span> <a
+        [routerLink]="['/shops', product?.shop?.alias]"> {{product?.shop?.name}}</a></div> -->
+  </div>
+</div>
