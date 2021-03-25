@@ -1,16 +1,14 @@
 <div class="card">
   <div class="card-body table-responsive">
-    <div class="row">
-      <div class="col-md-4">
+    <div class="row prod-action">
+      <div class="col-md-6">
         <a class="btn btn-danger button-custom" href="../../../../assets/Sample.csv" download><i class="fa fa-file"></i>
           Sample File</a>
+          <a class="btn btn-danger button-custom" (click)="exportCSV()" style="color: #fff"><i class="fa fa-cloud-download"></i>
+            Export Data</a>
       </div>
-      <div class="col-md-4">
-        <a class="btn btn-danger button-custom" (click)="exportCSV()" style="color: #fff"><i class="fa fa-cloud-download"></i>
-          Export Data</a>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-danger button-custom">
+      <div class="col-md-12">
+        <a class="btn btn-danger button-custom btn-fw">
           <span (click)="openFile()" style="color: #fff"><i class="fa fa-cloud-upload"></i> Import Data</span>
           <div class="import-button" *ngIf="showImport">
             <file-upload [options]="importOptions"></file-upload>
@@ -85,8 +83,7 @@
           </th>
         </tr>
         <tr>
-          <th class="min-w-40"></th>
-          <th>
+          <th colspan="10">
             <div class="input-group">
               <input class="form-control" [(ngModel)]="searchText" placeholder="search..." (keypress)="keyPress($event)" />
               <div class="input-group-append">
@@ -94,15 +91,7 @@
               </div>
             </div>
           </th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>
-          </th>
-          <th></th>
+          
         </tr>
       </thead>
       <tbody>

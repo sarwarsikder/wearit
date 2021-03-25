@@ -1,57 +1,63 @@
-<div class="card">
+<div class="card card-blank">
   <div class="card-body">
     <div class="d-flex no-block">
-      <div class="m-r-20 align-self-center mobile">
+      <!-- <div class="m-r-20 align-self-center mobile">
         <span class="lstick m-r-20"></span>
         <img *ngIf="type === 'order'" src="assets/images/icon/income.png">
         <img *ngIf="type === 'product'" src="assets/images/icon/expense.png">
         <img *ngIf="type === 'sale'" src="assets/images/icon/assets.png">
-      </div>
-      <div class="align-self-center inline-block">
+      </div> -->
+      <div class="align-self-center inline-block stat-title">
         <h5 class="text-highlight m-t-10">
           <span *ngIf="type === 'order'"><a [routerLink]="['/orders/list']">Orders </a></span>
           <span *ngIf="type === 'product'"><a [routerLink]="['/products/list']">Products </a></span>
           <span *ngIf="type === 'sale'"><a [routerLink]="['/orders/list']">Total Amount of Sales</a></span>
         </h5>
-        <div *ngIf="type === 'order'" class="mobile-stat-block">
+        <div *ngIf="type === 'order'" class="mobile-stat-block card-fancy orange-zone">
           <p class="inline-block">
-            <span class="label label-danger">{{stat?.all}}</span>&nbsp;<strong>Total</strong>
+            Total<span class="label label-danger">{{stat?.all}}</span>
           </p>
           <p class="inline-block">
-            <span class="pull-left"><span class="label label-success">{{stat?.completed}}</span>&nbsp;<strong>Completed</strong></span>
-            <span class="pull-right"><strong>Shipping</strong>&nbsp;<span class="label label-success">{{stat?.shipping}}</span></span>
+            Completed<span class="label label-success">{{stat?.completed}}</span>
           </p>
           <p class="inline-block">
-            <span class="pull-left"><span class="label label-info">{{stat?.pending}}</span>&nbsp;<strong>Pending</strong></span>
-            <span class="pull-right"><strong>Progressing</strong>&nbsp;<span class="label label-info">{{stat?.progressing}}</span></span>
+            Shipping<span class="label label-success">{{stat?.shipping}}</span>
           </p>
           <p class="inline-block">
-            <span class="pull-left"><span class="label label-warning">{{stat?.refunded}}</span>&nbsp;<strong>Refunded</strong></span>
-            <span class="pull-right"><strong>Cancelled</strong>&nbsp;<span class="label label-warning">{{stat?.cancelled}}</span></span>
+            Pending<span class="label label-info">{{stat?.pending}}</span>
+          </p>
+          <p class="inline-block">
+            Progressing<span class="label label-info">{{stat?.progressing}}</span>
+          </p>
+          <p class="inline-block">
+            Refunded<span class="label label-warning">{{stat?.refunded}}</span>
+          </p>
+          <p class="inline-block">
+            Cancelled<span class="label label-warning">{{stat?.cancelled}}</span>
           </p>
         </div>
 
-        <div *ngIf="type === 'product'" class="mobile-stat-block">
+        <div *ngIf="type === 'product'" class="mobile-stat-block card-fancy green-zone">
           <p class="inline-block">
-            <span class="label label-danger">{{stat?.total}}</span>&nbsp;<strong>Total</strong>
+            Total<span class="label label-danger">{{stat?.total}}</span>
           </p>
         </div>
 
-        <div *ngIf="type === 'sale'" class="mobile-stat-block">
+        <div *ngIf="type === 'sale'" class="mobile-stat-block card-fancy purple-zone">
           <p class="inline-block">
-            <span class="label label-danger no-wrap">{{stat?.balance | currency}}</span>&nbsp;<strong>Balance</strong>
+            Balance<span class="label label-danger no-wrap">{{stat?.balance | currency}}</span>
           </p>
           <p class="inline-block">
-            <span class="label label-info no-wrap">{{stat?.commission | currency}}</span>&nbsp;<strong>Commission</strong>
+            Commission<span class="label label-info no-wrap">{{stat?.commission | currency}}</span>
           </p>
           <p class="inline-block">
-            <span class="label label-info no-wrap">{{stat?.taxPrice | currency}}</span>&nbsp;<strong>Tax</strong>
+            Tax<span class="label label-info no-wrap">{{stat?.taxPrice | currency}}</span>
           </p>
           <p class="inline-block">
-            <span class="label label-warning no-wrap">{{stat?.totalPrice | currency}}</span>&nbsp;<strong>Total Price</strong>
+            Total Price<span class="label label-warning no-wrap">{{stat?.totalPrice | currency}}</span>
           </p>
           <p class="inline-block">
-            <span class="label label-warning">{{stat?.totalProduct}}</span>&nbsp;<strong>Total Product</strong>
+            Total Product<span class="label label-warning">{{stat?.totalProduct}}</span>
           </p>
         </div>
       </div>

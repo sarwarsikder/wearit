@@ -1,5 +1,5 @@
 <div class="card" *ngIf="!isLoading">
-  <div class="row req-pay-container" style="padding: 25px">
+  <div class="row req-pay-container order-row-flex" style="padding: 25px">
     <div class="col-md-3">
       <div class="input-group input-date">
         <span class="text-center">From:</span>&nbsp;
@@ -22,25 +22,29 @@
     </div>
     <div class="col-md-3"><a class="btn btn-success" (click)="queryStats()">Stats By Date Range</a></div>
   </div>
-  <div class="row">
-    <div class="col-md-6">
+  <div class="row req-payout-list">
+    <div class="col-md-6 pending">
       <div class="form-group" style="padding: 25px; padding-bottom: 0">
         <label>Pending</label>
-        <h4>Commission: {{stats?.pending?.commission | currency}}</h4>
-        <h4>Shop Balance: {{stats?.pending?.shopBalance | currency}}</h4>
-        <h4>Site Balance: {{stats?.pending?.siteBalance | currency}}</h4>
-        <h4>COD Balance: {{stats?.pending?.codBalance | currency}}</h4>
-        <h4>Non COD Balance: {{stats?.pending?.nonCodBalance | currency}}</h4>
+        <div class="balance-payout pending">
+          <h4><label for="">Commission</label> <span>{{stats?.pending?.commission | currency}}</span></h4>
+          <h4><label for="">Shop Balance</label> <span>{{stats?.pending?.shopBalance | currency}}</span></h4>
+          <h4><label for="">Site Balance</label><span> {{stats?.pending?.siteBalance | currency}}</span></h4>
+          <h4><label for="">COD Balance</label><span> {{stats?.pending?.codBalance | currency}}</span></h4>
+          <h4><label for="">Non COD Balance</label><span> {{stats?.pending?.nonCodBalance | currency}}</span></h4>
+        </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 approved">
       <div class="form-group" style="padding: 25px; padding-bottom: 0">
         <label>Approved</label>
-        <h4>Commission: {{stats?.approved?.commission | currency}}</h4>
-        <h4>Shop Balance: {{stats?.approved?.shopBalance | currency}}</h4>
-        <h4>Site Balance: {{stats?.approved?.siteBalance | currency}}</h4>
-        <h4>COD Balance: {{stats?.approved?.codBalance | currency}}</h4>
-        <h4>Non COD Balance: {{stats?.approved?.nonCodBalance | currency}}</h4>
+        <div class="balance-payout approved">
+          <h4><label for="">Commission</label><span> {{stats?.approved?.commission | currency}}</span></h4>
+          <h4><label for="">Shop Balance</label><span> {{stats?.approved?.shopBalance | currency}}</span></h4>
+          <h4><label for="">Site Balance</label><span> {{stats?.approved?.siteBalance | currency}}</span></h4>
+          <h4><label for="">COD Balance</label><span> {{stats?.approved?.codBalance | currency}}</span></h4>
+          <h4><label for="">Non COD Balance</label><span> {{stats?.approved?.nonCodBalance | currency}}</span></h4>
+        </div>
       </div>
     </div>
   </div>

@@ -310,31 +310,36 @@ File: scss
 }
 
 @media all and (min-width: 769px) {
-  .horizontal-nav.defaultdark .sidebar-nav {
-    padding: 0px 15px;
-  }
-
-  .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav {
-    display: flex;
-  }
-
-  .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li {
-    display: inline-block;
-    margin-bottom: 0px;
-    position: relative;
-  }
-
-  .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover {
-    background: #edf0f5;
-  }
-
-  .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover ul.collapse {
-    display: block;
-  }
-
-  .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li a {
-    padding: 12px 15px;
-  }
+    .horizontal-nav.defaultdark .sidebar-nav {
+        padding: 0px 15px;
+      }
+    
+      .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav {
+        display: flex;
+      }
+    
+      .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li {
+        display: inline-block;
+        margin-bottom: 0px;
+        position: relative;
+      }
+    
+      .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover {
+        background: #1C1C1C;
+      }
+    
+      .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover ul.collapse {
+        display: block;
+      }
+    
+      .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li a {
+        padding: 12px 15px;
+        color: #fff !important;
+      }
+      .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li a i{
+        color: #fff !important;
+      }
+      
 }
 
 @media all and (min-width: 1400px) {

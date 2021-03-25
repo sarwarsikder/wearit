@@ -1,7 +1,9 @@
 <div class="row">
-  <div class="col-lg-4 col-md-4">
+  <div class="col-md-12 m-b-40">
     <stat-card [stat]="orderStat" [type]="'order'" *ngIf="orderStat"></stat-card>
-
+    
+  </div>
+  <div class="col-md-6 m-b-40">
     <div style="display: block;">
       <canvas baseChart 
         [data]="pieChartData" 
@@ -14,22 +16,7 @@
     </div>
     
   </div>
-  <div class="col-lg-4 col-md-4">
-    <stat-card [stat]="productStat" [type]="'product'" *ngIf="productStat"></stat-card>
-    <div style="display: block;">
-      <canvas baseChart width="50" height="50"
-        [datasets]="lineChartData"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        [plugins]="lineChartPlugins">
-      </canvas>
-    </div>
-  </div>
-  <div class="col-lg-4 col-md-4">
-    <stat-card [stat]="saleStat" [type]="'sale'" *ngIf="saleStat"></stat-card>
+  <div class="col-md-6 m-b-40">
     <div style="display: block;">
       <canvas baseChart 
         [data]="pieChartData" 
@@ -40,14 +27,42 @@
         [legend]="pieChartLegend">
       </canvas>
     </div>
+    
   </div>
-  <div class="col-lg-6 col-md-6">
+  <div class="col-md-12">
+    <div class="row m-t-40 m-b-40">
+      <div class="col-md-3">
+        <stat-card [stat]="productStat" [type]="'product'" *ngIf="productStat"></stat-card>
+      </div>
+      <div class="col-md-9">
+        <stat-card [stat]="saleStat" [type]="'sale'" *ngIf="saleStat"></stat-card>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="col-md-5">
+    <div class="col-md-12">
+      <div style="display: block;">
+        <canvas baseChart width="50" height="50"
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+        </canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7 col-md-7">
     <last-order-card></last-order-card>
   </div>
-  <div class="col-lg-6 col-md-6">
-    <div class="card">
+  <div class="col-lg-12 col-md-12 m-t-40 m-b-40">
+    <div class="card card-blank">
       <div class="card-body">
-        <h4 class="card-title"><span class="lstick"></span>Latest Messages from User</h4>
+        <h4 class="card-title">Latest Messages from User</h4>
         <div class="comment-widgets" *ngFor="let item of latestMessages">
           <div class="d-flex flex-row comment-row">
             <div class="p-2"><span class="round"><img alt="user" width="50" [src]="item.sender?.avatarUrl"></span></div>
@@ -63,7 +78,7 @@
     </div>
   </div>
   <div class="col-lg-12 col-md-6">
-    <div class="card">
+    <div class="card card-blank card-info">
       <div class="row">
         <div class="col-lg-6 col-md-6">
           <div class="card-body little-profile text-center">
@@ -85,9 +100,9 @@
           </div>
         </div>
         <div class="col-lg-6 col-md-6">
-          <div class="text-center bg-light">
-            <div class="p-20 b-r">
-              <h4 class="m-b-0 font-medium">Personal Information</h4>
+          <div class="text-center bg-dark">
+            <div class="p-10 b-r">
+              <h4 class="m-b-0 font-medium color-light">Personal Information</h4>
             </div>
           </div>
           <ul class="list-group">
@@ -112,9 +127,9 @@
               </div>
             </li>
           </ul>
-          <div class="text-center bg-light">
-            <div class="p-20 b-r">
-              <h4 class="m-b-0 font-medium">Business Information</h4>
+          <div class="text-center bg-dark">
+            <div class="p-10 b-r">
+              <h4 class="m-b-0 font-medium color-light">Business Information</h4>
             </div>
           </div>
           <ul class="list-group">
@@ -130,9 +145,9 @@
           </ul>
         </div>
         <div class="col-lg-6 col-md-6">
-          <div class="text-center bg-light">
-            <div class="p-20 b-r">
-              <h4 class="m-b-0 font-medium">More Information</h4>
+          <div class="text-center bg-dark">
+            <div class="p-10 b-r">
+              <h4 class="m-b-0 font-medium color-light">More Information</h4>
             </div>
           </div>
           <ul class="list-group">
@@ -151,9 +166,9 @@
           </ul>
         </div>
         <div class="col-lg-6 col-md-6">
-          <div class="text-center bg-light">
-            <div class="p-20 b-r">
-              <h4 class="m-b-0 font-medium">Bank Information</h4>
+          <div class="text-center bg-dark">
+            <div class="p-10 b-r">
+              <h4 class="m-b-0 font-medium color-light">Bank Information</h4>
             </div>
           </div>
           <ul class="list-group">
