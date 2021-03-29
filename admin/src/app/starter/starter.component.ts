@@ -13,6 +13,7 @@ export class StarterComponent implements OnInit {
 
   public shopStat: any = {};
   public userStat: any = {};
+  public userLineStat: any = {};
   public productStat: any = {};
   public orderStat: any = {};
   public requestPayout = [];
@@ -58,6 +59,7 @@ export class StarterComponent implements OnInit {
    */
 public lineChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [55, 50, 80, 45, 50, 55, 40], label: 'Series B' },
   ];
   public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions: ChartOptions = {
@@ -147,6 +149,11 @@ public lineChartData: ChartDataSets[] = [
           ]
      }];
     });
+
+    this.statService.userLineStat().then(res => {
+      this.userLineStat = res.data;
+    });
+
     this.statService.prodStat().then(res => {
       this.productStat = res.data;
     });
