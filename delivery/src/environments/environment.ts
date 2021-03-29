@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   version: '1.0.1',
   build: 16,
    apiBaseUrl: 'https://wearit-shop-api.herokuapp.com/v1',
