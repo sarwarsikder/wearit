@@ -112,10 +112,12 @@ sidebar navigation
     }
     > ul > li > a {
         i {
-            width: 31px;
-            font-size: 24px;
+            width: 25px;
+            font-size: 12px;
             display: inline-block;
             vertical-align: middle;
+            margin-top: -3px;
+            margin-right: 5px;
             color: $sidebar-icons;
         }
         .label {

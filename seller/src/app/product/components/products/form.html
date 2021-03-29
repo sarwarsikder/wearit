@@ -83,8 +83,6 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
                   <div class="form-group">
                     <label>Price (*)</label>
                     <input type="number" name="price" min="0.1" class="form-control" [(ngModel)]="product.price" required #price="ngModel"/>
@@ -118,7 +116,7 @@
                     <input type="number" name="taxValue" class="form-control" placeholder="10" [(ngModel)]="product.taxPercentage" />
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label>Restrict COD areas</label>
                     <ng-select bindValue="label" placeholder="Fill out restrict COD areas here"  name="restrictCODAreas" [items]="[]" [addTag]="true" [multiple]="true" [isOpen]="false" [(ngModel)]="product.restrictCODAreas">
