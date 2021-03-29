@@ -1,19 +1,88 @@
 const Joi = require('joi');
 const nconf = require('nconf');
 const url = require('url');
+const formidable = require('formidable');
+const s3 = require("../media/services/s3");
+const Image = require('../media/components/image');
+const media = require("../media/index");
 
 exports.register = async (req, res, next) => {
-  const schema = Joi.object().keys({
-    type: Joi.string().allow(['user']).default('user'),
-    email: Joi.string().email().required(),
-    password: Joi.string().min(6).required(),
-    phoneNumber: Joi.string().allow(['', null]).optional(),
-    name: Joi.string().allow(['', null]).optional()
-  });
-
-  const validate = Joi.validate(req.body, schema);
-  if (validate.error) {
-    return next(PopulateResponse.validationError(validate.error));
+  const schema = Joi.object()
+    .keys({
+      type: Joi.string()
+        .allow(['user'])
+        .default('user'),
+      email: Joi.string()
+        .email()
+        .required(),
+      password: Joi.string()
+        .min(6)
+        .required(),
+      phoneNumber: Joi.string()
+        .allow(['', null])
+        .optional(),
+      name: Joi.string()
+        .allow(['', null])
+        .optional(),
+      nid: Joi.string()
+        .allow(['', null])
+        .optional(),
+      photo: Joi.string()
+        .allow(['', null])
+        .optional(),
+      address: Joi.string()
+        .allow(['', null])
+        .optional(),
+    });
+  var validate;
+  if (req.body && Object.keys(req.body).length === 0 && req.body.constructor === Object) {
+    var form = new formidable.IncomingForm();
+    form.encoding = 'utf-8';
+    const formfields = await new Promise(function (resolve, reject) {
+      form.parse(req, function (err, fields, files) {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve({...fields,...files});
+      }); // form.parse
+    });
+    if(formfields && formfields.photo){
+      try{
+        const file = await s3.uploadFile(formfields.photo.path);
+        if(file.url){
+          formfields.photo = file.url;
+        }else{
+          delete formfields.photo;
+        }
+      }
+      catch(exc){
+        console.log("Exception occoured: ",exc);
+        formfields.avatar = formfields.photo.path;
+        delete formfields.photo;
+      }
+    }
+    if(formfields && formfields.nid){
+      try{
+        const file = await s3.uploadFile(formfields.nid.path);
+        if(file.url){
+          formfields.nid = file.url;
+        }else{
+          delete formfields.nid;
+        }
+      }
+      catch(exc){
+        console.log(exc);
+        formfields.nid = formfields.nid.path;
+        // delete formfields.nid;
+      }
+    }
+    validate = Joi.validate(formfields, schema);
+  } else {
+    validate = Joi.validate(req.body, schema);
+    if (validate.error) {
+      return next(PopulateResponse.validationError(validate.error));
+    }
   }
 
   try {
@@ -46,9 +115,11 @@ exports.register = async (req, res, next) => {
 };
 
 exports.verifyEmail = async (req, res, next) => {
-  const schema = Joi.object().keys({
-    token: Joi.string().required()
-  });
+  const schema = Joi.object()
+    .keys({
+      token: Joi.string()
+        .required()
+    });
 
   const validate = Joi.validate(req.body, schema);
   if (validate.error) {
@@ -100,9 +171,12 @@ exports.verifyEmailView = async (req, res, next) => {
 };
 
 exports.forgot = async (req, res, next) => {
-  const schema = Joi.object().keys({
-    email: Joi.string().email().required()
-  });
+  const schema = Joi.object()
+    .keys({
+      email: Joi.string()
+        .email()
+        .required()
+    });
 
   const validate = Joi.validate(req.body, schema);
   if (validate.error) {
