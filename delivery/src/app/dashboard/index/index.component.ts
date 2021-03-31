@@ -15,9 +15,7 @@ export class IndexComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    if (!this.Auth.isLoggedin()) {
-      this.router.navigate(['/auth/sign-in']);
-    }
+  
   }
 
 }

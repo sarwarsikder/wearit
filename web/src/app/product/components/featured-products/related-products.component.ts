@@ -1,13 +1,13 @@
-import { UtilService } from './../../../shared/services/utils.service';
+import { UtilService } from '../../../shared/services/utils.service';
 import { Component, Input, OnChanges } from '@angular/core';
 import { ProductService } from '../../services';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'featured-products',
-  templateUrl: './featured-products.html'
+  selector: 'related-products',
+  templateUrl: './related-products.html'
 })
-export class FeaturedProductsComponent implements OnChanges {
+export class RelatedProductsComponent implements OnChanges {
   @Input() options: any = '';
   public items: any = [];
   public page: any = 1;
@@ -16,8 +16,8 @@ export class FeaturedProductsComponent implements OnChanges {
   public sort: any = 'random';
   public sortType: any = '';
   public slideConfig: any = {
-    slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToShow: 4,
+    slidesToScroll: 4,
     dots: false,
     arrows: true,
     autoplay: false,

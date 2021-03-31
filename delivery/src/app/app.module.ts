@@ -6,6 +6,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RestangularModule } from 'ngx-restangular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthGuard } from './shared/guard/auth.guard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavModule } from './nav/nav.module';
 
@@ -52,7 +53,7 @@ export function RestangularConfigFactory(RestangularProvider) {
     }),
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

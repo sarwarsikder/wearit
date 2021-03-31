@@ -1,5 +1,5 @@
 <form role="form" #frm="ngForm" (submit)="submit(frm)" novalidate>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12">
         <div class="panel panel-default">
@@ -30,7 +30,7 @@
                             Created at:
                           </div>
                           <div class="col-md-4">
-                            {{order.createdAt | date:'short'}}
+                            <span class="label label-success"> {{order.createdAt | date:'short'}}</span>
                           </div>
                           <div class="col-md-6">
                             IP: {{order.userIP}}
@@ -43,7 +43,7 @@
                             Status:
                           </div>
                           <div class="col-md-10">
-                            <select name="status" (change)="query()" [(ngModel)]="order.status" #status="ngModel">
+                            <select class="form-control" name="status" style="width: 200px;min-height: 28px;" (change)="query()" [(ngModel)]="order.status" #status="ngModel">
                               <option value="completed">Completed</option>
                               <option value="shipping">Shipping</option>
                               <option value="pending">Pending</option>
@@ -55,7 +55,7 @@
                         </div>
                       </li>
                       <li class="list-group-item">
-                        <div class="row">
+                        <div class="row view-special-box">
                           <div class="col-md-6">
                             Quantity(s): {{order?.quantity}}
                           </div>
@@ -67,14 +67,14 @@
                           </div>
                           <div class="col-md-6">
                             Total Price:
-                            <strong><span class="label label-danger">{{order?.totalPrice | currency}}</span></strong>
+                            <strong><span class="label label-primary">{{order?.totalPrice | currency}}</span></strong>
                           </div>
                           <div class="col-md-6">
                             Commission Rate/Price: {{order?.commissionRate *100}}% / {{order?.commission | currency}}
                           </div>
                           <div class="col-md-6">
                             Balance:
-                            <strong><span class="label label-danger">{{order?.balance | currency}}</span></strong>
+                            <strong><span class="label label-primary">{{order?.balance | currency}}</span></strong>
                           </div>
                         </div>
                       </li>

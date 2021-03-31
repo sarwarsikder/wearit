@@ -52,11 +52,17 @@ export class SignUpComponent implements OnInit {
     this.submitted = true;
     
     if (frm.invalid) {
+      this.toastr.error('Please fillup all the required fields.');
       return;
     }
 
     if (this.account.password !== this.input.rePassword) {
       this.toastr.error('Confirm password doest not match');
+      return;
+    }
+
+    if (this.account.nid == null) {
+      this.toastr.error('NID is mendatory');
       return;
     }
 

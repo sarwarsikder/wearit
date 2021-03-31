@@ -32,8 +32,15 @@ File: scss
 }
 
 .page-wrapper {
-  background: $bodycolor;
+  background: #fff ;
+  // background: $bodycolor;
+  padding-bottom: 60px;
+  height: calc(100vh - 64px);
+  position: relative;
+  overflow: auto;
+  padding-left: 220px;
 }
+
 
 .container-fluid {
   padding: 25px;
@@ -236,6 +243,11 @@ File: scss
     li {
       margin-top: 0px;
       margin-bottom: 0px;
+      font-weight: 600;
+      a{
+        color: #000;
+        
+      }
     }
 
     .breadcrumb-item+.breadcrumb-item::before {

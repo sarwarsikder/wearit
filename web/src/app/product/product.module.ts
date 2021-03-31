@@ -11,7 +11,9 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { ProductDetailComponent } from './components/detail/detail.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { RelatedProductCardComponent } from './components/product-card/related-product-card.component';
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
+import { RelatedProductsComponent } from './components/featured-products/related-products.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchSidebarComponent } from './components/search-sidebar/search-sidebar.component';
 import { BrandsComponent} from './components/brands/brands.component';
@@ -48,6 +50,8 @@ import { UtilsModule } from '../utils/utils.module';
   declarations: [
     ProductDetailComponent,
     FeaturedProductsComponent,
+    RelatedProductCardComponent,
+    RelatedProductsComponent,
     ProductCardComponent,
     SearchSidebarComponent,
     SearchComponent,
@@ -63,6 +67,8 @@ import { UtilsModule } from '../utils/utils.module';
   ],
   exports: [
     FeaturedProductsComponent,
+    RelatedProductCardComponent,
+    RelatedProductsComponent,
     ProductCardComponent,
     SearchSidebarComponent,
     BrandsComponent,

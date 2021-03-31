@@ -18,6 +18,10 @@ export class StatService {
     return this.restangular.one('users', 'stats').get().toPromise();
   }
 
+  userLineStat(): Promise<any> {
+    return this.restangular.one('users', 'line_stats').get().toPromise();
+  }
+
   orderStat(): Promise<any> {
     return this.restangular.one('orders/seller/stats').get().toPromise();
   }

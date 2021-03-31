@@ -39,7 +39,7 @@
       <div class="col-md-9">
         <div class="filter-search">
           <div class="pull-left">
-            <h4>Browse Products</h4>
+            <h4>Browse Shops</h4>
             <strong>{{total}}</strong>&nbsp;<span translate>Items Found</span>
           </div>
           <div class="pull-right">
@@ -55,7 +55,7 @@
         </div>
         <div *ngIf="!total" class="badge badge-warning" translate>No shops found</div>
         <ul class="list-shop row" *ngIf="!isLoading">
-          <li class="col-sm-6 col-md-3" *ngFor="let item of shops">
+          <li class="col-sm-6 col-md-4" *ngFor="let item of shops">
             <shop-card [shop]="item"></shop-card>
             &nbsp;
           </li>

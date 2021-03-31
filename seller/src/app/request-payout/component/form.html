@@ -1,9 +1,9 @@
 <div class="card">
   <div class="card-body">
-    <div style="background: beige; padding: 10px; margin-bottom: 20px">
-      <h4>Summary balance: {{balance?.summary?.balance | currency}}</h4>
-      <h4>COD balance: {{balance?.cod?.balance | currency}}</h4>
-      <h4>Non-COD balance: {{balance?.nonCod?.balance | currency}}</h4>
+    <div class="balance-payout">
+      <h4><label for="">Summary balance</label><span>{{balance?.summary?.balance | currency}}</span></h4>
+      <h4><label for="">COD balance </label> <span>{{balance?.cod?.balance | currency}}</span></h4>
+      <h4><label for="">Non-COD balance</label> <span>{{balance?.nonCod?.balance | currency}}</span></h4>
     </div>
     <div class="row">
       <div class="col-md-6">

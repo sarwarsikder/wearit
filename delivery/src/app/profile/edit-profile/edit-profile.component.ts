@@ -9,8 +9,10 @@ import { AuthService } from '../../shared/services';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
-  userImage = "assets/images/user.png"
+  userImage = "assets/images/avatar.png"
+  userNid = "assets/images/avatar.png"
   imageAlt = "userImage"
+  nidAlt = "userNid"
 
   private Auth: AuthService;
   public info: any = {};
@@ -21,18 +23,39 @@ export class EditProfileComponent implements OnInit {
     if (this.Auth.isLoggedin()) {
       this.Auth.me().then((resp) => {
         this.info = resp.data;
+        this.info.password = '';
+        this.userImage = this.info.avatarUrl;
+        this.userNid = this.info.nid;
+        // if(this.info.nid.length > 0)
+        // {
+        //   this.get_file(this.info.nid);
+        // }
+
         this.info.nid = null;
         this.info.photo = null;
-        this.info.password = '';
       });
+
+      
     }
    }
 
+
   ngOnInit(): void {
+    
   }
 
   files: File[] = [];
   picture: File[] = [];
+
+  // private async get_file(url)
+  //  {
+  //     let response = await fetch(url);
+  //     let data = await response.blob();
+  //     let name = url.split("/");
+  //     name = name[name.length-1];
+  //     let file = new File([data], name);
+  //     this.files.push(file);
+  //  }
 
   public submit(frm: any) {
     this.submitted = true;
@@ -48,8 +71,14 @@ export class EditProfileComponent implements OnInit {
     formData.append("address", this.info.address);
     formData.append("phoneNumber", this.info.phoneNumber);
     formData.append("password", this.info.password);
-    formData.append("nid", this.info.nid);
-    formData.append("photo", this.info.photo);
+    if(this.info.nid != null)
+    {
+      formData.append("nid", this.info.nid);
+    }
+    if(this.info.photo != null)
+    {
+      formData.append("photo", this.info.photo);
+    }
     formData.append("type", "delivery");
 
     this.Auth.updateMe(formData)
@@ -62,19 +91,19 @@ export class EditProfileComponent implements OnInit {
       });
   }
 
-  onSelect(event, type) {
-		//console.log(event);
+  // onSelect(event, type) {
+	// 	//console.log(event);
     
-		this.files.push(...event.addedFiles);
-    this.info.nid = event.addedFiles[0];
-	}
+	// 	this.files.push(...event.addedFiles);
+  //   this.info.nid = event.addedFiles[0];
+	// }
 
-	onRemove(event, type) {
-		//console.log(event);
+	// onRemove(event, type) {
+	// 	//console.log(event);
 		
-		this.files.splice(this.files.indexOf(event), 1);
-    this.info.nid = null;
-	}
+	// 	this.files.splice(this.files.indexOf(event), 1);
+  //   this.info.nid = null;
+	// }
 
   handleProfilePic(event) {
     if(event.target.files)
@@ -89,6 +118,21 @@ export class EditProfileComponent implements OnInit {
     
     this.picture.push(event.target.files[0]);
     this.info.photo = event.target.files[0];
+}
+
+handleNid(event) {
+  if(event.target.files)
+  {
+    var reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+
+    reader.onload=(event:any)=>{
+      this.userNid = event.target.result;
+    }
+  }
+  
+  this.files.push(event.target.files[0]);
+  this.info.nid = event.target.files[0];
 }
 
 }

@@ -1372,7 +1372,7 @@ h2.title {
 
 #cart_items .cart_info {
   border: 1px solid #e6e4df;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 
 #cart_items .cart_info .cart_menu {
@@ -2348,7 +2348,7 @@ textarea {
 .label-categories {
   padding: 8px 20px;
   color: #fff;
-  background-color: #df1a32;
+  background-color: #EF4444;
   font-size: 14px;
   cursor: pointer;
   text-transform: uppercase;
@@ -2781,7 +2781,7 @@ textarea {
 } */
 
 .slick-slide{
-  margin-top: 10px !important;
+  margin-top: 0px !important;
 }
 
 @media only screen and (min-width: 340px) and (max-width: 768px) {
