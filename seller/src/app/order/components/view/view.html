@@ -256,6 +256,21 @@
                   </li>
                 </ul>
                 <br>
+                <div class="col-md-2">
+                  Delivery / Courier :
+                </div>
+                <div class="col-md-6">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body" *ngIf="order.courier">
+                      <h5 class="card-title"> {{order?.courier.name}}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">  {{order?.courier.email}}</h6>
+                      <p class="card-text">  {{order?.courier.phoneNumber}}</p>
+                    </div>
+                    <div class="card-body" *ngIf="!order.courier">
+                      <h6 class="card-subtitle mb-2 text-muted">Courier Not Assign Yet.</h6>
+                    </div>
+                  </div>
+                </div>
                 <button class="btn btn-success" type="submit">Update Shipping</button>&nbsp;
                 <a class="btn btn-warning" [routerLink]="['/orders/list']">Cancel</a>
               </div>

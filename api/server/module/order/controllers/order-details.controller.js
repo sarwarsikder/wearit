@@ -96,12 +96,22 @@ exports.details = async (req, res, next) => {
     }
 
     const data = details.toObject();
-    if (data.customerId) {
-      const customer = await DB.User.findOne({ _id: data.customerId });
-      if (customer) {
-        data.customer = customer.toJSON();
+    const query = {
+      _id: data.orderId
+    };
+
+    const item = await DB.Order.findOne(query).populate('details').populate('customer').populate('courier');
+    const order = item.toObject();
+  
+    if (order.courierId) {
+      const courier = await DB.User.findOne({ _id: order.courierId });
+      if (courier) {
+        data.courier = courier.toJSON();
       }
     }
+
+    console.log('TEST');
+    console.log(data.courier);
 
     // load main image
     const product = await DB.Product.findOne({ _id: data.productId }).populate('mainImage');
@@ -154,6 +164,31 @@ exports.updateStatus = async (req, res, next) => {
     return next();
   }
 };
+
+exports.update = async (req, res, next) => {
+  try {
+    
+    const validate = Joi.validate(req.body, validateSchemaDelivery);
+    if (validate.error) {
+      return next(PopulateResponse.validationError(validate.error));
+    }
+
+    const query = {
+      _id: req.params.orderDetailId
+    };
+
+    const item = await DB.OrderDetail.findOne(query);
+    if (!item) {
+      return next(PopulateResponse.notFound());
+    }
+    await item.save();
+    res.locals.update = req.order;
+    return next();
+  } catch (e) {
+    return next();
+  }
+};
+
 
 exports.updateShippingInfo = async (req, res, next) => {
   try {
