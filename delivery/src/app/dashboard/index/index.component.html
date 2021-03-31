@@ -5,19 +5,19 @@
             <div class="card">
             <div class="card-body">
                 <p class="card-title">Complete Delivery</p>
-                <strong class="card-meta">120</strong>
+                <strong class="card-meta">{{count.complete}}</strong>
                 <hr class="margin-control">
-                <a class="card-link" href="#">View Now</a>
+                <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('complete')">View Now</a>
             </div>
             </div>
         </div>
         <div class="col-sm">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title">In progress delivery</p>
-                    <strong class="card-meta">03</strong>
+                    <p class="card-title">Shipped delivery</p>
+                    <strong class="card-meta">{{count.shipped}}</strong>
                     <hr class="margin-control">
-                    <a class="card-link" href="#">View Now</a>
+                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('shipped')">View Now</a>
                 </div>
                 </div>
         </div>
@@ -25,19 +25,19 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Returned</p>
-                    <strong class="card-meta">11</strong>
+                    <strong class="card-meta">{{ count.returned }}</strong>
                     <hr class="margin-control">
-                    <a class="card-link" href="#">View Now</a>
+                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('returned')">View Now</a>
                 </div>
                 </div>
         </div>
         <div class="col-sm">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title">Total Categories</p>
-                    <strong class="card-meta">10</strong>
+                    <p class="card-title">Cancelled</p>
+                    <strong class="card-meta">{{count.cancel}}</strong>
                     <hr class="margin-control">
-                    <a class="card-link" href="#">View Now</a>
+                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('cancel')">View Now</a>
                 </div>
                 </div>
         </div>
@@ -83,42 +83,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let order of orders| paginate: { itemsPerPage: 10, currentPage: pageNo, totalItems: totalCount }">
                         <td>
                             <div>
                                 <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1" value="" aria-label="...">
                             </div>
                         </td>
                         <td>
-                            <span>1554257252</span>
+                            <span>{{ order?._id}}</span>
                         </td>
                         <td>
                             <span>Levis Summer Hot Look</span>
                         </td>
                         <td>152454541</td>
-                        <td>05</td>
-                        <td>12/Ka/A Shamoly Dhaka</td>
-                        <td>01-14-2021</td>
-                        <td>Moushumi Store</td>
-                        <td>
-                            <button class="td-btn">Invoice</button>
-                            <button class="td-btn">Done</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>
-                                <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1" value="" aria-label="...">
-                            </div>
-                        </td>
-                        <td>
-                            <span>1554257252</span>
-                        </td>
-                        <td>
-                            <span>Levis Summer Hot Look</span>
-                        </td>
-                        <td>152454541</td>
-                        <td>05</td>
+                        <td>{{ order?.quantity}}</td>
                         <td>12/Ka/A Shamoly Dhaka</td>
                         <td>01-14-2021</td>
                         <td>Moushumi Store</td>
@@ -128,8 +106,8 @@
                         </td>
                     </tr>
                 </tbody>
-
             </table>
+            <pagination-controls (pageChange)="onPageChange($event)" style="text-align: center;"></pagination-controls>
         </div>
     </div>
 </div>
