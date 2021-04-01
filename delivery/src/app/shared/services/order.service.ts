@@ -17,5 +17,10 @@ export class OrderService {
   getAll(status, page): Promise<any> {
     return this.restangular.one("orders/"+'details/status/'+status+'/'+page+'/10').get().toPromise();
   }
-
+  changeStatus(orderId, status): Promise<any> {
+    const payload = {
+      status: status
+    }
+    return this.restangular.one("delivery/"+'orders/'+orderId).customPUT(payload).toPromise();
+  }
 }
