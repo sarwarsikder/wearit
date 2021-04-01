@@ -13,14 +13,14 @@ module.exports = (router) => {
    */
   router.get(
     '/v1/orders/count/',
-    //Middleware.isAuthenticated,
+    Middleware.isAuthenticated,
     orderDeliveryController.count,
     Middleware.Response.success('count')
   );
 
   router.get(
     '/v1/delivery/orders/:orderId',
-    //Middleware.isAuthenticated,
+    Middleware.isAuthenticated,
     orderDeliveryController.details,
     Middleware.Response.success('details')
   );
@@ -35,7 +35,7 @@ module.exports = (router) => {
    */
    router.get(
     '/v1/orders/details/status/:status/:page/:limit',
-    //Middleware.isAuthenticated,
+    Middleware.isAuthenticated,
     orderDeliveryController.detailsByStatus,
     Middleware.Response.success('details')
   );
