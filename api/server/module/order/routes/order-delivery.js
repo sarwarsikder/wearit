@@ -39,4 +39,18 @@ module.exports = (router) => {
     orderDeliveryController.detailsByStatus,
     Middleware.Response.success('details')
   );
+
+  router.post(
+    '/v1/orders/details/status/:status/:page/:limit',
+    Middleware.isAuthenticated,
+    orderDeliveryController.detailsByStatus,
+    Middleware.Response.success('details')
+  );
+
+  router.put(
+    '/v1/delivery/orders/:orderId',
+    Middleware.isAuthenticated,
+    orderDeliveryController.update,
+    Middleware.Response.success('update')
+  );
 };

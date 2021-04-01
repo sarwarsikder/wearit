@@ -70,3 +70,31 @@ exports.detailsByStatus = async (req, res, next) => {
     return next(e);
   }
 };
+
+exports.update = async (req, res, next) => {
+  try {
+    const order = await DB.OrderDetail.findOne({ _id: req.params.orderId });
+    let publicFields = [
+      'status'
+    ];
+
+    const fields = _.pick(req.body, publicFields);
+
+    console.log(fields);
+
+    await DB.OrderDetail.updateOne({ _id: req.params.orderId }, {
+      $set: fields
+    });
+    
+    const neworder = await DB.OrderDetail.findOne({ _id: req.params.orderId });
+    res.locals.update = neworder;
+    next();
+  } catch (e) {
+    next(e);
+  }
+};
+
+exports.me = (req, res, next) => {
+  res.locals.me = req.user;
+  next();
+};
