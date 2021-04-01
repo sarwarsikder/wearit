@@ -9,14 +9,44 @@ exports.details = async (req, res, next) => {
   try {
     // const page = Math.max(0, req.query.page - 1) || 0; // using a zero-based page index for use with skip()
     // const take = parseInt(req.query.take, 10) || 10;
-    
-    const orders = await DB.OrderDetail.find({ _id: req.params.orderId });
 
-    if (orders.length == 0) {
+    //const courierId = req.user._id;
+
+    // const orders = await DB.Order.find({ courierId: req.user._id });
+    // const orderIds = orders.map(p => p._id);
+
+    // const orderdetails = await DB.OrderDetail.find({ orderId: { $in: orderIds } });
+
+    const orderdetails = await DB.OrderDetail.find({ orderId: req.params.orderId });
+
+    const productIds = [];
+    orderdetails.forEach(item => productIds.push(item.productId));
+    if (productIds.length) {
+      const products = await DB.Product.find({ _id: { $in: productIds } }).select('_id mainImage');
+      const mediaIds = products.map(p => p.mainImage);
+      if (mediaIds) {
+        const media = await DB.Media.find({ _id: { $in: mediaIds } });
+        orderdetails.forEach((item) => {
+          const product = _.find(products, p => p._id.toString() === item.productId.toString());
+          if (product && product.mainImage) {
+            const image = _.find(media, m => m._id.toString() === product.mainImage.toString());
+            if (image) {
+              if (!item.productDetails) {
+                item.productDetails = {};
+              }
+
+              item.productDetails.mainImage = image.toJSON();
+            }
+          }
+        });
+      }
+    }
+
+    if (orderdetails.length == 0) {
         return next(PopulateResponse.notFound());
       }
 
-    res.locals.details = orders[0];
+    res.locals.details = orderdetails;
     return next();
   } catch (e) {
     return next(PopulateResponse.notFound());
@@ -51,11 +81,39 @@ exports.detailsByStatus = async (req, res, next) => {
   try {
     const page = Math.max(0, req.params.page - 1) || 0; // using a zero-based page index for use with skip()
     const take = parseInt(req.params.limit, 10) || 10;
+
+    // const orders = await DB.Order.find({ courierId: req.user._id });
+    // const orderIds = orders.map(p => p._id);
+
+    //, orderId: { $in: orderIds } 
     
-    const alldetails = await DB.OrderDetail.find({ status: req.params.status });
-    const details = await DB.OrderDetail.find({ status: req.params.status })
+    const alldetails = await DB.OrderDetail.find({ status: req.params.status});
+    const details = await DB.OrderDetail.find({ status: req.params.status})
     .skip(page * take)
     .limit(take);
+
+    const productIds = [];
+    details.forEach(item => productIds.push(item.productId));
+    if (productIds.length) {
+      const products = await DB.Product.find({ _id: { $in: productIds } }).select('_id mainImage');
+      const mediaIds = products.map(p => p.mainImage);
+      if (mediaIds) {
+        const media = await DB.Media.find({ _id: { $in: mediaIds } });
+        details.forEach((item) => {
+          const product = _.find(products, p => p._id.toString() === item.productId.toString());
+          if (product && product.mainImage) {
+            const image = _.find(media, m => m._id.toString() === product.mainImage.toString());
+            if (image) {
+              if (!item.productDetails) {
+                item.productDetails = {};
+              }
+
+              item.productDetails.mainImage = image.toJSON();
+            }
+          }
+        });
+      }
+    }
 
     // if (details.length == 0) {
     //     return next(PopulateResponse.notFound());
@@ -73,14 +131,12 @@ exports.detailsByStatus = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
   try {
-    const order = await DB.OrderDetail.findOne({ _id: req.params.orderId });
+    //const order = await DB.OrderDetail.findOne({ _id: req.params.orderId });
     let publicFields = [
       'status'
     ];
 
     const fields = _.pick(req.body, publicFields);
-
-    console.log(fields);
 
     await DB.OrderDetail.updateOne({ _id: req.params.orderId }, {
       $set: fields
