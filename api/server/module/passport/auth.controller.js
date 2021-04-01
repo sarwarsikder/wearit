@@ -3,8 +3,9 @@ const nconf = require('nconf');
 const url = require('url');
 const formidable = require('formidable');
 const s3 = require("../media/services/s3");
-const Image = require('../media/components/image');
-const media = require("../media/index");
+const fs = require('fs'); 
+const path = require('path');
+const ip = require('ip');
 
 exports.register = async (req, res, next) => {
   const schema = Joi.object()
@@ -48,33 +49,58 @@ exports.register = async (req, res, next) => {
       }); // form.parse
     });
     if(formfields && formfields.photo){
-      try{
-        const file = await s3.uploadFile(formfields.photo.path);
-        if(file.url){
-          formfields.photo = file.url;
-        }else{
-          delete formfields.photo;
+      if(formfields.photo.path){
+        try{
+          const file = await s3.uploadFile(formfields.photo.path);
+          if(file.url){
+            formfields.photo = file.url;
+          }else{
+            delete formfields.photo;
+          }
         }
-      }
-      catch(exc){
-        console.log("Exception occoured: ",exc);
-        formfields.avatar = formfields.photo.path;
-        delete formfields.photo;
+        catch(exc){
+          // console.log("Exception occoured: ",exc);
+          let oldPath = formfields.photo.path; 
+          let avatarDir =  '/avatar/'+formfields.photo.name;
+          let newPath = path.join(process.env.APP_ROOT_DIR, 'public')+avatarDir;
+          let rawData = fs.readFileSync(oldPath);
+          formfields.avatar = req.protocol+'://'+ip.address()+':'+process.env.PORT+avatarDir;
+          fs.writeFile(newPath, rawData, function(err){ 
+              if(err) {
+                console.log("Exception occoured while uploading locally: ", err) 
+              }
+          }) 
+          delete formfields.photo;
+        }   
+      }else{
+        delete formfields.photo
       }
     }
     if(formfields && formfields.nid){
-      try{
-        const file = await s3.uploadFile(formfields.nid.path);
-        if(file.url){
-          formfields.nid = file.url;
-        }else{
-          delete formfields.nid;
+      if(formfields.nid.path){
+        try{
+          const file = await s3.uploadFile(formfields.nid.path);
+          if(file.url){
+            formfields.nid = file.url;
+          }else{
+            delete formfields.nid;
+          }
         }
-      }
-      catch(exc){
-        console.log(exc);
-        formfields.nid = formfields.nid.path;
-        // delete formfields.nid;
+        catch(exc){
+          // console.log(exc);
+          let oldPath = formfields.nid.path; 
+          let nidDir =  '/files/'+formfields.nid.name;
+          let newPath = path.join(process.env.APP_ROOT_DIR, 'public')+nidDir;
+          let rawData = fs.readFileSync(oldPath) 
+          formfields.nid = req.protocol+'://'+ip.address()+':'+process.env.PORT+nidDir;
+          fs.writeFile(newPath, rawData, function(err){ 
+              if(err) {
+                console.log("Exception occoured while uploading locally: ", err) 
+              }
+          }); 
+        }
+      }else{
+        delete formfields.nid;
       }
     }
     validate = Joi.validate(formfields, schema);
