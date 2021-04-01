@@ -233,6 +233,24 @@
                   </tbody>
                 </table>
                 <br>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Delivery / Courier</label>
+                    <input type="text" name="seller" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="courier" [ngbTypeahead]="search" placeholder="Search Courier" [resultTemplate]="rt" [inputFormatter]="formatter" />
+                    <br>
+                    <br>
+                    <br>
+                    <input type="text" name="seller" class="form-control" *ngIf="order.courier" readonly [(ngModel)]="order.courier.name"/>
+                    <span *ngIf="searching">searching...</span>
+                    <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+                    <ng-template #rt let-r="result" let-t="term">
+                      <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>&nbsp;
+                      <small>({{r?.name?.name ? r.name : 'N/A'}})</small>
+                    </ng-template>
+                  </div>
+                  <button class="btn btn-success btn-black" (click)="addDelivery()">Add Courier</button>
+                </div>
+                <br>
                 <button class="btn btn-warning " [routerLink]="['/orders/list']" translate>Cancel</button>
               </div>
             </div>
