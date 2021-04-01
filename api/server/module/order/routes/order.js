@@ -66,4 +66,19 @@ module.exports = (router) => {
     orderController.details,
     Middleware.Response.success('order')
   );
+
+  /**
+   * @apiGroup Order
+   * @apiVersion 1.0.0
+   * @api {get} /v1/orders/:orderid Get details of the order
+   * @apiDescription Get details of the order
+   * @apiUse authRequest
+   * @apiPermission user
+   */
+   router.put(
+    '/v1/orders/:orderId',
+    Middleware.isAuthenticated,
+    orderController.update,
+    Middleware.Response.success('order')
+  );
 };

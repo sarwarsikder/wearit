@@ -37,6 +37,21 @@ module.exports = (router) => {
   /**
    * @apiGroup Shop Order
    * @apiVersion 1.0.0
+   * @api {get} /v1/orders/details/:orderDetailId  Get details of the sub order
+   * @apiDescription Get details of the sub order which managed by shop
+   * @apiUse authRequest
+   * @apiPermission seller
+   */
+   router.put(
+    '/v1/orders/details/:orderDetailId',
+    Middleware.isAuthenticated,
+    orderDetailsController.update,
+    Middleware.Response.success('details')
+  );
+
+  /**
+   * @apiGroup Shop Order
+   * @apiVersion 1.0.0
    * @api {put} /v1/orders/details/:orderDetailId/status Update shop order status
    * @apiDescription Update shop order status
    * @apiParam {String}   status `pending`, `progressing`, `shipping`, `completed`, `refunded`, `cancelled`
