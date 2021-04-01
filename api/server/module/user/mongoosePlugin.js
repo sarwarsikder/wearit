@@ -76,6 +76,7 @@ exports.User = (schema) => {
     }
 
     const newFilePath = filePath || 'public/assets/default-avatar.jpg';
-    return Helper.App.getPublicFileUrl(newFilePath);
+    // return Helper.App.getPublicFileUrl(newFilePath);
+      return newFilePath;
   });
 };
