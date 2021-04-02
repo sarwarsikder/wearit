@@ -10,14 +10,14 @@ exports.details = async (req, res, next) => {
     // const page = Math.max(0, req.query.page - 1) || 0; // using a zero-based page index for use with skip()
     // const take = parseInt(req.query.take, 10) || 10;
 
-    //const courierId = req.user._id;
+    const courierId = req.user._id;
 
-    // const orders = await DB.Order.find({ courierId: req.user._id });
-    // const orderIds = orders.map(p => p._id);
+    const orders = await DB.Order.find({ courierId: req.user._id });
+    const orderIds = orders.map(p => p._id);
 
-    // const orderdetails = await DB.OrderDetail.find({ orderId: { $in: orderIds } });
+    const orderdetails = await DB.OrderDetail.find({ orderId: { $in: orderIds } });
 
-    const orderdetails = await DB.OrderDetail.find({ orderId: req.params.orderId });
+    // const orderdetails = await DB.OrderDetail.find({ orderId: req.params.orderId });
 
     const productIds = [];
     orderdetails.forEach(item => productIds.push(item.productId));

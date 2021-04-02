@@ -1,11 +1,10 @@
-
 <div class="container-fluid">
     <div class="row card-stream">
         <div class="col-sm">
             <div class="card">
             <div class="card-body">
                 <p class="card-title">Complete Delivery</p>
-                <strong class="card-meta">{{count.complete}}</strong>
+                <strong class="card-meta">{{count?.complete}}</strong>
                 <hr class="margin-control">
                 <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('complete')">View Now</a>
             </div>
@@ -15,7 +14,7 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Shipped delivery</p>
-                    <strong class="card-meta">{{count.shipped}}</strong>
+                    <strong class="card-meta">{{count?.shipped}}</strong>
                     <hr class="margin-control">
                     <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('shipped')">View Now</a>
                 </div>
@@ -25,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Returned</p>
-                    <strong class="card-meta">{{ count.returned }}</strong>
+                    <strong class="card-meta">{{ count?.returned }}</strong>
                     <hr class="margin-control">
                     <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('returned')">View Now</a>
                 </div>
@@ -35,7 +34,7 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Cancelled</p>
-                    <strong class="card-meta">{{count.cancel}}</strong>
+                    <strong class="card-meta">{{count?.cancel}}</strong>
                     <hr class="margin-control">
                     <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('cancel')">View Now</a>
                 </div>
