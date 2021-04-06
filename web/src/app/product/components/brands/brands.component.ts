@@ -16,8 +16,8 @@ export class BrandsComponent implements OnChanges {
   public sort: any = 'random';
   public sortType: any = '';
   public slideConfig: any = {
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     dots: false,
     arrows: true,
     autoplay: false,

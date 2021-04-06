@@ -152,7 +152,7 @@
   </div>
   <div>
     <div class="price-range-block">
-      <input type="text"  [(ngModel)]="searchFields.low_price"/> to <input type="text" [(ngModel)]="searchFields.high_price"/>
+      <input placeholder="0" type="text"  [(ngModel)]="searchFields.low_price"/> to <input placeholder="5000" type="text" [(ngModel)]="searchFields.high_price"/>
     </div>
     <button class="btn-apply" (click)="filter()">Apply Price</button>
   </div>

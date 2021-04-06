@@ -26,14 +26,14 @@
                 <tr *ngFor="let item of cart?.products; let i = index">
                   <td class="cart_product">
                     <a appLocationHref [url]="'/products/' + item.product?.alias">
-                      <img [src]="item.product?.mainImage?.thumbUrl | checkPhoto" width="100px" />
+                      <img [src]="item.product?.mainImage?.thumbUrl | checkPhoto" width="80px" />
                     </a>
                   </td>
                   <td class="cart_description">
-                    <strong translate class="label label-success" *ngIf="item.freeShip">Free Ship</strong>
-                    <span *ngIf="!item.freeShip">
+                    <strong style="font-size: 12px;" translate class="label label-success" *ngIf="item.freeShip">Free Ship</strong>
+                    <span style="font-size: 12px;" *ngIf="!item.freeShip">
                         <strong translate>Home Delivery Fee: </strong>: {{item.calculatedData?.shipping | priceCurrency:item.userCurrency}}
-                      </span>
+                    </span>
                     <h4>
                       <a appLocationHref [url]="'/products/' + item.product?.alias"> {{item.product?.name}} </a>
                     </h4>
@@ -171,7 +171,7 @@
               <span style="font-size: 22px;font-weight: 600;" *ngIf="totalPrice && cart">{{totalPrice | priceCurrency: cart.userCurrency}}</span>
             </p>
             <p class="text-left">
-              <button class="btn btn-warning btn-pay-now" type="submit" translate>Confirm Order</button>
+              <button class="btn btn-warning btn-pay-now" type="submit" translate>Pay Now</button>
             </p>
           </div>
         </div>
