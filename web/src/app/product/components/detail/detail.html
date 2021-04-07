@@ -59,6 +59,12 @@
               <div [innerHtml]="product?.shortDescription | safeHtml"></div>
               <hr />
               <div class="prod-variants">
+                <button class="size-box">
+                  Size Guideline
+                  <div class="size-container">
+                    
+                  </div>
+                </button>
                 <div class="price-detial" *ngIf="salePrice">
                   <span class="salePrice-format">{{salePrice | currency | async}}</span>
                   <label class="shipping-status" *ngIf="product?.freeShip" translate>Free Shipping</label>

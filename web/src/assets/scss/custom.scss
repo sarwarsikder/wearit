@@ -2481,3 +2481,28 @@ input{
     }
   }
 }
+
+.size-box{
+  background: #ffeb3b;
+  color: #1c1c1c;
+  padding: 2px 8px;
+  margin-bottom: 25px;
+  border: 0px;
+  font-weight: 500;
+  position: relative;
+  .size-container{
+    position: absolute;
+    width: 260px;
+    height: 240px;
+    background: #e6e6e6;
+    left: 100%;
+    top: -15px;
+    z-index: 9;
+    display: none;
+  }
+  &:hover{
+    .size-container{
+      display: block;
+    }
+  }
+}
