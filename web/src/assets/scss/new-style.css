@@ -2273,6 +2273,13 @@ textarea {
 .slide-banner-new .slick-dots {
   display: none;
 }
+.slide-banner-new .slide{
+  height: 500px;
+}
+.slide-banner-new .slide img{
+  height: 500px;
+  object-fit: cover;
+}
 
 .dropdown-menu {
   padding: 0 !important;

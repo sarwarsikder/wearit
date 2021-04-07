@@ -2334,6 +2334,8 @@ input{
       a{
         color: #fff !important;
         position: relative;
+        min-width: 80px;
+        text-align: center;
         &:hover{
           background: #fff;
           color: #ff3c3c !important;
