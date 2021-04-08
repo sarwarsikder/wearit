@@ -82,13 +82,16 @@ exports.detailsByStatus = async (req, res, next) => {
     const page = Math.max(0, req.params.page - 1) || 0; // using a zero-based page index for use with skip()
     const take = parseInt(req.params.limit, 10) || 10;
 
-    // const orders = await DB.Order.find({ courierId: req.user._id });
-    // const orderIds = orders.map(p => p._id);
+    const orders = await DB.Order.find({ courierId: req.user._id });
+    const orderIds = orders.map(p => p._id);
 
     //, orderId: { $in: orderIds } 
     
-    const alldetails = await DB.OrderDetail.find({ status: req.params.status});
-    const details = await DB.OrderDetail.find({ status: req.params.status})
+    // const alldetails = await DB.OrderDetail.find({ status: req.params.status});
+    // const details = await DB.OrderDetail.find({ status: req.params.status})
+
+    const alldetails = await DB.OrderDetail.find({ status: req.params.status, orderId: { $in: orderIds } });
+    const details = await DB.OrderDetail.find({ status: req.params.status, orderId: { $in: orderIds } })
     .skip(page * take)
     .limit(take);
 
