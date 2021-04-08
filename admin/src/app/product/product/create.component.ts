@@ -34,7 +34,8 @@ export class ProductCreateComponent implements OnInit {
     salePrice: 0,
     vat: 0,
     restrictFreeShipAreas: [],
-    restrictCODAreas: []
+    restrictCODAreas: [],
+    sizeChart: null
   };
   public tree: any = [];
   public countries: any = [];
@@ -63,6 +64,7 @@ export class ProductCreateComponent implements OnInit {
   public searching: any = false;
   public searchFailed: any = false;
   public fileOptions: any = {};
+  public sizeChartUrl: any = '';
   // search seller
   formatter = (x: {
     name: string,
@@ -234,6 +236,10 @@ export class ProductCreateComponent implements OnInit {
     this.location.cities({ state: id }).then((res) => {
       this.cities = res.data;
     });
+  }
+  selectSizeImage(media: any) {
+    this.product.sizeChart = media._id;
+    this.sizeChartUrl = media.fileUrl;
   }
 
   addFreeShipAreas() {

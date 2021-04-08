@@ -36,6 +36,8 @@ export class ProductUpdateComponent implements OnInit {
   public freeCity: any;
   public dealDate: any;
   public brand: any;
+  public sizeChart: any = '';
+
   public imagesOptions: any = {
     multiple: true
   };
@@ -104,6 +106,13 @@ export class ProductUpdateComponent implements OnInit {
         this.freeShipAreas = resp.data.restrictFreeShipAreas;
         this.mainImage = resp.data.mainImage ? resp.data.mainImage._id : null;
         this.images = this.product.images;
+
+        this.sizeChart = this.product.sizeChart ? this.product.sizeChart.thumbUrl : null;
+        this.product.sizeChart = this.product.sizeChart ? this.product.sizeChart._id : null;
+
+
+        console.log( this.product.sizeChart.thumbUrl );
+
       });
     this.categoryService.tree()
       .then(resp => (this.tree = this.categoryService.prettyPrint(resp.data)));
@@ -139,8 +148,11 @@ export class ProductUpdateComponent implements OnInit {
       const data = _.pick(item, ['areaType', 'value', 'name']);
       this.product.restrictFreeShipAreas.push(data);
     });
+   
+
     this.product.images = this.images.map(i => i._id);
     this.product.mainImage = this.mainImage || null;
+    
     this.productService.update(this.product._id, this.product).then(resp => {
       this.toasty.success('Updated successfully.');
       // this.router.navigate(['/products']);
@@ -165,6 +177,11 @@ export class ProductUpdateComponent implements OnInit {
     }
 
     this.images.push(media);
+  }
+
+  selectSizeImage(media: any) {
+    this.product.sizeChart = media._id;
+    this.sizeChart = media.fileUrl;
   }
 
   setMain(media: any) {
@@ -197,6 +214,7 @@ export class ProductUpdateComponent implements OnInit {
       this.cities = res.data;
     });
   }
+
 
   addFreeShipAreas() {
     if (this.zipCode) {

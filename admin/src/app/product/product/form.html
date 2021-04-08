@@ -12,6 +12,8 @@
             <a class="nav-link" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" [ngClass]="{active: tab == 'images'}" (click)="changeTab('images')">Images</a>
 
             <a class="nav-link" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" [ngClass]="{active: tab == 'variants'}" (click)="changeTab('variants')">Variants</a>
+            
+            <a class="nav-link" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" [ngClass]="{active: tab == 'size-chart'}" (click)="changeTab('size-chart')">Size Chart</a>
 
             <a class="nav-link" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" [ngClass]="{active: tab == 'reviews'}" (click)="changeTab('reviews')" [hidden]="!product._id">Reviews</a>
           </div>
@@ -369,6 +371,18 @@
               <hr />
               <media-select (onSelect)="selectImage($event)" [options]="imagesOptions"></media-select>
             </div>
+
+            <div class="tab-pane fade show active" role="tabpanel" [ngClass]="{'show active': tab === 'size-chart'}">
+              <h3>Click to set Size Chart image.</h3>
+              <div class="row">
+            <div class="form-group">
+              <label><media-select (onSelect)="selectSizeImage($event)"></media-select></label>
+              <hr />
+              <img *ngIf="sizeChart" width="150" [src]="sizeChart" />
+            </div>
+          </div>
+        </div>
+
 
             <div class="tab-pane fade show active" role="tabpanel" [ngClass]="{'show active': tab === 'variants'}">
               <product-variants [product]="product" *ngIf="product?._id"></product-variants>
