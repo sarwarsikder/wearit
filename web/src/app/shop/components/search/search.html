@@ -11,8 +11,8 @@
       <h4 translate>Shops</h4>
     </div> -->
     <div class="row">
-      <div class="col-md-3">
-        <div class="filter-search filter-shop mar-bot-10">
+      <div class="col-md-2" style="padding-right: 0px;">
+        <div class="filter-search filter-shop mar-bot-10" style="padding: 7px;">
           <h5>Filter Shop</h5>
           <div class="pull-left form-inline">
             <div class="input-group mb-3">
@@ -36,7 +36,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-10 shop-list">
         <div class="filter-search">
           <div class="pull-left">
             <h4>Browse Shops</h4>
@@ -55,7 +55,7 @@
         </div>
         <div *ngIf="!total" class="badge badge-warning" translate>No shops found</div>
         <ul class="list-shop row" *ngIf="!isLoading">
-          <li class="col-sm-6 col-md-4" *ngFor="let item of shops">
+          <li class="col-sm-6 col-md-3" *ngFor="let item of shops">
             <shop-card [shop]="item"></shop-card>
             &nbsp;
           </li>

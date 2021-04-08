@@ -11,7 +11,7 @@ html {
 
 body {
   background: #fff;
-  color: #000 !important;
+  color: #1C1C1C !important;
   font-size: 14px;
   line-height: 23px;
   font-family: 'Poppins', sans-serif;
@@ -175,7 +175,7 @@ img {
     line-height: 15px;
     text-align: center;
     border-radius: 50%;
-    color: #000;
+    color: #1C1C1C;
     top: -3px;
     right: -5px;
     background: white;
@@ -259,21 +259,23 @@ img {
   a {
     display: inline-block;
     color: #7F1D1D !important;
-    text-decoration: none !important
+    text-decoration: none !important;
+    margin-top: 0px;
+    font-weight: 500;
   }
 }
 .padding-main {
-  padding: 40px 0px;
+  padding: 20px 0px;
   padding-bottom: 10px;
 }
 
 .box-product {
-  background: #FAFAFA;
+  background: #F9FAFB;
   border-radius: 0px;
   margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 10px;
-  box-shadow: 1px 1px 4px 0px #00000042;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   padding-top: 0px !important;
   padding: 0px !important;
   .img-prod{
@@ -304,9 +306,9 @@ img {
     }
 
     a {
-      color: #000;
+      color: #1C1C1C;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 13px;
     }
   }
 
@@ -327,7 +329,7 @@ img {
 .price-product {
   font-size: 15px;
   font-weight: bold;
-  color: #000;
+  color: #1C1C1C;
 
   span.line-through {
     color: red;
@@ -425,7 +427,7 @@ img {
   border: 1px solid #ddd;
   border-radius: 0px;
   margin-bottom: 20px;
-  box-shadow: 1px 1px 4px 0px #00000042;
+  box-shadow: 1px 1px 4px 0px #1C1C1C42;
   .img-prod{
     height: 200px !important;
     padding: 10px !important;
@@ -442,14 +444,14 @@ img {
 }
 
 .btn-shop-now{
-    border: 1px solid #000;
+    border: 1px solid #1C1C1C;
     padding: 1px 7px 1px 4px;
     font-size: 13px;
   svg{
     width: 20px;
     margin-top: -2px;
     path{
-      // fill: #000;
+      // fill: #1C1C1C;
     }
   }
   &.btn-align-fix{
@@ -630,7 +632,7 @@ img {
   border-bottom: 1px solid #ddd;
   margin-bottom: 0px;
   padding-bottom: 10px;
-  background: #000;
+  background: #1C1C1C;
   padding: 15px;
   font-size: 20px;
   font-weight: 500;
@@ -681,6 +683,7 @@ img {
     font-size: 20px;
     display: inline-block;
     margin-right: 10px;
+    font-weight: 700;
     color: #566b95;
   }
 }
@@ -920,8 +923,8 @@ img {
   }
 }
 .btn-send{
-  background: #000;
-  border: 1px solid #000;
+  background: #1C1C1C;
+  border: 1px solid #1C1C1C;
   &:hover{
     background: #333;
     border-color: #333;
