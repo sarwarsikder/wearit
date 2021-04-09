@@ -3,9 +3,9 @@
     <stat-card [stat]="shopStat" [type]="'shop'" *ngIf="shopStat"></stat-card>
   </div>
   <div class="col-md-12">
-    <div class="row" style="margin-top: 50px;margin-bottom:50px;">
+    <div class="row" style="margin-top: 30px;margin-bottom:30px;">
       <div class="col-md-6">
-        <div style="display: block;">
+        <div style="display: block;" class="card card-blank">
           <canvas baseChart 
             [data]="pieShopChartData" 
             [labels]="pieShopChartLabels" 
@@ -39,9 +39,9 @@
   </div>
 
   <div class="col-md-12">
-    <div class="row"  style="margin-top: 40px;margin-bottom: 40px;">
+    <div class="row"  style="margin-top: 30px;margin-bottom:30px;">
         <div class="col-md-6">
-          <div style="display: block;">
+          <div style="display: block;" class="card card-blank" >
             <canvas baseChart width="200" height="100"
               [datasets]="lineChartData"
               [labels]="lineChartLabels"
@@ -68,7 +68,7 @@
         </div> -->
 
         <div class="col-md-6">
-          <div style="display: block;">
+          <div style="display: block; " class="card card-blank">
             <canvas baseChart 
               [data]="pieUserChartData" 
               [labels]="pieUserChartLabels" 
@@ -93,7 +93,7 @@
   <div class="col-md-12">
     <div class="row">      
         <div class="col-md-12">
-          <div style="display: block;">
+          <div style="display: block;" class="card card-blank">
             <canvas baseChart 
               [datasets]="barChartData"
               [labels]="barChartLabels"
