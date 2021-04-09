@@ -59,11 +59,8 @@
               <div [innerHtml]="product?.shortDescription | safeHtml"></div>
               <hr />
               <div class="prod-variants">
-                <button class="size-box">
+                <button *ngIf="sizeChartImageUrl" class="size-box" (click)="open(0)" >
                   Size Guideline
-                  <div class="size-container">
-                    
-                  </div>
                 </button>
                 <div class="price-detial" *ngIf="salePrice">
                   <span class="salePrice-format">{{salePrice | currency | async}}</span>

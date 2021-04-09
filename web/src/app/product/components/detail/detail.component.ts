@@ -9,6 +9,7 @@ import { ShareButtons } from '@ngx-share/core';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { WishListService } from '../../../shared/services/wish-list.service';
+import { Lightbox } from 'ngx-lightbox';
 
 
 @Component({
@@ -47,10 +48,13 @@ export class ProductDetailComponent implements OnDestroy {
     q: ''
   };
 
+  public sizeChartImageUrl: any = '';
+  private _album: any = [];
+
   constructor(private translate: TranslateService, private route: ActivatedRoute,private productService: ProductService,
     private authService: AuthService, private seoService: SeoService, private variantService: ProductVariantService,
     public share: ShareButtons, private wishlistService: WishlistService, private toasty: ToastyService,
-    private cartService: CartService,private wishListService: WishListService) {
+    private cartService: CartService,private wishListService: WishListService, private _lightbox: Lightbox) {
     if (this.authService.isLoggedin()) {
       this.authService.getCurrentUser().then(res => this.userID = res._id);
     }
@@ -79,6 +83,21 @@ export class ProductDetailComponent implements OnDestroy {
         this.activeSlide = this.product.images[0];
       } else if (!this.product.images.length && this.product.mainImage) {
         this.activeSlide = this.product.mainImage;
+      }
+
+      if(this.product.sizeChart){
+         this.sizeChartImageUrl = this.product.sizeChart.mediumUrl;
+
+         const src = this.sizeChartImageUrl;
+         const caption = "";
+         const thumb = this.sizeChartImageUrl;
+         const album = {
+           src: src,
+           caption: caption,
+           thumb: thumb
+         };
+ 
+         this._album.push(album);
       }
 
       this.setPrice(this.product);
@@ -206,5 +225,17 @@ export class ProductDetailComponent implements OnDestroy {
 
   onlyNumberKey(event) {
     return (event.charCode === 8 || event.charCode === 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+  }
+
+  open(index: number): void {
+    // open lightbox
+    console.log(index);
+    console.log(this._album);
+    this._lightbox.open(this._album, index);
+  }
+ 
+  close(): void {
+    // close lightbox programmatically
+    this._lightbox.close();
   }
 }
