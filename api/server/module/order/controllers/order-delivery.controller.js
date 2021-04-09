@@ -58,10 +58,15 @@ exports.count = async (req, res, next) => {
     // const page = Math.max(0, req.query.page - 1) || 0; // using a zero-based page index for use with skip()
     // const take = parseInt(req.query.take, 10) || 10;
     
-    const complete = await DB.OrderDetail.find({ status: "complete" });
-    const shipped = await DB.OrderDetail.find({ status: "shipped" });
-    const returned = await DB.OrderDetail.find({ status: "returned" });
-    const cancel = await DB.OrderDetail.find({ status: "cancel" });
+    const orders = await DB.Order.find({ courierId: req.user._id });
+    const orderIds = orders.map(p => p._id);
+
+    const complete = await DB.OrderDetail.find({ status: "complete", orderId: { $in: orderIds }});
+    const shipped = await DB.OrderDetail.find({ status: "shipped" , orderId: { $in: orderIds }});
+    const returned = await DB.OrderDetail.find({ status: "returned" , orderId: { $in: orderIds }});
+    const cancel = await DB.OrderDetail.find({ status: "cancel" , orderId: { $in: orderIds }});
+    const progressing = await DB.OrderDetail.find({ status: "progressing" , orderId: { $in: orderIds }});
+
 
     // if (details.length == 0) {
     //     return next(PopulateResponse.notFound());
@@ -70,7 +75,9 @@ exports.count = async (req, res, next) => {
     res.locals.count = {"complete": complete.length,
                         "shipped": shipped.length,
                         "returned": returned.length,
-                        "cancel": cancel.length,};
+                        "cancel": cancel.length,
+                        "progressing": progressing.length,
+                      };
     next();
   } catch (e) {
     return next(e);
