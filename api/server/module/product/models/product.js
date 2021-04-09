@@ -124,6 +124,14 @@ const schema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Media'
   },
+  logo: {
+    type: Schema.Types.ObjectId,
+    ref: 'Media'
+  },
+  sizeChart: {
+    type: Schema.Types.ObjectId,
+    ref: 'Media'
+  },
   shopVerified: {
     type: Boolean,
     default: false
@@ -227,6 +235,13 @@ schema.virtual('shop', {
 schema.virtual('digitalFile', {
   ref: 'Media',
   localField: 'digitalFileId',
+  foreignField: '_id',
+  justOne: true
+});
+
+schema.virtual('sizeCharts', {
+  ref: 'Media',
+  localField: 'sizeChart',
   foreignField: '_id',
   justOne: true
 });

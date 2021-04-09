@@ -14,6 +14,8 @@ const validateSchema = Joi.object().keys({
   price: Joi.number().optional(),
   salePrice: Joi.number().allow([null]).optional(),
   mainImage: Joi.string().allow([null, '']).optional(),
+  sizeChart: Joi.string().allow([null, '']).optional(),
+  logo: Joi.string().allow([null, '']).optional(),
   images: Joi.array().items(Joi.string()).optional(),
   specifications: Joi.array().items(Joi.object({
     key: Joi.string(),
@@ -121,6 +123,8 @@ exports.update = async (req, res, next) => {
     if (validate.error) {
       return next(PopulateResponse.validationError(validate.error));
     }
+
+    console.log(req);
 
     let alias = req.body.alias ? Helper.String.createAlias(req.body.alias) : Helper.String.createAlias(req.body.name);
     const count = await DB.Product.count({
@@ -309,6 +313,10 @@ exports.details = async (req, res, next) => {
     const product = await DB.Product.findOne(query)
       .populate({
         path: 'mainImage',
+        select: '_id filePath mediumPath thumbPath type uploaed'
+      })
+      .populate({
+        path: 'sizeChart',
         select: '_id filePath mediumPath thumbPath type uploaed'
       })
       .populate({

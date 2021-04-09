@@ -31,7 +31,7 @@
           </div>
           <div class="col-md-6">
             <div class="box-detail product-information detail-block">
-              <h2>{{product?.name}}</h2>
+              <h2 style="font-weight: 500;">{{product?.name}}</h2>
               <div class="rate-seller">
                 <star-rating [rate]="product.ratingAvg" [total]="product?.totalRating"></star-rating>
               </div>
@@ -49,7 +49,7 @@
                 </strong>
               </div>
               <div class="highlight-info">
-                <span translate class="mar-right-5">Tax: </span>
+                Tax: &nbsp;
                 <strong>
                   <span *ngIf="product.taxClass && product.taxPercentage"> {{product?.taxClass}}
                     {{product?.taxPercentage}}%</span>
@@ -59,6 +59,12 @@
               <div [innerHtml]="product?.shortDescription | safeHtml"></div>
               <hr />
               <div class="prod-variants">
+                <button class="size-box">
+                  Size Guideline
+                  <div class="size-container">
+                    
+                  </div>
+                </button>
                 <div class="price-detial" *ngIf="salePrice">
                   <span class="salePrice-format">{{salePrice | currency | async}}</span>
                   <label class="shipping-status" *ngIf="product?.freeShip" translate>Free Shipping</label>
@@ -245,7 +251,7 @@
         <a appLocationHref [url]="'/shops/'+ product.shop.alias" class="btn-send-block">Go to vendor Store</a>
         <div class="row related-sidebar" style="margin: 0px;">
           <div class="title-main">
-            <h4>More from the Shop</h4>
+            <h4 style="margin-bottom: 10px;">More from the Shop</h4>
           </div>
           <div class="box-product" *ngFor="let item of products">
             <div class="img-prod"><a appLocationHref [url]="'/products/' + product.alias">

@@ -41,18 +41,29 @@ File: scss
   }
 
   .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover {
-    background: #1C1C1C;
+    background: #ed205e;
+  }
+
+  .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover a{
+    color: #fff !important;
+  }
+  .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover a i{
+    color: #fff !important;
   }
 
   .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover ul.collapse {
     display: block;
   }
 
-  .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li a {
+  .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li > a {
     padding: 12px 15px;
-    color: #fff !important;
+    color: #000 !important;
   }
   .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li a i{
+    color: #000 !important;
+    margin-right: 5px;
+  }
+  .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover a i{
     color: #fff !important;
   }
 }

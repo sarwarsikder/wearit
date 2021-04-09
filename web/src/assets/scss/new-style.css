@@ -201,8 +201,8 @@ a#scrollUp i {
 
 .shop-menu ul li a:hover {
   color: #ffffff;
-  background: #000;
-  border: 1px solid #000;
+  background: #1C1C1C;
+  border: 1px solid #1C1C1C;
 }
 
 .header-bottom {
@@ -1087,10 +1087,11 @@ h2.title {
 
 .product-information span {
   display: inline-block;
+  font-weight: 400;
 }
 
 .product-information span span {
-  color: #000;
+  color: #1C1C1C;
   float: left;
   font-family: 'sans-serif'1, 'sans-serif'2;
   font-size: 15px;
@@ -1458,14 +1459,26 @@ h2.title {
 }
 
 .cart_delete a {
-  background: #f0f0e9;
+  background: #e2e2e2;
   color: #fff;
   padding: 5px 7px;
-  font-size: 16px;
+  font-size: 10px;
+  opacity: 0.3;
+}
+.cart_delete a svg{
+  width: 12px;
+  height: 12px;
 }
 
 .cart_delete a:hover {
-  background: #fe980f;
+  background: #fe270f;
+  opacity: 1;
+}
+.cart_delete a:hover .cart_delete a svg{
+  fill: #fff;
+}
+.cart_delete a:hover .cart_delete a svg path{
+  fill: #fff;
 }
 
 .bg h2.title {
@@ -2260,6 +2273,13 @@ textarea {
 .slide-banner-new .slick-dots {
   display: none;
 }
+.slide-banner-new .slide{
+  height: 500px;
+}
+.slide-banner-new .slide img{
+  height: 500px;
+  object-fit: cover;
+}
 
 .dropdown-menu {
   padding: 0 !important;
@@ -2306,7 +2326,7 @@ textarea {
   position: absolute;
   top:38%;
   z-index: 9;
-  right: -10px;
+  right: 7px;
   font-size: 27px;
   color: #999;
   cursor: pointer;
@@ -2317,8 +2337,8 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: -1px 1px 3px #b3b3b3;
-  color: #000;
+  box-shadow:0px 2px 4px rgba(0, 0, 0, 0.25), 0px 4px 6px rgba(0, 0, 0, 0.25);
+  color: #1C1C1C;
 }
 
 .next-1:hover,
@@ -2328,7 +2348,7 @@ textarea {
 }
 
 .prev-1 {
-  left: -10px;
+  left: 10px;
 }
 
 .header-middle {
@@ -2342,7 +2362,7 @@ textarea {
   /* position: absolute; */
   top: 0px;
   left: 0px;
-  width: 250px
+  width: 50px
 }
 
 .label-categories {
@@ -2362,7 +2382,7 @@ textarea {
   position: absolute;
   top: 38px;
   background-color: #fff;
-  width: 100%;
+  width: 210px;
   z-index: 10;
   opacity: 0;
   visibility: hidden;
@@ -2403,7 +2423,7 @@ textarea {
 .search_box input {
   background: #f0f0e9;
   border: medium none;
-  color: #000;
+  color: #1C1C1C;
   font-size: 12px;
   font-weight: 300;
   height: 35px;
@@ -2667,7 +2687,7 @@ textarea {
   font-size: 16px;
   font-weight: 600;
   margin-right: 10px;
-  color: #000 !important;
+  color: #1C1C1C !important;
 }
 /* size variant */
 /* quantity spinner */
@@ -2683,7 +2703,7 @@ textarea {
 }
 .quantity-spinner button{
   background: #d8d8d8;
-  color: #000;
+  color: #1C1C1C;
   width: 40px;
   height: 25px;
   border: 0px;
@@ -2783,6 +2803,11 @@ textarea {
 .slick-slide{
   margin-top: 0px !important;
 }
+
+/* .form-control{
+  border: 1px solid #e8e8e8 !important;
+  border-radius: 3px !important;
+} */
 
 @media only screen and (min-width: 340px) and (max-width: 768px) {
   .shop-menu{
