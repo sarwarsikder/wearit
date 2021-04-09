@@ -325,18 +325,29 @@ File: scss
       }
     
       .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover {
-        background: #1C1C1C;
+        background: #de2929;
+      }
+    
+      .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover a{
+        color: #fff !important;
+      }
+      .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover a i{
+        color: #fff !important;
       }
     
       .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover ul.collapse {
         display: block;
       }
     
-      .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li a {
-        padding: 12px 15px;
-        color: #fff !important;
+      .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li > a {
+        padding: 7px 15px;
+        color: #000 !important;
       }
       .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li a i{
+        color: #000 !important;
+        margin-right: 5px;
+      }
+      .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover a i{
         color: #fff !important;
       }
       

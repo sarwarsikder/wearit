@@ -1,19 +1,17 @@
 <div class="card">
   <div class="card-body table-responsive">
     <div class="row prod-action">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <a class="btn btn-danger button-custom" href="../../../../assets/Sample.csv" download><i class="fa fa-file"></i>
           Sample File</a>
           <a class="btn btn-danger button-custom" (click)="exportCSV()" style="color: #fff"><i class="fa fa-cloud-download"></i>
             Export Data</a>
-      </div>
-      <div class="col-md-12">
-        <a class="btn btn-danger button-custom btn-fw">
-          <span (click)="openFile()" style="color: #fff"><i class="fa fa-cloud-upload"></i> Import Data</span>
-          <div class="import-button" *ngIf="showImport">
-            <file-upload [options]="importOptions"></file-upload>
-          </div>
-        </a>
+            <a class="btn btn-danger button-custom btn-fw">
+              <span (click)="openFile()" style="color: #fff"><i class="fa fa-cloud-upload"></i> Import Data</span>
+              <div class="import-button" *ngIf="showImport">
+                <file-upload [options]="importOptions"></file-upload>
+              </div>
+            </a>
       </div>
     </div>
     <table class="table table-custom">
