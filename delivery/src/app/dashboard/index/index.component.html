@@ -4,9 +4,9 @@
             <div class="card">
             <div class="card-body">
                 <p class="card-title">Complete Delivery</p>
-                <strong class="card-meta">{{count?.complete}}</strong>
+                <strong class="card-meta">{{count?.completed}}</strong>
                 <hr class="margin-control">
-                <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('complete')">View Now</a>
+                <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('completed')">View Now</a>
             </div>
             </div>
         </div>
@@ -14,19 +14,19 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Shipped delivery</p>
-                    <strong class="card-meta">{{count?.shipped}}</strong>
+                    <strong class="card-meta">{{count?.shipping}}</strong>
                     <hr class="margin-control">
-                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('shipped')">View Now</a>
+                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('shipping')">View Now</a>
                 </div>
                 </div>
         </div>
         <div class="col-sm">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title">Returned</p>
-                    <strong class="card-meta">{{ count?.returned }}</strong>
+                    <p class="card-title">Refunded</p>
+                    <strong class="card-meta">{{ count?.refunded }}</strong>
                     <hr class="margin-control">
-                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('returned')">View Now</a>
+                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('refunded')">View Now</a>
                 </div>
                 </div>
         </div>
@@ -34,9 +34,9 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">Cancelled</p>
-                    <strong class="card-meta">{{count?.cancel}}</strong>
+                    <strong class="card-meta">{{count?.cancelled}}</strong>
                     <hr class="margin-control">
-                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('cancel')">View Now</a>
+                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('cancelled')">View Now</a>
                 </div>
                 </div>
         </div>
@@ -111,10 +111,10 @@
                         <td>{{ getFormattedDateTime(order?.createdAt) }}</td>
                         <td>
                             <button class="td-btn">Invoice</button>
-                            <button *ngIf="status!='complete'" (click)="onStatusSet(order?._id, 'complete')" class="td-btn">Complete</button>
-                            <button *ngIf="status!='shipped'" (click)="onStatusSet(order?._id, 'shipped')" class="td-btn">Ship</button>
-                            <button *ngIf="status!='returned'" (click)="onStatusSet(order?._id, 'returned')" class="td-btn">Return</button>
-                            <button *ngIf="status!='cancel'" (click)="onStatusSet(order?._id, 'cancel')" class="td-btn">Cancel</button>
+                            <button *ngIf="status!='completed'" (click)="onStatusSet(order?._id, 'completed')" class="td-btn">Complete</button>
+                            <button *ngIf="status!='shipping'" (click)="onStatusSet(order?._id, 'shipping')" class="td-btn">Ship</button>
+                            <button *ngIf="status!='refunded'" (click)="onStatusSet(order?._id, 'refunded')" class="td-btn">Refund</button>
+                            <button *ngIf="status!='cancelled'" (click)="onStatusSet(order?._id, 'cancelled')" class="td-btn">Cancel</button>
                         </td>
                     </tr>
                 </tbody>
