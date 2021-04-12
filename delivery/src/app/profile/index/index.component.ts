@@ -20,7 +20,13 @@ export class IndexComponent implements OnInit {
     if (this.Auth.isLoggedin()) {
       this.Auth.me().then((resp) => {
         this.info = resp.data;
-        this.userImage = this.info.avatarUrl;
+        var {avatarUrl} = this.info;
+        if(avatarUrl){
+          if(!avatarUrl.includes('http')){
+            avatarUrl = this.userImage;
+          }
+        }
+        this.userImage = avatarUrl;
       });
     }
    }

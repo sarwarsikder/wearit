@@ -122,5 +122,8 @@
       }
     }
   },
-  "defaultProject": "delivery-panel"
+  "defaultProject": "delivery-panel",
+  "cli": {
+    "analytics": false
+  }
 }

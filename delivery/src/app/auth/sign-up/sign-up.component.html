@@ -8,7 +8,7 @@
                     <form #frm="ngForm" (submit)="submit(frm)">
                         <div class="mb-3">
                             <label for="" class="form-label required">First name<span class="ng-star-required"> *</span></label>
-                            <input type="text" class="form-control" placeholder="{{'Enter your first name'}}" 
+                            <input type="text" class="form-control" placeholder="{{'Enter your first name'}}"
                             #firstName="ngModel" name="firstName" required [(ngModel)]="name.firstName" />
                             <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched || submitted)">
                               <p [hidden]="!firstName.errors.required" class="error" > First name is required </p>
@@ -16,7 +16,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label required">Last name<span class="ng-star-required"> *</span></label>
-                            <input type="text" class="form-control" placeholder="{{'Enter your last name'}}" 
+                            <input type="text" class="form-control" placeholder="{{'Enter your last name'}}"
                             #lastName="ngModel" name="lastName" required [(ngModel)]="name.lastName" />
                             <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched || submitted)">
                                 <p [hidden]="!lastName.errors.required" class="error" > Last name is required </p>
@@ -66,7 +66,7 @@
                             <div *ngIf="rePassword.errors && (rePassword.dirty || rePassword.touched || submitted)">
                                 <p [hidden]="!rePassword.errors.required" class="error" > password is required </p>
                                 <p [hidden]="!rePassword.errors.minlength" class="error">
-                                    Password must be at least 6 characters!
+                                    Password must be at least 8 characters!
                                 </p>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                             <div class="upload-btn-wrapper attach-file">
                                 <div class="custom-dropzone" ngx-dropzone
                                 [multiple]="false"
-                                [accept]="'image/jpeg,image/jpg,image/png,image/gif'" 
+                                [accept]="'image/jpeg,image/jpg,image/png,image/gif'"
                                 (change)="onSelect($event, 'file')">
                                     <ngx-dropzone-label>
                                         <div>
@@ -88,7 +88,7 @@
                                     </ngx-dropzone-image-preview>
                                 </div>
                             </div>
-                            
+
                             <div *ngIf="!account.isFileUploaded && (submitted || firstUploadRemove > 0)">
                                 <p class="error" > NID / Passport is required </p>
                             </div>
@@ -99,7 +99,7 @@
                             <div class="upload-btn-wrapper attach-file">
                                 <div class="custom-dropzone" ngx-dropzone
                                 [multiple]="false"
-                                [accept]="'image/jpeg,image/jpg,image/png,image/gif'" 
+                                [accept]="'image/jpeg,image/jpg,image/png,image/gif'"
                                 (change)="onSelect($event, 'picture')">
                                     <ngx-dropzone-label>
                                         <div>
