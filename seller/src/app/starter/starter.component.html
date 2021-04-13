@@ -3,33 +3,33 @@
     <stat-card [stat]="orderStat" [type]="'order'" *ngIf="orderStat"></stat-card>
     
   </div>
-  <div class="col-md-6 m-b-20">
-    <div style="display: block;" class="card-blank">
+  <div class="col-md-8 m-b-40">
+    <div style="display: block;">
       <canvas baseChart 
         [data]="pieChartData" 
         [labels]="pieChartLabels" 
         [chartType]="pieChartType"
         [options]="pieChartOptions"
+        [colors]="pieChartColors"
         [plugins]="pieChartPlugins"
         [legend]="pieChartLegend">
       </canvas>
     </div>
     
   </div>
-  <div class="col-md-6 m-b-20">
-    <div style="display: block;" class="card-blank">
-      <canvas baseChart 
-        [data]="pieChartData" 
-        [labels]="pieChartLabels" 
-        [chartType]="pieChartType"
-        [options]="pieChartOptions"
-        [plugins]="pieChartPlugins"
-        [legend]="pieChartLegend">
-      </canvas>
-    </div>
-    
-  </div>
-
+<!--  <div class="col-md-6 m-b-40">-->
+<!--    <div style="display: block;">-->
+<!--      <canvas baseChart -->
+<!--        [data]="pieChartData" -->
+<!--        [labels]="pieChartLabels" -->
+<!--        [chartType]="pieChartType"-->
+<!--        [options]="pieChartOptions"-->
+<!--        [plugins]="pieChartPlugins"-->
+<!--        [legend]="pieChartLegend">-->
+<!--      </canvas>-->
+<!--    </div>-->
+<!--    -->
+<!--  </div>-->
   <div class="col-md-12">
     <stat-card [stat]="saleStat" [type]="'sale'" *ngIf="saleStat"></stat-card>
   </div>
