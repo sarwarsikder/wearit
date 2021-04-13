@@ -37,6 +37,7 @@ export class ProductUpdateComponent implements OnInit {
   };
   public fileType: any = '';
   public fileOptions: any = {};
+  public sizeChart: any = '';
 
   constructor(private router: Router, private route: ActivatedRoute, private categoryService: ProductCategoryService,
     private productService: ProductService, private toasty: ToastyService, private location: LocationService) {
@@ -83,6 +84,11 @@ export class ProductUpdateComponent implements OnInit {
           this.fileType = resp.data.digitalFile.type;
         }
         this.images = this.product.images;
+
+        this.sizeChart = this.product.sizeChart ? this.product.sizeChart.thumbUrl : null;
+        this.product.sizeChart = this.product.sizeChart ? this.product.sizeChart._id : null;
+
+        console.log( this.product.sizeChart.thumbUrl );
         if (this.product.dealTo) {
           const date = new Date(this.product.dealTo);
           this.dealDate = {
@@ -153,6 +159,11 @@ export class ProductUpdateComponent implements OnInit {
     }
 
     this.images.push(media);
+  }
+
+  selectSizeImage(media: any) {
+    this.product.sizeChart = media._id;
+    this.sizeChart = media.fileUrl;
   }
 
   setMain(media: any) {
