@@ -32,7 +32,8 @@ export class ProductCreateComponent implements OnInit {
     salePrice: 0,
     vat: 0,
     restrictFreeShipAreas: [],
-    restrictCODAreas: []
+    restrictCODAreas: [],
+    sizeChart: null
   };
   public isSubmitted: any = false;
   public tree: any = [];
@@ -58,6 +59,7 @@ export class ProductCreateComponent implements OnInit {
   };
   public fileType: any = '';
   public fileOptions: any = {};
+  public sizeChartUrl: any = '';
 
   constructor(private router: Router, private categoryService: ProductCategoryService,
     private productService: ProductService, private toasty: ToastyService, private location: LocationService) {
@@ -182,6 +184,11 @@ export class ProductCreateComponent implements OnInit {
     this.location.cities({ state: id }).then((res) => {
       this.cities = res.data;
     });
+  }
+
+  selectSizeImage(media: any) {
+    this.product.sizeChart = media._id;
+    this.sizeChartUrl = media.fileUrl;
   }
 
   addFreeShipAreas() {
