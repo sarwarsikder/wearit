@@ -362,7 +362,7 @@ h1, h2, h3, h4, h5, h6{
     width: 100%;
     height: 120px;
     top: 0px;
-    background: linear-gradient(to right, #e91e63, #ff2842);
+    background: linear-gradient(to right, #EF4444, #DC2626);
 
   }
 }
@@ -439,7 +439,7 @@ background: transparent;
 }
 
 .page-titles .breadcrumb .breadcrumb-item.active {
-  color: #ffb1b1;
+  color: #ffcbcb;
 }
 
 .page-titles .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
@@ -488,7 +488,7 @@ a {
 
 .sidebar-cstm .logo-admin img {
   width: 40px;
-  background: #ff2842;
+  background: #dc2727;
   padding: 8px;
   border-radius: 5px;
 }
@@ -554,7 +554,7 @@ a {
 }
 
 .stat-title h5 a {
-  color: #ed205d;
+  color: #df2a2a;
   font-weight: 600;
 }
 .media-select-btn{
@@ -584,6 +584,25 @@ a {
   margin-bottom: 0px;
   background: transparent;
   font-size: 14px;
-  background: #9c2144;
+  background: #a23939;
   padding: 4px 20px;
+}
+
+.scroll-sidebar .sidebar-nav {
+  padding: 0px !important;
+  width: 100% !important;
+  margin-top: 10px;
+  height: calc(100vh - 75px);
+}
+
+.sidebar-cstm .logo-admin{
+  display: flex;
+  align-items: center;
+  span{
+    color: #000;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 20px;
+    padding-left: 5px;
+  }
 }

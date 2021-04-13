@@ -1,10 +1,23 @@
 <div class="row">
-  <div class="col-md-12 m-b-40">
+  <div class="col-md-12 m-b-20">
     <stat-card [stat]="orderStat" [type]="'order'" *ngIf="orderStat"></stat-card>
     
   </div>
-  <div class="col-md-8 m-b-40">
-    <div style="display: block;">
+  <div class="col-md-6 m-b-20">
+    <div style="display: block;" class="card-blank">
+      <canvas baseChart 
+        [data]="pieChartData" 
+        [labels]="pieChartLabels" 
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [legend]="pieChartLegend">
+      </canvas>
+    </div>
+    
+  </div>
+  <div class="col-md-6 m-b-20">
+    <div style="display: block;" class="card-blank">
       <canvas baseChart 
         [data]="pieChartData" 
         [labels]="pieChartLabels" 
@@ -17,50 +30,41 @@
     </div>
     
   </div>
-<!--  <div class="col-md-6 m-b-40">-->
-<!--    <div style="display: block;">-->
-<!--      <canvas baseChart -->
-<!--        [data]="pieChartData" -->
-<!--        [labels]="pieChartLabels" -->
-<!--        [chartType]="pieChartType"-->
-<!--        [options]="pieChartOptions"-->
-<!--        [plugins]="pieChartPlugins"-->
-<!--        [legend]="pieChartLegend">-->
-<!--      </canvas>-->
-<!--    </div>-->
-<!--    -->
-<!--  </div>-->
   <div class="col-md-12">
-    <div class="row m-t-40 m-b-40">
-      <div class="col-md-3">
-        <stat-card [stat]="productStat" [type]="'product'" *ngIf="productStat"></stat-card>
+    <stat-card [stat]="saleStat" [type]="'sale'" *ngIf="saleStat"></stat-card>
+  </div>
+
+  <div class="col-md-12">
+    <div class="row m-t-40 m-b-20">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <stat-card [stat]="productStat" [type]="'product'" *ngIf="productStat"></stat-card>
+          </div>
+          <div class="col-lg-12 col-md-12">
+            <last-order-card></last-order-card>
+          </div>
+        </div>
       </div>
-      <div class="col-md-9">
-        <stat-card [stat]="saleStat" [type]="'sale'" *ngIf="saleStat"></stat-card>
-      </div>
+      <div class="col-md-6">
+        <div style="display: block;" class="card-blank">
+          <canvas baseChart width="50" height="50"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+    </div>
     </div>
     
   </div>
 
-  <div class="col-md-5">
-    <div class="col-md-12">
-      <div style="display: block;">
-        <canvas baseChart width="50" height="50"
-          [datasets]="lineChartData"
-          [labels]="lineChartLabels"
-          [options]="lineChartOptions"
-          [colors]="lineChartColors"
-          [legend]="lineChartLegend"
-          [chartType]="lineChartType"
-          [plugins]="lineChartPlugins">
-        </canvas>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-7 col-md-7">
-    <last-order-card></last-order-card>
-  </div>
-  <div class="col-lg-12 col-md-12 m-t-40 m-b-40">
+
+  <div class="col-lg-12 col-md-12 m-t-40 m-b-20">
     <div class="card card-blank">
       <div class="card-body">
         <h4 class="card-title">Latest Messages from User</h4>
@@ -82,9 +86,10 @@
     <div class="card card-blank card-info">
       <div class="row">
         <div class="col-lg-6 col-md-6">
-          <div class="card-body little-profile text-center">
-            <div class="pro-img m-t-20"><img alt="user" [src]="shop?.logo?.thumbUrl || '../../assets/images/noImage.jpg'"></div>
-            <h3 class="m-b-0">{{shop.name}}</h3>
+          <div class="card-body little-profile">
+            <div class="pro-img "><img alt="user" [src]="shop?.logo?.thumbUrl || '../../assets/images/noImage.jpg'"></div>
+            <div class="prof-details">
+              <h3 class="m-b-0">{{shop.name}}</h3>
             <h6 class="text-muted"><i class="fa fa-envelope"></i> {{shop.email}}</h6>
             <h6 class="text-muted"><i class="fa fa-phone-square"></i> {{shop.phoneNumber}}</h6>
             <h6 class="text-muted"><i class="fa fa-users"></i> {{shop.headerText}}</h6>
@@ -98,6 +103,7 @@
               <li [hidden]="!shop.socials?.instagram"><a [href]="shop.socials?.instagram"><i class="fa fa-instagram"></i></a></li>
               <li [hidden]="!shop.socials?.flickr"><a [href]="shop.socials?.flickr"><i class="fa fa-flickr"></i></a></li>
             </ul>
+            </div>
           </div>
         </div>
         <div class="col-lg-6 col-md-6">

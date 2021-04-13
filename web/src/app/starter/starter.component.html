@@ -97,7 +97,7 @@
 <div class="padding-main bg-grey">
   <div class="container">
     <div class="title-main">
-      <h4 translate>Best Sale</h4>
+      <h4 translate>Popular Products</h4>
       <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{bestSell: 1}" translate>See All  ></a></div>
     </div>
     <div class="body-box-main">
@@ -108,8 +108,8 @@
 <div class="padding-main" *ngIf="shops.length">
   <div class="container">
     <div class="title-main">
-      <h4><span translate>Shops</span></h4>
-      <div class="list-view-all"><a appLocationHref [url]="'/shops/search'" translate>View all</a></div>
+      <h4><span translate> Popular Shops</span></h4>
+      <div class="list-view-all"><a appLocationHref [url]="'/shops/search'" translate>See all ></a></div>
     </div>
     <ul class="list-product list-shop row">
       <li class="col-sm-3" *ngFor="let shop of shops">

@@ -33,6 +33,8 @@ import { CurrencyPipe } from '../shared/pipes';
 import { MessageModule } from '../message/message.module';
 import { from } from 'rxjs';
 import { UtilsModule } from '../utils/utils.module';
+import { LightboxModule } from 'ngx-lightbox';
+
 
 @NgModule({
   imports: [
@@ -45,7 +47,8 @@ import { UtilsModule } from '../utils/utils.module';
     CartModule,
     UtilsModule,
     SlickCarouselModule,
-    MessageModule
+    MessageModule,
+    LightboxModule
   ],
   declarations: [
     ProductDetailComponent,

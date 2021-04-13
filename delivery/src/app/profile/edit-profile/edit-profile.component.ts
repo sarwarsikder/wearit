@@ -24,7 +24,13 @@ export class EditProfileComponent implements OnInit {
       this.Auth.me().then((resp) => {
         this.info = resp.data;
         this.info.password = '';
-        this.userImage = this.info.avatarUrl;
+        var {avatarUrl} = this.info;
+        if(avatarUrl){
+          if(!avatarUrl.includes('http')){
+            avatarUrl = this.userImage;
+          }
+        }
+        this.userImage = avatarUrl;
         this.userNid = this.info.nid;
         // if(this.info.nid.length > 0)
         // {
@@ -35,13 +41,13 @@ export class EditProfileComponent implements OnInit {
         this.info.photo = null;
       });
 
-      
+
     }
    }
 
 
   ngOnInit(): void {
-    
+
   }
 
   files: File[] = [];
@@ -59,7 +65,7 @@ export class EditProfileComponent implements OnInit {
 
   public submit(frm: any) {
     this.submitted = true;
-    
+
     if (frm.invalid) {
       return;
     }
@@ -87,20 +93,20 @@ export class EditProfileComponent implements OnInit {
         this.router.navigate(['/profile']);
       })
       .catch(err => {
-        
+
       });
   }
 
   // onSelect(event, type) {
 	// 	//console.log(event);
-    
+
 	// 	this.files.push(...event.addedFiles);
   //   this.info.nid = event.addedFiles[0];
 	// }
 
 	// onRemove(event, type) {
 	// 	//console.log(event);
-		
+
 	// 	this.files.splice(this.files.indexOf(event), 1);
   //   this.info.nid = null;
 	// }
@@ -115,7 +121,7 @@ export class EditProfileComponent implements OnInit {
         this.userImage = event.target.result;
       }
     }
-    
+
     this.picture.push(event.target.files[0]);
     this.info.photo = event.target.files[0];
 }
@@ -130,7 +136,7 @@ handleNid(event) {
       this.userNid = event.target.result;
     }
   }
-  
+
   this.files.push(event.target.files[0]);
   this.info.nid = event.target.files[0];
 }

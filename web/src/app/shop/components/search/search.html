@@ -53,7 +53,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="!total" class="badge badge-warning" translate>No shops found</div>
+        <!-- <div *ngIf="!total" class="badge badge-warning" translate>No shops found</div> -->
         <ul class="list-shop row" *ngIf="!isLoading">
           <li class="col-sm-6 col-md-3" *ngFor="let item of shops">
             <shop-card [shop]="item"></shop-card>

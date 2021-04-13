@@ -71,13 +71,13 @@ exports.update = async (req, res, next) => {
         try{
           const file = await s3.uploadFile(formfields.photo.path);
           if(file.url){
-            formfields.photo = file.url;
+            formfields.avatar = file.url;
           }else{
             delete formfields.photo;
           }
         }
         catch(exc){ 
-          // console.log(exc);
+          console.log("Exception occoured while uploading avatar: ",exc);
           let oldPath = formfields.photo.path; 
           let avatarDir =  '/avatar/'+formfields.photo.name;
           let newPath = path.join(process.env.APP_ROOT_DIR, 'public')+avatarDir;
@@ -101,7 +101,7 @@ exports.update = async (req, res, next) => {
           }
         }
         catch(exc){
-          // console.log(exc);
+          console.log("Exception occoured while uploading nid: ",exc);
           let oldPath = formfields.nid.path; 
           let nidDir =  '/files/'+formfields.nid.name;
           let newPath = path.join(process.env.APP_ROOT_DIR, 'public')+nidDir;
