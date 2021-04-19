@@ -1,34 +1,36 @@
-<div class="card">
-  <div class="card-body">
-    <div class="balance-payout">
-      <h4><label for="">Summary balance</label><span>{{balance?.summary?.balance | currency}}</span></h4>
-      <h4><label for="">COD balance </label> <span>{{balance?.cod?.balance | currency}}</span></h4>
-      <h4><label for="">Non-COD balance</label> <span>{{balance?.nonCod?.balance | currency}}</span></h4>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Please select pay out account (*)</label>
-          <select [(ngModel)]="payoutAccountId" class="form-control" required>
-            <option *ngFor="let item of accounts" [value]="item._id">
-              <span *ngIf="item.type === 'bank-account'">Bank - {{item?.bankName}} - {{item?.accountNumber}}</span>
-              <span *ngIf="item.type === 'paypal'">Paypal - {{item?.paypalAccount}}</span>
-            </option>
-          </select>
-        </div>
+<div class="col-md-6" style="padding: 0px;">
+  <div class="card">
+    <div class="card-body">
+      <div class="balance-payout">
+        <h4><label for="">Summary balance</label><span>{{balance?.summary?.balance | currency}}</span></h4>
+        <h4><label for="">COD balance </label> <span>{{balance?.cod?.balance | currency}}</span></h4>
+        <h4><label for="">Non-COD balance</label> <span>{{balance?.nonCod?.balance | currency}}</span></h4>
       </div>
-      <!-- <div class="col-md-6">
-        <div class="form-group">
-          <label>Request to date (UTC)</label>
-          <div class="row">
-            <ngb-datepicker [minDate]="{year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()}" [(ngModel)]="toDate" name="toDate" (select)="selectDateTo()"></ngb-datepicker>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Please select pay out account (*)</label>
+            <select [(ngModel)]="payoutAccountId" class="form-control" required>
+              <option *ngFor="let item of accounts" [value]="item._id">
+                <span *ngIf="item.type === 'bank-account'">Bank - {{item?.bankName}} - {{item?.accountNumber}}</span>
+                <span *ngIf="item.type === 'paypal'">Paypal - {{item?.paypalAccount}}</span>
+              </option>
+            </select>
           </div>
         </div>
-      </div> -->
-    </div>
-    <div class="col col-md-12" style="padding: 0px;">
-      <div class="form-group">
-        <button (click)="submit()" class="btn btn-primary">Submit</button>
+        <!-- <div class="col-md-6">
+          <div class="form-group">
+            <label>Request to date (UTC)</label>
+            <div class="row">
+              <ngb-datepicker [minDate]="{year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()}" [(ngModel)]="toDate" name="toDate" (select)="selectDateTo()"></ngb-datepicker>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="col col-md-12" style="padding: 0px;">
+        <div class="form-group">
+          <button (click)="submit()" class="btn btn-primary">Submit</button>
+        </div>
       </div>
     </div>
-  </div>
+</div>
