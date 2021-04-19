@@ -239,25 +239,25 @@
                 </div>
                 <div class="col-md-2">
                   <label style="width: 100%">&nbsp;</label>
-                  <div class="btn btn-success" (click)="addFreeShipAreas()">Add</div>
+                  <div class="btn btn-danger" (click)="addFreeShipAreas()">Add</div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <hr />
-                  <div class="form-group">
+                  <div class="form-group" >
                     <div class="form-check">
-                      <label class="form-check-label">
+                      <label class="form-check-label" style="font-size: 14px;margin-bottom: 10px;">
                         <input type="checkbox" name="dailyDeal" [(ngModel)]="product.dailyDeal" /> Daily deal
                       </label>
                     </div>
                     <div class="form-check">
-                      <label class="form-check-label">
+                      <label class="form-check-label" style="font-size: 14px;margin-bottom: 10px;">
                         <input type="checkbox" name="freeShip" [(ngModel)]="product.freeShip" /> Free ship for all
                       </label>
                     </div>
                     <div class="form-check">
-                      <label class="form-check-label">
+                      <label class="form-check-label" style="font-size: 14px;margin-bottom: 10px;">
                         <input type="checkbox" name="active" [(ngModel)]="product.isActive" /> Active
                       </label>
                     </div>
@@ -330,7 +330,7 @@
                 <img class="img-thumbnail" [src]="media.thumbUrl" [ngClass]="{selected: media._id === mainImage}" />
 
                 <div class="btn-group" role="group">
-                  <button class="btn btn-secondary" type="button" [ngClass]="{'btn-success' : media._id === mainImage}"
+                  <button class="btn btn-secondary" type="button" [ngClass]="{'btn-danger' : media._id === mainImage}"
                     (click)="setMain(media)">
                     <i class="fa fa-check"></i>
                   </button>
@@ -359,7 +359,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <hr />
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-danger ">Submit</button>
         </div>
       </div>
     </form>
