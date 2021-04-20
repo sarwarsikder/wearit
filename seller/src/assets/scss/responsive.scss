@@ -340,11 +340,13 @@ File: scss
       }
     
       .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li > a {
-        padding: 7px 15px;
-        color: #000 !important;
+        padding: 10px 15px;
+        color: #fff !important;
+        font-weight: 400;
+        border-bottom: 1px solid #ffffff36;
       }
       .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav li a i{
-        color: #000 !important;
+        color: #fff !important;
         margin-right: 5px;
       }
       .horizontal-nav.defaultdark .sidebar-nav ul#sidebarnav>li:hover a i{
@@ -358,4 +360,11 @@ File: scss
     max-width: 1600px;
     margin: 0 auto;
   }
+}
+
+@media (min-width: 1400px){
+.container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+    max-width: 100%;
+    margin: 0 auto;
+}
 }

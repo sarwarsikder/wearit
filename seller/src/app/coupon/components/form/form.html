@@ -1,8 +1,8 @@
-<div class="card">
+<div class="card col-md-6" style="padding: 0px;">
   <div class="card-body">
     <form (submit)="submit(frm)" #frm="ngForm" *ngIf="coupon">
       <div class="row">
-        <div class="col col-md-12">
+        <div class="col">
           <div class="tab-content">
             <div class="row">
               <div class="col col-md-6">
@@ -72,7 +72,7 @@
         <div class="col col-md-12">
           <div class="form-group">
             <hr />
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-danger">Submit</button>
           </div>
         </div>
       </div>
