@@ -24,13 +24,14 @@ export class StarterComponent implements OnInit {
     public pieChartOptions: ChartOptions = {
         responsive: true,
     };
-    // public pieChartLabels: Label[] = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
+    // public pieChartLabels: Label[] = [['Download', 'Sales'], ['Download', 'Sales'],  ['In', 'Store', 'Sales'], 'Mail Sales'];
     // public pieChartLabels: Label[] = ['Completed', 'Shipping', 'Pending', 'Progressing', 'Refunded', 'Cancelled'];
     public pieChartLabels: Label[] = [];
     public pieChartData: SingleDataSet = [];
     public pieChartType: ChartType = 'pie';
     public pieChartLegend = true;
     public pieChartPlugins = [];
+
     public pieChartColors: Array<any> = [];
     public tpieChartColors: Array<any> = [];
 
