@@ -1,6 +1,6 @@
 <div class="card" *ngIf="!isLoading">
   <div class="card-body table-responsive">
-    <table class="table">
+    <table class="table table-custom">
       <thead>
         <tr>
           <th>
@@ -81,9 +81,9 @@
           <td>
             <span>{{item.createdAt | date:'short'}}</span>
           </td>
-          <td>
-            <a [routerLink]="['/coupons/update', item._id ]"><i class="fa fa-pencil"></i></a>
-            <a (click)="remove(item?._id, i)"><i class="fa fa-trash"></i></a>
+          <td class="text-right">
+            <a class="btn btn-sm btn-danger" [routerLink]="['/coupons/update', item._id ]"><i class="fa fa-pencil"></i></a>&nbsp;
+            <a class="btn btn-sm btn-danger" (click)="remove(item?._id, i)" style="color: #fff;"><i class="fa fa-trash"></i></a>
           </td>
         </tr>
       </tbody>

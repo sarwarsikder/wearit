@@ -173,8 +173,8 @@
           <td>
             <span>{{item.createdAt | date:'short'}}</span>
           </td>
-          <td>
-            <a [routerLink]="['/orders/view', item._id ]"><i class="fa fa-pencil"></i></a>
+          <td class="text-right">
+            <a class="btn btn-danger btn-sm" [routerLink]="['/orders/view', item._id ]"><i class="fa fa-pencil"></i></a>
           </td>
         </tr>
       </tbody>

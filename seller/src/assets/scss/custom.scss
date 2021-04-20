@@ -459,6 +459,9 @@ a{
       color: #000;
     }
   }
+  a{
+    color: #000;
+  }
 }
 
 .required-text {
@@ -1194,7 +1197,7 @@ flex: 1 0 20%;
   background-image: linear-gradient( 135deg, #F761A1 10%, #8C1BAB 100%);
 }
 .fa-pencil{
-  color: #000;
+  color: #fff;
   // margin-right: 10px;
 }
 .page-item.active .page-link {
@@ -1376,7 +1379,7 @@ a {
     display: flex;
     flex-direction: row;
     margin: 5px;
-    background: #ffd2d2;
+    background: #fff1f1;
     padding: 10px;
     border-radius: 5px;
     color: #000;
@@ -1413,14 +1416,14 @@ a {
 }
 
 .stat-card > div:first-child{
-  background: #ffbcbc;
+  background: #ffffff;
   border-radius: 50%;
   svg{
     fill: #ec3f3f;
     width: 65px;
     height: 65px;
     path{
-      fill: #ec3f3f;
+      fill: #ff0000;
     }
   }
 }
@@ -1459,8 +1462,8 @@ a {
 
 .flex-column.nav-pills{
   a{
-    background: #ec3f3f;
-    color: #fff;
+    background: #e8e8e8;
+    color: #000;
     margin-right: 5px !important;
     margin-bottom: 7px;
   }
