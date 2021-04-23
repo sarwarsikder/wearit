@@ -5,6 +5,9 @@ import { LocationService } from '../../../shared/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import * as _ from 'lodash';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
+import { BrandService } from '../../services/brand.service';
 
 @Component({
   selector: 'product-create',
@@ -57,11 +60,43 @@ export class ProductCreateComponent implements OnInit {
   public imagesOptions: any = {
     multiple: true
   };
+
+  public brand: any;
+  public searching: any = false;
+  public searchFailed: any = false;
   public fileType: any = '';
   public fileOptions: any = {};
   public sizeChartUrl: any = '';
 
-  constructor(private router: Router, private categoryService: ProductCategoryService,
+  formatter_brand = (x: {
+    name: string,
+    owner: {
+      name: string
+    }
+  }) => {
+
+  }
+
+  search_brand = (text$: Observable<string>) =>
+      text$.pipe(
+          debounceTime(500),
+          distinctUntilChanged(),
+          tap(() => this.searching = true),
+          switchMap(term =>
+              this.brandService.search({ name: term }).then((res) => {
+                if (res) {
+                  this.searchFailed = false;
+                  this.searching = false;
+                  return res.data.items;
+                }
+                this.searchFailed = true;
+                this.searching = false;
+                return of([]);
+              })
+          )
+      )
+
+  constructor(private router: Router, private categoryService: ProductCategoryService, private brandService: BrandService,
     private productService: ProductService, private toasty: ToastyService, private location: LocationService) {
   }
 
@@ -104,6 +139,10 @@ export class ProductCreateComponent implements OnInit {
 
     if (this.product.dailyDeal && this.dealDate) {
       this.product.dealTo = new Date(this.dealDate.year, this.dealDate.month, this.dealDate.day).toUTCString();
+    }
+
+    if (this.brand) {
+      this.product.brandId = this.brand._id;
     }
 
     if (this.product.type === 'digital' && !this.product.digitalFileId) {
