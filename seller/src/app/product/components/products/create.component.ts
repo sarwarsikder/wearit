@@ -68,14 +68,13 @@ export class ProductCreateComponent implements OnInit {
   public fileOptions: any = {};
   public sizeChartUrl: any = '';
 
-  formatter_brand = (x: {
-    name: string,
-    owner: {
-      name: string
-    }
-  }) => {
+  // formatter_brand = (x: {
+  //   name: string
+  // }) => {
+  //
+  // }
 
-  }
+  formatter_brand = (x: { name: string }) => x.name;
 
   search_brand = (text$: Observable<string>) =>
       text$.pipe(
@@ -141,8 +140,8 @@ export class ProductCreateComponent implements OnInit {
       this.product.dealTo = new Date(this.dealDate.year, this.dealDate.month, this.dealDate.day).toUTCString();
     }
 
-    if (this.brand) {
-      this.product.brandId = this.brand._id;
+    if (this.product.brand) {
+      this.product.brandId = this.product.brand._id;
     }
 
     if (this.product.type === 'digital' && !this.product.digitalFileId) {

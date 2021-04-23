@@ -46,16 +46,7 @@ export class ProductUpdateComponent implements OnInit {
 
   public searching: any = false;
   public searchFailed: any = false;
-
-
-  formatter_brand = (x: {
-    name: string,
-    owner: {
-      name: string
-    }
-  }) => {
-
-  }
+  formatter_brand = (x: { name: string }) => x.name;
 
   search_brand = (text$: Observable<string>) =>
       text$.pipe(
@@ -168,8 +159,8 @@ export class ProductUpdateComponent implements OnInit {
       return this.toasty.error('Please select Digital file path!');
     }
 
-    if (this.brand) {
-      this.product.brandId = this.brand._id;
+    if (this.product.brand) {
+      this.product.brandId = this.product.brand._id;
     }
 
     this.product.restrictFreeShipAreas = [];
