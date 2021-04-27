@@ -259,7 +259,8 @@ export class CheckoutComponent implements OnInit {
       streetAddress: this.userInfo.streetAddress,
       city: this.userInfo.city,
       state: this.userInfo.state,
-      country: this.userInfo.country,
+      // country: this.userInfo.country,
+      country: 'BD',
       shippingAddress: this.userInfo.shippingAddress,
       userCurrency: this.userInfo.userCurrency,
       phoneVerifyCode: this.userInfo.phoneVerifyCode,
@@ -326,4 +327,17 @@ export class CheckoutComponent implements OnInit {
         });
     });
   }
+
+  
+  plus() {
+    this.quantity = this.quantity + 1;
+  }
+  minus() {
+    if (this.quantity != 0) {
+      this.quantity = this.quantity - 1;
+    }
+
+  }
+
+  
 }

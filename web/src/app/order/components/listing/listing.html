@@ -56,13 +56,24 @@
                         </a>
                       </span>
                     </th>
-                    <th>
+                    <!-- <th>
                       <a (click)="sortBy('userIP', 'desc')" translate>User IP </a>
                       <span *ngIf="sortOption.sortBy=='userIP'">
                         <a (click)="sortBy('userIP', 'asc')" *ngIf="sortOption.sortType=='desc'">
                           <i class="fa fa-caret-down"></i>
                         </a>
                         <a (click)="sortBy('userIP', 'desc')" *ngIf="sortOption.sortType=='asc'">
+                          <i class="fa fa-caret-up"></i>
+                        </a>
+                      </span>
+                    </th> --> 
+                    <th>
+                      <a (click)="sortBy('status', 'desc')" translate>Status</a>
+                      <span *ngIf="sortOption.sortBy=='status'">
+                        <a (click)="sortBy('status', 'asc')" *ngIf="sortOption.sortType=='desc'">
+                          <i class="fa fa-caret-down"></i>
+                        </a>
+                        <a (click)="sortBy('status', 'desc')" *ngIf="sortOption.sortType=='asc'">
                           <i class="fa fa-caret-up"></i>
                         </a>
                       </span>
@@ -95,8 +106,11 @@
                     <td>
                       <span class="label label-success">{{item?.paymentMethod}}</span>
                     </td>
-                    <td>
+                    <!-- <td>
                       <span>{{item.userIP}}</span>
+                    </td> -->
+                    <td>
+                      <span>{{item.status}}</span>
                     </td>
                     <td>
                       <span>{{item.createdAt | date:'short'}}</span>
