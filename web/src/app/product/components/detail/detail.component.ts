@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { WishListService } from '../../../shared/services/wish-list.service';
 import { Lightbox } from 'ngx-lightbox';
+import {Router} from "@angular/router"
 
 
 @Component({
@@ -55,7 +56,8 @@ export class ProductDetailComponent implements OnDestroy {
   constructor(private translate: TranslateService, private route: ActivatedRoute, private productService: ProductService,
     private authService: AuthService, private seoService: SeoService, private variantService: ProductVariantService,
     public share: ShareButtons, private wishlistService: WishlistService, private toasty: ToastyService,
-    private cartService: CartService, private wishListService: WishListService, private _lightbox: Lightbox) {
+    private cartService: CartService, private wishListService: WishListService, private _lightbox: Lightbox,
+    private router: Router) {
     if (this.authService.isLoggedin()) {
       this.authService.getCurrentUser().then(res => this.userID = res._id);
     }
@@ -231,6 +233,25 @@ export class ProductDetailComponent implements OnDestroy {
       variant: this.isVariant ? this.selectedVariant : null,
       product: this.product
     }, this.quantity);
+  }
+
+  shopNow() {
+
+    if (!this.stockQuantity) {
+      return this.toasty.error(this.translate.instant('This item is out of stock.'));
+    }
+
+    if (this.quantity > this.stockQuantity) {
+      return this.toasty.error(this.translate.instant('Quantity is not valid, please check and try again!'));
+    }
+    this.cartService.add({
+      productId: this.isVariant ? this.selectedVariant.productId : this.product._id,
+      productVariantId: this.isVariant ? this.selectedVariant._id : null,
+      variant: this.isVariant ? this.selectedVariant : null,
+      product: this.product
+    }, this.quantity);
+
+    this.router.navigate(['/cart/checkout'])
   }
 
 

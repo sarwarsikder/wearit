@@ -153,7 +153,7 @@
 
               <hr>
               <div class="button-detail">
-                <button class="btn-add-cart btn-cstm add-cart" (click)="addCart()"
+                <button class="btn-add-cart btn-cstm add-cart" (click)="shopNow()"
                   *ngIf="product.stockQuantity && !isVariant || isVariant && selectedVariant.stockQuantity" translate>
                   <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -265,7 +265,7 @@
           </div>
         </div>
         <div class="title-main">
-          <h4 translate>Related Products</h4>
+          <h4 translate>Similar Products</h4>
         </div>
         <div class="body-box-main related-goods">
           <related-products [options]="{productId: product?._id}"></related-products>

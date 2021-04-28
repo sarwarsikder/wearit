@@ -15,7 +15,7 @@ export class DialCodeComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
   ngOnInit() {
-    this.dialCodes = this.authService.getDialCodes();
+    this.dialCodes = this.authService.getBDDialCodes();
   }
   selectDial(dial: any) {
     this.dialCode = dial.dialCode;
