@@ -176,7 +176,13 @@ exports.create = async (data, user) => {
 
     order.totalProducts = totalProducts;
     order.totalPrice = totalPrice;
+    order.userNote = data.userNote;
     order.userTotalPrice = totalPrice * currencyExchangeRate;
+
+    console.log("Order Data Test")
+    console.log(data)
+    console.log("Order Data Test")
+
     await order.save();
     await Promise.all(orderDetails.map(orderDetail => orderDetail.save()));
 

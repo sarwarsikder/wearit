@@ -27,7 +27,8 @@ export class CheckoutComponent implements OnInit {
   public totalShippingPrice: any = 0;
   public totalDiscountPrice: any = 0;
   public userInfo: any = {
-    country: ''
+    country: '',
+    userNote: ''
   };
   public phoneNumber: any;
   public isSubmitted: any = false;
@@ -73,10 +74,7 @@ export class CheckoutComponent implements OnInit {
         this.userInfo.paymentMethod = 'stripe';
       }
     }
-    console.log("TEST ONE");
-    console.log(this.paymentGateway);
-    console.log("TEST TWO");
-
+    
     this.userInfo.userCurrency = config ? config.customerCurrency : 'USD';
   }
 
@@ -164,7 +162,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   submit(frm: any) {
-    console.log("TEST");
     this.isSubmitted = true;
     if (frm.invalid) {
       return this.toasty.error(this.translate.instant('Please submit valid form'));
@@ -259,6 +256,7 @@ export class CheckoutComponent implements OnInit {
       streetAddress: this.userInfo.streetAddress,
       city: this.userInfo.city,
       state: this.userInfo.state,
+      userNote: this.userInfo.userNote,
       // country: this.userInfo.country,
       country: 'BD',
       shippingAddress: this.userInfo.shippingAddress,
@@ -327,17 +325,5 @@ export class CheckoutComponent implements OnInit {
         });
     });
   }
-
-  
-  plus() {
-    this.quantity = this.quantity + 1;
-  }
-  minus() {
-    if (this.quantity != 0) {
-      this.quantity = this.quantity - 1;
-    }
-
-  }
-
   
 }
