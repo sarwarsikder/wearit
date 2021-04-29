@@ -52,8 +52,6 @@
                     </span><br>
                     
                   </td> -->
-                  
-                  <td class="cart_total"> {{item.calculatedData?.total | priceCurrency:item.userCurrency}} </td>
                   <td class="cart_quantity">
                     
                     <input type="number" name="number{{i}}" class="form-control" [(ngModel)]="item.quantity" (change)="updateTotalPrice()"
@@ -63,6 +61,9 @@
                       <span translate>Please remove this product from the cart!</span>
                     </p>
                   </td>
+                  
+                  <td class="cart_total"> {{item.calculatedData?.total | priceCurrency:item.userCurrency}} </td>
+                  
                   <!-- <td>
                     <textarea rows="2" [(ngModel)]="item.userNote" name="userNote" class="form-control min-width-100"
                       placeholder="{{'Enter your note' | translate}}" style="width:150px"></textarea>
@@ -152,11 +153,11 @@
 
           </div>
           <div class="form-group fill-txt-color">
-            <p>
+            <!-- <p>
               <strong translate>Tax</strong>
               <span class="badge badge-success" *ngIf="!totalTaxPrice" translate>Free</span>
               <span *ngIf="totalTaxPrice && cart">{{totalTaxPrice | priceCurrency: cart.userCurrency}}</span>
-            </p>
+            </p> -->
             <p>
               <strong translate>Shipping</strong>
               <span class="badge badge-success" *ngIf="!totalShippingPrice" translate>Free</span>

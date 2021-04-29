@@ -13,6 +13,6 @@ export class PriceCurrencyPipe implements PipeTransform {
   transform(price: any, currency = 'USD'): any {
     const symbol = this.service.getSymbol(currency);
     const p = (parseFloat(price) || 0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-    return `${p} ${symbol}`;
+    return `${symbol} ${p}`;
   }
 }
