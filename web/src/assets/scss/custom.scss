@@ -885,42 +885,42 @@ a.color-dark {
   }
 }
 
-.socials-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+// .socials-box {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   width: 100%;
 
-  .social-login {
-    // width: 0%;
-    float: left;
-    padding: 10px 15px;
-  }
+//   .social-login {
+//     // width: 0%;
+//     float: left;
+//     padding: 10px 15px;
+//   }
 
-  .facebook {
-    button {
-      background: #5e80fd;
-      border: 1px solid #5e80fd;
-    }
+//   .facebook {
+//     button {
+//       background: #5e80fd;
+//       border: 1px solid #5e80fd;
+//     }
 
-    &:hover button {
-      background: #fe980f;
-      border: 1px solid #fe980f;
-    }
-  }
+//     &:hover button {
+//       background: #fe980f;
+//       border: 1px solid #fe980f;
+//     }
+//   }
 
-  .google {
-    button {
-      background: #da1919;
-      border: 1px solid #da1919;
-    }
+//   .google {
+//     button {
+//       background: #da1919;
+//       border: 1px solid #da1919;
+//     }
 
-    &:hover button {
-      background: #fe980f;
-      border: 1px solid #fe980f;
-    }
-  }
-}
+//     &:hover button {
+//       background: #fe980f;
+//       border: 1px solid #fe980f;
+//     }
+//   }
+// }
 
 .table.border-1 {
   border: 1px solid #eee;
@@ -2508,3 +2508,66 @@ input{
     }
   }
 }
+
+// sumon work
+
+.custom-socials-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .facebook{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color:#DC2626;
+    width:42px;
+    height:40px;
+    border-radius:2px;
+    margin:10px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .facebook:hover{
+    background-color:#1C1C1C;
+  }
+
+  .google{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color:#DC2626;
+    width:42px;
+    height:40px;
+    border-radius:2px;
+    margin:10px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .google:hover{
+    background-color:#1C1C1C;
+  }
+
+  .instagram{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color:#DC2626;
+    width:42px;
+    height:40px;
+    border-radius:2px;
+    margin:10px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .instagram:hover{
+    background-color:#1C1C1C;
+  }
+
+}
+
+// sumon work
