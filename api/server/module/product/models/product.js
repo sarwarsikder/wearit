@@ -132,6 +132,9 @@ const schema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Media'
   },
+  videoUrl: {
+    type: String
+  },
   shopVerified: {
     type: Boolean,
     default: false

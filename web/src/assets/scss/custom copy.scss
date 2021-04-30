@@ -2934,6 +2934,19 @@ span {
   }
 }
 
+.btn-cstm-contact{
+  height: 40px;
+  padding: 0px 20px;
+  &.contact{
+    background: #000;
+    color: #fafafa;
+    svg{
+      margin-right: 5px;
+      margin-top: -3px;
+    }
+  }
+}
+
 .btn-send-block{
   background: #E8E8E8;
   color: #000;
