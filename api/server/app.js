@@ -35,6 +35,8 @@ kernel.loadModule(require('./module/payment'));
 kernel.loadModule(require('./module/message'));
 kernel.loadModule(require('./module/coupons'));
 kernel.loadModule(require('./module/payout'));
+kernel.loadModule(require('./module/question'));
+
 
 // NOTE - compose at last
 kernel.compose();
