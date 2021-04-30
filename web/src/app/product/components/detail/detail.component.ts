@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Input} from '@angular/core';
+import { Component, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService, CartService, AuthService } from '../../../shared/services';
 import { ProductService, ProductVariantService } from '../../services';
@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { WishListService } from '../../../shared/services/wish-list.service';
 import { Lightbox } from 'ngx-lightbox';
+import {Router} from "@angular/router"
 
 
 @Component({
@@ -50,21 +51,23 @@ export class ProductDetailComponent implements OnDestroy {
 
   public sizeChartImageUrl: any = '';
   private _album: any = [];
+  private inputnumber: any = 0;
 
-  constructor(private translate: TranslateService, private route: ActivatedRoute,private productService: ProductService,
+  constructor(private translate: TranslateService, private route: ActivatedRoute, private productService: ProductService,
     private authService: AuthService, private seoService: SeoService, private variantService: ProductVariantService,
     public share: ShareButtons, private wishlistService: WishlistService, private toasty: ToastyService,
-    private cartService: CartService,private wishListService: WishListService, private _lightbox: Lightbox) {
+    private cartService: CartService, private wishListService: WishListService, private _lightbox: Lightbox,
+    private router: Router) {
     if (this.authService.isLoggedin()) {
       this.authService.getCurrentUser().then(res => this.userID = res._id);
     }
 
     this.product = route.snapshot.data.product;
 
-    
 
-    if(this.product.shop){
-      this.shop=this.product.shop;
+
+    if (this.product.shop) {
+      this.shop = this.product.shop;
       this.shop.id = this.product.shop._id;
       this.query();
     }
@@ -85,19 +88,19 @@ export class ProductDetailComponent implements OnDestroy {
         this.activeSlide = this.product.mainImage;
       }
 
-      if(this.product.sizeChart){
-         this.sizeChartImageUrl = this.product.sizeChart.mediumUrl;
+      if (this.product.sizeChart) {
+        this.sizeChartImageUrl = this.product.sizeChart.mediumUrl;
 
-         const src = this.sizeChartImageUrl;
-         const caption = "";
-         const thumb = this.sizeChartImageUrl;
-         const album = {
-           src: src,
-           caption: caption,
-           thumb: thumb
-         };
- 
-         this._album.push(album);
+        const src = this.sizeChartImageUrl;
+        const caption = "";
+        const thumb = this.sizeChartImageUrl;
+        const album = {
+          src: src,
+          caption: caption,
+          thumb: thumb
+        };
+
+        this._album.push(album);
       }
 
       this.setPrice(this.product);
@@ -114,23 +117,33 @@ export class ProductDetailComponent implements OnDestroy {
 
     this.productService.search(params).then((res) => {
       let index = res.data.items.indexOf(this.product);
-      res.data.items.splice(index,1);
+      res.data.items.splice(index, 1);
       this.products = this.shuffle(res.data.items);
       this.totalProducts = res.data.count;
       const n = 2;
-      this.products =  this.products
-      .map(x => ({ x, r: Math.random() }))
-      .sort((a, b) => a.r - b.r)
-      .map(a => a.x)
-      .slice(0, n);
+      this.products = this.products
+        .map(x => ({ x, r: Math.random() }))
+        .sort((a, b) => a.r - b.r)
+        .map(a => a.x)
+        .slice(0, n);
 
-      })
+    })
       .catch(() => this.toasty.error(this.translate.instant('Something went wrong, please try again!')));
   }
-  
+
 
   shuffle(array) {
     return array.sort(() => Math.random() - 0.5);
+  }
+
+  plus() {
+    this.quantity = this.quantity + 1;
+  }
+  minus() {
+    if (this.quantity != 0) {
+      this.quantity = this.quantity - 1;
+    }
+
   }
 
   updateSeo() {
@@ -217,9 +230,28 @@ export class ProductDetailComponent implements OnDestroy {
     this.cartService.add({
       productId: this.isVariant ? this.selectedVariant.productId : this.product._id,
       productVariantId: this.isVariant ? this.selectedVariant._id : null,
-      variant : this.isVariant ? this.selectedVariant : null,
+      variant: this.isVariant ? this.selectedVariant : null,
       product: this.product
     }, this.quantity);
+  }
+
+  shopNow() {
+
+    if (!this.stockQuantity) {
+      return this.toasty.error(this.translate.instant('This item is out of stock.'));
+    }
+
+    if (this.quantity > this.stockQuantity) {
+      return this.toasty.error(this.translate.instant('Quantity is not valid, please check and try again!'));
+    }
+    this.cartService.addShop({
+      productId: this.isVariant ? this.selectedVariant.productId : this.product._id,
+      productVariantId: this.isVariant ? this.selectedVariant._id : null,
+      variant: this.isVariant ? this.selectedVariant : null,
+      product: this.product
+    }, this.quantity);
+
+    this.router.navigate(['/cart/checkout'])
   }
 
 
@@ -233,7 +265,7 @@ export class ProductDetailComponent implements OnDestroy {
     console.log(this._album);
     this._lightbox.open(this._album, index);
   }
- 
+
   close(): void {
     // close lightbox programmatically
     this._lightbox.close();

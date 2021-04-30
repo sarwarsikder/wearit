@@ -1,6 +1,6 @@
 <app-banner></app-banner>
 <div class="padding-main">
-  <div class="container">
+  <div class="container-fluid">
     <div class="body-box-main">
       <offers ></offers>
     </div>
@@ -25,7 +25,7 @@
   </div>
 </div>
 <div class="box-main-1" *ngIf="category">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-4"  *ngIf="category[0]">
         <div class="card-box">
@@ -95,7 +95,7 @@
   </div>
 </div> -->
 <div class="padding-main bg-grey">
-  <div class="container">
+  <div class="container-fluid">
     <div class="title-main">
       <h4 translate>Popular Products</h4>
       <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{bestSell: 1}" translate>See All  ></a></div>
@@ -106,7 +106,7 @@
   </div>
 </div>
 <div class="padding-main" *ngIf="shops.length">
-  <div class="container">
+  <div class="container-fluid">
     <div class="title-main">
       <h4><span translate> Popular Shops</span></h4>
       <div class="list-view-all"><a appLocationHref [url]="'/shops/search'" translate>See all ></a></div>
@@ -124,7 +124,7 @@
   </div>
 </div>
 <div class="padding-main bg-grey">
-  <div class="container">
+  <div class="container-fluid">
     <div class="title-main">
       <h4 translate>Product you may like</h4>
       <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{hot: 1}" translate>See All  ></a></div>

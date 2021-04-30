@@ -106,6 +106,9 @@ const schema = new Schema({
   userIP: {
     type: String
   },
+  userNote: {
+    type: String
+  },
   createdAt: {
     type: Date
   },
