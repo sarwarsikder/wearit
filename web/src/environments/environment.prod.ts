@@ -6,7 +6,7 @@ export const environment = {
   apiBaseUrl: 'https://wearit-shop-api.herokuapp.com/v1',
   apiProxy: '',
   sellerUrl: 'https://wearit-seller.herokuapp.com/',
-  googleClientId: '917195124089-hp1m6g5fbotlkbipmrejrapt9uh0lhhl.apps.googleusercontent.com',
+  googleClientId: '137828882328-lk6q22rskp5v3a30q1701h5mk9hhvrhq.apps.googleusercontent.com',
   facebookAppId: '113570925979091',
   paymentRedirectSuccessUrl: 'https://wearit-web.herokuapp.com/cart/checkout/success',
   paymentRedirectCancelUrl: 'https://wearit-web.herokuapp.com/cart/checkout/cancel',

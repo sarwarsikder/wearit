@@ -17,6 +17,7 @@ const validateSchema = Joi.object().keys({
   sizeChart: Joi.string().allow([null, '']).optional(),
   logo: Joi.string().allow([null, '']).optional(),
   images: Joi.array().items(Joi.string()).optional(),
+  videoUrl: Joi.string().allow([null, '']).optional(),
   specifications: Joi.array().items(Joi.object({
     key: Joi.string(),
     value: Joi.any()
@@ -96,6 +97,10 @@ exports.create = async (req, res, next) => {
         'featured', 'hot', 'bestSell'
       ]);
     }
+
+    console.log("Test")
+    console.log(req)
+    console.log("Test")
 
     Helper.Utils.markNullEmpty(validate.value, ['categoryId']);
     const product = new DB.Product(Object.assign(validate.value, {

@@ -20,6 +20,7 @@ export class ProductCreateComponent implements OnInit {
     description: '',
     specifications: [],
     mainImage: null,
+    videoUrl: null,
     metaSeo: {
       keywords: '',
       description: ''
@@ -146,6 +147,9 @@ export class ProductCreateComponent implements OnInit {
   }
 
   submit(frm: any) {
+    console.log("TEST")
+    console.log(this.product)
+    console.log("TEST")
     if (frm.invalid) {
       return this.toasty.error('Invalid form, please check again.');
     }
