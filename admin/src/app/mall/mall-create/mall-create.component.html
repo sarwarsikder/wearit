@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="card-body" *ngIf="mall">
+      <form (submit)="submit(frm)" #frm>
+        <div class="row">
+          <div class="col col-md-6">
+            <div class="form-group">
+              <label>Title (*)</label>
+              <input type="text" name="mallTitle" class="form-control" placeholder="Enter Title" [(ngModel)]="mall.title" required />
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <div class="form-group">
+              <label>Description</label>
+              <textarea class="form-control" name="malldesc" placeholder="Enter some text" [(ngModel)]="mall.description"></textarea>
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <div class="form-group">
+              <label>Image (*)
+                <media-select (onSelect)="selectMedia($event)"></media-select>
+              </label>
+              <div *ngIf="media">
+                <img [src]="media.thumbUrl" class="img-thumbnail" />
+              </div>
+            </div>
+          </div>
+          <div class="col col-md-6">
+            <div class="form-group">
+              <label>Address</label>
+              <input type="text" name="address" class="form-control" placeholder="Enter address of the mall" [(ngModel)]="mall.address" required />
+            </div>
+          </div>
+          <!-- <div class="col col-md-6">
+            <div class="form-group">
+              <label>Position</label>
+              <select name="Position" [(ngModel)]="mall.position" class="form-control">
+                <option value="default">Default</option>
+              </select>
+            </div>
+          </div> -->
+          <div class="col col-md-12">
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
