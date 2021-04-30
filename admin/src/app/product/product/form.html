@@ -11,6 +11,8 @@
               <a class="nav-link" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false" [ngClass]="{active: tab == 'spec'}" (click)="changeTab('spec')">Specifications</a>
   
               <a class="nav-link" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" [ngClass]="{active: tab == 'images'}" (click)="changeTab('images')">Images</a>
+              
+              <a class="nav-link" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" [ngClass]="{active: tab == 'videos'}" (click)="changeTab('videos')">Video</a>
   
               <a class="nav-link" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false" [ngClass]="{active: tab == 'variants'}" (click)="changeTab('variants')">Variants</a>
               
@@ -384,6 +386,12 @@
           </div>
         </div>
 
+        <div class="tab-pane fade show active" role="tabpanel" [ngClass]="{'show active': tab === 'videos'}">
+          <label>Product video url (Youtube).</label>
+          <div class="row">
+            <div class="col-sm-9"><input type="text" name="video_url" [(ngModel)]="product.videoUrl" class="form-control" /></div>
+          </div>
+        </div>
   
               <div class="tab-pane fade show active" role="tabpanel" [ngClass]="{'show active': tab === 'variants'}">
                 <product-variants [product]="product" *ngIf="product?._id"></product-variants>
