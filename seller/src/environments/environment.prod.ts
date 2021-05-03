@@ -4,7 +4,7 @@ export const environment = {
   build: 23,
   apiBaseUrl: 'https://wearit-shop-api.herokuapp.com/v1',
   apiProxy: '',
-  googleClientId: '946463315327-0l0svqeglss2jrulg19t9hs5slem6247.apps.googleusercontent.com',
+  googleClientId: '137828882328-lk6q22rskp5v3a30q1701h5mk9hhvrhq.apps.googleusercontent.com',
   facebookAppId: '113570925979091',
   stripeKey: 'pk_test_Z3rf3HSfsokHl4lLFTBxhZrZ',
   paymentRedirectSuccessUrl: 'https://wearit-web.herokuapp.com/payments/success',

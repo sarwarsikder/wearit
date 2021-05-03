@@ -244,7 +244,7 @@ export class ProductDetailComponent implements OnDestroy {
     if (this.quantity > this.stockQuantity) {
       return this.toasty.error(this.translate.instant('Quantity is not valid, please check and try again!'));
     }
-    this.cartService.add({
+    this.cartService.addShop({
       productId: this.isVariant ? this.selectedVariant.productId : this.product._id,
       productVariantId: this.isVariant ? this.selectedVariant._id : null,
       variant: this.isVariant ? this.selectedVariant : null,

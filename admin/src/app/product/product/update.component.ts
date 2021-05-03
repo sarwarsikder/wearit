@@ -22,6 +22,7 @@ export class ProductUpdateComponent implements OnInit {
     value: ''
   };
   public imageUrl: any = '';
+  public videoUrl: any = '';
   public images: any = [];
   public mainImage: any = '';
   public tab = 'info';

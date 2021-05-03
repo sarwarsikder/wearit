@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,700i');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vidaloka&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -258,10 +259,15 @@ img {
   margin-left: 15px;
   a {
     display: inline-block;
-    color: #7F1D1D !important;
+    color: #fff!important;
+    background: #dc2626 !important;
     text-decoration: none !important;
-    margin-top: 0px;
+    margin-top: 3px;
     font-weight: 500;
+    padding: 0px 8px 0px 14px;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-radius: 33px;
   }
 }
 .padding-main {
@@ -270,12 +276,12 @@ img {
 }
 
 .box-product {
-  background: #F9FAFB;
+  // background: #F9FAFB;
   border-radius: 0px;
   margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 10px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   padding-top: 0px !important;
   padding: 0px !important;
   .img-prod{
@@ -290,7 +296,7 @@ img {
   }
 
   .text-product {
-    padding: 5px !important;
+    padding: 10px ​5px 5px 5px !important;
   }
 
   .name-product {
@@ -302,13 +308,14 @@ img {
     text-overflow: ellipsis;
     
     .price-product > span{
-      font-size: 16px;
+      font-size: 18px;
     }
 
     a {
+      font-family: 'Vidaloka', serif;
       color: #1C1C1C;
       font-weight: 400;
-      font-size: 13px;
+      font-size: 16px;
     }
   }
 
