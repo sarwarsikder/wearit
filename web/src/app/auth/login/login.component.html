@@ -2,22 +2,25 @@
   <div class="col-md-4">
     <div class="card sign-box">
       <article class="card-body login-form">
-        <form class="form-horizontal form-material" (submit)="login(frm)" #frm="ngForm">
+
+        
+
+        <form class="form-horizontal form-material" #frm="ngForm">
           <h3 class="box-title m-b-20" translate>Sign In</h3>
-          <div class="form-group ">
+          <!-- <div class="form-group ">
             <div class="col-xs-12">
-              <input class="form-control" placeholder="{{'Email' | translate}}" required type="text" autocomplete="off" name="email" #email="ngModel" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="credentials.email" />
+              <input class="form-control" placeholder="{{'Email' | translate}}" required type="text" autocomplete="off" name="email" #email="ngModel" pattern="/^(\d{11}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/" [(ngModel)]="credentials.email" />
               <div *ngIf="email.errors && (email.dirty || email.touched || submitted)">
                 <p [hidden]="!email.errors.required" class="error" translate>
                   Email is required
                 </p>
                 <p [hidden]="!email.errors.pattern" class="error" translate>
-                  Email is required
+                  Email / Phone is required
                 </p>
               </div>
             </div>
-          </div>
-          <div class="form-group ">
+          </div> -->
+          <!-- <div class="form-group ">
             <div class="col-xs-12">
               <input class="form-control" placeholder="{{'Password' | translate}}" required type="password" autocomplete="off" name="pw" [minlength]="6" #password="ngModel" [(ngModel)]="credentials.password" />
               <div *ngIf="password.errors && (password.dirty || password.touched || submitted)">
@@ -29,9 +32,27 @@
                 </p>
               </div>
             </div>
+          </div> -->
+
+          <div [formGroup]="login_form">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Email / Phone :</label>
+                <input  class="form-control" type="text" class="form-control" placeholder="Email/Phone" formControlName="email">
+                <span class="text-danger" *ngIf="login_form.controls['email'].hasError('required') && (login_form.controls['email'].dirty || login_form.controls['email'].touched)">This field is required</span>
+                <span class="text-danger" *ngIf="login_form.controls['email'].hasError('pattern') && (login_form.controls['email'].dirty || login_form.controls['email'].touched)">Please enter valid email address or phone number</span>
+              </div>
+              <div class="form-group">
+                <label>Password :</label>
+                <input  class="form-control" type="password" class="form-control" placeholder="Password" formControlName="password">
+                <span class="text-danger" *ngIf="login_form.controls['password'].hasError('required') && (login_form.controls['password'].dirty || login_form.controls['password'].touched)">This field is required</span>
+                <span class="text-danger" *ngIf="login_form.controls['password'].hasError('minlength') && (login_form.controls['password'].dirty || login_form.controls['password'].touched)">Please enter minimum 6 character</span>
+              </div>
+            </div>
           </div>
+
           <div class="form-group text-center m-t-20">
-            <button class="btn btn-default btn-sign-log" type="submit" translate>Log In</button>
+            <button class="btn btn-default btn-sign-log" (click)="login()" type="submit" translate>Log In</button>
           </div>
           <div class="form-group row">
             <div class="col-md-12 font-14">
