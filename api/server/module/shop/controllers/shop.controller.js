@@ -88,6 +88,15 @@ exports.search = async (req, res, next) => {
     if (req.query.q) {
       query.name = { $regex: req.query.q.trim(), $options: 'i' };
     }
+    if (req.query.area) {
+      query.area = { $regex: req.query.area.trim(), $options: 'i' };
+    }
+    if (req.query.mallId) {
+      query.mallId = {
+        $in: req.query.mallId
+      };
+      //query.mallId = { $regex: req.query.mallId.trim(), $options: 'i' };
+    }
     const sort = Object.assign(defaultSort ? {} : { featured: -1 }, Helper.App.populateDBSort(req.query));
     const lat = parseFloat(req.query.latitude);
     const lng = parseFloat(req.query.longitude);

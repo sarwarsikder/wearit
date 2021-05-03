@@ -155,6 +155,8 @@
                 (inputChanged)='onChangeSearch($event)'
                 (inputFocused)='onFocused($event)'
                 historyIdentifier="malls"
+                name="mall"
+                [(ngModel)]= mallFilterSelected.mall
                 [itemTemplate]="itemTemplate"
                 [notFoundTemplate]="notFoundTemplate">
               </ng-autocomplete>
@@ -167,8 +169,8 @@
                 <div [innerHTML]="notFound"></div>
               </ng-template>
             </div>
+        </div>
       </div>
-    </div>
       </div>
       <div class="col-md-12">
         <div class="form-group">

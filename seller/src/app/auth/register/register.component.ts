@@ -10,9 +10,9 @@ export class RegisterComponent implements OnInit {
 
   keyword = 'title';
   public malls = [];
-;
+
     selectEvent(item) {
-    this.shop.mallId = item._id;
+    //this.shop.mallId = item._id;
   }
 
   onChangeSearch(search: string) {
@@ -28,6 +28,9 @@ export class RegisterComponent implements OnInit {
   public shop: any = {
     email: '',
     password: ''
+  };
+  public mallFilterSelected: any = {
+    mall: ''
   };
   public confirmPassword: string = '';
 
@@ -67,6 +70,15 @@ export class RegisterComponent implements OnInit {
   }
 
   public submit(form: any) {
+    if(this.mallFilterSelected.mall != '')
+    {
+      this.shop.mallId = this.mallFilterSelected.mall._id;
+    }
+    else
+    {
+      delete this.shop["mallId"];
+    }
+    console.log(this.shop);
     this.submitted = true;
     if (form.invalid) {
       return;
