@@ -14,7 +14,7 @@
       <div class="col-md-2" style="padding-right: 0px;">
         <div class="filter-search filter-shop mar-bot-10" style="padding: 7px;">
           <h5>Filter Shop</h5>
-          <div class="pull-left form-inline">
+          <div class="form-nearby">
             <div class="input-group mb-3">
               <input type="text" class="form-control" name="shopSearch" placeholder="{{'Search shop' | translate}}" (keypress)="keyPress($event)" [(ngModel)]="searchFields.q" />
               <div class="input-group-append">
@@ -24,7 +24,7 @@
               </div>
             </div>
           </div>
-          <div class="pull-right form-nearby">
+          <div class="form-nearby">
             <div class="input-group mb-3">
               <input type="number" class="form-control" name="distance" placeholder="{{'Find shops nearby in kilometers' | translate}}" min="0.1" [(ngModel)]="map.distance" />
               <div class="input-group-append">

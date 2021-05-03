@@ -40,6 +40,10 @@
     position: absolute;
     padding: 20px 15px 20px 20px;
     z-index: 1;
+    border: 1px solid #ef4444;
+    border-right: 1px solid #ef4444 !important;
+    background: #ef4444;
+    right: 0px !important;
 
     &:before {
       content: '\25b6';
@@ -61,6 +65,10 @@
     position: absolute;
     padding: 20px 15px 20px 20px;
     z-index: 1;
+    border: 1px solid #ef4444;
+    border-right: 1px solid #ef4444 !important;
+    background: #ef4444;
+    left: 0px !important;
 
     &:before {
       content: '\25C0';
@@ -2144,15 +2152,15 @@ input.stv-radio-tab {
     display: none;
   }
   .next-1{
-    top: 33%
+    top: 43%
   }
   .prev-1{
-    top: 33%
+    top: 43%
   }
   .img-prod{
-    height: 138px;
+    height: 275px;
     img{
-      height: 138px !important;
+      height: 275px !important;
     }
   }
 }
@@ -2594,6 +2602,7 @@ input{
   .img-prod{
     padding: 7px !important;
     height:295px !important;
+    background: #f6f5f8;
     img{
       height: 295px !important;
       object-fit: cover !important;
@@ -2778,7 +2787,7 @@ input{
 
 
 .questionsanswers {
-  border-bottom: .5px solid #454545;
+  border-bottom: .5px solid #e4e4e4;
   padding-bottom: 5px;
   margin-bottom: 30px;
 }
