@@ -2735,3 +2735,82 @@ input{
 }
 
 // sumon work date: 29-04-21
+
+// sumon work date: 03-05-21
+
+.qa-section{
+  margin-bottom:25px;
+
+}
+
+.qa-section .headline{
+  background-color:#E8E8E8;
+  color: #1C1C1C;
+  padding:10px 10px 20px 10px;
+}
+
+.qa-section .headline h5{
+  font-weight: 600;
+  line-height:1.6em;
+}
+
+.qa-section .qa-box{
+  background-color:#fafafa !important;
+  padding:20px 10px 10px 10px;
+}
+
+.qa-section .qa-box .question{
+  display: flex;
+}
+
+.qa-section .qa-box .answer{
+  display: flex;
+}
+
+
+.questionsanswers {
+  border-bottom: .5px solid #454545;
+  padding-bottom: 5px;
+  margin-bottom: 30px;
+}
+
+.qa-section .qa-box .question p :hover{
+  color:#DC2626 !important;
+  text-decoration:underline;
+}
+
+.qa-section .qa-box .answer p{
+  color:#1C1C1C !important;
+  font-weight: 600;
+}
+
+.qa-section .qa-box label{
+  width:100px;
+}
+
+.qa-section .qa-box a{
+  text-decoration:dashed;
+}
+
+.question label{
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.answer label{
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.showmore{
+  margin-top:10px;
+}
+
+.showmore a{
+  text-decoration: underline;
+  color:#1C1C1C;
+  font-weight: 500;
+}
+
+
+// sumon work date: 03-05-21
