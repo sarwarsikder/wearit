@@ -43,6 +43,7 @@ exports.connectFacebook = async (req, res, next) => {
 
 exports.connectGoogle = async (req, res, next) => {
   try {
+      console.log(req);
     const schema = Joi.object().keys({
       accessToken: Joi.string().required()
     });
@@ -75,6 +76,7 @@ exports.connectGoogle = async (req, res, next) => {
     };
     return next();
   } catch (e) {
+    console.log(e);
     return next(e);
   }
 };
