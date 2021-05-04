@@ -3,7 +3,7 @@ const _ = require('lodash');
 const Joi = require('joi');
 
 const validateSchema = Joi.object().keys({
-  name: Joi.string().required(),
+  title: Joi.string().required(),
   description: Joi.string().allow([null, '']).optional(),
   address: Joi.number().allow([null, '']).optional(),
   mediaId: Joi.string().allow([null, '']).optional(),
@@ -84,8 +84,7 @@ exports.list = async (req, res, next) => {
 
   try {
     const query = Helper.App.populateDbQuery(req.query, {
-      text: ['title'],
-      text: ['address']
+      text: ['title', 'address'],
     });
 
     const sort = Helper.App.populateDBSort(req.query);
@@ -111,8 +110,7 @@ exports.random = async (req, res, next) => {
   try {
     const take = parseInt(req.query.take, 10) || 10;
     const query = Helper.App.populateDbQuery(req.query, {
-      text: ['title'],
-      text: ['address']
+      text: ['title', 'address'],
     });
     const data = await DB.Mall.aggregate([
       { $match: query },
