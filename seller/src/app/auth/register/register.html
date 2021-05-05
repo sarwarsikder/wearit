@@ -64,7 +64,7 @@
           <div class="form-group">
             <div class="input-group">
               <dial-code (selectCode)="selectDial($event)"></dial-code>
-              <input class="form-control" placeholder="Phone number" required type="text" pattern="[0-9]{9,10}"
+              <input class="form-control" placeholder="Phone number" required type="text" pattern="[0-9]{9,11}"
                 autocomplete="off" name="Phone" [(ngModel)]="shop.phoneNumber" #phoneNumber="ngModel" />
               <div *ngIf="phoneNumber.errors && (phoneNumber.dirty ||
                 phoneNumber.touched || submitted)">
@@ -72,8 +72,7 @@
                   Phone number is required
                 </p>
                 <p [hidden]="!phoneNumber.errors.pattern" class="error">
-                  Phone number must have 9-10 numbers
-                </p>
+                  Phone must be 11 characters                </p>
               </div>
             </div>
           </div>
@@ -133,6 +132,44 @@
             </div>
           </div>
         </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input class="form-control" placeholder="Area" required type="text" autocomplete="off" name="area"
+              [(ngModel)]="shop.area" #city="ngModel" />
+            <!-- <div *ngIf="city.errors && (city.dirty || city.touched || submitted)">
+              <p [hidden]="!city.errors.required" class="error">
+                City is required
+              </p>
+            </div> -->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="ng-autocomplete">
+              <ng-autocomplete
+                [data]="malls"
+                [searchKeyword]="keyword"
+                placeholder="Enter the Mall Name"
+                (selected)='selectEvent($event)'
+                (inputChanged)='onChangeSearch($event)'
+                (inputFocused)='onFocused($event)'
+                historyIdentifier="malls"
+                name="mall"
+                [(ngModel)]= mallFilterSelected.mall
+                [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate">
+              </ng-autocomplete>
+            
+              <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.title"></a>
+              </ng-template>
+            
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+            </div>
+        </div>
+      </div>
       </div>
       <div class="col-md-12">
         <div class="form-group">

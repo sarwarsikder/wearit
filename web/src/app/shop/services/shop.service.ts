@@ -13,6 +13,13 @@ export class ShopService {
     return this.restangular.one('shops', alias).get().toPromise();
   }
 
+  getMall() {
+    return this.restangular.one('malls').get().toPromise()
+      .then((resp) => {
+        return resp.data;
+      });
+  }
+
   search(params: any): Promise<any> {
     return this.restangular.one('shops', 'search').get(params).toPromise();
   }
