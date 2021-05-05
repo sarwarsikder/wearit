@@ -5,7 +5,7 @@ const Joi = require('joi');
 const validateSchema = Joi.object().keys({
   title: Joi.string().required(),
   description: Joi.string().allow([null, '']).optional(),
-  address: Joi.number().allow([null, '']).optional(),
+  address: Joi.string().allow([null, '']).optional(),
   mediaId: Joi.string().allow([null, '']).optional(),
 });
 
