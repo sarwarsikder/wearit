@@ -7,10 +7,30 @@ import { ToastyService } from 'ng2-toasty';
   templateUrl: 'register.html'
 })
 export class RegisterComponent implements OnInit {
+
+  keyword = 'title';
+  public malls = [];
+
+    selectEvent(item) {
+    //this.shop.mallId = item._id;
+  }
+
+  onChangeSearch(search: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e) {
+    
+  }
+
   public dialCode: any = '';
   public shop: any = {
     email: '',
     password: ''
+  };
+  public mallFilterSelected: any = {
+    mall: ''
   };
   public confirmPassword: string = '';
 
@@ -30,6 +50,13 @@ export class RegisterComponent implements OnInit {
         this.currentUser = user;
       });
     }
+
+    this.auth.getMall().then(mall => {
+      
+      this.malls = mall.items;
+      
+    });
+
     // TODO - check if user login here or the link have access token
     // then we can query user and hide password field and show user info
     this.issueDocumentOptions = {
@@ -43,6 +70,15 @@ export class RegisterComponent implements OnInit {
   }
 
   public submit(form: any) {
+    if(this.mallFilterSelected.mall != '')
+    {
+      this.shop.mallId = this.mallFilterSelected.mall._id;
+    }
+    else
+    {
+      delete this.shop["mallId"];
+    }
+    console.log(this.shop);
     this.submitted = true;
     if (form.invalid) {
       return;
