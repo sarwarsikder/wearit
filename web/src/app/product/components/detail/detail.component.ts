@@ -10,13 +10,16 @@ import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { WishListService } from '../../../shared/services/wish-list.service';
 import { Lightbox } from 'ngx-lightbox';
-import {Router} from "@angular/router"
-
+import { Router } from "@angular/router"
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DomSanitizer, SafeResourceUrl,SafeUrl } from '@angular/platform-browser';
 
 @Component({
   templateUrl: './detail.html'
 })
 export class ProductDetailComponent implements OnDestroy {
+  public safeSrc : SafeUrl;
+  public iframeURL: any = '';
   public product: any;
   public discount: any = 100;
   public discountVal: any = 100;
@@ -51,13 +54,14 @@ export class ProductDetailComponent implements OnDestroy {
 
   public sizeChartImageUrl: any = '';
   private _album: any = [];
+  private _album_video: any = [];
   private inputnumber: any = 0;
 
   constructor(private translate: TranslateService, private route: ActivatedRoute, private productService: ProductService,
     private authService: AuthService, private seoService: SeoService, private variantService: ProductVariantService,
     public share: ShareButtons, private wishlistService: WishlistService, private toasty: ToastyService,
     private cartService: CartService, private wishListService: WishListService, private _lightbox: Lightbox,
-    private router: Router) {
+    private router: Router, private modalService: NgbModal, private sanitizer: DomSanitizer) {
     if (this.authService.isLoggedin()) {
       this.authService.getCurrentUser().then(res => this.userID = res._id);
     }
@@ -88,6 +92,7 @@ export class ProductDetailComponent implements OnDestroy {
         this.activeSlide = this.product.mainImage;
       }
 
+    
       if (this.product.sizeChart) {
         this.sizeChartImageUrl = this.product.sizeChart.mediumUrl;
 
@@ -107,6 +112,43 @@ export class ProductDetailComponent implements OnDestroy {
       this.getVariants();
     });
   }
+
+  ngOnInit() {
+
+    if (this.product.videoUrl) {
+      var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
+      var url = this.product.videoUrl;
+      var matches = regex.exec(url);
+      var videoId = matches[1];
+      console.log(videoId)
+      var videos = {
+        fileUrl: this.product.videoUrl,
+        thumbUrl: "http://img.youtube.com/vi/" + videoId + "/default.jpg",
+        type: "video",
+      };
+
+
+      this.product.images.push(videos);
+      var _id = this.getYoutubeId(this.product.videoUrl);
+      console.log(_id);
+      var _url = 'https://www.youtube.com/embed/'+ _id;
+      this.iframeURL = _url;
+      console.log(this.iframeURL);
+
+    }
+
+  }
+
+  getYoutubeId(url) {
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+
+    if (match && match[2].length == 11) {
+        return match[2];
+    } else {
+        return 'error';
+    }
+}
 
   query() {
     const params = Object.assign({
@@ -181,7 +223,9 @@ export class ProductDetailComponent implements OnDestroy {
 
   changeSlide(index: number) {
     this.slidePosition = index;
-    this.activeSlide = this.product.images[index];
+    if (this.product.images[index].type == 'photo') {
+      this.activeSlide = this.product.images[index];
+    }
   }
 
   selectVariant(val: any, index: any) {
@@ -266,8 +310,13 @@ export class ProductDetailComponent implements OnDestroy {
     this._lightbox.open(this._album, index);
   }
 
+
   close(): void {
     // close lightbox programmatically
     this._lightbox.close();
+  }
+
+  open_video(content): void {
+    this.modalService.open(content, { size: 'lg' });
   }
 }

@@ -34,6 +34,7 @@ import { MessageModule } from '../message/message.module';
 import { from } from 'rxjs';
 import { UtilsModule } from '../utils/utils.module';
 import { LightboxModule } from 'ngx-lightbox';
+import {SafePipeModule} from 'safe-pipe'
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { LightboxModule } from 'ngx-lightbox';
     UtilsModule,
     SlickCarouselModule,
     MessageModule,
-    LightboxModule
+    LightboxModule,
+    SafePipeModule
   ],
   declarations: [
     ProductDetailComponent,

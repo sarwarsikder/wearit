@@ -59,6 +59,7 @@
     "pusher-js": "^4.3.1",
     "rxjs": "^6.2.0",
     "rxjs-compat": "^6.0.0-rc.0",
+    "safe-pipe": "^1.0.3",
     "slick-carousel": "^1.8.1",
     "zone.js": "^0.10.3"
   },
