@@ -98,7 +98,7 @@ export class AuthService {
 
   
   getBDDialCodes() {
-    return [ { "name": "Bangladesh", "dialCode": "+880", "code": "BD" }];
+    return [ { "name": "Bangladesh", "dialCode": "+88", "code": "BD" }];
   }
-  
+
 }
