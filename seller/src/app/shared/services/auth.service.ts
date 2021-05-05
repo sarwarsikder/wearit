@@ -24,6 +24,13 @@ export class AuthService {
       });
   }
 
+  getMall() {
+    return this.restangular.one('malls').get().toPromise()
+      .then((resp) => {
+        return resp.data;
+      });
+  }
+
   register(credentials: any): Promise<any> {
     return this.restangular.all('shops/register').post(credentials).toPromise();
   }
