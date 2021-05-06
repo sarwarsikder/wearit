@@ -30,6 +30,13 @@ const routes: Routes = [{
 }
 ];
 
+const fbLoginOptions = {
+  scope: 'pages_messaging,pages_messaging_subscriptions,email,pages_show_list,manage_pages',
+  return_scopes: true,
+  enable_profile_selector: true,
+  version: 'v2.11'
+}
+
 @NgModule({
   imports: [
     CommonModule,
@@ -70,11 +77,7 @@ const routes: Routes = [{
           id: FacebookLoginProvider.PROVIDER_ID,
           provider: new FacebookLoginProvider(
             window.appConfig.facebookAppId,
-            {
-              scope: 'email',
-              return_scopes: true,
-              enable_profile_selector: true
-            } as any
+            fbLoginOptions
           ),
         }
       ],
