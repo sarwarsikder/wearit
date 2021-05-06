@@ -36,6 +36,7 @@
     "@swimlane/ngx-datatable": "^13.0.0",
     "angular-calendar": "^0.22.1",
     "angular-froala-wysiwyg": "^2.8.4",
+    "angular-ng-autocomplete": "^2.0.5",
     "angularx-social-login": "^3.2.1",
     "bootstrap": "^4.1.1",
     "chart.js": "^2.7.1",
