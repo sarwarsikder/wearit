@@ -5,7 +5,8 @@ exports.getProfile = async (accessToken) => {
     return new Promise((resolve, reject) => request(
       {
         method: 'GET',
-        uri: `https://www.googleapis.com/plus/v1/people/me?access_token=${accessToken}`
+        // uri: `https://www.googleapis.com/plus/v1/people/me?access_token=${accessToken}`
+        uri: `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`
       },
       (err, response, body) => {
         if (err) {

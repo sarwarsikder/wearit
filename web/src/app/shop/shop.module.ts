@@ -19,6 +19,7 @@ import { ShopService, ReportService } from './services';
 import { LocationService, GoogleAnalyticsService } from '../shared/services';
 
 import { ShopBannerPipe, ShopLogoPipe } from '../shared/pipes';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ShopBannerPipe, ShopLogoPipe } from '../shared/pipes';
     NgbModule,
     ProductModule,
     UtilsModule,
-    MessageModule
+    MessageModule,
+    AutocompleteLibModule,
   ],
   declarations: [
     ShopDetailComponent, ReportComponent, SearchComponent, ShopCardComponent,

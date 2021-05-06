@@ -9,3 +9,18 @@
 a {
   cursor: pointer;
 }
+
+.ng-autocomplete {
+  width:100% !important;
+  color: #67757c;
+  max-width: 600px;
+  display: table;
+  margin: 0 auto;
+}
+.autocomplete-container .input-container input {
+  background: #efefef !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+}
+
+

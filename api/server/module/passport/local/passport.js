@@ -7,8 +7,17 @@ exports.setup = () => {
     passwordField: 'password' // this is the virtual field on the model
   }, async (email, password, done) => {
     try {
-      const user = await DB.User.findOne({ email: email.toLowerCase(), isActive: true });
+
+      let user = await DB.User.findOne({ email: email.toLowerCase(), isActive: true });
+
       if (!user) {
+         user = await DB.User.findOne({ phoneNumber: email.toLowerCase(), phoneVerified: true });
+        console.log("Data" + user);
+      }
+      
+
+      if (!user) {
+        console.log("No Data");
         return done(null, false, PopulateResponse.error({
           message: 'This email is not registered.'
         }, 'ERR_USER_NOT_FOUND', 400, 400));

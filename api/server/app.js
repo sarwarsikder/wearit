@@ -22,6 +22,7 @@ kernel.loadModule(require('./module/media'));
 kernel.loadModule(require('./module/i18n'));
 kernel.loadModule(require('./module/newsletter'));
 kernel.loadModule(require('./module/banner'));
+kernel.loadModule(require('./module/mall'));
 kernel.loadModule(require('./module/offer'));
 kernel.loadModule(require('./module/shop'));
 kernel.loadModule(require('./module/product'));
@@ -35,6 +36,8 @@ kernel.loadModule(require('./module/payment'));
 kernel.loadModule(require('./module/message'));
 kernel.loadModule(require('./module/coupons'));
 kernel.loadModule(require('./module/payout'));
+kernel.loadModule(require('./module/question'));
+
 
 // NOTE - compose at last
 kernel.compose();
