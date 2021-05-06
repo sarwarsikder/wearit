@@ -3013,6 +3013,9 @@ input{
   height: 35px;
   border-radius: 0px;
 }
+.ng-autocomplete{
+  max-width: 100% !important;
+}
 
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.79);
