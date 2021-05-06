@@ -172,7 +172,7 @@ a#scrollUp i {
 
 .shop-menu ul li {
   display: inline-block;
-  padding-left: 15px;
+  padding-left: 0px;
   padding-right: 15px;
 }
 
@@ -200,9 +200,9 @@ a#scrollUp i {
 }
 
 .shop-menu ul li a:hover {
-  color: #ffffff;
+  /* color: #ffffff;
   background: #1C1C1C;
-  border: 1px solid #1C1C1C;
+  border: 1px solid #1C1C1C; */
 }
 
 .header-bottom {
@@ -2354,7 +2354,7 @@ textarea {
 .header-middle {
   display: table;
   width: 100%;
-  padding: 5px 0px 20px 0px;
+  padding: 15px 0px 0px 0px;
   background: #DC2626;
 }
 
@@ -2366,7 +2366,7 @@ textarea {
 }
 
 .label-categories {
-  padding: 8px 20px;
+  padding: 8px 0px;
   color: #fff;
   background-color: #EF4444;
   font-size: 14px;
@@ -2380,7 +2380,7 @@ textarea {
 
 .show-categories {
   position: absolute;
-  top: 38px;
+  top: 45px;
   background-color: #fff;
   width: 210px;
   z-index: 10;
@@ -2406,8 +2406,8 @@ textarea {
 .show-categories li a {
   color: #333;
   padding: 15px;
-  border-bottom: 1px solid #444 !important;
-  background: #1d1d1d;
+  border-bottom: 1px solid #e8e8e8 !important;
+  background: #ffffff;
   display: block;
 }
 
