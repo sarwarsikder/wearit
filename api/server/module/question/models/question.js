@@ -16,6 +16,11 @@ const schema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+  productId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Product',
+    index: true
+  },
   createdAt: {
     type: Date
   },

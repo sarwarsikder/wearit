@@ -11,7 +11,7 @@
   "dependencies": {
     "@types/memwatch-next": "^0.3.2",
     "agenda": "^4.0.1",
-    "apidoc": "^0.17.1",
+    "apidoc": "^0.27.1",
     "async": "^2.6.1",
     "aws-sdk": "^2.355.0",
     "base64-img": "^1.0.4",
@@ -29,6 +29,7 @@
     "express-session": "^1.15.6",
     "fluent-ffmpeg": "^2.1.2",
     "formidable": "^1.2.2",
+    "fs-extra": "^8.0.1",
     "gm": "^1.23.1",
     "html-pdf": "^2.2.0",
     "ip": "^1.1.5",

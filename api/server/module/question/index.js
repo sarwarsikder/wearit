@@ -6,14 +6,11 @@ exports.model = {
 
 exports.router = (router) => {
   /**
-   * @apiDefine bannerRequest
-   * @apiParam {String}   title       banner title
-   * @apiParam {String}   [content]
-   * @apiParam {Number}   [ordering]
-   * @apiParam {String}   [position] Position of the banner. like `home`, `category`...
-   * @apiParam {String}   [mediaId] File Id
-   * @apiParam {String}   [link] Link of the banner
-   * @apiParam {Object}   [meta] any custom meta data
+   * @apiDefine questionRequest
+   * @apiParam {String}   question       question
+   * @apiParam {String}   [answer]
+   * @apiParam {Object}   [userId]
+   * @apiParam {String}   [replayedBy]
    */
 
   /**
@@ -85,7 +82,7 @@ exports.router = (router) => {
    * @apiGroup Question
    * @apiVersion 1.0.0
    * @api {get} /v1/questions/random?:title&:locatione&take  Get random question
-   * @apiDescription Get random banners
+   * @apiDescription Get random question
    * @apiParam {String}   [title] title of question
    * @apiParam {Number}   [take] num of item should return
    * @apiPermission all

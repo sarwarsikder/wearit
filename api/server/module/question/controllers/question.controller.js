@@ -12,7 +12,7 @@ exports.findOne = async (req, res, next) => {
   try {
     const question = await DB.Question.findOne({ _id: req.params.id })
       .populate('media');
-    if (!banner) {
+    if (!question) {
       return res.status(404).send(PopulateResponse.notFound());
     }
 
