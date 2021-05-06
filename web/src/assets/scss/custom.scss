@@ -251,11 +251,13 @@
 }
 
 .avatar-circle {
-  width: 30px;
+  width: 26px;
   border-radius: 100%;
-  margin-right: 10px;
+  margin-right: 0px;
 }
-
+.dropdown-toggle::after{
+  display: none;
+}
 .head-top-main {
   display: inline-block;
   margin-bottom: 25px;
@@ -670,8 +672,9 @@ a.color-dark {
     color: #fff;
     background: none;
     border: none;
-    padding: 3px;
-    margin-top: 4px;
+    padding: 0px;
+    margin-top: 0px;
+    font-size: 12px;
   }
 }
 
@@ -1485,10 +1488,12 @@ span {
     background: #fff;
   }
   .search-top-btn{
-    background: #1C1C1C;
+    background: #a02727;
     border: 0px;
-    width: 60px;
+    width: 43px;
     height: 36px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 }
 
@@ -1953,10 +1958,15 @@ span {
 }
 
 .pre-selector{
-  width: 150px;
-  background: white;
-  height: 35px;
-  border-right: 1px solid #c5c5c5;
+  width: 100px;
+  height: 36px;
+  border-right: 0px;
+  background: #a02727;
+  color: #fff;
+  padding-right: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-size: 12px;
 }
 
 .stv-radio-tabs-wrapper {
@@ -1980,7 +1990,7 @@ input.stv-radio-tab {
 		float: left;
 		border: 1px solid #fff;
 		border-bottom: 0;
-		background-color: #1C1C1C;
+		background-color: #ef9344;
 		margin-right: -1px;
 		padding: 0.9em 2em;
 		position: relative;
@@ -1997,8 +2007,9 @@ input.stv-radio-tab {
     //    inset 0 5px 0 -1px #13CD4A;
 		background-color: #e8e8e8;
      border-color: #fff;
-     color: #1C1C1C;
-		z-index: 1;
+     color: #ffffff;
+     z-index: 1;
+     background: #6b6b6b !important;
 	}
 }
 
@@ -2363,7 +2374,9 @@ input{
 }
 
 .has-drop-new{
-  position: relative !important
+  position: relative !important;
+  margin-left: 0px;
+  padding-left: 0px !important;
 }
 
 .drop-new-menu{
@@ -2832,3 +2845,199 @@ input{
 
 
 // sumon work date: 03-05-21
+
+// Tanveer work fom menu
+/* adds some margin below the link sets  */
+.navbar .dropdown-menu div[class*="col"] {
+  margin-bottom:1rem;
+}
+
+.navbar .dropdown-menu {
+ border:none;
+//  background-color:#0060c8!important;
+}
+
+/* breakpoint and up - mega dropdown styles */
+@media screen and (min-width: 992px) {
+ 
+ /* remove the padding from the navbar so the dropdown hover state is not broken */
+.navbar {
+ padding-top:0px;
+ padding-bottom:0px;
+}
+
+/* remove the padding from the nav-item and add some margin to give some breathing room on hovers */
+.navbar .nav-item {
+ padding:.2rem .2rem;
+ margin:0 .25rem;
+}
+
+.nav-sub-drop .nav-item{
+  padding: 1px 0px;
+  .item-name{
+    color: #000 !important;
+    font-size: 16px;
+  }
+  a{
+    color: #000 !important;
+    &:hover{
+      font-family: inherit !important;
+    }
+    &:focus{
+      font-family: inherit !important;
+    }
+  }
+}
+
+/* makes the dropdown full width  */
+.navbar .dropdown {position:static;}
+
+.navbar .dropdown-menu {
+  width: 100%;
+  left: 0px;
+  right: 0;
+  top: 45px;
+  border: 0px !important;
+  border-radius: 0px !important;
+  z-index: 9999;
+}
+ 
+ /* shows the dropdown menu on hover */
+.navbar .dropdown:hover .dropdown-menu, .navbar .dropdown .dropdown-menu:hover {
+ display:block!important;
+}
+ 
+ .navbar .dropdown-menu {
+   border: 1px solid rgba(0,0,0,.15);
+   background-color: #fff;
+   padding: 20px !important;
+   background: #efefef !important;
+   box-shadow: 0px 35px 40px 2px #00000038;
+ }
+
+}
+
+.flex-flow{
+  display: flex;
+  flex-direction: row;
+  .search_box{
+    flex-grow: 1;
+    margin-top: 0px;
+    padding-left: 20px;
+    padding-right: 80px;
+  }
+  .shop-menu{
+    margin-top: -5px;
+    .navbar-nav{
+      margin-top: 0px;
+    }
+     li a{
+      border: 0px;
+      padding: 0px;
+      text-transform: capitalize;
+      font-size: 12px;
+    }
+  }
+  
+}
+
+.icon-flex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 0px !important;
+  margin-top: 0px !important;
+  color: #fff !important;
+  font-size: 12px;
+  
+  svg{
+    height: 23px;
+    display: block;
+  }
+}
+.wishlist-flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff !important;
+  font-size: 12px;
+  svg{
+    display: block;
+    height: 23px;
+  }
+}
+.wish-top{
+  margin-top: 1px;
+}
+.cart-top{
+  margin-top: 1px !important;
+  a{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #fff !important;
+    margin-top: 0px !important;
+    font-size: 12px;
+    svg{
+      height: 22px;
+    }
+  }
+}
+
+.logo-mango{
+  margin-right: 20px;
+}
+
+.shake {
+  animation: shake-animation 3.72s ease infinite;
+  transform-origin: 50% 50%;
+}
+.element {
+}
+@keyframes shake-animation {
+   0% { transform:translate(0,0) }
+  1.78571% { transform:translate(5px,0) }
+  3.57143% { transform:translate(0,0) }
+  5.35714% { transform:translate(5px,0) }
+  7.14286% { transform:translate(0,0) }
+  8.92857% { transform:translate(5px,0) }
+  10.71429% { transform:translate(0,0) }
+  100% { transform:translate(0,0) }
+}
+
+.ng-autocomplete .autocomplete-container .input-container input {
+  height: 35px;
+  border-radius: 0px;
+}
+.ng-autocomplete{
+  max-width: 100% !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.79);
+}
+.navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+  color: rgb(255, 255, 255);
+}
+
+.user-dropdown{
+  margin-top: 0px;
+}
+.user-toggle-flex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-for.product-slider .slick-arrow.slick-next:before{
+  color: #fff;
+}
+.slider-for.product-slider .slick-arrow.slick-prev:before{
+  color: #fff;
+}
+// Tanveer work fom menu

@@ -8,6 +8,7 @@ import { CategoryService } from '../../product/services';
   templateUrl: './search-bar.html'
 })
 export class SearchbarComponent implements OnInit {
+  public appConfig: any = {};
   public tree: any = [];
   public isMenuCollapsed:any = '';
 

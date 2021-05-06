@@ -50,7 +50,84 @@
   </div>
 </div> -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 nav-cstm-red">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background: #ef4444!important;">
+  <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+    &#9776;
+  </button>
+
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item has-drop-new">
+        <div class="category-top">
+          <div  class="label-categories"><i class="fa fa-bars"></i>
+            <!-- <span translate>Categories</span> -->
+            </div>
+            <div class="show-categories">
+              <ul>
+                <li *ngFor="let item of tree">
+                  <a class="dropdown-item" [routerLink]="['/products/search']" 
+                  [queryParams]="{categoryId: 'item._id'}" (click)="search(item)">{{item.name}}</a>
+                </li>
+              </ul>
+            </div>
+  
+        </div>
+      </li>
+      <li *ngFor="let item of tree" class="nav-item dropdown"> <a class="nav-link" [routerLink]="['/products/search']" 
+        [queryParams]="{categoryId: 'item._id'}" (click)="search(item)"><span>{{item.name}}</span></a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf="item?.children?.length">
+          <div class="container-fluid">
+            <div class="row" style="width: 100%;">
+              <div class="col col-md-4">
+                <strong class="text-uppercase" >{{item.name}}</strong>
+                <ul class="nav flex-column nav-sub-drop">
+                <li class="nav-item" *ngFor="let child of item.children">
+                  <a class="nav-link" [routerLink]="['/products/search']" 
+                  [queryParams]="{categoryId:child.id}">{{child.name}}</a>
+                </li>
+              </ul>
+              </div>
+              <!-- /.col-md-4  -->
+              <div class="col col-md-4">
+                <ul class="nav flex-column nav-sub-drop">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link item</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link item</a>
+                </li>
+              </ul>
+              </div>
+              <!-- /.col-md-4  -->
+              <div class="col col-md-4">
+                <a href="">
+                  <img src="https://dummyimage.com/600x400/ccc/000&text=CATEGORY+IMAGE" alt="" class="img-fluid">
+                </a>
+              </div>
+              <!-- /.col-md-4  -->
+            </div>
+          </div>
+          <!--  /.container  -->
+
+
+        </div>
+      </li>
+      <li class="nav-item"><a class="nav-link" appLocationHref (click)="isMenuCollapsed = true" [url]="'/products/search'" [ngClass]="{'active': router.url === '/products/search'}"
+        translate>Products</a></li>
+      <li class="nav-item"><a class="nav-link" appLocationHref (click)="isMenuCollapsed = true" [url]="'/shops/search'" [ngClass]="{'active': router.url === '/shops/search'}"
+        translate>Shops</a></li>
+      
+    </ul>
+    
+  </div>
+
+
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 nav-cstm-red" style="display: none;">
 
 <div class="container-fluid">
     <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->

@@ -37,6 +37,9 @@ import { ConfigResolver } from './shared/resolver';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { WishlistService } from './profile/services';
 
+import { StickyNavModule } from 'ng2-sticky-nav';
+
+
 
 
 // Function for setting the default restangular configuration
@@ -108,7 +111,8 @@ export function createTranslateLoader(http: HttpClient) {
     NgxStripeModule.forRoot(),
     UtilsModule,
     MediaModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    StickyNavModule
   ],
   providers: [{
     provide: LocationStrategy,
