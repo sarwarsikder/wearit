@@ -2923,11 +2923,12 @@ input{
   .search_box{
     flex-grow: 1;
     margin-top: 0px;
-    padding-left: 20px;
+    padding-left: 25px;
     padding-right: 80px;
   }
   .shop-menu{
     margin-top: -5px;
+    margin-right: 10px;
     .navbar-nav{
       margin-top: 0px;
     }
@@ -2990,6 +2991,7 @@ input{
 
 .logo-mango{
   margin-right: 20px;
+  margin-left: 10px;
 }
 
 .shake {
@@ -3039,5 +3041,18 @@ input{
 }
 .slider-for.product-slider .slick-arrow.slick-prev:before{
   color: #fff;
+}
+
+.social-logon{
+  display: flex;
+  align-items: center ;
+  justify-content: center ;
+  .social-login{
+    margin: 5px;
+  }
+}
+
+.login-box{
+  // border: 1px solid #111;
 }
 // Tanveer work fom menu
