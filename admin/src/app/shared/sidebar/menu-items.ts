@@ -72,6 +72,11 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
+    path: '/faqs', title: 'FAQs', icon: 'fa fa-comment', class: 'has-arrow', label: '', labelClass: '', extralink: false, submenu: [
+      { path: '/faqs', title: 'Questions', icon: 'fa fa-comment', class: '', label: '', labelClass: '', extralink: false, submenu: [] }
+    ]
+  },
+  {
     path: '/requestPayout', title: 'Requests Payout', icon: 'fa fa-dollar', class: 'has-arrow', label: '', labelClass: '', extralink: false, submenu: [
       { path: '/requestPayout', title: 'Listing', icon: 'fa fa-dollar', class: '', label: '', labelClass: '', extralink: false, submenu: [] }
     ]

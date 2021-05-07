@@ -38,7 +38,8 @@ export const Approutes: Routes = [
       { path: 'newsletter', loadChildren: './newsletter/newsletter.module#NewsletterModule' },
       { path: 'requestPayout', loadChildren: './request-payout/request-payout.module#RequestPayoutModule' },
       { path: 'packages', loadChildren: './package/package.module#PackageModule' },
-      { path: 'report', loadChildren: './report-sale/report.module#ReportModule' }
+      { path: 'report', loadChildren: './report-sale/report.module#ReportModule' },
+      { path: 'faqs', loadChildren: './faq/faq.module#FaqModule' },
     ]
   },
   {

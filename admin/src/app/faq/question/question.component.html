@@ -1,0 +1,56 @@
+<div class="card">
+    <div class="card-block table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    <a>Question</a>
+                </th>
+                <th>
+                    <a>Question By</a>
+                </th>
+                <th>
+                    <a>Answer</a>
+                </th>
+                <th>
+                    <a>Visibility</a>
+                </th>
+                <th>
+                    <a>Created at</a>
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let question of questions, let i = index">
+                <td>{{question['question']}}</td>
+                <td>A user</td>
+                <td>{{question['answer']}}</td>
+                <td>
+                    {{question['visibility']}}
+                </td>
+                <td>
+                    <span>{{question['createdAt'] | date}}</span>
+                </td>
+                <td>
+                    <a [routerLink]="['/faqs/answer', question.id ]">
+                        <i class="fa fa-pencil"></i>
+                    </a>&nbsp;
+                    <a (click)="remove(question, i)">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <ngb-pagination [collectionSize]="take" [(page)]="page" [maxSize]="5" (pageChange)="loadQuestion()"></ngb-pagination>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

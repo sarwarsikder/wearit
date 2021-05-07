@@ -1,0 +1,25 @@
+<div class="qa-section">
+    <div class="headline">
+        <h5>Consumer Questions & Answers</h5>
+        <input (input)="doDelayedSearch(600)" [(ngModel)]="searchStr" class="form-control" type="text" placeholder="Have a question? Search for answer">
+    </div>
+    <div class="qa-box">
+        <div *ngFor="let question of questions" class="questionsanswers">
+            <div class="question">
+                <label>Question:</label>
+                <p>{{question['question']}}</p>
+            </div>
+            <div *ngIf="question['answer']" class="answer">
+                <label>Answer:</label>
+                <p>{{question['answer']}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showSeeMore" class="showmore">
+        <a href="#question_{{productId}}">Show more</a>
+    </div>
+    <div *ngIf="showAddQuestion">
+        Could not find your answer? <a href="#" class="btn btn-primary">Post a question</a>
+    </div>
+</div>
