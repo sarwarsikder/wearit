@@ -10,6 +10,7 @@ exports.router = (router) => {
    * @apiParam {String}   question       question
    * @apiParam {String}   [answer]
    * @apiParam {Object}   [userId]
+   * @apiParam {Object}   [productId]
    * @apiParam {String}   [replayedBy]
    */
 

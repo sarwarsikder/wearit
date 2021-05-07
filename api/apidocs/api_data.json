@@ -8183,6 +8183,13 @@
           },
           {
             "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "productId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
             "type": "String",
             "optional": true,
             "field": "replayedBy",
@@ -8355,6 +8362,13 @@
           },
           {
             "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "productId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
             "type": "String",
             "optional": true,
             "field": "replayedBy",
@@ -8400,6 +8414,13 @@
             "type": "Object",
             "optional": true,
             "field": "userId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "productId",
             "description": ""
           },
           {

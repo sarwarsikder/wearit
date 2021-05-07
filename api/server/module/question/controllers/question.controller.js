@@ -5,7 +5,8 @@ const Joi = require('joi');
 const validateSchema = Joi.object().keys({
   question: Joi.string().required(),
   answer: Joi.string().allow([null, '']).optional(),
-  userId: Joi.string().allow([null, '']).optional()
+  userId: Joi.string().allow([null, '']).optional(),
+  productId: Joi.string().allow([null, '']).optional()
 });
 
 exports.findOne = async (req, res, next) => {
