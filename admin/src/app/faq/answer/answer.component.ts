@@ -27,6 +27,7 @@ export class AnswerComponent implements OnInit {
         .then(
             res => {
               this.question = res.data;
+              this.answer = this.question.answer;
             }
         )
         .catch(err => console.log(err));
@@ -34,7 +35,6 @@ export class AnswerComponent implements OnInit {
 
 
   updateAnswer() {
-    console.log('Updating answer', this.answer);
     this.faqService.updateAnswer(this.answer, this.question);
   }
 }
