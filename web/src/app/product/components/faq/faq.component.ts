@@ -14,10 +14,10 @@ export class FaqComponent implements OnInit {
   private questions: any[] = [];
 
   private searchTimeout: any = null;
-  private questionPerPage = 5;
+  // private questionPerPage = 5;
 
   private searchStr: string;
-  private showSeeMore = false;
+  // private showSeeMore = false;
   private showAddQuestion = false;
 
   constructor(private faqService: FaqService) { }
@@ -29,16 +29,17 @@ export class FaqComponent implements OnInit {
     const params = {
       productId: this.productId,
       question: this.searchStr,
-      page: 1,
-      take: this.questionPerPage
+      visibility: true,
+      // page: 1,
+      // take: this.questionPerPage
     };
     console.log('Searching', this.searchStr);
     this.faqService.search(params)
         .then((res) => {
           this.questions = res.data.items;
-          if (res.data.count > this.questionPerPage) {
-            this.showSeeMore = true;
-          }
+          // if (res.data.count > this.questionPerPage) {
+          //   this.showSeeMore = true;
+          // }
           this.showAddQuestion = true;
         })
         .catch(err => console.log(err));
