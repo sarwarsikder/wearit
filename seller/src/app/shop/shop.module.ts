@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShopRoutingModule } from './shop.routing';
 import { ShopService } from './shop.service';
@@ -16,17 +16,20 @@ import { LocationService } from '../shared/services/location.service';
 import { MediaModule } from '../media/media.module';
 import { ReviewModule } from '../review/review.module';
 import { UtilsModule } from '../utils/utils.module';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     //our custom module
     ShopRoutingModule,
     NgbModule,
     MediaModule,
     ReviewModule,
-    UtilsModule
+    UtilsModule,
+    AutocompleteLibModule,
   ],
   declarations: [
     ShopUpdateComponent,
