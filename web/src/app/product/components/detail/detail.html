@@ -221,7 +221,7 @@
 
         <div class="panel panel-default">
           <div class="panel-body">
-            <ul class="nav nav-tabs products-tab">
+            <ul class="nav nav-tabs products-tab" style="display: none;">
               <li class="nav-item">
                 <a class="nav-link" (click)="tab = 'detail'" [ngClass]="{active: tab === 'detail'}"
                   translate>Information</a>
@@ -242,7 +242,7 @@
               </li>
             </ul>
 
-            <div class="prod-description pt-3 pb-3" [hidden]="tab !== 'detail'">
+            <div class="prod-description pt-3 pb-3">
               <h5 class="prd-title" translate>Information</h5>
               <div class="mar-top-15" [innerHTML]="product?.description | safeHtml"></div>
               <div *ngIf="!product?.description">
@@ -263,17 +263,20 @@
             </div>
       
 
-            <div class="pb-3 review-bg" [hidden]="tab !== 'reviews'">
+            <div class="pb-3 review-bg" >
+              <h5 class="prd-title" translate>Reviews</h5>
               <review-list [options]="{productId: product?._id, type: 'product'}"></review-list>
             </div>
 
-            <div class="prod-description pt-3 pb-3" [hidden]="tab !== 'shippingPolicy'">
+            <div class="prod-description pt-3 pb-3">
+              <h5 class="prd-title" translate>Shipping Policy</h5>
               <p class="pre-line">{{product?.shop?.shippingSettings?.shippingPolicy}}</p>
               <div *ngIf="!product.shop.shippingSettings.shippingPolicy">
                 <p>No shipping policy for product!</p>
               </div>
             </div>
-            <div class="prod-description pt-3 pb-3" [hidden]="tab !== 'refundPolicy'">
+            <div class="prod-description pt-3 pb-3" >
+              <h5 class="prd-title" translate>Refund Policy</h5>
               <p class="pre-line">{{product?.shop?.shippingSettings?.refundPolicy}}</p>
               <div *ngIf="!product.shop.shippingSettings.refundPolicy">
                 <p>No refund policy for product!</p>
