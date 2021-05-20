@@ -7,8 +7,8 @@ export const environment = {
   production: false,
   version: '0.0.1',
   build: 27,
-  // apiBaseUrl: 'http://localhost:8080/v1',
-  apiBaseUrl: 'https://wearit-shop-api.herokuapp.com/v1',
+   apiBaseUrl: 'http://localhost:9000/v1',
+  //apiBaseUrl: 'https://wearit-shop-api.herokuapp.com/v1',
 
   apiProxy: '',
   // sellerUrl: 'https://wearit-shop-api.herokuapp.com/api',

@@ -14,6 +14,13 @@ const routes: Routes = [
     }
   },
   {
+    path: 'search/:mallId',
+    component: SearchComponent,
+    resolve: {
+      search: SearchResolver
+    }
+  },
+  {
     path: ':alias',
     component: ShopDetailComponent,
     resolve: {
