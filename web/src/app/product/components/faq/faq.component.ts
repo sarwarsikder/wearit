@@ -11,14 +11,14 @@ export class FaqComponent implements OnInit {
   @Input()
   productId: any = '';
 
-  private questions: any[] = [];
+  public questions: any[] = [];
 
-  private searchTimeout: any = null;
+  public searchTimeout: any = null;
   // private questionPerPage = 5;
 
-  private searchStr: string;
-  // private showSeeMore = false;
-  private showAddQuestion = false;
+  public searchStr: string;
+  public showSeeMore = false;
+  public showAddQuestion = false;
 
   constructor(private faqService: FaqService) { }
 

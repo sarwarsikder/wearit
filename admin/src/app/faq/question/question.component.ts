@@ -8,11 +8,11 @@ import {FaqService} from '../faq.service';
 })
 export class QuestionComponent implements OnInit {
 
-  private questions: any[] = [];
-  private searchStr = '';
+  public questions: any[] = [];
+  public searchStr = '';
 
-  private page = 1;
-  private take = 5;
+  public page = 1;
+  public take = 5;
 
   constructor(private faqService: FaqService) { }
 

@@ -9,8 +9,8 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class AnswerComponent implements OnInit {
 
-  private question: any = {};
-  private answer = '';
+  public question: any = {};
+  public answer = '';
 
   private questionId: any;
 
