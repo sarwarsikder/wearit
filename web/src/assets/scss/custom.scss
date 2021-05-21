@@ -107,10 +107,27 @@
 
 .prod-description {
   h5.prd-title {
-    display: inline;
-    font-weight: 600;
+    display: block;
+    font-weight: 700;
     border-bottom: 0;
     font-style: normal;
+    padding: 10px 15px;
+    background: #eaeaea;
+    margin: -15px -20px 10px -20px;
+  }
+
+}
+.review-bg{
+  padding: 15px 20px !important;
+  margin-bottom: 50px;
+  h5.prd-title {
+    display: block;
+    font-weight: 700;
+    border-bottom: 0;
+    font-style: normal;
+    padding: 10px 15px;
+    background: #eaeaea;
+    margin: -15px -20px 10px -20px;
   }
 }
 
@@ -1568,7 +1585,8 @@ span {
     padding-left: 20px;
     h3{
       color: #fff;
-      font-size: 2.5em;
+      font-size: 4em;
+      line-height: 35px;
     }
     p{
       font-size: 18px;
