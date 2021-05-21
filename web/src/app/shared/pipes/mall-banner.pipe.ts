@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
  * show default cover photo if it is not provided
 */
 @Pipe({
-  name: 'shopBanner'
+  name: 'mallBanner'
 })
 export class MallBannerPipe implements PipeTransform {
   transform(value: string): any {
@@ -12,6 +12,6 @@ export class MallBannerPipe implements PipeTransform {
       return value;
     }
 
-    return '/assets/images/shop-banner1.png';
+    return '/assets/images/mall-banner1.jpg';
   }
 }

@@ -49,6 +49,10 @@ export class SearchComponent implements OnInit {
     this.shopService.getMall().then(mall => {
       
       this.malls = mall.items;
+      if(this.route.params['_value']['mallId'] != undefined)
+      {
+        this.mallFilterSelected.mall = mall.items.filter(x => x._id == this.route.params['_value'].mallId)[0];
+      }
       
     });
     // this.location.countries().then(resp => this.countries = resp.data);
@@ -83,7 +87,7 @@ export class SearchComponent implements OnInit {
       page: this.page,
       take: this.itemsPerPage
     }, this.searchFields);
-    if(this.route.params['_value']['mallId'] != undefined)
+    if(this.route.params['_value']['mallId'] != undefined && this.mallFilterSelected.mall == '')
     {
       history.pushState(null, null, window.location.href.replace("malls","shops"));
       params.mallId = this.route.params['_value'].mallId;
