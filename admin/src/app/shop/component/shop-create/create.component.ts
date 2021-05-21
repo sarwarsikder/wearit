@@ -11,6 +11,7 @@ import { catchError, debounceTime, distinctUntilChanged, map, tap, switchMap } f
   templateUrl: './form.html'
 })
 export class ShopCreateComponent implements OnInit {
+  keyword = 'title';
 
   public isSubmitted = false;
   public shop: any = {};
@@ -18,6 +19,23 @@ export class ShopCreateComponent implements OnInit {
   public owner: any;
   public searching: boolean = false;
   public searchFailed: boolean = false;
+  public malls = [];
+
+  selectEvent(item) {
+    //this.shop.mallId = item._id;
+  }
+
+  onChangeSearch(search: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e) {
+
+  }
+  public mallFilterSelected: any = {
+    mall: ''
+  };
 
   formatter = (x: { name: string, email: string }) => x.name + ' (' + x.email + ' )';
   search = (text$: Observable<string>) =>
@@ -42,33 +60,37 @@ export class ShopCreateComponent implements OnInit {
   constructor(private router: Router, private shopService: ShopService, private userService: UserService, private toasty: ToastyService) { }
 
   ngOnInit() {
-  }
+    this.shopService.getMall().then(mall => {
+      this.malls = mall.items;
+  });
+}
 
-  submit(frm: any) {
-    this.isSubmitted = true;
-    if (!frm.valid) {
-      return this.toasty.error('Invalid form, please check and try again!');
-    }
-    if (this.owner) {
-      if (!this.owner._id) {
-        return this.toasty.error('Please find the available owner in the system');
-      }
-      this.shop.ownerId = this.owner._id;
-    } else if (!this.owner) {
-      return this.toasty.error('Please select Owner');
-    }
-    if (!this.shop.verificationIssueId) {
-      return this.toasty.error('Please select verification Issue');
-    }
-    this.shopService.create(this.shop).then(resp => {
-      this.toasty.success('Created successfuly!');
-      this.router.navigate(['/shops/update', resp.data._id]);
-    })
-      .catch((err) => this.toasty.error(err.data.data.message));
+submit(frm: any) {
+  this.shop.mallId=this.mallFilterSelected.mall._id;
+  this.isSubmitted = true;
+  if (!frm.valid) {
+    return this.toasty.error('Invalid form, please check and try again!');
   }
+  if (this.owner) {
+    if (!this.owner._id) {
+      return this.toasty.error('Please find the available owner in the system');
+    }
+    this.shop.ownerId = this.owner._id;
+  } else if (!this.owner) {
+    return this.toasty.error('Please select Owner');
+  }
+  if (!this.shop.verificationIssueId) {
+    return this.toasty.error('Please select verification Issue');
+  }
+  this.shopService.create(this.shop).then(resp => {
+    this.toasty.success('Created successfuly!');
+    this.router.navigate(['/shops/update', resp.data._id]);
+  })
+    .catch((err) => this.toasty.error(err.data.data.message));
+}
 
-  selectVerificationIssue(data: any) {
-    this.shop.verificationIssueId = data._id;
-    this.verificationIssue = data;
-  }
+selectVerificationIssue(data: any) {
+  this.shop.verificationIssueId = data._id;
+  this.verificationIssue = data;
+}
 }
