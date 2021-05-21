@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ShopRoutingModule } from "./shop.routing";
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 import { MediaModule } from "../media/media.module";
 
@@ -31,6 +32,7 @@ import { UserService } from "../user/user.service";
     ShopRoutingModule,
     NgbModule,
     MediaModule,
+    AutocompleteLibModule,
   ],
   declarations: [
     ShopListingComponent,

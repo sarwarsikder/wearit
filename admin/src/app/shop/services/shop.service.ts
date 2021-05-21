@@ -29,4 +29,10 @@ export class ShopService {
   findOwner(params: any): Promise<any> {
     return this.restangular.one('users', 'search').get(params).toPromise();
   }
+  getMall() {
+    return this.restangular.one('malls').get().toPromise()
+      .then((resp) => {
+        return resp.data;
+      });
+  }
 }
