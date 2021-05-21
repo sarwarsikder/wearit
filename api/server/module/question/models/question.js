@@ -2,7 +2,8 @@ const Schema = require('mongoose').Schema;
 
 const schema = new Schema({
   question: {
-    type: String
+    type: String,
+    required: false
   },
   answer: {
     type: String
