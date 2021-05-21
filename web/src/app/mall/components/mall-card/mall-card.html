@@ -1,6 +1,6 @@
 <div class="box-shop">
   <div class="img-prod custom">
-    <a appLocationHref [url]="'/malls/'+ shop.id">
+    <a (click)="goShopPage(shop.id)">
       <img class="card-banner" [src]="shop?.banner?.fileUrl | shopBanner">
     </a>
   </div>
