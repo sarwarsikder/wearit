@@ -87,7 +87,7 @@ export class SearchComponent implements OnInit {
       page: this.page,
       take: this.itemsPerPage
     }, this.searchFields);
-    if(this.route.params['_value']['mallId'] != undefined && this.mallFilterSelected.mall == '')
+    if(this.route.params['_value']['mallId'] != undefined && !window.location.href.includes("shop"))
     {
       history.pushState(null, null, window.location.href.replace("malls","shops"));
       params.mallId = this.route.params['_value'].mallId;
