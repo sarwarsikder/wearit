@@ -15,7 +15,12 @@ exports.router = (router) => {
    * @apiParam {String}   [link] Link of the mall
    * @apiParam {Object}   [meta] any custom meta data
    */
-
+   router.get(
+    '/v1/malls/search',
+    Middleware.loadUser,
+    mallController.search,
+    Middleware.Response.success('search')
+  );
   /**
    * @apiGroup Mall
    * @apiVersion 1.0.0

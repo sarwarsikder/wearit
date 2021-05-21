@@ -40,6 +40,7 @@ export class SearchComponent implements OnInit {
     private utilService: UtilService) {
     this.route.queryParamMap.subscribe((params: Params) => {
       this.searchFields = Object.assign(this.searchFields, params.params);
+      //console.log(params);
       this.query();
     });
   }
@@ -48,6 +49,10 @@ export class SearchComponent implements OnInit {
     this.shopService.getMall().then(mall => {
       
       this.malls = mall.items;
+      if(this.route.params['_value']['mallId'] != undefined)
+      {
+        this.mallFilterSelected.mall = mall.items.filter(x => x._id == this.route.params['_value'].mallId)[0];
+      }
       
     });
     // this.location.countries().then(resp => this.countries = resp.data);
@@ -82,6 +87,11 @@ export class SearchComponent implements OnInit {
       page: this.page,
       take: this.itemsPerPage
     }, this.searchFields);
+    if(this.route.params['_value']['mallId'] != undefined && !window.location.href.includes("shop"))
+    {
+      history.pushState(null, null, window.location.href.replace("malls","shops"));
+      params.mallId = this.route.params['_value'].mallId;
+    }
 
     if (this.map.distance && this.map.distance <= 0 && this.map.latitude && this.map.longitude) {
       return this.toasty.error('Wrong distance number please try again.');
