@@ -1,4 +1,17 @@
-<div class="qa-section">
+<div *ngIf="postQuestionSection" class="qa-section">
+    <div class="headline">
+        <h5>Write Your Question</h5>
+        <textarea [(ngModel)]="newQuestionTxt" class="form-control" placeholder="Type your question here"></textarea>
+        <br>
+        <button (click)="postNewQuestion()" class="btn btn-primary"
+                style="background-color: #4cae4c; padding-left: 20px; padding-right: 20px">
+            Post
+        </button>
+    </div>
+</div>
+
+
+<div *ngIf="!postQuestionSection" class="qa-section">
     <div class="headline">
         <h5>Consumer Questions & Answers</h5>
         <input (input)="doDelayedSearch(600)" [(ngModel)]="searchStr" class="form-control" type="text" placeholder="Have a question? Search for answer">
@@ -16,10 +29,11 @@
         </div>
     </div>
 
-    <div *ngIf="showSeeMore" class="showmore">
-        <a href="#question_{{productId}}">Show more</a>
-    </div>
-    <div *ngIf="showAddQuestion">
-        Could not find your answer? <a href="#" class="btn btn-primary">Post a question</a>
+<!--    <div *ngIf="seeMoreBtn" class="showmore">-->
+<!--        <a href="#question_{{productId}}">Show more</a>-->
+<!--    </div>-->
+
+    <div *ngIf="addQuestionBtn">
+        Could not find your answer? <button (click)="showPostQuestionSection()" class="btn btn-primary">Post your question</button>
     </div>
 </div>

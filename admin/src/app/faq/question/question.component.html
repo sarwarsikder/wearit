@@ -38,7 +38,7 @@
                     <a [routerLink]="['/faqs/answer', question.id ]">
                         <i class="fa fa-pencil"></i>
                     </a>&nbsp;
-                    <a (click)="remove(question, i)">
+                    <a (click)="remove(question.id, i)">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
@@ -47,7 +47,7 @@
             <tfoot>
             <tr>
                 <td colspan="4">
-                    <ngb-pagination [collectionSize]="take" [(page)]="page" [maxSize]="5" (pageChange)="loadQuestion()"></ngb-pagination>
+                    <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="take" (pageChange)="loadQuestion()"></ngb-pagination>
                 </td>
             </tr>
             </tfoot>
