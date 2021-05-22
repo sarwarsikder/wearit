@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FaqService} from '../faq.service';
-import {element} from "protractor";
-import {ToastyService} from "ng2-toasty";
+import {ToastyService} from 'ng2-toasty';
 
 @Component({
   selector: 'app-question',
@@ -10,12 +9,12 @@ import {ToastyService} from "ng2-toasty";
 })
 export class QuestionComponent implements OnInit {
 
-  private questions: any[] = [];
-  private searchStr = '';
+  public questions: any[] = [];
+  public searchStr = '';
 
-  private page = 1;
-  private take = 5;
-  private total = 0;
+  public page = 1;
+  public take = 10;
+  public total = 0;
 
   constructor(private faqService: FaqService, private toastyService: ToastyService) { }
 

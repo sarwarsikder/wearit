@@ -1673,6 +1673,11 @@ angular-froala-wysiwyg@^2.8.4:
     "@types/jquery" "^2.0.40"
     froala-editor "2.9.8"
 
+angular-ng-autocomplete@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/angular-ng-autocomplete/-/angular-ng-autocomplete-2.0.5.tgz#6284eacb97ed2ef3bf3c9765b564b412217574e0"
+  integrity sha512-mYALrzwc5eoFR5xz/diup5GDsxqXp3L707P4CkiBl5l01fKej0nyIDTQ+xXtZUK3spXIyfuOX0ypa9wTrgCP5A==
+
 angular-resizable-element@^1.2.4:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/angular-resizable-element/-/angular-resizable-element-1.2.5.tgz#b8627f31e87eea1abe10fd0eb5bd8efc81d0d47f"

@@ -6,13 +6,15 @@ const jwt = require('jsonwebtoken');
 const validateSchema = Joi.object().keys({
   question: Joi.string().allow([null, '']).optional(),
   answer: Joi.string().allow([null, '']).optional(),
-  userId: Joi.string().allow([null, '']).optional()
+  userId: Joi.string().allow([null, '']).optional(),
+  productId: Joi.string().allow([null, '']).optional(),
+  visibility: Joi.boolean().allow([null, '']).optional()
 });
 
 exports.findOne = async (req, res, next) => {
   try {
     const question = await DB.Question.findOne({ _id: req.params.id })
-      .populate('media');
+      .populate('user');
     if (!question) {
       return res.status(404).send(PopulateResponse.notFound());
     }
@@ -33,10 +35,11 @@ exports.create = async (req, res, next) => {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
 
-    if(token){
-      let decoded = jwt.verify(token, process.env.SESSION_SECRET);
+    if (token) {
+      const decoded = jwt.verify(token, process.env.SESSION_SECRET);
       req.body['userId'] = decoded._id;
     }
+    console.log(req.body);
 
     const validate = Joi.validate(req.body, validateSchema);
     if (validate.error) {
@@ -62,8 +65,8 @@ exports.update = async (req, res, next) => {
       return next(PopulateResponse.validationError(validate.error));
     }
 
-    for(let updateKey in req.body) {
-      if (req.question[updateKey] && req.question[updateKey] !== req.body[updateKey]){
+    for (let updateKey in req.body) {
+      if ((req.question[updateKey] && req.question[updateKey] !== req.body[updateKey]) || !req.question.hasOwnProperty(updateKey)) {
         req.question[updateKey] = req.body[updateKey];
       }
     }
@@ -96,20 +99,22 @@ exports.list = async (req, res, next) => {
   const page = Math.max(0, req.query.page - 1) || 0; // using a zero-based page index for use with skip()
   const take = parseInt(req.query.take, 10) || 10;
 
-  let params = req.query
-  params['visibility'] = (params['visibility'] === 'true')
+  const params = req.query;
+  params['visibility'] = (params['visibility'] === 'true');
 
   try {
     const query = Helper.App.populateDbQuery(params, {
       text: ['question'],
       boolean: ['visibility'],
-      equal: ['position']
+      equal: ['productId']
     });
     const sort = Helper.App.populateDBSort(params);
     const count = await DB.Question.count(query);
     const items = await DB.Question.find(query)
       .collation({ locale: 'en' })
-      .sort(sort).skip(page * take)
+      .populate('user')
+      .sort(sort)
+      .skip(page * take)
       .limit(take)
       .exec();
 

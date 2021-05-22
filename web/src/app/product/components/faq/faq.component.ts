@@ -1,7 +1,8 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {FaqService} from '../../services/faq.service';
-import {AuthService} from "../../../shared/services";
-import {Router} from "@angular/router";
+import {AuthService} from '../../../shared/services';
+import {Router} from '@angular/router';
+import {ToastyService} from "ng2-toasty";
 
 @Component({
   selector: 'app-faq',
@@ -13,24 +14,24 @@ export class FaqComponent implements OnInit {
   @Input()
   productId: any = '';
 
-  private questions: any[] = [];
+  public questions: any[] = [];
 
-  private searchTimeout: any = null;
-  // private questionPerPage = 5;
+  public searchTimeout: any = null;
+  // public questionPerPage = 5;
 
-  private searchStr: string;
-  private newQuestionTxt: string;
+  public searchStr: string;
+  public newQuestionTxt: string;
 
-  // private seeMoreBtn = false;
-  private addQuestionBtn = false;
-  private postQuestionSection = false;
+  // public seeMoreBtn = false;
+  public addQuestionBtn = false;
+  public postQuestionSection = false;
 
   constructor(private faqService: FaqService,
               private authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private toastyService: ToastyService) { }
 
   ngOnInit(): void {
-    console.log(this.productId)
   }
 
   searchQuestions(): void {
@@ -45,10 +46,10 @@ export class FaqComponent implements OnInit {
     this.faqService.search(params)
         .then((res) => {
           this.questions = res.data.items;
+          this.addQuestionBtn = true;
           // if (res.data.count > this.questionPerPage) {
           //   this.seeMoreBtn = true;
           // }
-          this.addQuestionBtn = true;
         })
         .catch(err => console.log(err));
   }
@@ -75,13 +76,15 @@ export class FaqComponent implements OnInit {
 
   postNewQuestion(): void {
     const data = {
-      question: this.newQuestionTxt + this.productId
+      question: this.newQuestionTxt,
+      productId: this.productId
     };
     this.faqService.postQuestion(data)
         .then((res) => {
           this.newQuestionTxt = '';
           this.postQuestionSection = false;
+          this.toastyService.success('Successfully posted your question');
         })
-        .catch(err => console.log(err));
+        .catch(err => this.toastyService.error('Question posting failed'));
   }
 }

@@ -22,6 +22,10 @@ const schema = new Schema({
     ref: 'Product',
     index: true
   },
+  visibility: {
+    type: Boolean,
+    default: false
+  },
   createdAt: {
     type: Date
   },

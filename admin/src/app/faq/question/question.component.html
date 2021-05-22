@@ -26,10 +26,11 @@
             <tbody>
             <tr *ngFor="let question of questions, let i = index">
                 <td>{{question['question']}}</td>
-                <td>A user</td>
+                <td>{{question?.user?.email}}</td>
                 <td>{{question['answer']}}</td>
                 <td>
-                    {{question['visibility']}}
+                    <span class="label label-success" *ngIf="question['visibility']">Y</span>
+                    <span class="label label-warning" *ngIf="!question['visibility']">N</span>
                 </td>
                 <td>
                     <span>{{question['createdAt'] | date}}</span>

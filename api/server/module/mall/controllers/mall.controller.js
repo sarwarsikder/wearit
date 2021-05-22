@@ -106,6 +106,37 @@ exports.list = async (req, res, next) => {
   }
 };
 
+exports.search = async (req, res, next) => {
+  const page = Math.max(0, req.query.page - 1) || 0; // using a zero-based page index for use with skip()
+  const take = parseInt(req.query.take, 10) || 10;
+
+  try {
+    const query = Helper.App.populateDbQuery(req.query, {
+      text: ['title', 'address'],
+    });
+    if (req.query.q) {
+      query.title = { $regex: req.query.q.trim(), $options: 'i' };
+    }
+
+    const sort = Helper.App.populateDBSort(req.query);
+    const count = await DB.Mall.count(query);
+    const items = await DB.Mall.find(query)
+      .collation({ locale: 'en' })
+      .sort(sort).skip(page * take)
+      .limit(take)
+      .populate('media')
+      .exec();
+
+    res.locals.search = {
+      count,
+      items
+    };
+    next();
+  } catch (e) {
+    next(e);
+  }
+};
+
 exports.random = async (req, res, next) => {
   try {
     const take = parseInt(req.query.take, 10) || 10;

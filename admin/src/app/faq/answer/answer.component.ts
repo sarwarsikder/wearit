@@ -10,8 +10,8 @@ import {ToastyService} from "ng2-toasty";
 })
 export class AnswerComponent implements OnInit {
 
-  private question: any = {};
-  private answer = '';
+  public question: any = {};
+  public answer = '';
 
   private questionId: any;
 
