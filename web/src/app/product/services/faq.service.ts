@@ -11,4 +11,8 @@ export class FaqService {
   search(params: any): Promise<any> {
     return this.rest.all('questions').customGET('', params).toPromise();
   }
+
+  postQuestion(data: any) {
+    return this.rest.all('questions').post(data).toPromise();
+  }
 }

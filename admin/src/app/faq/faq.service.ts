@@ -19,9 +19,13 @@ export class FaqService {
   updateAnswer(answer: any, question: any) {
     const data = {
       answer: answer,
-      // visibility: true
+      visibility: true,
       question: question.question
     };
-    return this.rest.one('questions', question.id).customPUT(data);
+    return this.rest.one('questions', question.id).customPUT(data).toPromise();
+  }
+
+  remove(questionId: any) {
+    return this.rest.all('questions').customDELETE(questionId).toPromise();
   }
 }

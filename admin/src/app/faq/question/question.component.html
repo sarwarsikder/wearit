@@ -26,10 +26,11 @@
             <tbody>
             <tr *ngFor="let question of questions, let i = index">
                 <td>{{question['question']}}</td>
-                <td>A user</td>
+                <td>{{question?.user?.email}}</td>
                 <td>{{question['answer']}}</td>
                 <td>
-                    {{question['visibility']}}
+                    <span class="label label-success" *ngIf="question['visibility']">Y</span>
+                    <span class="label label-warning" *ngIf="!question['visibility']">N</span>
                 </td>
                 <td>
                     <span>{{question['createdAt'] | date}}</span>
@@ -38,7 +39,7 @@
                     <a [routerLink]="['/faqs/answer', question.id ]">
                         <i class="fa fa-pencil"></i>
                     </a>&nbsp;
-                    <a (click)="remove(question, i)">
+                    <a (click)="remove(question.id, i)">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>
@@ -47,7 +48,7 @@
             <tfoot>
             <tr>
                 <td colspan="4">
-                    <ngb-pagination [collectionSize]="take" [(page)]="page" [maxSize]="5" (pageChange)="loadQuestion()"></ngb-pagination>
+                    <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="take" (pageChange)="loadQuestion()"></ngb-pagination>
                 </td>
             </tr>
             </tfoot>
