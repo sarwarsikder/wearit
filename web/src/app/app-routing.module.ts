@@ -16,6 +16,7 @@ export const Approutes: Routes = [
       { path: 'page', loadChildren: './static-page/static-page.module#StaticPageModule' },
       { path: 'products', loadChildren: './product/product.module#ProductModule' },
       { path: 'shops', loadChildren: './shop/shop.module#ShopModule' },
+      { path: 'malls', loadChildren: './mall/mall.module#MallModule' },
       {
         path: 'profile',
         canActivate: [AuthGuard],

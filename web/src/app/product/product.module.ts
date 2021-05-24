@@ -35,6 +35,7 @@ import { from } from 'rxjs';
 import { UtilsModule } from '../utils/utils.module';
 import { LightboxModule } from 'ngx-lightbox';
 import {SafePipeModule} from 'safe-pipe'
+import { FaqComponent } from './components/faq/faq.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import {SafePipeModule} from 'safe-pipe'
     OfferCardComponent,
     BrandCardComponent,
     CurrencyPipe,
+    FaqComponent,
   ],
   providers: [
     CategoryService, ProductService, ProductResolver, SearchResolver,
@@ -81,8 +83,6 @@ import {SafePipeModule} from 'safe-pipe'
     OfferComponent,
     OfferCardComponent,
     SearchComponent,
-  
-    
   ]
 })
 export class ProductModule { }

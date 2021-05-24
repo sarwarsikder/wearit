@@ -12,6 +12,7 @@ a {
 
 .ng-autocomplete {
   width:100% !important;
+  max-width: unset !important;
   color: #67757c;
   max-width: 600px;
   display: table;
@@ -21,6 +22,6 @@ a {
   background: #efefef !important;
   font-size: 13px !important;
   font-weight: 400 !important;
+  color: #67757c !important;
 }
-
 
