@@ -117,6 +117,30 @@
             <span>{{cart ? cart.length : 0}}</span>
             <label for="">Cart</label>
           </a>
+          <div class="cart-dropout">
+            <h5>Cart items (1) <label for="" class="total">Total: $154</label></h5>
+            <ul class="item-list">
+              <li>
+                <a href="">
+                  <img src="" alt="">
+                  <p class="name">
+                    Wifi router
+                    <label for="" class="quantity">Quantity:1</label>
+                  </p>
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="" alt="">
+                  <p class="name">
+                    Wifi router
+                    <label for="" class="quantity">Quantity:1</label>
+                  </p>
+                </a>
+              </li>
+            </ul>
+            <button class="btn-chekout-fly">Checkout</button>
+          </div>
         </div>
         <div class="pull-right wish-top">
           <a class="wishlist-flex" appLocationHref [url]="'/profile/wishlist'">
