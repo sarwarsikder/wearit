@@ -3074,3 +3074,70 @@ input{
   // border: 1px solid #111;
 }
 // Tanveer work fom menu
+
+.cart-dropout{
+  position: absolute;
+  top: 100%;
+  width: 360px;
+  right: -15px;
+  min-height: 200px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  z-index: 99;
+  box-shadow: 0px 2px 16px -4px #00000047;
+  h5{
+    margin-top: 0px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    font-size: 14px;
+    label.total{
+      float: right;
+    }
+  }
+  ul.item-list{
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    overflow: auto;
+    li{
+      list-style: none;
+      margin-bottom: 15px;
+      display: inline-flex;
+      a{
+        display:flex;
+        width: 100%;
+        flex-direction: row;
+        img{
+          width: 60px;
+          height: 60px;
+          background: #d8d8d8;
+        }
+        p.name{
+          position: relative;
+          font-size: 13px;
+          font-weight: 500;
+          flex-grow: 1;
+          margin-top:0px;
+          margin-bottom: 0px;
+          padding-left: 10px;
+          color: #000;
+          label.quantity{
+            position: relative;
+            display: block;
+            color: #d8d8d8;
+          }
+        }
+      }
+    }
+  }
+  .btn-chekout-fly{
+    background: #000;
+    color: #fff;
+    width: 100%;
+    height: 40px;
+    border: 0px;
+  }
+}
