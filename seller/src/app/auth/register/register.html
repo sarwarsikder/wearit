@@ -134,8 +134,8 @@
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <input class="form-control" placeholder="Area" required type="text" autocomplete="off" name="area"
-              [(ngModel)]="shop.area" #city="ngModel" />
+            <input class="form-control" placeholder="Area" type="text" autocomplete="off" name="area"
+              [(ngModel)]="shop.area" #area="ngModel" />
             <!-- <div *ngIf="city.errors && (city.dirty || city.touched || submitted)">
               <p [hidden]="!city.errors.required" class="error">
                 City is required
@@ -168,6 +168,11 @@
                 <div [innerHTML]="notFound"></div>
               </ng-template>
             </div>
+        </div>
+      </div>
+      <div class="col col-md-4">
+        <div class="form-group">
+          <label><input type="checkbox" name="tailor" [(ngModel)]="shop.tailor" #tailor="ngModel"/> Tailors</label>
         </div>
       </div>
       </div>
