@@ -1,5 +1,8 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {FaqService} from '../../services/faq.service';
+import {AuthService} from '../../../shared/services';
+import {Router} from '@angular/router';
+import {ToastyService} from "ng2-toasty";
 
 @Component({
   selector: 'app-faq',
@@ -14,13 +17,19 @@ export class FaqComponent implements OnInit {
   public questions: any[] = [];
 
   public searchTimeout: any = null;
-  // private questionPerPage = 5;
+  // public questionPerPage = 5;
 
   public searchStr: string;
-  public showSeeMore = false;
-  public showAddQuestion = false;
+  public newQuestionTxt: string;
 
-  constructor(private faqService: FaqService) { }
+  // public seeMoreBtn = false;
+  public addQuestionBtn = false;
+  public postQuestionSection = false;
+
+  constructor(private faqService: FaqService,
+              private authService: AuthService,
+              private router: Router,
+              private toastyService: ToastyService) { }
 
   ngOnInit(): void {
   }
@@ -33,14 +42,14 @@ export class FaqComponent implements OnInit {
       // page: 1,
       // take: this.questionPerPage
     };
-    console.log('Searching', this.searchStr);
+    // console.log('Searching', this.searchStr);
     this.faqService.search(params)
         .then((res) => {
           this.questions = res.data.items;
+          this.addQuestionBtn = true;
           // if (res.data.count > this.questionPerPage) {
-          //   this.showSeeMore = true;
+          //   this.seeMoreBtn = true;
           // }
-          this.showAddQuestion = true;
         })
         .catch(err => console.log(err));
   }
@@ -52,5 +61,30 @@ export class FaqComponent implements OnInit {
     this.searchTimeout = setTimeout(() => {
       this.searchQuestions();
     }, delay);
+  }
+
+  showPostQuestionSection(): void {
+    if (this.authService.isLoggedin()) {
+      this.searchStr = '';
+      this.postQuestionSection = true;
+    } else {
+      sessionStorage.setItem('redirectUrl', this.router.url);
+      this.router.navigate(['/auth/login']);
+    }
+  }
+
+
+  postNewQuestion(): void {
+    const data = {
+      question: this.newQuestionTxt,
+      productId: this.productId
+    };
+    this.faqService.postQuestion(data)
+        .then((res) => {
+          this.newQuestionTxt = '';
+          this.postQuestionSection = false;
+          this.toastyService.success('Successfully posted your question');
+        })
+        .catch(err => this.toastyService.error('Question posting failed'));
   }
 }

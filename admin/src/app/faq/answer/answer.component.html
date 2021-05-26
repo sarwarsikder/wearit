@@ -1,7 +1,7 @@
 <div class="col col-md-6 offset-md-3">
     <div class="card p-5">
         <p>{{question['question']}}</p>
-        <p>by User A</p>
+        <p>by {{question?.user?.email}}</p>
         <input [(ngModel)]="answer" type="text" class="form-control" placeholder="Enter Answer" required/>
 
         <br>
