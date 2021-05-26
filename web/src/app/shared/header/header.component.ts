@@ -69,18 +69,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private wishListLoadedSubscription: Subscription;
   public whishListJson: any = [];
 
-
-
-
-
-  
+  public showCart = false;
+  public cartTotal = 0.00;
 
 
   constructor(private router: Router, private authService: AuthService, private systemService: SystemService, private utilService: UtilService,
     private modalService: NgbModal, private translate: TranslateService, private cartService: CartService,private wishlistService: WishlistService,
     config: NgbModalConfig, private toasty: ToastyService, auth: AuthService,private productService: ProductService,private wishListService: WishListService) {
-    this.userLoadedSubscription = authService.userLoaded$.subscribe(data => this.currentUser = data);
-    this.cartLoadedSubscription = cartService.cartChanged$.subscribe(data => this.cart = data);
+
     this.systemService.configs().then(resp => {
       this.isLoaded = true;
       this.languages = resp.i18n.languages;
@@ -91,13 +87,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     config.keyboard = false;
     this.Auth = auth;
 
+    this.userLoadedSubscription = authService.userLoaded$.subscribe(data => this.currentUser = data);
+    this.cartLoadedSubscription = cartService.cartChanged$.subscribe(
+        data => {
+          this.cart = data;
+          this.updateCartTotal();
+        });
     this.wishListLoadedSubscription = wishListService.wishListChanged$.subscribe(data => this.whishListJson = data);
-
-    
   }
 
   ngOnInit() {
     this.cart = this.cartService.get();
+    this.updateCartTotal();
     this.whishListJson = this.wishListService.get();
     if (this.authService.isLoggedin()) {
       this.authService.getCurrentUser().then(resp => this.currentUser = resp);
@@ -108,6 +109,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // prevent memory leak when component destroyed
     this.userLoadedSubscription.unsubscribe();
+    this.cartLoadedSubscription.unsubscribe();
+    this.wishListLoadedSubscription.unsubscribe();
   }
 
   selectDial(event) {
@@ -308,4 +311,27 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.modalService.dismissAll();
     this.modalReferenceSignUp = this.modalService.open(content,  { size: 'lg' });
   }
+
+  removeAllItemFromCart() {
+    this.cartService.clean();
+  }
+
+  removeItemFromCart(index: number) {
+    this.cartService.remove(this.cart[index]);
+  }
+
+  private updateCartTotal() {
+    this.cartTotal = 0.0;
+    if (this.cart.length === 0) {
+      return;
+    }
+    this.cart.forEach(item => {
+      if (item.product.discounted) {
+        this.cartTotal += item.quantity * item.product.salePrice;
+      } else {
+        this.cartTotal += item.quantity * item.product.price;
+      }
+    });
+  }
+
 }

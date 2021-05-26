@@ -95,7 +95,7 @@
       </div>
       <div class="shop-menu pull-right ">
         <div class="cart-top">
-          <a appLocationHref [url]="'/cart/checkout'">
+          <a (click)="showCart = !showCart" href="javascript:void(0)">
             <!-- <img src="/assets/images/cart.png" /> -->
             <svg *ngIf="cart.length==0" width="29" height="32" viewBox="0 0 29 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.36283 7.90476C7.57802 7.90476 5.24633 7.90476 3.49857 7.90476C2.11786 7.90476 1 9.02405 1 10.4048V23.5C1 27.6421 4.35786 31 8.5 31H20.5C24.6421 31 28 27.6421 28 23.5V10.4048C28 9.02405 26.8821 7.90476 25.5014 7.90476C23.7537 7.90476 21.422 7.90476 19.6372 7.90476M9.36283 7.90476C9.36283 5.52381 9.41062 1 14.3805 1C19.3504 1 19.6372 5.52381 19.6372 7.90476M9.36283 7.90476C13.3752 7.90476 15.6248 7.90476 19.6372 7.90476M9.36283 7.90476H19.6372" stroke="white" stroke-width="1.5"/>
@@ -117,31 +117,33 @@
             <span>{{cart ? cart.length : 0}}</span>
             <label for="">Cart</label>
           </a>
-          <div class="cart-dropout">
-            <h5>Cart items (1) <label for="" class="total">Total: $154</label></h5>
-            <ul class="item-list">
+          <div *ngIf="showCart" class="cart-dropout" style="min-height: auto">
+            <h5>Cart items ({{cart ? cart.length : 0}}) <label for="" class="total">Total: ${{cartTotal}}</label></h5>
+            <hr>
+            <h4 *ngIf="cart.length == 0">Your cart is empty!</h4>
+            <ul *ngFor="let item of cart; let i = index" class="item-list">
               <li>
                 <a href="">
-                  <img src="" alt="">
+                  <img src="{{item.product?.mainImage?.thumbUrl}}" alt="">
                   <p class="name">
-                    Wifi router
-                    <label for="" class="quantity">Quantity:1</label>
+                    {{item.product?.name}}
+                    <label for="" class="quantity" style="margin-bottom: 0; color: #a5a5a5">Quantity: {{item.quantity}}</label>
+                    <label for="" class="quantity" style="margin-bottom: 0; color: #a5a5a5">
+                      Unit Price: {{item.product.discounted ? item.product.salePrice : item.product.price}}
+                    </label>
                   </p>
                 </a>
-              </li>
-              <li>
-                <a href="">
-                  <img src="" alt="">
-                  <p class="name">
-                    Wifi router
-                    <label for="" class="quantity">Quantity:1</label>
-                  </p>
-                </a>
+                <button (click)="removeItemFromCart(i)" class="btn">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
               </li>
             </ul>
-            <button class="btn-chekout-fly">Checkout</button>
+            <hr>
+            <button *ngIf="cart.length != 0" (click)="removeAllItemFromCart()" class="btn-chekout-fly mar-bot-10">Delete All</button>
+            <a *ngIf="cart.length != 0" appLocationHref [url] ="'/cart/checkout'" class="btn-chekout-fly" style="font-size: inherit">Checkout</a>
           </div>
         </div>
+
         <div class="pull-right wish-top">
           <a class="wishlist-flex" appLocationHref [url]="'/profile/wishlist'">
             <svg *ngIf="whishListJson.length==0" width="30" height="30" viewBox="0 0 30 30" fill="none"
