@@ -150,6 +150,11 @@
               <a href="{{verificationIssue?.fileUrl}}" download target="_blank">{{verificationIssue?.name}}</a>
             </div>
           </div>
+          <div class="col col-md-4">
+            <div class="form-group">
+              <label><input type="checkbox" name="tailor" [(ngModel)]="shop.tailor" #tailor="ngModel"/> Tailors</label>
+            </div>
+          </div>
 
           <div class="col-md-12">
             <div class="form-group">

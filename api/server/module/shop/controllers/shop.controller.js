@@ -173,6 +173,7 @@ exports.create = async (req, res, next) => {
       email: Joi.string().email().required(),
       phoneNumber: Joi.string().allow([null, '']).optional(),
       address: Joi.string().required(),
+      tailor: Joi.boolean().optional(),
       city: Joi.string().allow([null, '']).optional(),
       state: Joi.string().allow([null, '']).optional(),
       country: Joi.string().allow([null, '']).optional(),
