@@ -123,7 +123,7 @@
             <h4 *ngIf="cart.length == 0">Your cart is empty!</h4>
             <ul *ngFor="let item of cart; let i = index" class="item-list">
               <li>
-                <a href="">
+                <a appLocationHref [url]="'/products/' + item.product.alias">
                   <img src="{{item.product?.mainImage?.thumbUrl}}" alt="">
                   <p class="name">
                     {{item.product?.name}}
