@@ -76,6 +76,10 @@ const schema = new Schema({
     type: Boolean,
     default: true
   },
+  publishStatus: {
+    type: String,
+    enum: ['pending', 'accepted', 'rejected']
+  },
   // stock keeping unit
   sku: {
     type: String,

@@ -24,6 +24,7 @@ export class ProductCreateComponent implements OnInit {
       description: ''
     },
     type: 'physical',
+    publishStatus: 'pending',
     categoryId: '',
     isActive: true,
     freeShip: false,
@@ -154,6 +155,7 @@ export class ProductCreateComponent implements OnInit {
     });
     this.product.images = this.images.map(i => i._id);
     this.product.mainImage = this.mainImage || null;
+   
     this.productService.create(this.product)
       .then(() => {
         this.toasty.success('Product has been created');

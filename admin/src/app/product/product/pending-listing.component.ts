@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 
 @Component({
-  selector: 'pending-product-listing',
-  templateUrl: './pending-listing.html'
+  selector: 'product-listing',
+  templateUrl: './listing.html'
 })
-export class ProductListingComponent implements OnInit {
+export class ProductPendingListingComponent implements OnInit {
   public items = [];
   public page: any = 1;
   public total: any = 0;
@@ -29,7 +29,7 @@ export class ProductListingComponent implements OnInit {
       page: this.page,
       q: this.searchText,
       sort: `${this.sortOption.sortBy}`,
-      sortType: `${this.sortOption.sortType}`
+      sortType: `${this.sortOption.sortType}`,
     })
       .then(resp => {
         this.items = resp.data.items;

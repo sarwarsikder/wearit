@@ -4,6 +4,7 @@ const Joi = require('joi');
 const validateSchema = Joi.object().keys({
   name: Joi.string().required(),
   alias: Joi.string().allow([null, '']).optional(),
+  publishStatus: Joi.string().allow(['pending', 'accepted', 'rejected']).optional(),
   type: Joi.string().allow(['physical', 'digital']).optional(),
   shortDescription: Joi.string().allow([null, '']).optional(),
   description: Joi.string().allow([null, '']).optional(),

@@ -1,26 +1,12 @@
 <div class="card">
-  <div class="card-body table-responsive">
-    <div class="row prod-action">
-      <div class="col-md-12">
-        <a class="btn btn-danger button-custom" href="../../../../assets/Sample.csv" download><i class="fa fa-file"></i>
-          Sample File</a>
-          <a class="btn btn-danger button-custom" (click)="exportCSV()" style="color: #fff"><i class="fa fa-cloud-download"></i>
-            Export Data</a>
-            <a class="btn btn-danger button-custom">
-              <span (click)="openFile()" style="color: #fff"><i class="fa fa-cloud-upload"></i> Import Data</span>
-              <div class="import-button" *ngIf="showImport">
-                <file-upload [options]="importOptions"></file-upload>
-              </div>
-            </a>
-      </div>
-    </div>
+  <div class="card-block table-responsive">
     <table class="table table-custom">
       <thead>
         <tr>
-          <th class="min-w-40">
+          <th>
             Image
           </th>
-          <th class="min-w-180">
+          <th>
             <a (click)="sortBy('name', 'desc')">Name</a>
             <span *ngIf="sortOption.sortBy=='name'">
               <a (click)="sortBy('name', 'asc')" *ngIf="sortOption.sortType=='desc'"><i class="fa fa-caret-down"></i></a>
@@ -35,6 +21,13 @@
             </span>
           </th>
           <th>
+            <a (click)="sortBy('brand.name', 'desc')">Shop</a>
+            <span *ngIf="sortOption.sortBy=='brand.name'">
+              <a (click)="sortBy('brand.name', 'asc')" *ngIf="sortOption.sortType=='desc'"><i class="fa fa-caret-down"></i></a>
+              <a (click)="sortBy('brand.name', 'desc')" *ngIf="sortOption.sortType=='asc'"><i class="fa fa-caret-up"></i></a>
+            </span>
+          </th>
+          <th>
             <a (click)="sortBy('featured', 'desc')">Feature</a>
             <span *ngIf="sortOption.sortBy=='featured'">
               <a (click)="sortBy('featured', 'asc')" *ngIf="sortOption.sortType=='desc'"><i class="fa fa-caret-down"></i></a>
@@ -43,7 +36,7 @@
           </th>
           <th>
             <a (click)="sortBy('hot', 'desc')">Hot</a>
-            <span *ngIf="sortOption.sortBy=='featured'">
+            <span *ngIf="sortOption.sortBy=='hot'">
               <a (click)="sortBy('hot', 'asc')" *ngIf="sortOption.sortType=='desc'"><i class="fa fa-caret-down"></i></a>
               <a (click)="sortBy('hot', 'desc')" *ngIf="sortOption.sortType=='asc'"><i class="fa fa-caret-up"></i></a>
             </span>
@@ -63,6 +56,13 @@
             </span>
           </th>
           <th>
+            <a (click)="sortBy('dailyDeal', 'desc')">Daily Deal</a>
+            <span *ngIf="sortOption.sortBy=='dailyDeal'">
+              <a (click)="sortBy('dailyDeal', 'asc')" *ngIf="sortOption.sortType=='desc'"><i class="fa fa-caret-down"></i></a>
+              <a (click)="sortBy('dailyDeal', 'desc')" *ngIf="sortOption.sortType=='asc'"><i class="fa fa-caret-up"></i></a>
+            </span>
+          </th>
+          <th>
             <a (click)="sortBy('isActive', 'desc')">Active</a>
             <span *ngIf="sortOption.sortBy=='isActive'">
               <a (click)="sortBy('isActive', 'asc')" *ngIf="sortOption.sortType=='desc'"><i class="fa fa-caret-down"></i></a>
@@ -70,10 +70,10 @@
             </span>
           </th>
           <th>
-            <a (click)="sortBy('publishStatus', 'desc')">Publish Status</a>
-            <span *ngIf="sortOption.sortBy=='publishStatus'">
-              <a (click)="sortBy('publishStatus', 'asc')" *ngIf="sortOption.sortType=='desc'"><i class="fa fa-caret-down"></i></a>
-              <a (click)="sortBy('publishStatus', 'desc')" *ngIf="sortOption.sortType=='asc'"><i class="fa fa-caret-up"></i></a>
+            <a (click)="sortBy('shopVerified', 'desc')">Shop Verified</a>
+            <span *ngIf="sortOption.sortBy=='shopVerified'">
+              <a (click)="sortBy('shopVerified', 'asc')" *ngIf="sortOption.sortType=='desc'"><i class="fa fa-caret-down"></i></a>
+              <a (click)="sortBy('shopVerified', 'desc')" *ngIf="sortOption.sortType=='asc'"><i class="fa fa-caret-up"></i></a>
             </span>
           </th>
           <th>
@@ -87,30 +87,31 @@
             Actions
           </th>
         </tr>
-        <tr>
-          <th colspan="12">
-            <div class="input-group">
-              <input class="form-control" [(ngModel)]="searchText" placeholder="search..." (keypress)="keyPress($event)" />
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary fa fa-search" (click)="query()" type="button"></button>
-              </div>
-            </div>
+        <tr class="sub-th">
+          <th></th>
+          <th colspan="4">
+            <input class="form-control" [(ngModel)]="searchText" placeholder="search ..." (keypress)="keyPress($event)" />
           </th>
-          
+          <th colspan="7"></th>
+          <th><a class="btn btn-success" (click)="query()">Search</a></th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngIf="!total && !isLoading">
-          <td colspan="10">
-            <p class="text-center text-danger">There is no items yet..</p>
-          </td>
-        </tr>
+      <tbody *ngIf="items.length">
         <tr *ngFor="let item of items, let i = index">
-          <td class="min-w-40">
+          <td>
             <img *ngIf="item.mainImage" [src]="item?.mainImage?.thumbUrl" class="image-responsive" style="width:40px" />
           </td>
-          <td>{{item.name}}</td>
-          <td><span class="label label-warning" *ngIf="item.category && item.category.name">{{item.category?.name}}</span></td>
+          <td>
+            <a [routerLink]="['/products/update', item._id ]" *ngIf="item._id">
+              {{item?.name}}
+            </a>
+          </td>
+          <td><span class="label label-warning" *ngIf="item.category && item.category.name">{{item?.category?.name}}</span></td>
+          <td>
+            <a [routerLink]="['/shops/update', item.shopId ]" *ngIf="item.shopId">
+              {{item?.shop?.name}}
+            </a>
+          </td>
           <td>
             <span class="label label-success" *ngIf="item.featured">Y</span>
             <span class="label label-warning" *ngIf="!item.featured">N</span>
@@ -128,30 +129,37 @@
             <span class="label label-danger" *ngIf="item.type === 'digital'">Digital</span>
           </td>
           <td>
+            <span class="label label-success" *ngIf="item.dailyDeal">Y</span>
+            <span class="label label-warning" *ngIf="!item.dailyDeal">N</span>
+          </td>
+          <td>
             <span class="label label-success" *ngIf="item.isActive">Y</span>
             <span class="label label-warning" *ngIf="!item.isActive">N</span>
           </td>
           <td>
-            <span>{{item.publishStatus}}</span>
+            <span class="label label-success" *ngIf="item.shopVerified">Y</span>
+            <span class="label label-warning" *ngIf="!item.shopVerified">N</span>
           </td>
           <td>
-            <span>{{item.createdAt | date}}</span>
+            <span>{{item?.createdAt | date}}</span>
           </td>
           <td>
-            <a class="btn btn-sm btn-danger" [routerLink]="['/products/update', item?._id ]">
-              <i style="color: #fff;" class="fa fa-pencil"></i>
-            </a>&nbsp;
-            <a class="btn btn-sm btn-danger" (click)="remove(item?._id, i)">
+            <a [routerLink]="['/products/update', item._id]" *ngIf="item._id">
+              <i class="fa fa-pencil"></i>
+            </a> &nbsp;
+            <a (click)="remove(item?._id, i)">
               <i class="fa fa-trash"></i>
             </a>
           </td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="8" *ngIf="total > 10">
+            <ngb-pagination [collectionSize]="total" [maxSize]="5" [(page)]="page" (pageChange)="query()"></ngb-pagination>
+          </td>
+        </tr>
+      </tfoot>
     </table>
-    <div class="display-inline" [hidden]="total < take">
-      <div class="pull-right">
-        <ngb-pagination [collectionSize]="total" [(page)]="page" [maxSize]="5" [pageSize]="take" (pageChange)="query()"></ngb-pagination>
-      </div>
-    </div>
   </div>
 </div>

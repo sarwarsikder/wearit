@@ -9,6 +9,7 @@ import { ReviewsComponent } from './reviews/listing.component';
 import { BrandComponent, } from './brand/brand.component'
 import { ProductBrandCreateComponent } from './brand/brand.component'
 import { ProductBrandUpdateComponent } from './brand/brand.component'
+import { ProductPendingListingComponent } from './product/pending-listing.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,14 @@ const routes: Routes = [
     data: {
       title: 'Product Listing',
       urls: [{ title: 'Products', url: '/products' }, { title: 'Manage Products' }]
+    }
+  },
+  {
+    path: 'pending',
+    component: ProductPendingListingComponent,
+    data: {
+      title: 'pending Product',
+      urls: [{ title: 'Products', url: '/products' }, { title: 'Pending Product', url: '/products/pending' }, { title: 'Manage pending Product' }]
     }
   },
   {
