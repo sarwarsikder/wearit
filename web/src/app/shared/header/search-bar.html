@@ -64,9 +64,14 @@
             </div>
             <div class="show-categories">
               <ul>
-                <li *ngFor="let item of tree">
+                <!-- <li *ngFor="let item of tree">
                   <a class="dropdown-item" [routerLink]="['/products/search']" 
                   [queryParams]="{categoryId: 'item._id'}" (click)="search(item)">{{item.name}}</a>
+                </li> -->
+                <li>
+                  <a class="dropdown-item" [routerLink]="['/malls/search']">Cirlce</a>
+                  <a class="dropdown-item" [routerLink]="['/malls/search']">Tailors Made</a>
+                  <a class="dropdown-item" [routerLink]="['/malls/search']">Malls</a>
                 </li>
               </ul>
             </div>
