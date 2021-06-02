@@ -11,6 +11,10 @@ const schema = new Schema({
     type: Schema.Types.ObjectId,
     index: true
   },
+  tailor: {
+    type: Boolean,
+    default: false
+  },
   // store name
   name: {
     type: String

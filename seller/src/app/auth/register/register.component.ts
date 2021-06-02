@@ -27,7 +27,8 @@ export class RegisterComponent implements OnInit {
   public dialCode: any = '';
   public shop: any = {
     email: '',
-    password: ''
+    password: '',
+    tailor: false
   };
   public mallFilterSelected: any = {
     mall: ''
@@ -81,6 +82,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.shop);
     this.submitted = true;
     if (form.invalid) {
+      console.log(form);
       return;
     }
 
