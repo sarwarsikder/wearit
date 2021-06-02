@@ -26,6 +26,7 @@ export class ProductCreateComponent implements OnInit {
       description: ''
     },
     type: 'physical',
+    publishStatus: 'accepted',
     categoryId: '',
     freeShip: true,
     dailyDeal: false,

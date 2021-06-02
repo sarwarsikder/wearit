@@ -178,7 +178,7 @@ exports.search = async (req, res, next) => {
 
   try {
     let query = Helper.App.populateDbQuery(req.query, {
-      text: ['name', 'alias', 'shortDescription'],
+      text: ['name', 'alias', 'shortDescription', 'publishStatus'],
       boolean: ['featured', 'isActive', 'hot', 'bestSell', 'dailyDeal', 'discounted', 'soldOut'],
       number:['price']
     });
@@ -202,10 +202,12 @@ exports.search = async (req, res, next) => {
     }
 
     let defaultSort = true;
+    
     if (['seller', 'admin'].indexOf(req.headers.platform) === -1) {
       query.isActive = true;
       query.shopVerified = true;
       query.shopActivated = true;
+      query.publishStatus = 'accepted';
       defaultSort = false;
     } else if (req.headers.platform === 'seller' && req.user && req.user.isShop) {
       // from seller platform, just show seller products

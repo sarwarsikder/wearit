@@ -9,7 +9,7 @@ export class ProductService {
     'name', 'alias', 'description', 'shortDescription', 'categoryId', 'brandId', 'specifications', 'videoUrl',
     'chemicalIdentifiers', 'safetyHandling', 'featured', 'isActive', 'metaSeo', 'ordering', 'shopId', 'freeShip',
     'images', 'mainImage', 'type', 'price', 'salePrice', 'stockQuantity', 'sku', 'upc', 'mpn', 'ean', 'digitalFileId','sizeChart','logo',
-    'jan', 'isbn', 'taxClass', 'taxPercentage', 'restrictCODAreas', 'restrictFreeShipAreas', 'dailyDeal', 'dealTo', 'hot', 'bestSell'
+    'jan', 'isbn', 'taxClass', 'taxPercentage', 'restrictCODAreas', 'restrictFreeShipAreas', 'dailyDeal', 'dealTo', 'hot', 'bestSell', 'publishStatus'
   ];
 
   constructor(private restangular: Restangular) { }
