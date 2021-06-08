@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 
 @Component({
@@ -18,12 +18,20 @@ export class UserListingComponent implements OnInit {
     sortBy: 'createdAt',
     sortType: 'desc'
   };
+  private userType: string;
 
-  constructor(private router: Router, private userService: UserService, private toasty: ToastyService) {
+  constructor(private router: Router, private userService: UserService, private toasty: ToastyService, private route: ActivatedRoute) {
+    route.params.subscribe(params => {
+      this.setupComponent(params['type']);
+    })
   }
-
-  ngOnInit() {
+  setupComponent(someParam) {
+    this.userType = someParam;
     this.query();
+  }
+  ngOnInit() {
+    // this.userType = this.route.snapshot.paramMap.get('type');
+    // this.query();
   }
 
   query() {
@@ -31,7 +39,8 @@ export class UserListingComponent implements OnInit {
       page: this.currentPage,
       take: this.pageSize,
       sort: `${this.sortOption.sortBy}`,
-      sortType: `${this.sortOption.sortType}`
+      sortType: `${this.sortOption.sortType}`,
+      role: this.userType
     }, this.searchFields);
     this.userService.search(params)
       .then((resp) => {

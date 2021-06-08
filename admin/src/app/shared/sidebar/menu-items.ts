@@ -7,7 +7,10 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '/users/list', title: 'Users', icon: 'fa fa-users', class: 'has-arrow', label: '', labelClass: '', extralink: false,
     submenu: [
-      { path: '/users/list', title: 'List users', icon: 'fa fa-users', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+      { path: '/users/list/admin', title: 'Admin users', icon: 'fa fa-users', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+      { path: '/users/list/seller', title: 'Seller Users', icon: 'fa fa-users', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+      { path: '/users/list/user', title: 'Normal Users', icon: 'fa fa-users', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+      { path: '/users/list/courier', title: 'Courier users', icon: 'fa fa-users', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
       { path: '/users/create', title: 'Create new', icon: 'fa fa fa-user-plus', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
     ]
   },
