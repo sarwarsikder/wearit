@@ -48,6 +48,7 @@
           <th>
             Actions
           </th>
+          
         </tr>
         <tr class="sub-th">
           <td>
@@ -80,8 +81,12 @@
             </select>
           </td>
           <td></td>
-          <td>
+          <td *ngIf="userType === 'admin'">
             <button class="btn btn-primary" (click)="query()">Filter</button>
+          </td>
+          <td *ngIf="userType !== 'admin'">
+            <button class="btn btn-primary" (click)="query()">Filter</button>
+            <button class="btn btn-primary" style="margin-left: 10px;" (click)="exportUsers()">Export</button>
           </td>
         </tr>
       </thead>
