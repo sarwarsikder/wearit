@@ -22,6 +22,10 @@ exports.User = (schema) => {
       type: Boolean,
       default: true
     },
+    wholeSeller: {
+      type: Boolean,
+      default: false
+    },
     emailVerified: {
       type: Boolean,
       default: false
@@ -35,6 +39,10 @@ exports.User = (schema) => {
     phoneVerified: {
       type: Boolean,
       default: false
+    },
+    permission: {
+      type: [String],
+      default: []
     },
     countryCode: {
       type: String
