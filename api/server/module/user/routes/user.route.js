@@ -69,7 +69,6 @@ module.exports = (router) => {
     Middleware.Response.success('user')
   );
 
-  router.post('/v1/users/insta', userController.createInsta)
 
   /**
    * @apiGroup User
