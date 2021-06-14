@@ -47,11 +47,11 @@ exports.update = async (req, res, next) => {
   try {
     const user = req.params.id ? await DB.User.findOne({ _id: req.params.id }) : req.user;
     let publicFields = [
-      'name', 'password', 'address', 'phoneNumber', 'photo', 'nid'
+      'name', 'password', 'address', 'phoneNumber', 'photo', 'nid', 'wholeSeller'
     ];
     if (req.user.role === 'admin') {
       publicFields = publicFields.concat([
-        'isActive', 'emailVerified', 'role'
+        'isActive', 'emailVerified', 'role', 'permission'
       ]);
     }
     const fields = _.pick(req.body, publicFields);
@@ -116,10 +116,11 @@ exports.update = async (req, res, next) => {
         }
       }
       _.merge(user, formfields);
-    }else{
+    } else{
       _.merge(user, fields);
     }
     
+    user.markModified('permission');
     await user.save();
     res.locals.update = user;
     next();

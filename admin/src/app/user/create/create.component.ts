@@ -16,16 +16,34 @@ export class UserCreateComponent implements OnInit {
     email: '',
     address: '',
     role: 'user',
+    permission: ['shops','products','orders'],
     emailVerified: true,
-    isActive: true
+    isActive: true,
+    wholeSeller: true,
   };
   public isSubmitted: any = false;
-
+  public menu = [{name:'Shops', value:'shops'},{name:'Products',value:'products'},{name:'Orders',value:'orders'}]
   constructor(private router: Router, private userService: UserService, private toasty: ToastyService) { }
 
   ngOnInit() { }
 
+  updatePermission(value){
+    if(this.info.permission.includes(value)){
+      var index = this.info.permission.indexOf(value);
+      if (index !== -1) {
+        this.info.permission.splice(index, 1);
+      }
+    }else{
+      this.info.permission.push(value)
+    }
+  }
+
   submit(frm: any) {
+    if(this.info.role==='admin'){
+      frm.value.permission=this.info.permission;
+    }
+    
+
     this.isSubmitted = true;
     if (!frm.valid) {
       return this.toasty.error('Something went wrong, please check and try again!');
