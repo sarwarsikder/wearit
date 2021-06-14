@@ -11,10 +11,11 @@ import { SignupComponent } from './signup/signup.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { GoogleLoginButtonComponent } from './socials-login/google-login-button.component';
 import { FacebookLoginButtonComponent } from './socials-login/facebook-login-button.component';
+// import {InstagramLoginButtonComponent} from './socials-login/instagram-login-button.component';
 
 // social login, check document here https://github.com/abacritt/angularx-social-login#readme
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
 
 import { UtilsModule } from '../utils/utils.module';
 
@@ -37,6 +38,13 @@ const fbLoginOptions = {
   version: 'v2.11'
 };
 
+const instaLoginOptions = {
+  scope: 'username',
+  return_scopes: true,
+  enable_profile_selector: true,
+  version: 'v2.11'
+};
+
 @NgModule({
   imports: [
     CommonModule,
@@ -54,10 +62,12 @@ const fbLoginOptions = {
     ForgotComponent,
     GoogleLoginButtonComponent,
     FacebookLoginButtonComponent
+    // InstagramLoginButtonComponent
   ],
   exports: [
     GoogleLoginButtonComponent,
     FacebookLoginButtonComponent
+    // InstagramLoginButtonComponent
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
@@ -80,6 +90,13 @@ const fbLoginOptions = {
             fbLoginOptions
           ),
         }
+        // {
+        //   id: InstagramLoginProvider.PROVIDER_ID,
+        //   provider: new InstagramLoginProvider(
+        //     window.appConfig.instagramAppId,
+        //     instaLoginOptions
+        //   ),
+        // }
       ],
     } as SocialAuthServiceConfig,
   }]
