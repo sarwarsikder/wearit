@@ -11,9 +11,10 @@ const ip = require('ip');
  * Create a new user
  */
 exports.create = async (req, res, next) => {
+  console.log('new req',req)
   try {
     const schema = Joi.object().keys({
-      email: Joi.string().email().required(),
+      email: Joi.string().email(),
       password: Joi.string().min(6).required()
     }).unknown();
 
@@ -39,6 +40,7 @@ exports.create = async (req, res, next) => {
     return next(e);
   }
 };
+
 
 /**
  * do update for user profile or admin update
