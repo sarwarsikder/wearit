@@ -38,12 +38,12 @@ const fbLoginOptions = {
   version: 'v2.11'
 };
 
-const instaLoginOptions = {
-  scope: 'username',
-  return_scopes: true,
-  enable_profile_selector: true,
-  version: 'v2.11'
-};
+// const instaLoginOptions = {
+//   scope: 'username',
+//   return_scopes: true,
+//   enable_profile_selector: true,
+//   version: 'v2.11'
+// };
 
 @NgModule({
   imports: [

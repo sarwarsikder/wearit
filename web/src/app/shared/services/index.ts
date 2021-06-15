@@ -1,4 +1,5 @@
 export * from './auth.service';
+export * from './check.service';
 export * from './system.service';
 export * from './seo.service';
 export * from './location.service';
