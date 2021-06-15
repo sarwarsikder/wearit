@@ -19,11 +19,10 @@ export class checkEmailPhoneGuard implements CanActivate {
     return this.Auth.getCurrentUser()
       .then(res => {
         if(this.check.checkEmailandPhone(res.email, res.address)){
-          this.router.navigate(['/profile/update'],{ skipLocationChange: true })
-          console.log('asche to')
           return true
         }
         else{
+          this.router.navigate(['/profile/update'])
           return false          
         }
       });
