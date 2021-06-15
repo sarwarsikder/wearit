@@ -15,9 +15,11 @@ export class UserUpdateComponent implements OnInit {
   public avatarOptions: any = {};
   public user: any = {};
   private userId: string;
-  public menu = [{name:'Shops', value:'shops'},{name:'Products',value:'products'},{name:'Orders',value:'orders'}]
+  public menu = []
 
-  constructor(private router: Router, private userService: UserService, private toasty: ToastyService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private userService: UserService, private toasty: ToastyService, private route: ActivatedRoute) {
+    this.menu = this.userService.menuList;
+   }
 
   ngOnInit() {
     this.userId = this.route.snapshot.paramMap.get('id');

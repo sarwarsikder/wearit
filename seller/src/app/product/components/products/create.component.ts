@@ -32,6 +32,8 @@ export class ProductCreateComponent implements OnInit {
     hot: false,
     bestSell: false,
     stockQuantity: 0,
+    minimumPurchaseQuantity: 0,
+    maximumPurchaseQuantity: 0,
     price: 0,
     salePrice: 0,
     vat: 0,
@@ -135,6 +137,14 @@ export class ProductCreateComponent implements OnInit {
 
     if (this.product.salePrice > this.product.price || this.product.salePrice <= 0 || this.product.price <= 0) {
       return this.toasty.error('Price or sale price is invalid.');
+    }
+
+    if (this.product.minimumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0) {
+      return this.toasty.error('Minimum purchase quantity is invalid.');
+    }
+
+    if (this.product.maximumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0 || this.product.minimumPurchaseQuantity < this.product.minimumPurchaseQuantity) {
+      return this.toasty.error('Maximum purchase quantity is invalid.');
     }
 
     if (this.product.dailyDeal && this.dealDate) {

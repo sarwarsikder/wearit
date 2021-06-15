@@ -54,6 +54,14 @@ const schema = new Schema({
     type: Number,
     default: 0
   },
+  minimumPurchaseQuantity: {
+    type: Number,
+    default: 0
+  },
+  maximumPurchaseQuantity: {
+    type: Number,
+    default: 0
+  },
   // base on  the category
   specifications: [{
     _id: false,
