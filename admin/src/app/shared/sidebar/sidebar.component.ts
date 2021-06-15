@@ -13,6 +13,7 @@ export class SidebarComponent implements OnInit {
   showSubMenu: any = '';
   public isShowMenu: any = false;
   public sidebarnavItems: any[];
+  public urlPermission;
   // this is for the open close
   addExpandClass(element: any) {
     if (element === this.showMenu) {
@@ -32,6 +33,9 @@ export class SidebarComponent implements OnInit {
   }
   // End open close
   ngOnInit() {
+    if (this.authService.isLoggedin()) {
+      this.urlPermission = this.authService.getCurrentUser().__zone_symbol__value.permission;
+    }
     this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
     $(function () {
       $('.sidebartoggler').on('click', function () {

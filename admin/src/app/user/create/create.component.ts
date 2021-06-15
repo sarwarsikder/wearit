@@ -16,14 +16,19 @@ export class UserCreateComponent implements OnInit {
     email: '',
     address: '',
     role: 'user',
-    permission: ['shops','products','orders'],
+    permission: [],
     emailVerified: true,
     isActive: true,
     wholeSeller: true,
   };
   public isSubmitted: any = false;
-  public menu = [{name:'Shops', value:'shops'},{name:'Products',value:'products'},{name:'Orders',value:'orders'}]
-  constructor(private router: Router, private userService: UserService, private toasty: ToastyService) { }
+
+  public menu = []
+
+  constructor(private router: Router, private userService: UserService, private toasty: ToastyService) {
+    this.menu = this.userService.menuList;
+    this.info.permission = this.userService.menuValue;
+  }
 
   ngOnInit() { }
 
