@@ -14,7 +14,7 @@ export const environment = {
   // sellerUrl: 'https://wearit-shop-api.herokuapp.com/api',
   sellerUrl: 'https://wearit-seller.herokuapp.com/',
   platform: 'web',
-  googleClientId: '65008936034-ljo9abfuchl5ddpbthbbpfjj05aavdr5.apps.googleusercontent.com',
+  googleClientId: '65008936034-b8nn9u1d0nitk5qlbtc91iqbv841cp21.apps.googleusercontent.com',
   // googleClientId: '137828882328-lk6q22rskp5v3a30q1701h5mk9hhvrhq.apps.googleusercontent.com',
   // facebookAppId: '115398973981786',
   // facebookAppId: '113570925979091',

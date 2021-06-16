@@ -18,7 +18,8 @@ export class checkEmailPhoneGuard implements CanActivate {
 
     return this.Auth.getCurrentUser()
       .then(res => {
-        if(this.check.checkEmailandPhone(res.email, res.address)){
+        console.log('dataaa',res)
+        if(this.check.checkEmailandPhone(res.email, res.phoneNumber)){
           return true
         }
         else{
