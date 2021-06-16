@@ -9,7 +9,8 @@ export class ProductService {
     'name', 'alias', 'description', 'shortDescription', 'categoryId', 'brandId', 'specifications',
     'chemicalIdentifiers', 'safetyHandling', 'isActive', 'metaSeo', 'ordering', 'freeShip',
     'images', 'mainImage', 'type', 'price', 'salePrice', 'stockQuantity', 'sku', 'upc', 'mpn', 'ean', 'sizeChart', 'digitalFileId',
-    'jan', 'isbn', 'taxClass', 'taxPercentage', 'restrictCODAreas', 'restrictFreeShipAreas', 'dailyDeal', 'dealTo'
+    'jan', 'isbn', 'taxClass', 'taxPercentage', 'restrictCODAreas', 'restrictFreeShipAreas', 'dailyDeal', 'dealTo', 'publishStatus',
+    'maximumPurchaseQuantity','minimumPurchaseQuantity'
   ];
 
   constructor(private restangular: Restangular) { }

@@ -8,6 +8,7 @@ import { ProductRoutingModule } from "./product.routing";
 import { MediaModule } from "../media/media.module";
 
 import { ProductListingComponent } from "./product/listing.component";
+import { ProductPendingListingComponent } from "./product/pending-listing.component";
 import { ProductUpdateComponent } from "./product/update.component";
 import { ProductCreateComponent } from "./product/create.component";
 import { ReviewsComponent } from "./reviews/listing.component";
@@ -37,6 +38,7 @@ import { ProductVariantService } from "./services/variant.service";
 import { ReviewService } from "./services/review.service";
 import { BrandService } from "./services/brand.service";
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -57,6 +59,7 @@ import { BrandService } from "./services/brand.service";
     OptionCreateComponent,
     OptionUpdateComponent,
     ProductListingComponent,
+    ProductPendingListingComponent,
     ProductCreateComponent,
     ProductUpdateComponent,
     VariantUpdateModalComponent,

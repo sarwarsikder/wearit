@@ -11,9 +11,10 @@ const ip = require('ip');
  * Create a new user
  */
 exports.create = async (req, res, next) => {
+  console.log('new req',req)
   try {
     const schema = Joi.object().keys({
-      email: Joi.string().email().required(),
+      email: Joi.string().email(),
       password: Joi.string().min(6).required()
     }).unknown();
 
@@ -40,6 +41,7 @@ exports.create = async (req, res, next) => {
   }
 };
 
+
 /**
  * do update for user profile or admin update
  */
@@ -47,11 +49,11 @@ exports.update = async (req, res, next) => {
   try {
     const user = req.params.id ? await DB.User.findOne({ _id: req.params.id }) : req.user;
     let publicFields = [
-      'name', 'password', 'address', 'phoneNumber', 'photo', 'nid'
+      'name', 'password', 'address', 'phoneNumber', 'photo', 'nid', 'wholeSeller'
     ];
     if (req.user.role === 'admin') {
       publicFields = publicFields.concat([
-        'isActive', 'emailVerified', 'role'
+        'isActive', 'emailVerified', 'role', 'permission'
       ]);
     }
     const fields = _.pick(req.body, publicFields);
@@ -116,10 +118,11 @@ exports.update = async (req, res, next) => {
         }
       }
       _.merge(user, formfields);
-    }else{
+    } else{
       _.merge(user, fields);
     }
     
+    user.markModified('permission');
     await user.save();
     res.locals.update = user;
     next();

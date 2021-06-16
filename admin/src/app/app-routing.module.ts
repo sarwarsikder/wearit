@@ -19,6 +19,7 @@ export const Approutes: Routes = [
     path: '',
     component: FullComponent,
     canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always',
     resolve: { appConfig: ConfigResolver },
     children: [
       { path: '', redirectTo: '/auth/login', pathMatch: 'full' },

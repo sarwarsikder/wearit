@@ -85,7 +85,7 @@ export class ProductDetailComponent implements OnDestroy {
       this.updateSeo();
       this.selectedVariant = {};
       this.isVariant = false;
-      this.quantity = 1;
+      this.quantity = this.product.minimumPurchaseQuantity ? this.product.minimumPurchaseQuantity : 1;
       if (this.product.images.length) {
         this.activeSlide = this.product.images[0];
       } else if (!this.product.images.length && this.product.mainImage) {
@@ -268,7 +268,7 @@ export class ProductDetailComponent implements OnDestroy {
       return this.toasty.error(this.translate.instant('This item is out of stock.'));
     }
 
-    if (this.quantity > this.stockQuantity) {
+    if (this.quantity < this.product.minimumPurchaseQuantity || this.quantity > this.product.maximumPurchaseQuantity || this.quantity > this.stockQuantity) {
       return this.toasty.error(this.translate.instant('Quantity is not valid, please check and try again!'));
     }
     this.cartService.add({
@@ -285,7 +285,7 @@ export class ProductDetailComponent implements OnDestroy {
       return this.toasty.error(this.translate.instant('This item is out of stock.'));
     }
 
-    if (this.quantity > this.stockQuantity) {
+    if (this.quantity < this.product.minimumPurchaseQuantity || this.quantity > this.product.maximumPurchaseQuantity || this.quantity > this.stockQuantity) {
       return this.toasty.error(this.translate.instant('Quantity is not valid, please check and try again!'));
     }
     this.cartService.addShop({

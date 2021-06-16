@@ -28,7 +28,8 @@ export class RegisterComponent implements OnInit {
   public shop: any = {
     email: '',
     password: '',
-    tailor: false
+    tailor: false,
+    wholeSeller: false
   };
   public mallFilterSelected: any = {
     mall: ''

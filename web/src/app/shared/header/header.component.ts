@@ -110,6 +110,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.authService.getCurrentUser().then(resp => this.currentUser = resp);
       this.whishList();
     }
+    
   }
 
   ngOnDestroy() {

@@ -67,6 +67,7 @@ module.exports = (router) => {
    * @api {get} /v1/products/search?:name&brandId&:shopId&&:q&dailyDeal&discounted&bestSell&soldOut&:sort&:sortType&:page&:take  Get list products
    * @apiDescription Get list products
    * @apiParam {String}   [name]      product name
+   * @apiParam {Enum}   [publishStatus]      product Publish Status
    * @apiParam {String}   [shortDescription]      product description
    * @apiParam {String}   [q] search all allowed fields
    * @apiParam {Number}   [take] Response item. defaultl `10`

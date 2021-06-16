@@ -4,6 +4,27 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
+  
+  public menuList = [
+    {name:'Users', value:'users'},
+    {name:'Shops', value:'shops'},
+    {name:'Products',value:'products'},
+    {name:'Orders',value:'orders'},
+    {name:'Banners',value:'banners'},
+    {name:'Malls',value:'malls'},
+    {name:'Offers',value:'offers'},
+    {name:'Posts',value:'posts'},
+    {name:'Newsletter',value:'newsletter'},
+    {name:'Complaints',value:'complaints'},
+    {name:'Faqs',value:'faqs'},
+    {name:'Request Payout',value:'requestPayout'},
+    {name:'Report',value:'report'},
+    {name:'Configs',value:'configs'}
+  ];
+
+  public menuValue = ['users','shops','products','orders','banners','malls','offers','posts','newsletter','complaints','faqs','requestPayout','report','configs'];
+  
+  
   constructor(private restangular: Restangular) { }
 
   create(credentials: any): Promise<any> {

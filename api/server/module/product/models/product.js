@@ -54,6 +54,14 @@ const schema = new Schema({
     type: Number,
     default: 0
   },
+  minimumPurchaseQuantity: {
+    type: Number,
+    default: 0
+  },
+  maximumPurchaseQuantity: {
+    type: Number,
+    default: 0
+  },
   // base on  the category
   specifications: [{
     _id: false,
@@ -75,6 +83,10 @@ const schema = new Schema({
   isActive: {
     type: Boolean,
     default: true
+  },
+  publishStatus: {
+    type: String,
+    enum: ['pending', 'accepted', 'rejected']
   },
   // stock keeping unit
   sku: {

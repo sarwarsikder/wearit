@@ -117,6 +117,30 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label>Minimum Purchase Quantity (*)</label>
+                                        <input type="number" name="minimumPurchaseQuantity" min="1" class="form-control"
+                                               [(ngModel)]="product.minimumPurchaseQuantity" required #minimumPurchaseQuantity="ngModel"/>
+                                        <div *ngIf="minimumPurchaseQuantity.errors && (minimumPurchaseQuantity.dirty || minimumPurchaseQuantity.touched || isSubmitted)">
+                                            <p [hidden]="!minimumPurchaseQuantity.errors.required" class="required-text">
+                                                Minimum Purchase Quantity quantity is required
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Maximum Purchase Quantity (*)</label>
+                                        <input type="number" name="maximumPurchaseQuantity" min="1" class="form-control"
+                                               [(ngModel)]="product.maximumPurchaseQuantity" required #maximumPurchaseQuantity="ngModel"/>
+                                        <div *ngIf="maximumPurchaseQuantity.errors && (maximumPurchaseQuantity.dirty || maximumPurchaseQuantity.touched || isSubmitted)">
+                                            <p [hidden]="!maximumPurchaseQuantity.errors.required" class="required-text">
+                                                Maximum Purchase Quantity quantity is required
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label>Sale Price (*)</label>
                                         <input type="number" name="salePrice" class="form-control"
                                                [(ngModel)]="product.salePrice" min="0.1" required #salePrice="ngModel"/>
@@ -127,6 +151,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tax Name</label>
