@@ -98,6 +98,43 @@ export class LoginComponent {
   }
 
   signInWithInsta(code){
+    let instagramRedirectUri = '819247062130628';
+    let instagramClientId = 'https://www.google.com';
+    let accessToken = '';
+    var popupWidth = 700,
+    popupHeight = 500,
+    popupLeft = (window.screen.width - popupWidth) / 2,
+    popupTop = (window.screen.height - popupHeight) / 2;
+// Url needs to point to instagram_auth.php
+var popup = window.open('instagram_auth.php', '', 'width='+popupWidth+',height='+popupHeight+',left='+popupLeft+',top='+popupTop+'');
+popup.onload = function() {
+    // Open authorize url in pop-up
+    if(window.location.hash.length == 0) {
+        popup.open('https://instagram.com/oauth/authorize/?client_id='+instagramClientId+'&redirect_uri='+instagramRedirectUri+'&response_type=token', '_self');
+    }
+    // An interval runs to get the access token from the pop-up
+    var interval = setInterval(function() {
+        try {
+            // Check if hash exists
+            if(popup.location.hash.length) {
+                // Hash found, that includes the access token
+                clearInterval(interval);
+                accessToken = popup.location.hash.slice(14); //slice #access_token= from string
+                popup.close();
+                // if(callback != undefined && typeof callback == 'function'){
+                //     callback();
+                // }
+            }
+        }
+        catch(evt) {
+            // Permission denied
+        }
+    }, 100);
+};
+
+
+
+
 
   //   const data = { client_id: '819247062130628',
   //           redirect_url: 'https://www.google.com',
@@ -107,19 +144,19 @@ export class LoginComponent {
     
     // this.http.post('http://localhost:8080/v1/users/insta', data)
 
-    try {
-      const body = new HttpParams()
-        .set('client_id', '819247062130628')
-        .set('redirect_uri', 'https://www.google.com/')
-        .set('scope', 'user_profile,user_media')
-        .set('response_type', 'code');
+    // try {
+    //   const body = new HttpParams()
+    //     .set('client_id', '819247062130628')
+    //     .set('redirect_uri', 'https://www.google.com/')
+    //     .set('scope', 'user_profile,user_media')
+    //     .set('response_type', 'code');
   
-      return this.http
-        .post('https://api.instagram.com/oauth/authorize?client_id=819247062130628&redirect_uri=https://www.google.com&scope=user_profile,user_media&response_type=code', null, httpOptions)
-        .subscribe(res => console.log('res', res))
-    } catch (err) {
-      return err;
-    }
+    //   return this.http
+    //     .post('https://api.instagram.com/oauth/authorize?client_id=819247062130628&redirect_uri=https://www.google.com&scope=user_profile,user_media&response_type=code', null, httpOptions)
+    //     .subscribe(res => console.log('res', res))
+    // } catch (err) {
+    //   return err;
+    // }
   
   
 
