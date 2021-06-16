@@ -64,6 +64,16 @@
                   <span *ngIf="!stockQuantity" class="badge badge-danger" translate>SOLD OUT!</span>
                 </strong>
               </div>
+              <div translate class="highlight-info" *ngIf="stockQuantity">Minimum Puchase Quantity:
+                <strong>
+                  <span *ngIf="stockQuantity">{{product.minimumPurchaseQuantity?product.minimumPurchaseQuantity:1 | number}}</span>
+                </strong>
+              </div> 
+              <div translate class="highlight-info" *ngIf="stockQuantity" >Maximum Puchase Quantity:
+                <strong>
+                  <span *ngIf="stockQuantity">{{product.maximumPurchaseQuantity?product.maximumPurchaseQuantity:1 | number}}</span>
+                </strong>
+              </div>
               <!-- <div class="highlight-info">
                 Tax: &nbsp;
                 <strong>
@@ -160,8 +170,8 @@
                     <button class="btn" (click)="plus()"><i class="fa fa-plus"></i></button>
                   </div>
                   <div class="form-check-inline">
-                    <input type="text" type="number" min="1"
-                    max="{{stockQuantity}}" [(ngModel)]="quantity" name="quantity">
+                    <input type="text" type="number" min="{{product.minimumPurchaseQuantity?product.minimumPurchaseQuantity:1}}"
+                    max="{{(product.maximumPurchaseQuantity && product.maximumPurchaseQuantity <= stockQuantity) ? product.maximumPurchaseQuantity:stockQuantity}}" [(ngModel)]="quantity" name="quantity">
                   </div>
                   <div class="form-check-inline">
                     <button class="btn" (click)="minus()"><i class="fa fa-minus"></i></button>

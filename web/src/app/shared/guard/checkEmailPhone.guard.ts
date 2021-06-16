@@ -1,31 +1,29 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { Router } from '@angular/router';
-import {AuthService, CheckService} from '../services'
+import {AuthService} from '../services'
 
 @Injectable()
 export class checkEmailPhoneGuard implements CanActivate {
 
-  constructor(private router: Router, public check: CheckService, public Auth: AuthService) { }
+  constructor(private router: Router, public Auth: AuthService) { }
 
 
   canActivate() {
-
-    if (!this.Auth.isLoggedin()) {
-      this.router.navigate(['/auth/login']);
-      return false;
-    }
-
-    return this.Auth.getCurrentUser()
+    if (this.Auth.isLoggedin()) {
+      return this.Auth.getCurrentUser()
       .then(res => {
-        if(this.check.checkEmailandPhone(res.email, res.address)){
-          return true
+        if(!res.email||!res.phoneNumber){
+          this.router.navigate(['/profile/update'])
+          return false  
         }
         else{
-          this.router.navigate(['/profile/update'])
-          return false          
+           return true;      
         }
       });
-  }
+    }else{
+      return true;
+    }  
+   }
   }
 
