@@ -23,7 +23,7 @@ import { SearchbarComponent } from './shared/header/search-bar.component';
 import { CategoriesComponent } from './shared/header/categories.component';
 import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { ComplainComponent } from './shared/complain/complain.component';
-import { AuthService, SystemService, ComplainService, CheckService} from './shared/services';
+import { AuthService, SystemService, ComplainService} from './shared/services';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MediaModule } from './media/media.module';
@@ -120,7 +120,6 @@ export function createTranslateLoader(http: HttpClient) {
     useClass: PathLocationStrategy // HashLocationStrategy
   },
     AuthService,
-    CheckService,
     SystemService,
     AuthGuard,
     checkEmailPhoneGuard,
