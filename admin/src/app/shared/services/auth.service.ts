@@ -19,7 +19,6 @@ export class AuthService {
     return this.restangular.one('users', 'me').get().toPromise()
       .then((resp) => {
         this.currentUser = resp.data;
-
         return resp.data;
       });
   }
@@ -34,10 +33,11 @@ export class AuthService {
             this.removeToken();
             throw 'Invalid role!';
           }
-          console.log("TESTING");
+  
 
           this.currentUser = resp.data;
           localStorage.setItem('isLoggedin', 'yes');
+      
           return resp.data;
         });
     });
@@ -58,6 +58,7 @@ export class AuthService {
   removeToken() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('isLoggedin');
+    localStorage.removeItem('currentUser');
   }
 
   isLoggedin() {

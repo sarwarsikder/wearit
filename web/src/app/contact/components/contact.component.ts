@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { ContactService } from '../services/contact.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,7 +15,7 @@ export class ContactComponent implements OnInit {
     email: '',
     message: ''
   };
-  constructor(private translate: TranslateService, private router: Router, private route: ActivatedRoute, private toasty: ToastyService, private contactService: ContactService) { }
+  constructor(private translate: TranslateService, private router: Router, private route: ActivatedRoute, private toasty: ToastyService, private contactService: ContactService) {}
 
   ngOnInit() { }
 

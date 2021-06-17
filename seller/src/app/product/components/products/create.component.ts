@@ -24,6 +24,7 @@ export class ProductCreateComponent implements OnInit {
       description: ''
     },
     type: 'physical',
+    publishStatus: 'pending',
     categoryId: '',
     isActive: true,
     freeShip: false,
@@ -31,6 +32,8 @@ export class ProductCreateComponent implements OnInit {
     hot: false,
     bestSell: false,
     stockQuantity: 0,
+    minimumPurchaseQuantity: 0,
+    maximumPurchaseQuantity: 0,
     price: 0,
     salePrice: 0,
     vat: 0,
@@ -136,6 +139,14 @@ export class ProductCreateComponent implements OnInit {
       return this.toasty.error('Price or sale price is invalid.');
     }
 
+    if (this.product.minimumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0) {
+      return this.toasty.error('Minimum purchase quantity is invalid.');
+    }
+
+    if (this.product.maximumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0 || this.product.minimumPurchaseQuantity < this.product.minimumPurchaseQuantity) {
+      return this.toasty.error('Maximum purchase quantity is invalid.');
+    }
+
     if (this.product.dailyDeal && this.dealDate) {
       this.product.dealTo = new Date(this.dealDate.year, this.dealDate.month, this.dealDate.day).toUTCString();
     }
@@ -154,6 +165,7 @@ export class ProductCreateComponent implements OnInit {
     });
     this.product.images = this.images.map(i => i._id);
     this.product.mainImage = this.mainImage || null;
+   
     this.productService.create(this.product)
       .then(() => {
         this.toasty.success('Product has been created');

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Restangular } from 'ngx-restangular';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import 'rxjs/add/operator/toPromise';
 
@@ -8,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 })
 export class AuthService {
   private accessToken: string = null;
-  private currentUser = null;
+  public currentUser = null;
   private userLoaded = new Subject<any>();
   public userLoaded$ = this.userLoaded.asObservable();
 
@@ -16,7 +17,7 @@ export class AuthService {
   // because many component use get current user function
   private _getUser: any;
 
-  constructor(private restangular: Restangular) { }
+  constructor(private restangular: Restangular, private router: Router) { }
 
   getCurrentUser() {
     if (this.currentUser) {
@@ -24,6 +25,7 @@ export class AuthService {
     }
 
     if (this._getUser && typeof this._getUser.then === 'function') {
+      console.log("_getuser", this._getUser)
       return this._getUser;
     }
 
@@ -37,6 +39,8 @@ export class AuthService {
 
     return this._getUser;
   }
+
+  
 
   login(credentials: any): Promise<any> {
     return this.restangular.all('auth/login').post(credentials).toPromise()

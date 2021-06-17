@@ -147,6 +147,14 @@ export class ProductUpdateComponent implements OnInit {
       return this.toasty.error('Price or sale price is invalid.');
     }
 
+    if (this.product.minimumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0) {
+      return this.toasty.error('Minimum purchase quantity is invalid.');
+    }
+
+    if (this.product.maximumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0 || this.product.minimumPurchaseQuantity < this.product.minimumPurchaseQuantity) {
+      return this.toasty.error('Maximum purchase quantity is invalid.');
+    }
+
     if (this.product.taxPercentage < 0) {
       return this.toasty.error('Tax value is invalid.');
     }

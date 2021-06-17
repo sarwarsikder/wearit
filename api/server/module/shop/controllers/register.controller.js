@@ -19,7 +19,8 @@ exports.register = async (req, res, next) => {
     verificationIssueId: Joi.string().required(),
     area: Joi.string().optional(),
     mallId: Joi.string().optional(),
-    tailor: Joi.boolean().optional()
+    tailor: Joi.boolean().optional(),
+    wholeSeller: Joi.boolean().optional()
   });
 
   const validate = Joi.validate(req.body, schema);

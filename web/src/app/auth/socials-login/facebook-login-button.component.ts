@@ -20,6 +20,7 @@ export class FacebookLoginButtonComponent {
     console.log(FacebookLoginProvider.PROVIDER_ID);
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID)
       .then((resp) => {
+        // console.log(resp)
         this.Auth.socialLogin('facebook', resp.authToken);
         this.router.navigate(['/']);
       })

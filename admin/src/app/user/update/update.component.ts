@@ -15,8 +15,11 @@ export class UserUpdateComponent implements OnInit {
   public avatarOptions: any = {};
   public user: any = {};
   private userId: string;
+  public menu = []
 
-  constructor(private router: Router, private userService: UserService, private toasty: ToastyService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private userService: UserService, private toasty: ToastyService, private route: ActivatedRoute) {
+    this.menu = this.userService.menuList;
+   }
 
   ngOnInit() {
     this.userId = this.route.snapshot.paramMap.get('id');
@@ -29,10 +32,21 @@ export class UserUpdateComponent implements OnInit {
     this.userService.findOne(this.userId).then(resp => {
       this.user = resp.data;
       this.info = _.pick(resp.data, [
-        'name', 'email', 'isActive', 'emailVerified', 'address', 'role', 'emailNotification', 'type', 'phoneNumber'
+        'name', 'email', 'isActive','wholeSeller', 'emailVerified', 'address', 'role', 'emailNotification', 'type', 'phoneNumber','permission'
       ]);
       this.avatarUrl = resp.data.avatarUrl;
     });
+  }
+
+  updatePermission(value){
+    if(this.info.permission.includes(value)){
+      var index = this.info.permission.indexOf(value);
+      if (index !== -1) {
+        this.info.permission.splice(index, 1);
+      }
+    }else{
+      this.info.permission.push(value)
+    }
   }
 
   submit(frm: any) {

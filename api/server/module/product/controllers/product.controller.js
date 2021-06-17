@@ -4,6 +4,7 @@ const Joi = require('joi');
 const validateSchema = Joi.object().keys({
   name: Joi.string().required(),
   alias: Joi.string().allow([null, '']).optional(),
+  publishStatus: Joi.string().allow(['pending', 'accepted', 'rejected']).optional(),
   type: Joi.string().allow(['physical', 'digital']).optional(),
   shortDescription: Joi.string().allow([null, '']).optional(),
   description: Joi.string().allow([null, '']).optional(),
@@ -27,6 +28,8 @@ const validateSchema = Joi.object().keys({
   bestSell: Joi.boolean().allow([null]).optional(), // for admin only
   isActive: Joi.boolean().allow([null]).optional(),
   stockQuantity: Joi.number().optional(),
+  minimumPurchaseQuantity: Joi.number().optional(),
+  maximumPurchaseQuantity: Joi.number().optional(),
   sku: Joi.string().allow([null, '']).optional(),
   upc: Joi.string().allow([null, '']).optional(),
   mpn: Joi.string().allow([null, '']).optional(),
@@ -87,7 +90,9 @@ exports.create = async (req, res, next) => {
     }
 
     let alias = req.body.alias ? Helper.String.createAlias(req.body.alias) : Helper.String.createAlias(req.body.name);
-    const count = await DB.Product.count({ alias });
+    const count = await DB.Product.count({
+      alias
+    });
     if (count) {
       alias = `${alias}-${Helper.String.randomString(5)}`;
     }
@@ -98,9 +103,6 @@ exports.create = async (req, res, next) => {
       ]);
     }
 
-    console.log("Test")
-    console.log(req)
-    console.log("Test")
 
     Helper.Utils.markNullEmpty(validate.value, ['categoryId']);
     const product = new DB.Product(Object.assign(validate.value, {
@@ -134,7 +136,9 @@ exports.update = async (req, res, next) => {
     let alias = req.body.alias ? Helper.String.createAlias(req.body.alias) : Helper.String.createAlias(req.body.name);
     const count = await DB.Product.count({
       alias,
-      _id: { $ne: req.product._id }
+      _id: {
+        $ne: req.product._id
+      }
     });
     if (count) {
       alias = `${alias}-${Helper.String.randomString(5)}`;
@@ -177,9 +181,9 @@ exports.search = async (req, res, next) => {
 
   try {
     let query = Helper.App.populateDbQuery(req.query, {
-      text: ['name', 'alias', 'shortDescription'],
+      text: ['name', 'alias', 'shortDescription', 'publishStatus'],
       boolean: ['featured', 'isActive', 'hot', 'bestSell', 'dailyDeal', 'discounted', 'soldOut'],
-      number:['price']
+      number: ['price']
     });
 
     if (req.query.categoryId) {
@@ -201,10 +205,12 @@ exports.search = async (req, res, next) => {
     }
 
     let defaultSort = true;
+
     if (['seller', 'admin'].indexOf(req.headers.platform) === -1) {
       query.isActive = true;
       query.shopVerified = true;
       query.shopActivated = true;
+      query.publishStatus = 'accepted';
       defaultSort = false;
     } else if (req.headers.platform === 'seller' && req.user && req.user.isShop) {
       // from seller platform, just show seller products
@@ -216,20 +222,17 @@ exports.search = async (req, res, next) => {
     }
 
     if (req.query.q) {
-      query.name = { $regex: req.query.q.trim(), $options: 'i' };
+      query.name = {
+        $regex: req.query.q.trim(),
+        $options: 'i'
+      };
     }
 
     if (req.query.low_price) {
-       console.log(req.query.high_price);
-        query.price > req.query.low_price;
-        req.query.low_price <  query.price > req.query.high_price;
-
+      console.log(req.query.high_price);
+      query.price > req.query.low_price;
+      req.query.low_price < query.price > req.query.high_price;
     }
-
-  //   if (req.query.high_price) {
-  //     console.log(req.query.high_price);
-  //     query.price < req.query.high_price;
-  //  }
 
 
     if (query.dailyDeal && ['false', '0'].indexOf(query.dailyDeal) === -1) {
@@ -240,33 +243,33 @@ exports.search = async (req, res, next) => {
       shopFeatured: -1
     });
 
-    low_price=req.query.low_price;
-    high_price=req.query.high_price;
-    console.log('LOW');
+    low_price = req.query.low_price;
+    high_price = req.query.high_price;
 
-    if(low_price===null || low_price==='' || !req.query.low_price){
-       console.log('LOW One');
-       low_price=0;
+
+    if (low_price === null || low_price === '' || !req.query.low_price) {
+      console.log('LOW One');
+      low_price = 0;
     }
 
-    if(high_price===null || high_price===''  || !req.query.high_price){
+    if (high_price === null || high_price === '' || !req.query.high_price) {
       console.log("HIGH");
-      high_price=5000000;
+      high_price = 5000000;
     }
-
-
 
     const count = await DB.Product.count(query).where('price').gte(low_price).lte(high_price);
-
-    
 
     if (req.query.sort === 'random') {
       const randomData = await DB.Product.aggregate([{
         $match: query
       }, {
-        $sample: { size: take }
+        $sample: {
+          size: take
+        }
       }, {
-        $project: { _id: 1 }
+        $project: {
+          _id: 1
+        }
       }]);
       if (randomData && randomData.length) {
         query = {
@@ -276,8 +279,7 @@ exports.search = async (req, res, next) => {
         };
       }
     }
-    
-    
+
 
     const items = await DB.Product.find(query)
       .populate({
@@ -289,8 +291,12 @@ exports.search = async (req, res, next) => {
         select: '_id name mainImage totalProduct parentId'
       })
       .populate('shop')
-      .where('price').gte(low_price).lte(high_price)
-      .collation({ locale: 'en' })
+      .where('price')
+      .gte(low_price)
+      .lte(high_price)
+      .collation({
+        locale: 'en'
+      })
       .sort(sort)
       .skip(page * take)
       .limit(take)
@@ -348,7 +354,9 @@ exports.details = async (req, res, next) => {
 
     if (req.user && product.type === 'digital' && product.digitalFileId &&
       (req.user.role === 'admin' || (req.user.isShop && req.user.shopId && req.user.shopId.toString() === product.shopId.toString()))) {
-      product.digitalFile = await DB.Media.findOne({ _id: product.digitalFileId });
+      product.digitalFile = await DB.Media.findOne({
+        _id: product.digitalFileId
+      });
     }
 
     req.product = product;
@@ -386,9 +394,16 @@ exports.related = async (req, res, next) => {
     const page = Math.max(0, req.query.page - 1) || 0; // using a zero-based page index for use with skip()
     const take = parseInt(req.query.take, 10) || 10;
     // change to random
-    const randomData = await DB.Product.aggregate([
-      { $sample: { size: take } },
-      { $project: { _id: 1 } }
+    const randomData = await DB.Product.aggregate([{
+      $sample: {
+        size: take
+      }
+    },
+    {
+      $project: {
+        _id: 1
+      }
+    }
     ]);
     if (randomData && randomData.length) {
       query._id = {
@@ -409,7 +424,9 @@ exports.related = async (req, res, next) => {
         select: '_id name mainImage totalProduct parentId'
       })
       .populate('shop')
-      .collation({ locale: 'en' })
+      .collation({
+        locale: 'en'
+      })
       .sort(sort)
       .skip(page * take)
       .limit(take)
@@ -431,7 +448,9 @@ exports.checkAlias = async (req, res, next) => {
       return next(PopulateResponse.validationError(validate.error));
     }
     const alias = Helper.String.createAlias(validate.value.alias);
-    const count = await DB.Product.findOne({ alias });
+    const count = await DB.Product.findOne({
+      alias
+    });
     res.locals.checkAlias = {
       exist: count > 0
     };

@@ -8,6 +8,7 @@ web/node_modules
 admin/node_modules
 seller/node_modules
 node_modules
+dist
 npm-debug.log
 package-lock.json
 .nvmrc
