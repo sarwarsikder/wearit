@@ -164,7 +164,7 @@ a#scrollUp i {
 
 .dropdown-menu li a:hover,
 .dropdown-menu li a:focus {
-  background-color: #fe980f;
+  background-color: #d8d8d8;
   color: #fff;
   font-family: 'Roboto', 'sans-serif';
   text-decoration: none;
@@ -318,7 +318,7 @@ ul.sub-menu {
 }
 
 #footer {
-  background: #FEF2F2;
+  background: #1b1b1b;
 }
 
 .footer-top .container {
@@ -440,7 +440,7 @@ ul.sub-menu {
 
 
 .single-widget h2 {
-  color: #696763;
+  color: #fff;
   font-family: 'Roboto'2, 'Roboto'3;
   font-size: 15px;
   font-weight: 500;
@@ -454,7 +454,7 @@ ul.sub-menu {
 }
 
 .single-widget ul li a {
-  color: #8d8d8d;
+  color: #adadad !important;
   font-family: 'Roboto'4, 'Roboto'5;
   font-size: 14px;
   font-weight: 300;
@@ -506,12 +506,12 @@ ul.sub-menu {
 }
 
 .footer-bottom {
-  background: #FEF2F2;
+  background: #000;
   padding-top: 10px;
 }
 
 .footer-bottom p {
-  color: #363432;
+  color: #fff;
   font-family: 'sans-serif'0, 'sans-serif'1;
   font-weight: 300;
   margin-left: 15px;
@@ -2271,13 +2271,13 @@ textarea {
 }
 
 .slide-banner-new .slick-dots {
-  display: none;
+  display: block;
 }
 .slide-banner-new .slide{
-  height: 500px;
+  height: 300px;
 }
 .slide-banner-new .slide img{
-  height: 500px;
+  height: 300px;
   object-fit: cover;
 }
 
@@ -2354,7 +2354,7 @@ textarea {
 .header-middle {
   display: table;
   width: 100%;
-  padding: 15px 0px 0px 0px;
+  padding: 20px 0px 0px 0px;
   background: #DC2626;
 }
 

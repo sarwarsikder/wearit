@@ -1,8 +1,9 @@
 .slide-banner-new {
   .carousel.carousel-row {
     .slick-list {
-      height: 500px;
+      height: 300px;
       overflow: hidden;
+      margin-bottom: -30px;
 
       .slide {
         img {
@@ -12,16 +13,17 @@
     }
 
     .slick-dots {
-      bottom: 0px;
+      bottom:8px;
 
       li {
-        background: #fdb45e;
+        // background: #000;
         margin: 0;
 
         button {
           &::before {
             font-size: 14px;
-            color: #fff;
+            color: #000;
+            opacity: 1 !important;
           }
         }
 
@@ -37,7 +39,7 @@
       li.slick-active {
         button {
           &::before {
-            color: #fff;
+            color:#DC2626 ;
           }
         }
       }

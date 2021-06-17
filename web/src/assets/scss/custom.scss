@@ -1506,17 +1506,39 @@ span {
     background: #fff;
   }
   .search-top-btn{
-    background: #a02727;
+    background: #1a1a1a;
     border: 0px;
     width: 43px;
     height: 36px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    &:hover{
+      background: #000;
+    }
   }
 }
 
 .wish-top{
   margin-top: 6px;
+  position: relative;
+  margin-left: 15px;
+  span{
+    position: absolute;
+    min-width: 15px;
+    min-height: 15px;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 50%;
+    color: #1C1C1C;
+    top: -3px;
+    right: -5px;
+    background: white;
+    font-size: 12px;
+  }
+}
+
+.wholesale{
+  margin-top: 0px;
   position: relative;
   margin-left: 15px;
   span{
@@ -1980,8 +2002,8 @@ span {
   width: 100px;
   height: 36px;
   border-right: 0px;
-  background: #a02727;
-  color: #fff;
+  background: #eaeaea;
+  color: #000;
   padding-right: 10px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -2634,10 +2656,10 @@ input{
 .custom-brand-box{
   .img-prod{
     padding: 7px !important;
-    height:295px !important;
+    height:350px !important;
     background: #f6f5f8;
     img{
-      height: 295px !important;
+      height: 360px !important;
       object-fit: cover !important;
       border-radius: 0px !important;
     }
@@ -2657,7 +2679,7 @@ input{
 }
 
 .img-prod {
-  height:275px;
+  height:350px;
   line-height: 145px;
   padding: 0px !important;
 
@@ -2665,7 +2687,7 @@ input{
     border-radius: 0px;
     max-height: 100%;
     max-width: 100%;
-    height: 296px !important;
+    height: 360px !important;
     object-fit: cover;
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s linear;
@@ -2942,9 +2964,9 @@ input{
   flex-direction: row;
   .search_box{
     flex-grow: 1;
-    margin-top: 0px;
+    margin-top: -3px;
     padding-left: 25px;
-    padding-right: 80px;
+    padding-right: 100px;
   }
   .shop-menu{
     margin-top: -5px;
@@ -2990,6 +3012,22 @@ input{
     height: 23px;
   }
 }
+.wholesale-flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff !important;
+  font-size: 12px;
+  label{
+    display: block;
+    color: #fff;
+  }
+  svg{
+    display: block;
+    height: 23px;
+  }
+}
 .wish-top{
   margin-top: 1px;
 }
@@ -3010,12 +3048,13 @@ input{
 }
 
 .logo-mango{
-  margin-right: 20px;
+  margin-right: 40px;
   margin-left: 10px;
 }
 
 .shake {
   animation: shake-animation 3.72s ease infinite;
+  animation-iteration-count: 2;
   transform-origin: 50% 50%;
 }
 .element {
@@ -3032,7 +3071,7 @@ input{
 }
 
 .ng-autocomplete .autocomplete-container .input-container input {
-  height: 35px;
+  height: 36px !important;
   border-radius: 0px;
 }
 .ng-autocomplete{
@@ -3080,14 +3119,25 @@ input{
 .cart-dropout{
   position: absolute;
   top: 100%;
-  width: 360px;
+  width: 400px;
   right: -15px;
   min-height: 200px;
   background: #fff;
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 15px;
   z-index: 99;
   box-shadow: 0px 2px 16px -4px #00000047;
+  &::before{
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 6px 6px 6px;
+    right: 20px;
+    border-color: transparent transparent #fff transparent;
+  }
   h5{
     margin-top: 0px;
     margin-bottom: 0px;
@@ -3106,22 +3156,23 @@ input{
     overflow: auto;
     li{
       list-style: none;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       display: inline-flex;
+      position: relative;
       a{
         display:flex;
         width: 100%;
         flex-direction: row;
         align-items:end;
         img{
-          width: 60px;
-          height: 60px;
+          width: 75px;
+          height: 75px;
           background: #d8d8d8;
         }
         p.name{
           position: relative;
           font-size: 13px;
-          font-weight: 500;
+          font-weight: 600;
           flex-grow: 1;
           margin-top:0px;
           margin-bottom: 0px;
@@ -3130,13 +3181,17 @@ input{
           label.quantity{
             position: relative;
             display: block;
-            color: #000;
+            color: #252525;
+            font-size: 12px;
+            font-weight: 500;
           }
         }
         label.quantity{
           position: relative;
           display: block;
           color: #000;
+          font-weight: 600;
+          padding-left: 10px;
         }
       }
       .btn{
@@ -3145,7 +3200,11 @@ input{
         height: 24px;
         align-items: end;
         justify-content: center;
-        padding: 0px 7px;
+        padding: 0px;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        font-size: 11px;
         &:hover{
           svg{
             opacity: 1;
@@ -3281,5 +3340,79 @@ input{
     color: #fff;
     border: 0px;
     margin-top: 30px;
+  }
+}
+
+.navbar-dark .nav-item{
+  span{
+    position: relative;
+    &::before{
+      position: absolute;
+      content: " ";
+      width: 0;
+      height: 2px;
+      background: #fff;
+      bottom: -8px;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  &:hover{
+    span{
+      &::before{
+        position: absolute;
+        content: " ";
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        bottom: -8px;
+      }
+    }
+  }
+}
+.navbar-dark .navbar-nav .nav-link{
+  span{
+    position: relative;
+    &::before{
+      position: absolute;
+      content: " ";
+      width: 0;
+      height: 2px;
+      background: #fff;
+      bottom: -8px;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  &:hover{
+    span{
+      &::before{
+        position: absolute;
+        content: " ";
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        bottom: -8px;
+      }
+    }
+  }
+  color: #fff;
+}
+
+.social-footer{
+  margin-bottom: 30px;
+  a{
+    display: inline-block;
+    margin-right: 10px;
+    svg{
+      height: 35px;
+      width: 35px;
+    }
   }
 }
