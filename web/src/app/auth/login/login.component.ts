@@ -5,6 +5,7 @@ import { ToastyService } from 'ng2-toasty';
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http"
 import { Router, ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 // import { environment } from '../../../environments/environment';
 // import { tap } from 'rxjs/operators/tap';
 // import { HttpClientModule } from '@angular/common/http';
@@ -30,6 +31,7 @@ export class LoginComponent {
     private translate: TranslateService, 
     private toasty: ToastyService, fb: FormBuilder, public http: HttpClient,
     private route: ActivatedRoute) {
+
     this.Auth = auth;
 
 
@@ -57,7 +59,7 @@ export class LoginComponent {
   }
 
   ngOnInit() {
-
+    console.log(this.route.queryParams)
     this.route
              .queryParams
              .subscribe(params => {
@@ -98,38 +100,52 @@ export class LoginComponent {
   }
 
   signInWithInsta(code){
-    let instagramRedirectUri = '819247062130628';
-    let instagramClientId = 'https://www.google.com';
+    let instagramRedirectUri = 'https://localhost:4200/';
+    let instagramClientId = '273737951098288';
     let accessToken = '';
-    var popupWidth = 700,
+    let popupWidth = 700,
     popupHeight = 500,
     popupLeft = (window.screen.width - popupWidth) / 2,
     popupTop = (window.screen.height - popupHeight) / 2;
 // Url needs to point to instagram_auth.php
-var popup = window.open('instagram_auth.php', '', 'width='+popupWidth+',height='+popupHeight+',left='+popupLeft+',top='+popupTop+'');
+let popup = window.open('instagram_auth.php', '', 'width='+popupWidth+',height='+popupHeight+',left='+popupLeft+',top='+popupTop+'');
 popup.onload = function() {
+  console.log("here I am 1")
     // Open authorize url in pop-up
     if(window.location.hash.length == 0) {
-        popup.open('https://instagram.com/oauth/authorize/?client_id='+instagramClientId+'&redirect_uri='+instagramRedirectUri+'&response_type=token', '_self');
+        popup.open('https://api.instagram.com/oauth/authorize?client_id='+instagramClientId+'&redirect_uri='+instagramRedirectUri+'&scope=user_profile,user_media&response_type=code', '_self');
     }
     // An interval runs to get the access token from the pop-up
-    var interval = setInterval(function() {
+    let interval = setInterval(function() {
         try {
+          console.log("here I am 2")
+          console.log(popup.location)
+          const urlParams = new URLSearchParams(popup.location.search);
+          const myParam = urlParams.get('code');
+          if(myParam){
+            console.log("here I am final")
+            clearInterval(interval);
+            popup.close();
+          }
             // Check if hash exists
-            if(popup.location.hash.length) {
-                // Hash found, that includes the access token
-                clearInterval(interval);
-                accessToken = popup.location.hash.slice(14); //slice #access_token= from string
-                popup.close();
-                // if(callback != undefined && typeof callback == 'function'){
-                //     callback();
-                // }
-            }
+            // if(popup.location.hash.length) {
+            //   console.log("here I am 2")
+            //   console.log(popup.location.hash)
+            //     // Hash found, that includes the access token
+            //     clearInterval(interval);
+            //     accessToken = popup.location.hash.slice(14); //slice #access_token= from string
+            //     popup.close();
+            //     // if(callback != undefined && typeof callback == 'function'){
+            //     //     callback();
+            //     // }
+            // }
         }
         catch(evt) {
+          console.log("here I am 3")
+          console.log(popup.location)
             // Permission denied
         }
-    }, 100);
+    }, 300);
 };
 
 
