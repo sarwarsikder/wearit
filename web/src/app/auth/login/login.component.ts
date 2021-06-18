@@ -25,7 +25,7 @@ export class LoginComponent {
   };
   public submitted: boolean = false;
 
-  constructor(auth: AuthService, public router: Router, 
+  constructor(auth: AuthService, private router: Router, 
     private translate: TranslateService, 
     private toasty: ToastyService, fb: FormBuilder, public http: HttpClient,
     private socialAuthService : SocialAuthService,
@@ -98,11 +98,9 @@ export class LoginComponent {
     }
   }
 
-async  signInWithInsta(code){
+async  signInWithInsta(){
     let instagramRedirectUri = 'https://localhost:4200/';
     let instagramClientId = '554933932170461';
-    let instagramClientSecret = '89586836c233ae35a2e2c6b2944e7dfd';
-    let accessToken = '';
     let popupWidth = 700,
     popupHeight = 500,
     popupLeft = (window.screen.width - popupWidth) / 2,
@@ -137,7 +135,6 @@ async  signInWithInsta(code){
               body:  myParam
             } ).then(res => {
               console.log(res)
-              this.router.navigate(['/']);
             }).catch(err => console.log(err))
     }
 

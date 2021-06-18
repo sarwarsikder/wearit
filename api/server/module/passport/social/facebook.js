@@ -46,7 +46,6 @@ exports.login = async (req, res, next) => {
     }
     social.accessToken = validate.value.accessToken;
     social.socialInfo = data;
-    // console.log('ekhon pabo', social)
     await social.save();
 
     const expireTokenDuration = 60 * 60 * 24 * 7; // 7 days
@@ -58,7 +57,7 @@ exports.login = async (req, res, next) => {
       token,
       expiredAt
     };
-
+    
     return next();
   } catch (e) {
     return next(e);

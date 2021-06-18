@@ -26,7 +26,6 @@ exports.login = async (req, res, next) => {
     const username = user_info.data.username;
     const userid = user_info.data.id;
     
-    
     let user = await DB.User.findOne({
       username
     });
@@ -46,21 +45,23 @@ exports.login = async (req, res, next) => {
 
     if(!isNew){
       social = await DB.UserSocial.findOne({
+        userId: user._id,
         socialId: userid,
         social: 'instagram'
       });
     }
 
     if (!social) {
-      social = new DB.UserSocial({
+      social = await new DB.UserSocial({
         userId: user._id,
         social: 'instagram',
         socialId: userid,
         username : username,
-        accessToken: auth.access_token
+        accessToken : auth.access_token
       });
     }
-    social.accessToken = auth.accessToken;
+
+    social.accessToken =  auth.access_token
 
     await social.save();
 
@@ -68,7 +69,7 @@ exports.login = async (req, res, next) => {
     const now = new Date();
     const expiredAt = new Date(now.getTime() + (expireTokenDuration * 1000));
     const token = signToken(user._id, user.role, expireTokenDuration);
-    console.log(token)
+
     res.locals.login = {
       token,
       expiredAt
@@ -77,6 +78,6 @@ exports.login = async (req, res, next) => {
     return next();
 
   } catch (e) {
-    console.log(e)
+    return next(e)
   }
 };
