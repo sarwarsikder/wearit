@@ -96,12 +96,12 @@
       <div class="row total_area cstm-tab-area mar-0" [hidden]="!paymentGateway.cod.enable && !paymentGateway.paypal.enable && !paymentGateway.stripe.enable">
         <div class="col-sm-12" style="padding: 0px;">
           <div class="stv-radio-tabs-wrapper form-group">
-            <input type="radio" class="stv-radio-tab" type="radio"  name="mode" [value]="'cod'" id="cod" [(ngModel)]="userInfo.paymentMethod" />
-            <label for="cod" style="background: #20a52a;">Cash on Delivery (COD)</label>
+            <input checked type="radio" class="stv-radio-tab" type="radio"  name="mode" [value]="'cod'" id="cod" [(ngModel)]="userInfo.paymentMethod" />
+            <label for="cod" >Cash on Delivery (COD)</label>
             <input type="radio" class="stv-radio-tab" type="radio" name="mode" id="paypal" [value]="'paypal'" [(ngModel)]="userInfo.paymentMethod" />
-            <label for="paypal" style="background: #2f42a2;">Paypal</label>
+            <label for="paypal">Paypal</label>
             <input type="radio" class="stv-radio-tab" type="radio" name="mode" id="stripe" [value]="'stripe'" [(ngModel)]="userInfo.paymentMethod" />
-            <label for="stripe" style="background: #dc6e0f;">Credit Card</label>
+            <label for="stripe">Credit Card</label>
           </div>
           <!-- <div class="form-group">
             <label translate>Payment Method</label>
@@ -221,7 +221,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                   <div class="form-group">
                     <label translate class="required">Email</label>
                     <input class="form-control" [(ngModel)]="userInfo.email" required name="email" #email="ngModel"
@@ -247,7 +247,7 @@
                   <div class="form-group">
                     <label translate class="required">City</label>
                     <select class="form-control" required name="city" #city="ngModel" [(ngModel)]="userInfo.city">
-                      <option selected value="">Select your City</option>
+                      <option selected  disabled value="">Select your City</option>
                       <option value="Barishal">Barishal</option>
                       <option value="Chittagong">Chittagong</option>
                       <option value="Dhaka">Dhaka</option>
@@ -309,7 +309,7 @@
                   <div class="form-group">
                     <label translate class="required">Shipping Address</label>
                     <textarea class="form-control" [(ngModel)]="userInfo.shippingAddress" required name="shippingAddress"
-                      #shippingAddress="ngModel"></textarea>
+                      #shippingAddress="ngModel" placeholder="Ex: 12/KA, F/A, Mukti Niketon, Road#3,&#10;Shyamoli, Dhaka 1207"></textarea>
                     <div *ngIf="shippingAddress.errors && (shippingAddress.dirty || shippingAddress.touched || isSubmitted)">
                       <p [hidden]="!shippingAddress.errors.required" class="error" translate> Please enter shipping
                         address! </p>
@@ -318,9 +318,43 @@
                 </div>
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <textarea rows="2" name="userNote"  [(ngModel)]="userInfo.userNote" class="form-control min-width-100"
-                      placeholder="{{'Enter your note' | translate}}" style="width:150px"></textarea>
+                    <textarea class="form-control" rows="2" name="userNote"  [(ngModel)]="userInfo.userNote" class="form-control min-width-100"
+                      placeholder="{{'Enter your note' | translate}}" ></textarea>
                   </div>
+                </div>
+                <div class="col-sm-12 delivery-selectable">
+                  <p class="cstm-radio-block"><input checked type="radio" ><label for="regular">Regular Delivery</label></p>
+                  <p class="cstm-radio-block"><input  type="radio" ><label for="express">Express Delivery</label></p>
+                </div>
+                <div class="col-sm-12 order-summary-aside">
+                  <h4>Order Summary</h4>
+                  <table class="table table-order-s">
+                    <tr>
+                      <td>Subtotal(2 items):</td>
+                      <td><span *ngIf="totalPrice && cart">{{totalPrice | priceCurrency: cart.userCurrency}}</span></td>
+                    </tr>
+                    <tr>
+                      <td>Discount</td>
+                      <td>
+                        <span class="badge badge-warning" *ngIf="!totalDiscountPrice" translate>N/A</span>
+                        <span  *ngIf="totalDiscountPrice && cart">{{totalDiscountPrice | priceCurrency: cart.userCurrency}}</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Deliver Fee:</td>
+                      <td>
+                        <span class="badge badge-success" *ngIf="!totalShippingPrice" translate>Free</span>
+                        <span *ngIf="totalShippingPrice && cart">{{totalShippingPrice | priceCurrency: cart.userCurrency}}</span>
+                      </td>
+                    </tr>
+                    <tfoot>
+                      <tr>
+                        <td style="font-size: 16px;font-weight: 600;">Total:</td>
+                        <td><span *ngIf="totalPrice && cart">{{totalPrice | priceCurrency: cart.userCurrency}}</span></td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <button>Proceed to pay</button>
                 </div>
               </div>
             </div>

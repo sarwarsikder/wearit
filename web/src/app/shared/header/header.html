@@ -124,29 +124,36 @@
             <label for="">Cart</label>
           </a>
           <div *ngIf="showCart" class="cart-dropout" style="min-height: auto">
-            <h5>Cart items ({{cart ? cart.length : 0}}) <label for="" class="total">Total: ${{cartTotal}}</label></h5>
+            <h5>Cart items ({{cart ? cart.length : 0}}) </h5>
             <hr>
             <h4 *ngIf="cart.length == 0">Your cart is empty!</h4>
             <ul *ngFor="let item of cart; let i = index" class="item-list">
               <li>
-                <a href="">
+                <a appLocationHref [url]="'/products/' + item.product.alias">
                   <img src="{{item.product?.mainImage?.thumbUrl}}" alt="">
                   <p class="name">
                     {{item.product?.name}}
-                    <label for="" class="quantity" style="margin-bottom: 0; color: #a5a5a5">Quantity: {{item.quantity}}</label>
-                    <label for="" class="quantity" style="margin-bottom: 0; color: #a5a5a5">
-                      Unit Price: {{item.product.discounted ? item.product.salePrice : item.product.price}}
-                    </label>
+                    <label for="" class="quantity" style="margin-bottom: 0;">Qty: {{item.quantity}}</label>
                   </p>
+                  <label for="" class="quantity" style="margin-bottom: 0;">
+                    {{item.product.discounted ? item.product.salePrice : item.product.price}}BDT
+                  </label>
                 </a>
                 <button (click)="removeItemFromCart(i)" class="btn">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.705 7.70498L16.295 6.29498L12 10.59L7.70501 6.29498L6.29501 7.70498L10.59 12L6.29501 16.295L7.70501 17.705L12 13.41L16.295 17.705L17.705 16.295L13.41 12L17.705 7.70498Z" fill="black"/>
+                  </svg>
                 </button>
               </li>
             </ul>
+            <p style="font-size: 16px;font-weight: 500;">
+              Subtotal: <label for="" class="total pull-right"> ${{cartTotal}}</label>
+            </p>
             <hr>
-            <button *ngIf="cart.length != 0" (click)="removeAllItemFromCart()" class="btn-chekout-fly mar-bot-10">Delete All</button>
-            <a *ngIf="cart.length != 0" appLocationHref [url] ="'/cart/checkout'" class="btn-chekout-fly" style="font-size: inherit">Checkout</a>
+            <div class="small-cart">
+              <button *ngIf="cart.length != 0" (click)="removeAllItemFromCart()" class="btn-chekout-fly mar-bot-10">Delete All</button>
+              <a *ngIf="cart.length != 0" appLocationHref [url] ="'/cart/checkout'" class="btn-chekout-fly" style="font-size: inherit">Checkout</a>
+            </div>
           </div>
         </div>
 

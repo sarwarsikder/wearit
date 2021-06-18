@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { Router } from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import { AuthService, SystemService, CartService, UtilService } from '../services';
 import { NgbModal, NgbModalOptions, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ComplainComponent } from '../complain/complain.component';
@@ -94,6 +94,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.updateCartTotal();
         });
     this.wishListLoadedSubscription = wishListService.wishListChanged$.subscribe(data => this.whishListJson = data);
+
+    this.router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd) {
+        this.showCart = false;
+      }
+    });
   }
 
   ngOnInit() {
