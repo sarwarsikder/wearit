@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductCategoryService } from '../../services/category.service';
 import { ProductService } from '../../services/product.service';
 import { LocationService } from '../../../shared/services';
+import { MeasurementService } from '../../services/measurement.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import * as _ from 'lodash';
@@ -13,6 +14,8 @@ import * as _ from 'lodash';
 export class ProductCreateComponent implements OnInit {
   public product: any = {
     name: '',
+    isTailor: false,
+    measurementFormId: '',
     description: '',
     specifications: [],
     mainImage: null,
@@ -58,9 +61,11 @@ export class ProductCreateComponent implements OnInit {
   };
   public fileType: any = '';
   public fileOptions: any = {};
+  public measurementForms: any = [];
+  public selectedForm: any = null;
 
   constructor(private router: Router, private categoryService: ProductCategoryService,
-    private productService: ProductService, private toasty: ToastyService, private location: LocationService) {
+    private productService: ProductService, private toasty: ToastyService, private location: LocationService, private measurementService: MeasurementService) {
   }
 
   ngOnInit() {
@@ -88,12 +93,23 @@ export class ProductCreateComponent implements OnInit {
     this.categoryService.tree()
       .then(resp => (this.tree = this.categoryService.prettyPrint(resp.data)));
 
+    this.measurementService.getAll()
+      .then((res) => {
+        this.measurementForms = res.data
+        console.log(this.measurementForms)
+      })
+      .catch((err) => this.toasty.error(err.data.data.details[0].message || err.data.message || 'Something went wrong!'))
   }
 
   submit(frm: any) {
     this.isSubmitted = true;
     if (frm.invalid) {
       return this.toasty.error('Form is invalid, please try again.');
+    }
+
+    if (this.selectedForm) {
+      this.product.isTailor = true
+      this.product.measurementFormId = this.selectedForm
     }
 
     if (this.product.salePrice > this.product.price || this.product.salePrice <= 0 || this.product.price <= 0) {
@@ -114,6 +130,7 @@ export class ProductCreateComponent implements OnInit {
     });
     this.product.images = this.images.map(i => i._id);
     this.product.mainImage = this.mainImage || null;
+    console.log(this.product)
     this.productService.create(this.product)
       .then(() => {
         this.toasty.success('Product has been created');

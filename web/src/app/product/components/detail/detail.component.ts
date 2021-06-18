@@ -2,7 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService, CartService, AuthService } from '../../../shared/services';
 import { ProductVariantService } from '../../services';
+import { MeasurementService } from '../../services/measurement.service';
 import { WishlistService } from '../../../profile/services';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ToastyService } from 'ng2-toasty';
 import { TranslateService } from '@ngx-translate/core';
 import { ShareButtons } from '@ngx-share/core';
@@ -33,16 +35,23 @@ export class ProductDetailComponent implements OnDestroy {
   public stockQuantity: any = 0;
   public isShowVar: any = false;
   public userID: any;
+  public measurementForm: any;
 
   constructor(private translate: TranslateService, private route: ActivatedRoute,
     private authService: AuthService, private seoService: SeoService, private variantService: ProductVariantService,
     public share: ShareButtons, private wishlistService: WishlistService, private toasty: ToastyService,
-    private cartService: CartService) {
+    private cartService: CartService, private modalService: NgbModal, private measurementService: MeasurementService) {
     if (this.authService.isLoggedin()) {
       this.authService.getCurrentUser().then(res => this.userID = res._id);
     }
 
     this.product = route.snapshot.data.product;
+
+    if (this.product.isTailor) {
+      measurementService.findOne(this.product.measurementFormId)
+        .then((res) => { this.measurementForm = res.data; console.log(this.measurementForm) })
+        .catch((err) => this.toasty.error(err.data.data.message || this.translate.instant('Error occured, please try again later.')))
+    }
 
     if (this.product.shop && this.product.shop.gaCode) {
       seoService.trackPageViewForShop(this.product.shop._id, this.product.shop.gaCode);
@@ -62,6 +71,10 @@ export class ProductDetailComponent implements OnDestroy {
       this.setPrice(this.product);
       this.getVariants();
     });
+  }
+
+  open(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   }
 
   updateSeo() {
@@ -137,12 +150,13 @@ export class ProductDetailComponent implements OnDestroy {
     if (this.quantity > this.stockQuantity) {
       return this.toasty.error(this.translate.instant('Quantity is not valid, please check and try again!'));
     }
-    this.cartService.add({
-      productId: this.isVariant ? this.selectedVariant.productId : this.product._id,
-      productVariantId: this.isVariant ? this.selectedVariant._id : null,
-      variant : this.isVariant ? this.selectedVariant : null,
-      product: this.product
-    }, this.quantity);
+    console.log(this.measurementForm)
+    // this.cartService.add({
+    //   productId: this.isVariant ? this.selectedVariant.productId : this.product._id,
+    //   productVariantId: this.isVariant ? this.selectedVariant._id : null,
+    //   variant: this.isVariant ? this.selectedVariant : null,
+    //   product: this.product
+    // }, this.quantity);
   }
 
 

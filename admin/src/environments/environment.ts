@@ -7,6 +7,6 @@ export const environment = {
   production: false,
   version: "0.0.1",
   build: 16,
-  apiBaseUrl: "https://api.genstore.info/v1",
+  apiBaseUrl: "http://localhost:9000/v1",
   platform: "admin",
 };

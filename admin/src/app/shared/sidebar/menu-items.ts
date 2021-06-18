@@ -29,6 +29,13 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
+    path: '/measurement', title: 'Measurement', icon: 'fa fa-edit', class: 'has-arrow', label: '', labelClass: '', extralink: false, submenu: [
+      {
+        path: '/measurement', title: 'Add Measurement', icon: 'fa fa-plus', class: '', label: '', labelClass: '', extralink: false, submenu: []
+      },
+    ]
+  },
+  {
     path: '/orders/list', title: 'Orders', icon: 'fa fa-bars', class: 'has-arrow', label: '', labelClass: '', extralink: false, submenu: [
       { path: '/orders/list', title: 'Orders', icon: 'fa fa-usd', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
       { path: '/refunds', title: 'Refunds', icon: 'fa fa-undo', class: '', label: '', labelClass: '', extralink: false, submenu: [] }

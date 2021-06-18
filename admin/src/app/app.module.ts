@@ -118,4 +118,4 @@ export function RestangularConfigFactory(RestangularProvider) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
