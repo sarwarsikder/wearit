@@ -6,12 +6,13 @@ const Image = require('../../media/components/image');
 const formidable = require('formidable');
 const s3 = require("../../media/services/s3");
 const ip = require('ip');
+const axios = require('axios')
+const oauth = require('axios-oauth-client')
 
 /**
  * Create a new user
  */
 exports.create = async (req, res, next) => {
-  console.log('new req',req)
   try {
     const schema = Joi.object().keys({
       email: Joi.string().email(),
@@ -40,6 +41,9 @@ exports.create = async (req, res, next) => {
     return next(e);
   }
 };
+
+
+
 
 
 /**

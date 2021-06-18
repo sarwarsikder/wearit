@@ -8,8 +8,7 @@ exports.mongoosePlugin = require('./mongoosePlugin');
 exports.services = {
   SocialConnect: {
     Facebook: require('./services/Facebook'),
-    Google: require('./services/Google'),
-    Instagram: require('./services/Instagram')
+    Google: require('./services/Google')
   },
   User: require('./services/User')
 };

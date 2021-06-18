@@ -14,14 +14,14 @@ exports.register = async (req, res, next) => {
         .allow(['user'])
         .default('user'),
       email: Joi.string()
-        .email()
-        .required(),
+        .email(),
       password: Joi.string()
         .min(6)
         .required(),
       phoneNumber: Joi.string()
         .allow(['', null])
         .optional(),
+      username: Joi.string(),  
       name: Joi.string()
         .allow(['', null])
         .optional(),
