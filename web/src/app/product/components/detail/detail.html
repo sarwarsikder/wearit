@@ -151,6 +151,7 @@
                     </div>
                     <div class="modal-footer">
                       <button class="btn-add-cart btn-cstm add-cart" (click)="addCart()"
+                        (click)="modal.dismiss('Cross click')"
                         *ngIf="product.stockQuantity && !isVariant || isVariant && selectedVariant.stockQuantity"
                         translate>
                         <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
