@@ -135,13 +135,13 @@
                       <div class="card">
                         <div class="card-body">
                           <div class="form-group">
-                            <div *ngFor="let field of measurementForm.fields">
+                            <div *ngFor="let field of measurementForm.fields; let i = index">
                               <div [ngStyle]="{'display': 'flex'}">
                                 <label>{{field.label}}</label>
                                 <input type="text" *ngIf="field.type=='string'" name="Form-label" class="form-control"
-                                  placeholder="Enter value" />
+                                  [(ngModel)]="measurementValues[i]" placeholder="Enter value" />
                                 <input type="number" *ngIf="field.type=='int'" name="Form-label" class="form-control"
-                                  placeholder="Enter value" />
+                                  [(ngModel)]="measurementValues[i]" placeholder="Enter value" />
                                 <label>{{field.unit}}</label>
                               </div>
                             </div>

@@ -36,6 +36,7 @@ export class ProductDetailComponent implements OnDestroy {
   public isShowVar: any = false;
   public userID: any;
   public measurementForm: any;
+  public measurementValues: any = []
 
   constructor(private translate: TranslateService, private route: ActivatedRoute,
     private authService: AuthService, private seoService: SeoService, private variantService: ProductVariantService,
@@ -49,7 +50,13 @@ export class ProductDetailComponent implements OnDestroy {
 
     if (this.product.isTailor) {
       measurementService.findOne(this.product.measurementFormId)
-        .then((res) => { this.measurementForm = res.data; console.log(this.measurementForm) })
+        .then((res) => {
+          this.measurementForm = res.data;
+          for (const item in this.measurementForm.fields) {
+            this.measurementValues.push('')
+          };
+          //console.log(this.measurementValues)
+        })
         .catch((err) => this.toasty.error(err.data.data.message || this.translate.instant('Error occured, please try again later.')))
     }
 
@@ -150,13 +157,18 @@ export class ProductDetailComponent implements OnDestroy {
     if (this.quantity > this.stockQuantity) {
       return this.toasty.error(this.translate.instant('Quantity is not valid, please check and try again!'));
     }
-    console.log(this.measurementForm)
-    // this.cartService.add({
-    //   productId: this.isVariant ? this.selectedVariant.productId : this.product._id,
-    //   productVariantId: this.isVariant ? this.selectedVariant._id : null,
-    //   variant: this.isVariant ? this.selectedVariant : null,
-    //   product: this.product
-    // }, this.quantity);
+    //console.log(this.measurementValues)
+    for (let i = 0; i < this.measurementForm.fields.length; i++) {
+      this.measurementForm.fields[i].type = this.measurementValues[i]
+    }
+    //console.log(this.measurementForm)
+    this.cartService.add({
+      productId: this.isVariant ? this.selectedVariant.productId : this.product._id,
+      productVariantId: this.isVariant ? this.selectedVariant._id : null,
+      variant: this.isVariant ? this.selectedVariant : null,
+      product: this.product,
+      measurementForm: this.measurementForm
+    }, this.quantity);
   }
 
 
