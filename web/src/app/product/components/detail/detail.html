@@ -139,9 +139,9 @@
                               <div [ngStyle]="{'display': 'flex'}">
                                 <label>{{field.label}}</label>
                                 <input type="text" *ngIf="field.type=='string'" name="Form-label" class="form-control"
-                                  [(ngModel)]="field.type" placeholder="Enter value" />
+                                  placeholder="Enter value" />
                                 <input type="number" *ngIf="field.type=='int'" name="Form-label" class="form-control"
-                                  [(ngModel)]="field.type" placeholder="Enter value" />
+                                  placeholder="Enter value" />
                                 <label>{{field.unit}}</label>
                               </div>
                             </div>
