@@ -46,10 +46,14 @@
                     </li>
                     <li class="list-group-item">
                       <div class="row">
-                        <div class="col-md-3"><i class="fa fa-phone"></i>&nbsp; <span translate>Phone</span>
+                        <div class="col-md-3"><i class="fa fa-phone"></i>&nbsp; <span translate class="required">Phone</span>
                         </div>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" [(ngModel)]="info.phoneNumber" name="phone" />
+                          <input type="text" class="form-control" [(ngModel)]="info.phoneNumber" name="phone" required #phone="ngModel"/>
+                          <div *ngIf="phone.errors && (phone.dirty || phone.touched || isSubmitted)">
+                            <p [hidden]="!phone.errors.required" style="color:red" translate> Phone Number is required </p>
+                            
+                          </div>
                         </div>
                       </div>
                     </li>
