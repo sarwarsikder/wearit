@@ -6,6 +6,10 @@ const schema = new Schema({
     index: true,
     ref: 'User'
   },
+  courierId: {
+    type: Schema.Types.ObjectId,
+    index: true
+  },
   orderId: {
     type: Schema.Types.ObjectId,
     ref: 'Order'
@@ -222,6 +226,13 @@ schema.virtual('customer', {
 schema.virtual('shop', {
   ref: 'Shop',
   localField: 'shopId',
+  foreignField: '_id',
+  justOne: true
+});
+
+schema.virtual('courier', {
+  ref: 'User',
+  localField: 'courierId',
   foreignField: '_id',
   justOne: true
 });

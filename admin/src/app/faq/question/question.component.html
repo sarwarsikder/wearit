@@ -1,0 +1,57 @@
+<div class="card">
+    <div class="card-block table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    <a>Question</a>
+                </th>
+                <th>
+                    <a>Question By</a>
+                </th>
+                <th>
+                    <a>Answer</a>
+                </th>
+                <th>
+                    <a>Visibility</a>
+                </th>
+                <th>
+                    <a>Created at</a>
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let question of questions, let i = index">
+                <td>{{question['question']}}</td>
+                <td>{{question?.user?.email}}</td>
+                <td>{{question['answer']}}</td>
+                <td>
+                    <span class="label label-success" *ngIf="question['visibility']">Y</span>
+                    <span class="label label-warning" *ngIf="!question['visibility']">N</span>
+                </td>
+                <td>
+                    <span>{{question['createdAt'] | date}}</span>
+                </td>
+                <td>
+                    <a [routerLink]="['/faqs/answer', question.id ]">
+                        <i class="fa fa-pencil"></i>
+                    </a>&nbsp;
+                    <a (click)="remove(question.id, i)">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <ngb-pagination [collectionSize]="total" [(page)]="page" [pageSize]="take" (pageChange)="loadQuestion()"></ngb-pagination>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

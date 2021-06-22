@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
+import { Parser } from 'json2csv';
 
 @Component({
   selector: 'user-listing',
@@ -18,12 +19,69 @@ export class UserListingComponent implements OnInit {
     sortBy: 'createdAt',
     sortType: 'desc'
   };
+  private userType: string;
 
-  constructor(private router: Router, private userService: UserService, private toasty: ToastyService) {
+  constructor(private router: Router, private userService: UserService, private toasty: ToastyService, private route: ActivatedRoute) {
+    route.params.subscribe(params => {
+      this.setupComponent(params['type']);
+      console.log(params);
+    })
+  }
+  setupComponent(someParam) {
+    this.userType = someParam;
+    this.query();
+  }
+  ngOnInit() {
+    // this.userType = this.route.snapshot.paramMap.get('type');
+    // this.query();
   }
 
-  ngOnInit() {
-    this.query();
+  exportUsers() {
+
+    try {
+      const myData = [];
+      const fields = ['Name', 'Email', 'Active', 'EmailVerified', 'CreatedAt'];
+      const opts = { fields };
+      
+      let params = Object.assign({
+        take: this.count,
+        role: this.userType
+      }, this.searchFields);
+      this.userService.search(params)
+        .then((resp) => {           
+          resp.data.items.forEach((key: any, val: any) => {      
+                var date = new Date(key.createdAt);      
+                myData.push({ Name: key.name, Email: key.email, Active: key.isActive === true ? "Y" : "N", EmailVerified: key.emailVerified === true ? "Y" : "N", CreatedAt: date.toString()  });
+          })
+
+      const parser = new Parser(opts);
+      console.log(myData)
+      const csv = parser.parse(myData);
+
+      var exportedFilenmae = 'user.csv' || 'export.csv';
+
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      if (navigator.msSaveBlob) { // IE 10+
+        navigator.msSaveBlob(blob, exportedFilenmae);
+      } else {
+        var link = document.createElement("a");
+        if (link.download !== undefined) { // feature detection
+          var url = URL.createObjectURL(blob);
+          link.setAttribute("href", url);
+          link.setAttribute("download", exportedFilenmae);
+          link.style.visibility = 'hidden';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      }
+    })
+      .catch(() => alert('Something went wrong, please try again!'));
+
+    } catch (err) {
+      console.error('Err', err);
+    }
+    
   }
 
   query() {
@@ -31,7 +89,8 @@ export class UserListingComponent implements OnInit {
       page: this.currentPage,
       take: this.pageSize,
       sort: `${this.sortOption.sortBy}`,
-      sortType: `${this.sortOption.sortType}`
+      sortType: `${this.sortOption.sortType}`,
+      role: this.userType
     }, this.searchFields);
     this.userService.search(params)
       .then((resp) => {
@@ -40,6 +99,7 @@ export class UserListingComponent implements OnInit {
         this.searchFields.isShop = '';
       })
       .catch(() => alert('Something went wrong, please try again!'));
+      
   }
 
   sortBy(field: string, type: string) {

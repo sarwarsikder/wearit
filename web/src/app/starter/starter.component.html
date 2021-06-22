@@ -1,6 +1,18 @@
 <app-banner></app-banner>
 <div class="padding-main">
-  <div class="container">
+  <div class="container-fluid">
+    <div class="body-box-main">
+      <offers ></offers>
+    </div>
+    <div class="box-main-1">
+      <div class="title-main">
+        <h4 translate>Brands</h4>
+        <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{featured: 1}" translate>See All  ></a></div>
+      </div>
+      <div class="body-box-main">
+        <brands [options]="{featured: 1}"></brands>
+      </div>
+    </div>
     <div class="box-main-1">
       <div class="title-main">
         <h4 translate>Featured</h4>
@@ -12,7 +24,44 @@
     </div>
   </div>
 </div>
-<div class="padding-main">
+<!-- <div class="box-main-1" *ngIf="category">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4"  *ngIf="category[0]">
+        <div class="card-box">
+          <h4>{{category[0]?.name}}</h4>
+          <a [routerLink]="['/products/search']" [queryParams]="{categoryId: category[0]?.id}">
+            <img [src]="category[0]?.mainImage?.thumbUrl" alt=""></a>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="category[1]">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card-box small">
+              <h4>{{category[1]?.name}}</h4><a [routerLink]="['/products/search']" [queryParams]="{categoryId: category[1]?.id}">
+              <img [src]="category[1]?.mainImage?.thumbUrl" alt=""></a>
+            </div>
+          </div>
+          <div class="col-md-12" *ngIf="category[2]">
+            <div class="card-box small">
+              <h4>{{category[2]?.name}}</h4>
+              <a [routerLink]="['/products/search']" [queryParams]="{categoryId: category[2]?.id}">
+                <img [src]="category[2]?.mainImage?.thumbUrl" alt=""></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="category[3]">
+        <div class="card-box">
+          <h4>{{category[3]?.name}}</h4>
+          <a [routerLink]="['/products/search']" [queryParams]="{categoryId: category[3]?.id}">
+            <img [src]="category[3]?.mainImage?.thumbUrl" alt=""></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="padding-main">
   <div class="container">
     <div class="title-main">
       <h4 translate>Daily Deal</h4>
@@ -22,8 +71,8 @@
       <featured-products [options]="{dailyDeal: 1, showDeal: 1}"></featured-products>
     </div>
   </div>
-</div>
-<div class="padding-main feature-shop bg-cover" style="background: url(/assets/images/bg-1.jpg);">
+</div> -->
+<!-- <div class="padding-main feature-shop bg-cover" style="background: url(/assets/images/bg-1.jpg);">
   <div class="container">
     <h2 class="title-center" translate>Easy keeps you safe</h2>
     <div class="row">
@@ -44,11 +93,11 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <div class="padding-main bg-grey">
-  <div class="container">
+  <div class="container-fluid">
     <div class="title-main">
-      <h4 translate>Best Sale</h4>
+      <h4 translate>Popular Products</h4>
       <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{bestSell: 1}" translate>See All  ></a></div>
     </div>
     <div class="body-box-main">
@@ -56,25 +105,14 @@
     </div>
   </div>
 </div>
-<div class="padding-main bg-grey">
-  <div class="container">
-    <div class="title-main">
-      <h4 translate>Hottest</h4>
-      <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{hot: 1}" translate>See All  ></a></div>
-    </div>
-    <div class="body-box-main">
-      <featured-products [options]="{hot: 1}"></featured-products>
-    </div>
-  </div>
-</div>
 <div class="padding-main" *ngIf="shops.length">
-  <div class="container">
+  <div class="container-fluid">
     <div class="title-main">
-      <h4><span translate>Shops</span></h4>
-      <div class="list-view-all"><a appLocationHref [url]="'/shops/search'" translate>View all</a></div>
+      <h4><span translate> Popular Shops</span></h4>
+      <div class="list-view-all"><a appLocationHref [url]="'/shops/search'" translate>See all ></a></div>
     </div>
     <ul class="list-product list-shop row">
-      <li class="col-sm-6" *ngFor="let shop of shops">
+      <li class="col-sm-3" *ngFor="let shop of shops">
         <shop-card [shop]="shop"></shop-card>
       </li>
     </ul>
@@ -85,10 +123,21 @@
     </ngx-slick-carousel> -->
   </div>
 </div>
-<div class="padding-main action-register bg-cover" style="background: url(/assets/images/bg-2.jpg);">
+<div class="padding-main bg-grey">
+  <div class="container-fluid">
+    <div class="title-main">
+      <h4 translate>Product you may like</h4>
+      <div class="list-view-all"><a [routerLink]="['/products/search']" [queryParams]="{hot: 1}" translate>See All  ></a></div>
+    </div>
+    <div class="body-box-main">
+      <featured-products [options]="{hot: 1}"></featured-products>
+    </div>
+  </div>
+</div>
+<!-- <div class="padding-main action-register bg-cover" style="background: url(/assets/images/bg-2.jpg);">
   <div class="container">
     <h2> <span translate>Start selling on</span> {{siteName}} </h2>
     <p translate>Milions of shoppers can’t wait to see what you have in store.</p>
     <a [href]="sellerUrl" target="_blank" class="button-action" translate>Become A Seller</a>
   </div>
-</div>
+</div> -->

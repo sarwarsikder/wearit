@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   { path: 'create', component: UserCreateComponent },
   {
-    path: 'list',
+    path: 'list/:type',
     component: UserListingComponent,
     data: {
       title: 'Users manager',

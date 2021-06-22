@@ -3,6 +3,9 @@ import { OrderService } from '../../services/order.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import * as _ from 'lodash';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'view',
@@ -12,7 +15,11 @@ export class ViewComponent implements OnInit {
 
   public isSubmitted: boolean = false;
   public order: any = {};
+  public courier: any;
   public avatarUrl: any;
+  public searching: any = false;
+  public searchFailed: any = false;
+
 
   constructor(private router: Router, private route: ActivatedRoute,
     private orderService: OrderService, private toasty: ToastyService) {
@@ -25,6 +32,37 @@ export class ViewComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  // search seller
+  formatter = (x: {
+    name: string,
+  }) => {
+    if (x.name) {
+      x.name ;
+      console.log( x);
+      console.log( x.name);
+      this.order.courier= x;
+    }
+  }
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap(() => this.searching = true),
+      switchMap(term =>
+        this.orderService.findDelivery({ name: term }).then((res) => {
+          if (res) {
+            this.searchFailed = false;
+            this.searching = false;
+            return res.data.items;
+          }
+          this.searchFailed = true;
+          this.searching = false;
+          return of([]);
+        })
+      )
+    )
+
 
   submit(frm: any) {
     this.isSubmitted = true;
@@ -45,4 +83,5 @@ export class ViewComponent implements OnInit {
       this.toasty.success('Updated status successfuly!');
     }).catch((err) => this.toasty.error('Something went wrong, please try again!'));
   }
+
 }

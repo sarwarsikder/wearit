@@ -33,6 +33,7 @@ exports.findOne = async (req, res, next) => {
  * Create a new media brand
  */
 exports.create = async (req, res, next) => {
+  console.log("Hello World!");
   try {
     const validate = Joi.validate(req.body, validateSchema);
     if (validate.error) {
@@ -52,6 +53,7 @@ exports.create = async (req, res, next) => {
     res.locals.brand = brand;
     return next();
   } catch (e) {
+    console.log(e);
     return next(e);
   }
 };

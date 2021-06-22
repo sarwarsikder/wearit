@@ -2551,6 +2551,381 @@ define({ "api": [
     "name": "PutV1I18nTranslationsTranslationid"
   },
   {
+    "group": "Mall",
+    "version": "1.0.0",
+    "type": "delete",
+    "url": "/v1/malls/:id",
+    "title": "Remove a mall",
+    "description": "<p>Remove a mall</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>mall id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>mall title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "content",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "ordering",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>Position of the mall. like <code>home</code>, <code>category</code>...</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "mediaId",
+            "description": "<p>File Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "link",
+            "description": "<p>Link of the mall</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "meta",
+            "description": "<p>any custom meta data</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/mall/index.js",
+    "groupTitle": "Mall",
+    "name": "DeleteV1MallsId"
+  },
+  {
+    "group": "Mall",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/malls/:id",
+    "title": "Get mall details",
+    "description": "<p>Get mall details</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>mall id</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/mall/index.js",
+    "groupTitle": "Mall",
+    "name": "GetV1MallsId"
+  },
+  {
+    "group": "Mall",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/malls/random?:title&:locatione&take",
+    "title": "Get random malls",
+    "description": "<p>Get random malls</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "title",
+            "description": "<p>title of mall</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>mall position</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "take",
+            "description": "<p>num of item should return</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/mall/index.js",
+    "groupTitle": "Mall",
+    "name": "GetV1MallsRandomTitleLocationeTake"
+  },
+  {
+    "group": "Mall",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/malls?:title&:location&page&take",
+    "title": "Get list malls",
+    "description": "<p>Get list malls</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "title",
+            "description": "<p>title of mall</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>mall position</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/mall/index.js",
+    "groupTitle": "Mall",
+    "name": "GetV1MallsTitleLocationPageTake"
+  },
+  {
+    "group": "Mall",
+    "version": "1.0.0",
+    "type": "post",
+    "url": "/v1/malls",
+    "title": "Create new mall",
+    "description": "<p>Create new mall</p>",
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/mall/index.js",
+    "groupTitle": "Mall",
+    "name": "PostV1Malls",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>mall title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "content",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "ordering",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>Position of the mall. like <code>home</code>, <code>category</code>...</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "mediaId",
+            "description": "<p>File Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "link",
+            "description": "<p>Link of the mall</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "meta",
+            "description": "<p>any custom meta data</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "group": "Mall",
+    "version": "1.0.0",
+    "type": "put",
+    "url": "/v1/malls/:id",
+    "title": "Update a mall",
+    "description": "<p>Update a mall</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>mall id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>mall title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "content",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "ordering",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>Position of the mall. like <code>home</code>, <code>category</code>...</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "mediaId",
+            "description": "<p>File Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "link",
+            "description": "<p>Link of the mall</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "meta",
+            "description": "<p>any custom meta data</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/mall/index.js",
+    "groupTitle": "Mall",
+    "name": "PutV1MallsId",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "group": "Media",
     "version": "1.0.0",
     "type": "delete",
@@ -3937,6 +4312,381 @@ define({ "api": [
     }
   },
   {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "delete",
+    "url": "/v1/offers/:id",
+    "title": "Remove a offer",
+    "description": "<p>Remove a offer</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>offer id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>offer title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "content",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "ordering",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>Position of the offer. like <code>home</code>, <code>category</code>...</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "mediaId",
+            "description": "<p>File Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "link",
+            "description": "<p>Link of the offer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "meta",
+            "description": "<p>any custom meta data</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "DeleteV1OffersId"
+  },
+  {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/offers/:id",
+    "title": "Get offer details",
+    "description": "<p>Get offer details</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Offer id</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "GetV1OffersId"
+  },
+  {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/offers/random?:title&:locatione&take",
+    "title": "Get random offers",
+    "description": "<p>Get random offer</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "title",
+            "description": "<p>title of offer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>offer position</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "take",
+            "description": "<p>num of item should return</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "GetV1OffersRandomTitleLocationeTake"
+  },
+  {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/offers?:title&:location&page&take",
+    "title": "Get list Offers",
+    "description": "<p>Get list offers</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "title",
+            "description": "<p>title of offer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>offer position</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "GetV1OffersTitleLocationPageTake"
+  },
+  {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "post",
+    "url": "/v1/offers",
+    "title": "Create new offer",
+    "description": "<p>Create new offer</p>",
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "PostV1Offers",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>offer title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "content",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "ordering",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>Position of the offer. like <code>home</code>, <code>category</code>...</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "mediaId",
+            "description": "<p>File Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "link",
+            "description": "<p>Link of the offer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "meta",
+            "description": "<p>any custom meta data</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "group": "Offer",
+    "version": "1.0.0",
+    "type": "put",
+    "url": "/v1/offer/:id",
+    "title": "Update a offer",
+    "description": "<p>Update a offers</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>offer id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>offer title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "content",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "ordering",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "position",
+            "description": "<p>Position of the offer. like <code>home</code>, <code>category</code>...</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "mediaId",
+            "description": "<p>File Id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "link",
+            "description": "<p>Link of the offer</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "meta",
+            "description": "<p>any custom meta data</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/offer/index.js",
+    "groupTitle": "Offer",
+    "name": "PutV1OfferId",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "group": "Order",
     "version": "1.0.0",
     "name": "Create_new_order",
@@ -4133,6 +4883,78 @@ define({ "api": [
     "filename": "server/module/order/routes/order.js",
     "groupTitle": "Order",
     "name": "GetV1OrdersOrderid",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "group": "Order",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/orders/:orderid",
+    "title": "Get details of the order",
+    "description": "<p>Get details of the order</p>",
+    "permission": [
+      {
+        "name": "user"
+      }
+    ],
+    "filename": "server/module/order/routes/order.js",
+    "groupTitle": "Order",
+    "name": "GetV1OrdersOrderid",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "group": "Order",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/orders/:status",
+    "title": "Get details of the order byu status",
+    "description": "<p>Get details of the order</p>",
+    "permission": [
+      {
+        "name": "user"
+      }
+    ],
+    "filename": "server/module/order/routes/order-delivery.js",
+    "groupTitle": "Order",
+    "name": "GetV1OrdersStatus",
     "header": {
       "fields": {
         "Header": [
@@ -7322,6 +8144,325 @@ define({ "api": [
     }
   },
   {
+    "group": "Question",
+    "version": "1.0.0",
+    "type": "delete",
+    "url": "/v1/questions/:id",
+    "title": "Remove a question",
+    "description": "<p>Remove a question</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>question id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "question",
+            "description": "<p>question</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "answer",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "userId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "productId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "replayedBy",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/question/index.js",
+    "groupTitle": "Question",
+    "name": "DeleteV1QuestionsId"
+  },
+  {
+    "group": "Question",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/questions/:id",
+    "title": "Get question details",
+    "description": "<p>Get question details</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>question id</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/question/index.js",
+    "groupTitle": "Question",
+    "name": "GetV1QuestionsId"
+  },
+  {
+    "group": "Question",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/questions/random?:title&:locatione&take",
+    "title": "Get random question",
+    "description": "<p>Get random question</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "title",
+            "description": "<p>title of question</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "take",
+            "description": "<p>num of item should return</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/question/index.js",
+    "groupTitle": "Question",
+    "name": "GetV1QuestionsRandomTitleLocationeTake"
+  },
+  {
+    "group": "Question",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/questions?:title&:location&page&take",
+    "title": "Get list questions",
+    "description": "<p>Get list questions</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "question",
+            "description": "<p>title of question</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "all"
+      }
+    ],
+    "filename": "server/module/question/index.js",
+    "groupTitle": "Question",
+    "name": "GetV1QuestionsTitleLocationPageTake"
+  },
+  {
+    "group": "Question",
+    "version": "1.0.0",
+    "type": "post",
+    "url": "/v1/questions",
+    "title": "Create new question",
+    "description": "<p>Create new question</p>",
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/question/index.js",
+    "groupTitle": "Question",
+    "name": "PostV1Questions",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "question",
+            "description": "<p>question</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "answer",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "userId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "productId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "replayedBy",
+            "description": ""
+          }
+        ]
+      }
+    }
+  },
+  {
+    "group": "Question",
+    "version": "1.0.0",
+    "type": "put",
+    "url": "/v1/questions/:id",
+    "title": "Update a question",
+    "description": "<p>Update a question</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>question id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "question",
+            "description": "<p>question</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "answer",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "userId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": true,
+            "field": "productId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "replayedBy",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "superadmin"
+      }
+    ],
+    "filename": "server/module/question/index.js",
+    "groupTitle": "Question",
+    "name": "PutV1QuestionsId",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "group": "Refund_request",
     "version": "1.0.0",
     "type": "get",
@@ -9733,6 +10874,42 @@ define({ "api": [
     "group": "Shop_Order",
     "version": "1.0.0",
     "type": "get",
+    "url": "/v1/orders/details/:orderDetailId",
+    "title": "Get details of the sub order",
+    "description": "<p>Get details of the sub order which managed by shop</p>",
+    "permission": [
+      {
+        "name": "seller"
+      }
+    ],
+    "filename": "server/module/order/routes/order-details.js",
+    "groupTitle": "Shop_Order",
+    "name": "GetV1OrdersDetailsOrderdetailid",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "group": "Shop_Order",
+    "version": "1.0.0",
+    "type": "get",
     "url": "/v1/orders/shops?:status&:sort&:sortType&:page&:take&startDate&toDate&paymentMethod",
     "title": "Get list orders for shop",
     "description": "<p>Get list orders of shop. it is order details</p>",
@@ -9764,6 +10941,42 @@ define({ "api": [
     "filename": "server/module/order/routes/order-details.js",
     "groupTitle": "Shop_Order",
     "name": "GetV1OrdersShopsStatusSortSorttypePageTakeStartdateTodatePaymentmethod",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "group": "Shop_Order",
+    "version": "1.0.0",
+    "name": "Get_download_invoice",
+    "type": "get",
+    "url": "/v1/orders/details/:orderDetailId/download/invoice",
+    "title": "",
+    "description": "<p>Download invoice content. Add access_token to query string</p>",
+    "permission": [
+      {
+        "name": "user"
+      }
+    ],
+    "filename": "server/module/order/routes/order-delivery.js",
+    "groupTitle": "Shop_Order",
     "header": {
       "fields": {
         "Header": [
@@ -10156,6 +11369,51 @@ define({ "api": [
     "filename": "server/module/shop/routes/stats.route.js",
     "groupTitle": "Statistic",
     "name": "GetV1ShopsStats",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Example:",
+          "content": "{\n  \"Authorization\": \"Bearer abcxyz1234\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "group": "Statistic",
+    "version": "1.0.0",
+    "type": "get",
+    "url": "/v1/users/line_stats",
+    "title": "User statistic",
+    "description": "<p>Get stats for user</p>",
+    "permission": [
+      {
+        "name": "admin"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Response-Success:",
+          "content": "{\n   \"code\": 200,\n    \"message\": \"OK\",\n    \"data\": {\n       \"activated\": 2,\n       \"deactivated\": 1,\n       \"all\": 3\n   },\n   \"error\": false\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "server/module/user/routes/stats.route.js",
+    "groupTitle": "Statistic",
+    "name": "GetV1UsersLine_stats",
     "header": {
       "fields": {
         "Header": [

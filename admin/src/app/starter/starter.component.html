@@ -1,22 +1,155 @@
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-12">
     <stat-card [stat]="shopStat" [type]="'shop'" *ngIf="shopStat"></stat-card>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-12">
+    <div class="row" style="margin-top: 30px;margin-bottom:30px;">
+      <div class="col-md-6">
+        <div style="display: block;" class="card card-blank">
+          <canvas baseChart 
+            [data]="pieShopChartData" 
+            [labels]="pieShopChartLabels" 
+            [chartType]="pieShopChartType"
+            [options]="pieShopChartOptions"
+            [plugins]="pieShopChartPlugins"
+            [colors]="pieShopChartColors"
+            [legend]="pieShopChartLegend">
+          </canvas>
+        </div>
+      </div>
+      
+        <!-- <div class="col-md-6">
+          <div style="display: block;">
+            <canvas baseChart width="200" height="100"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              [plugins]="lineChartPlugins">
+            </canvas>
+          </div>
+        </div> -->
+    </div>
+  </div>
+ 
+  <div class="col-md-12">
     <stat-card [stat]="userStat" [type]="'user'" *ngIf="userStat"></stat-card>
   </div>
-  <div class="col-md-3">
+
+  <div class="col-md-12">
+    <div class="row"  style="margin-top: 30px;margin-bottom:30px;">
+        <div class="col-md-6">
+          <div style="display: block;" class="card card-blank" >
+            <canvas baseChart width="200" height="100"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              [plugins]="lineChartPlugins">
+            </canvas>
+          </div>
+        </div>
+
+        <!-- <div class="col-md-6">
+          <div style="display: block;">
+            <canvas baseChart 
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+        </div> -->
+
+        <div class="col-md-6">
+          <div style="display: block; " class="card card-blank">
+            <canvas baseChart 
+              [data]="pieUserChartData" 
+              [labels]="pieUserChartLabels" 
+              [chartType]="pieUserChartType"
+              [options]="pieUserChartOptions"
+              [plugins]="pieUserChartPlugins"
+              [colors]="pieUserChartColors"
+              [legend]="pieUserChartLegend">
+            </canvas>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+  
+ 
+
+  <div class="col-md-12">
     <stat-card [stat]="productStat" [type]="'product'" *ngIf="productStat"></stat-card>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-12">
+    <div class="row">      
+        <div class="col-md-12">
+          <div style="display: block;" class="card card-blank">
+            <canvas baseChart 
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+        </div>
+
+    </div>
+  </div>
+  <div class="col-md-12">
     <stat-card [stat]="orderStat" [type]="'order'" *ngIf="orderStat"></stat-card>
   </div>
+
+  <!-- <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <div style="display: block;">
+          <canvas baseChart 
+            [data]="pieOrderChartData" 
+            [labels]="pieOrderChartLabels" 
+            [chartType]="pieOrderChartType"
+            [options]="pieOrderChartOptions"
+            [plugins]="pieOrderChartPlugins"
+            [colors]="pieOrderChartColors"
+            [legend]="pieOrderChartLegend">
+          </canvas>
+        </div>
+      </div>
+      
+        <div class="col-md-6">
+          <div style="display: block;">
+            <canvas baseChart width="200" height="100"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="lineChartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"
+              [plugins]="lineChartPlugins">
+            </canvas>
+          </div>
+        </div>
+
+    </div>
+  </div> -->
+
   <div class="col-lg-12 col-md-6">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Latest Request Payout of Seller</h4>
         <div class="comment-widgets">
-          <div class="card-body table-responsive">
+          <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>

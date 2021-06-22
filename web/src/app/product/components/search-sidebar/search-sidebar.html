@@ -1,16 +1,66 @@
+
+  <div class="title-main">
+    <h2><span translate>Brands</span></h2>
+  </div>
+  <!-- <ul class="category-left category-shop-left">
+    <li>
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId, shopId: routeId.shopId, brandId: ''}"
+        [ngClass]="{'active-a': routeId.shopId == ''}">
+        <span translate>All Brands</span>
+      </a>
+    </li>
+    <li *ngFor="let item of brands">
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId,shopId: routeId.shopId, brandId: item._id}"
+        [ngClass]="{'active-a': item._id === routeId.brandId}">
+        {{item.name}}
+      </a>
+    </li>
+  </ul> -->
+  <p class="cstm-radio-block">
+    <input type="radio" id="brands"  name="radio-brand" [checked]="(routeId.brandId==='')"
+    [routerLink]="['/products/search']" 
+    [queryParams]="{categoryId: routeId.categoryId, shopId: routeId.shopId, brandId: ''}">
+    <label for="brands">All Brands</label>
+  </p>
+  <p class="cstm-radio-block" *ngFor="let item of brands">
+    <input type="radio" id="{{item._id}}"  name="radio-brand"  [checked]="(item._id===routeId.brandId)"
+    [routerLink]="['/products/search']" 
+    [queryParams]="{categoryId: routeId.categoryId,shopId: routeId.shopId, brandId: item._id}">
+    <label for="{{item._id}}" [routerLink]="['/products/search']" 
+    [queryParams]="{categoryId: routeId.categoryId,shopId: routeId.shopId, brandId: item._id}">{{item.name}}</label>
+  </p>
+  
+
+
 <div class="left-sidebar">
   <div class="title-main">
-    <h2 translate>Categories</h2>
+    <h2 translate>All Categories</h2>
   </div>
-  <ul class="category-left">
+
+  <p class="cstm-radio-block">
+    <input type="radio" id="category"  name="radio-category" [checked]=" (routeId.categoryId==='')"
+    [routerLink]="['/products/search']" 
+    [queryParams]="{categoryId: '', shopId: routeId.shopId, brandId: routeId.brandId}">
+    <label for="category" translate>Categories</label>
+  </p>
+  <p class="cstm-radio-block" *ngFor="let category of tree">
+    <input type="radio" id="{{category._id}}"  name="radio-category" [checked]=" (category._id===routeId.categoryId)"
+    [routerLink]="['/products/search']" 
+    [queryParams]="{categoryId: category._id, shopId: routeId.shopId, brandId: routeId.brandId}">
+    <label for="{{category._id}}" [routerLink]="['/products/search']" 
+    [queryParams]="{categoryId: category._id, shopId: routeId.shopId, brandId: routeId.brandId}">{{category.name}}</label>
+  </p>
+  
+
+  <!-- <ul class="category-left">
     <li>
-      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: '', shopId: routeId.shopId}"
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: '', shopId: routeId.shopId, brandId: routeId.brandId}"
         [ngClass]="{'active-a': routeId.categoryId == ''}">
         <span translate>All Categories</span>
       </a>
     </li>
     <li *ngFor="let category of tree">
-      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: category._id, shopId: routeId.shopId}"
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: category._id, shopId: routeId.shopId, brandId: routeId.brandId}"
         [ngClass]="{collapsed: !category.showChildren, 'active-a': category._id === routeId.categoryId}">
         {{category.name}}
         <span class="badge pull-right" *ngIf="category?.children?.length" (click)="category.showChildren = !category.showChildren">
@@ -26,20 +76,20 @@
         </li>
       </ul>
     </li>
-  </ul>
+  </ul> -->
 
   <div class="title-main">
     <h2><span translate>Featured Shops</span></h2>
   </div>
-  <ul class="category-left category-shop-left">
+  <!-- <ul class="category-left category-shop-left">
     <li>
-      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId, shopId: ''}"
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId, shopId: '', brandId: routeId.brandId}"
         [ngClass]="{'active-a': routeId.shopId == ''}">
         <span translate>All Shop</span>
       </a>
     </li>
     <li *ngFor="let item of shops">
-      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId, shopId: item._id}"
+      <a data-toggle="collapse" [routerLink]="['/products/search']" [queryParams]="{categoryId: routeId.categoryId, shopId: item._id, brandId: routeId.brandId}"
         [ngClass]="{'active-a': item._id === routeId.shopId}">
         {{item.name}}
       </a>
@@ -47,7 +97,21 @@
     <li>
       <a [routerLink]="['/shops/search']" [queryParams]="{featured: 1}" class="view-all-menu"><span translate>View all</span></a>
     </li>
-  </ul>
+  </ul> -->
+
+  <p class="cstm-radio-block">
+    <input type="radio" id="shops" name="radio-shop" [routerLink]="['/products/search']" [checked]="(routeId.shopId==='')"
+    [queryParams]="{categoryId: routeId.categoryId, shopId: '', brandId: routeId.brandId}">
+    <label for="shops" translate>All Shop</label>
+  </p>
+  <p class="cstm-radio-block" *ngFor="let item of shops">
+    <input type="radio" id="{{item._id}}"  name="radio-shop" [checked]="(item._id===routeId.shopId)"
+    [routerLink]="['/products/search']" 
+    [queryParams]="{categoryId: routeId.categoryId, shopId: item._id, brandId: routeId.brandId}">
+    <label for="{{item._id}}" 
+    [routerLink]="['/products/search']" 
+    [queryParams]="{categoryId: routeId.categoryId, shopId: item._id, brandId: routeId.brandId}">{{item.name}}</label>
+  </p>
 
   <div class="title-main">
     <h2 translate>Filters</h2>
@@ -82,4 +146,14 @@
       <span translate>Sold Out</span>
     </li>
   </ul>
+
+  <div class="title-main">
+    <h2 translate>Price</h2>
+  </div>
+  <div>
+    <div class="price-range-block">
+      <input placeholder="0" type="text"  [(ngModel)]="searchFields.low_price"/> to <input placeholder="5000" type="text" [(ngModel)]="searchFields.high_price"/>
+    </div>
+    <button class="btn-apply" (click)="filter()">Apply Price</button>
+  </div>
 </div>

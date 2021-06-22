@@ -1,0 +1,310 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  padding-top: 100px;
+}
+
+hr.margin-control {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-color: #808080;
+}
+
+.card-stream .card {
+  min-height: 120px;
+  background: #FFDEDE;
+}
+
+.card-stream .card-title {
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 0px;
+}
+
+.card-stream .card-meta {
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.card-stream .card-link {
+  color: #454545;
+  text-decoration: none;
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 10px;
+  border: 1px solid #454545;
+  display: inline-block;
+  -ms-flex-item-align: baseline;
+      align-self: baseline;
+  padding: 2px 10px;
+}
+
+.card-stream .card-link:hover {
+  background: #454545;
+  color: #fff;
+}
+
+.head-title {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  border: 1px solid #868686;
+  border-radius: 0px;
+}
+
+.cstm-table {
+  font-size: 12px;
+  margin-top: 30px;
+}
+
+.cstm-table thead th {
+  background: #E8E8E8;
+  color: #454545;
+  text-transform: uppercase;
+}
+
+.cstm-table tbody td {
+  background: #FAFAFA;
+  font-weight: 500;
+}
+
+.cstm-table tbody td .form-check-input {
+  margin-left: 0px;
+}
+
+.cstm-table tbody .td-btn {
+  border: 1px solid #454545;
+  margin-right: 5px;
+  text-transform: uppercase;
+  background: transparent;
+}
+
+.cstm-table tbody .td-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+.panel-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  border: 0px !important;
+  background: #fafafa;
+  min-height: 500px;
+}
+
+.panel-info .card-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 30px;
+}
+
+.panel-info .image-container {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-preferred-size: 250px;
+      flex-basis: 250px;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.panel-info .image-container img {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  height: 100%;
+}
+
+.panel-info .info-container {
+  padding-left: 40px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.panel-info .info-container p {
+  font-size: 16px;
+}
+
+.panel-info .info-container .name {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.panel-info .info-container .form-control {
+  background: #E8E8E8;
+  border: 0px;
+  min-height: 50px;
+  margin-bottom: 20px;
+}
+
+.panel-info .info-container select.form-control {
+  width: 50%;
+}
+
+.panel-info .info-container label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.btn-general {
+  background: #1C1C1C;
+  color: #fff;
+  padding: 10px 15px;
+  border: 0px;
+  border-radius: 0px;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.upload-btn-wrapper {
+  position: absolute;
+  overflow: hidden;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  bottom: -30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 30px;
+  border: 2px solid #000;
+  -webkit-box-shadow: 0px 0px 2px #d8d8d8;
+          box-shadow: 0px 0px 2px #d8d8d8;
+}
+
+.upload-btn-wrapper.attach-file {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  border-radius: 0px;
+  border: 0px;
+  bottom: 0px;
+  display: block;
+  margin-top: 15px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin-bottom: 30px;
+}
+
+.upload-btn-wrapper.attach-file button {
+  border-radius: 0px;
+  color: #fff;
+  font-size: 13px;
+  background: #454545;
+  font-weight: 400;
+  padding: 0px 20px;
+  cursor: pointer;
+}
+
+.upload-btn-wrapper.attach-file button svg {
+  width: 15px;
+}
+
+.upload-btn-wrapper.attach-file button svg path {
+  fill: #fff;
+}
+
+.upload-btn-wrapper button {
+  background-color: #fff;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 0px;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cstm-navbar {
+  background: #EF4444 !important;
+}
+
+.cstm-navbar .navbar-brand {
+  color: #fff !important;
+}
+
+.cstm-navbar .navbar-nav a {
+  color: #fff !important;
+}
+
+.title-head {
+  font-size: 22px;
+  text-transform: uppercase;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.cstm-sign-area {
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+.cstm-sign-area .title-head {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.cstm-sign-area label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.cstm-sign-area .form-control {
+  background: #e8e8e8;
+  border: 0px;
+  height: 50px;
+}
+
+.cstm-sign-area .btn-login {
+  height: 50px;
+  width: 100%;
+  text-transform: uppercase;
+  background: #333;
+  color: #fff;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border-radius: 0px;
+  font-weight: 600;
+}
+
+.cstm-sign-area .btn-login.btn-hollow {
+  border: 2px solid #333;
+  color: #000;
+  background: transparent;
+}
+/*# sourceMappingURL=styles.css.map */

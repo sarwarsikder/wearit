@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -23,7 +23,7 @@ import { SearchbarComponent } from './shared/header/search-bar.component';
 import { CategoriesComponent } from './shared/header/categories.component';
 import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { ComplainComponent } from './shared/complain/complain.component';
-import { AuthService, SystemService, ComplainService } from './shared/services';
+import { AuthService, SystemService, ComplainService} from './shared/services';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MediaModule } from './media/media.module';
@@ -34,6 +34,14 @@ import { AppComponent } from './app.component';
 import { SpinnerComponent } from './shared/spinner.component';
 
 import { ConfigResolver } from './shared/resolver';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { WishlistService } from './profile/services';
+
+import { StickyNavModule } from 'ng2-sticky-nav';
+import { checkEmailPhoneGuard } from './shared/guard/checkEmailPhone.guard';
+
+
+
 
 // Function for setting the default restangular configuration
 export function RestangularConfigFactory(RestangularProvider) {
@@ -85,6 +93,7 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
     RouterModule.forRoot(Approutes, { useHash: false }),
@@ -102,7 +111,9 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     NgxStripeModule.forRoot(),
     UtilsModule,
-    MediaModule
+    MediaModule,
+    AutocompleteLibModule,
+    StickyNavModule
   ],
   providers: [{
     provide: LocationStrategy,
@@ -111,8 +122,10 @@ export function createTranslateLoader(http: HttpClient) {
     AuthService,
     SystemService,
     AuthGuard,
+    checkEmailPhoneGuard,
     ConfigResolver,
-    ComplainService
+    ComplainService,
+    WishlistService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ComplainComponent]

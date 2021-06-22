@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row justify-content-md-center">
+        <div class="col-8">
+            <h2 class="title-head">Overview</h2>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card panel-info">
+                        <div class="card-body ">
+                            <div class="image-container">
+                                <img [src]="userImage" class="img-fluid" [alt]="imageAlt">
+                            </div>
+                            <div class="info-container">
+                                <p class="name">{{info.name}}</p>
+                                <p class="other-info" ><label>Address:</label>{{info.address}}</p>
+                                <p class="other-info"><label>Email: </label>{{info.email}}</p>
+                                <p class="other-info"><label>Phone: </label>{{info.phoneNumber}}</p>
+                                <!-- <p class="other-info"><label>Trade: </label>EMP-265484554</p> -->
+                                <button routerLink="edit" class="btn-general">Edit Information</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

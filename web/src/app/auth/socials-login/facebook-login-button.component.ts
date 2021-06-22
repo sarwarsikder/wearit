@@ -17,11 +17,14 @@ export class FacebookLoginButtonComponent {
   }
 
   signInWithFacebook(): void {
+    console.log(FacebookLoginProvider.PROVIDER_ID);
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID)
-      .then((resp) => {
-        this.Auth.socialLogin('facebook', resp.authToken);
+      .then( async (resp) => {
+        this.toasty.success(this.translate.instant('Please wait...You will redirect soon.'))
+        await this.Auth.socialLogin('facebook', resp.authToken);
         this.router.navigate(['/']);
       })
-      .catch(err => this.toasty.error(this.translate.instant('Something went wrong, please try again.')));
+      // .catch(err => this.toasty.error(this.translate.instant('Something went wrong, please try again.')));
+      .catch(err => console.log(err));
   }
 }

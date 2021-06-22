@@ -5,6 +5,10 @@ const schema = new Schema({
     type: Schema.Types.ObjectId,
     index: true
   },
+  courierId: {
+    type: Schema.Types.ObjectId,
+    index: true
+  },
   totalProducts: {
     type: Number,
     default: 1
@@ -102,6 +106,9 @@ const schema = new Schema({
   userIP: {
     type: String
   },
+  userNote: {
+    type: String
+  },
   createdAt: {
     type: Date
   },
@@ -121,6 +128,7 @@ const schema = new Schema({
   }
 });
 
+
 schema.virtual('details', {
   ref: 'OrderDetail',
   localField: '_id',
@@ -131,6 +139,13 @@ schema.virtual('details', {
 schema.virtual('customer', {
   ref: 'User',
   localField: 'customerId',
+  foreignField: '_id',
+  justOne: true
+});
+
+schema.virtual('courier', {
+  ref: 'User',
+  localField: 'courierId',
   foreignField: '_id',
   justOne: true
 });

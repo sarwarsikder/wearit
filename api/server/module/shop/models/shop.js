@@ -7,6 +7,14 @@ const schema = new Schema({
     type: Schema.Types.ObjectId,
     index: true
   },
+  mallId: {
+    type: Schema.Types.ObjectId,
+    index: true
+  },
+  tailor: {
+    type: Boolean,
+    default: false
+  },
   // store name
   name: {
     type: String
@@ -36,6 +44,9 @@ const schema = new Schema({
     default: [0, 0]
   },
   city: {
+    type: String
+  },
+  area: {
     type: String
   },
   state: {

@@ -16,7 +16,11 @@ export class ShopUpdateComponent implements OnInit {
   public twitterConnectLink = '';
   public socialConnected: any = {};
 
-  constructor(private router: Router, private shopService: ShopService, private toasty: ToastyService, private route: ActivatedRoute, private authService: AuthService) { }
+  constructor(private router: Router, 
+    private shopService: ShopService, 
+    private toasty: ToastyService, 
+    private route: ActivatedRoute, 
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.shopService.me().then(resp => {

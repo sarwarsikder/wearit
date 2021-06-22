@@ -5,6 +5,9 @@ import { LocationService } from '../../../shared/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import * as _ from 'lodash';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
+import { BrandService } from '../../services/brand.service';
 
 @Component({
   selector: 'product-create',
@@ -21,6 +24,7 @@ export class ProductCreateComponent implements OnInit {
       description: ''
     },
     type: 'physical',
+    publishStatus: 'pending',
     categoryId: '',
     isActive: true,
     freeShip: false,
@@ -28,11 +32,14 @@ export class ProductCreateComponent implements OnInit {
     hot: false,
     bestSell: false,
     stockQuantity: 0,
+    minimumPurchaseQuantity: 0,
+    maximumPurchaseQuantity: 0,
     price: 0,
     salePrice: 0,
     vat: 0,
     restrictFreeShipAreas: [],
-    restrictCODAreas: []
+    restrictCODAreas: [],
+    sizeChart: null
   };
   public isSubmitted: any = false;
   public tree: any = [];
@@ -56,10 +63,42 @@ export class ProductCreateComponent implements OnInit {
   public imagesOptions: any = {
     multiple: true
   };
+
+  public brand: any;
+  public searching: any = false;
+  public searchFailed: any = false;
   public fileType: any = '';
   public fileOptions: any = {};
+  public sizeChartUrl: any = '';
 
-  constructor(private router: Router, private categoryService: ProductCategoryService,
+  // formatter_brand = (x: {
+  //   name: string
+  // }) => {
+  //
+  // }
+
+  formatter_brand = (x: { name: string }) => x.name;
+
+  search_brand = (text$: Observable<string>) =>
+      text$.pipe(
+          debounceTime(500),
+          distinctUntilChanged(),
+          tap(() => this.searching = true),
+          switchMap(term =>
+              this.brandService.search({ name: term }).then((res) => {
+                if (res) {
+                  this.searchFailed = false;
+                  this.searching = false;
+                  return res.data.items;
+                }
+                this.searchFailed = true;
+                this.searching = false;
+                return of([]);
+              })
+          )
+      )
+
+  constructor(private router: Router, private categoryService: ProductCategoryService, private brandService: BrandService,
     private productService: ProductService, private toasty: ToastyService, private location: LocationService) {
   }
 
@@ -100,8 +139,20 @@ export class ProductCreateComponent implements OnInit {
       return this.toasty.error('Price or sale price is invalid.');
     }
 
+    if (this.product.minimumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0) {
+      return this.toasty.error('Minimum purchase quantity is invalid.');
+    }
+
+    if (this.product.maximumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0 || this.product.minimumPurchaseQuantity < this.product.minimumPurchaseQuantity) {
+      return this.toasty.error('Maximum purchase quantity is invalid.');
+    }
+
     if (this.product.dailyDeal && this.dealDate) {
       this.product.dealTo = new Date(this.dealDate.year, this.dealDate.month, this.dealDate.day).toUTCString();
+    }
+
+    if (this.product.brand) {
+      this.product.brandId = this.product.brand._id;
     }
 
     if (this.product.type === 'digital' && !this.product.digitalFileId) {
@@ -114,6 +165,7 @@ export class ProductCreateComponent implements OnInit {
     });
     this.product.images = this.images.map(i => i._id);
     this.product.mainImage = this.mainImage || null;
+   
     this.productService.create(this.product)
       .then(() => {
         this.toasty.success('Product has been created');
@@ -182,6 +234,11 @@ export class ProductCreateComponent implements OnInit {
     this.location.cities({ state: id }).then((res) => {
       this.cities = res.data;
     });
+  }
+
+  selectSizeImage(media: any) {
+    this.product.sizeChart = media._id;
+    this.sizeChartUrl = media.fileUrl;
   }
 
   addFreeShipAreas() {

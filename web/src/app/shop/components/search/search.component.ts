@@ -11,12 +11,17 @@ import * as _ from 'lodash';
   templateUrl: './search.html'
 })
 export class SearchComponent implements OnInit {
+  keyword = 'title';
+  public malls = [];
   public shops: any = [];
   public page: Number = 1;
   public itemsPerPage: Number = 12;
   public searchFields: any = {
     q: '',
     featured: ''
+  };
+  public mallFilterSelected: any = {
+    mall: ''
   };
   public total: any = 0;
   public countries: any = [];
@@ -35,21 +40,58 @@ export class SearchComponent implements OnInit {
     private utilService: UtilService) {
     this.route.queryParamMap.subscribe((params: Params) => {
       this.searchFields = Object.assign(this.searchFields, params.params);
+      //console.log(params);
       this.query();
     });
   }
 
   ngOnInit() {
+    this.shopService.getMall().then(mall => {
+      
+      this.malls = mall.items;
+      if(this.route.params['_value']['mallId'] != undefined)
+      {
+        this.mallFilterSelected.mall = mall.items.filter(x => x._id == this.route.params['_value'].mallId)[0];
+      }
+      
+    });
     // this.location.countries().then(resp => this.countries = resp.data);
+  }
+
+  selectEvent(item) {
+    //this.searchFields.mallId = item._id;
+  }
+
+  onChangeSearch(search: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+    console.log(search);
+  }
+
+  onFocused(e) {
+    
   }
 
   query() {
     this.utilService.setLoading(true);
     this.isLoading = true;
+    if(this.mallFilterSelected.mall != '')
+    {
+      this.searchFields.mallId = this.mallFilterSelected.mall._id;
+    }
+    else
+    {
+      delete this.searchFields["mallId"];
+    }
     const params = Object.assign({
       page: this.page,
       take: this.itemsPerPage
     }, this.searchFields);
+    if(this.route.params['_value']['mallId'] != undefined && !window.location.href.includes("shop"))
+    {
+      history.pushState(null, null, window.location.href.replace("malls","shops"));
+      params.mallId = this.route.params['_value'].mallId;
+    }
 
     if (this.map.distance && this.map.distance <= 0 && this.map.latitude && this.map.longitude) {
       return this.toasty.error('Wrong distance number please try again.');

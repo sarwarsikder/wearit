@@ -54,6 +54,14 @@ const schema = new Schema({
     type: Number,
     default: 0
   },
+  minimumPurchaseQuantity: {
+    type: Number,
+    default: 0
+  },
+  maximumPurchaseQuantity: {
+    type: Number,
+    default: 0
+  },
   // base on  the category
   specifications: [{
     _id: false,
@@ -75,6 +83,10 @@ const schema = new Schema({
   isActive: {
     type: Boolean,
     default: true
+  },
+  publishStatus: {
+    type: String,
+    enum: ['pending', 'accepted', 'rejected']
   },
   // stock keeping unit
   sku: {
@@ -123,6 +135,17 @@ const schema = new Schema({
   mainImage: {
     type: Schema.Types.ObjectId,
     ref: 'Media'
+  },
+  logo: {
+    type: Schema.Types.ObjectId,
+    ref: 'Media'
+  },
+  sizeChart: {
+    type: Schema.Types.ObjectId,
+    ref: 'Media'
+  },
+  videoUrl: {
+    type: String
   },
   shopVerified: {
     type: Boolean,
@@ -227,6 +250,13 @@ schema.virtual('shop', {
 schema.virtual('digitalFile', {
   ref: 'Media',
   localField: 'digitalFileId',
+  foreignField: '_id',
+  justOne: true
+});
+
+schema.virtual('sizeCharts', {
+  ref: 'Media',
+  localField: 'sizeChart',
   foreignField: '_id',
   justOne: true
 });

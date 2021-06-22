@@ -1,17 +1,24 @@
+<div class="logo-admin">
+  <!-- <img [src]="appConfig?.siteLogo" class="logo" width="65px" /> -->
+  <img src="/assets/images/wearit-white-logo.png" class="logo" width="65px" />
+  <span>Wearit</span>
+</div>
+
 <nav class="sidebar-nav">
   <button class="btn btn-warning menu-drop-bars" (click)="showDropdown()">
     <i class="fa fa-bars" *ngIf="!isShowMenu"></i>
     <i class="fa fa-close" *ngIf="isShowMenu"></i>
   </button>
   <ul id="sidebarnav" class="scroll-top-bar" [ngClass]="{'show': isShowMenu}">
-    <li [class.active]="showMenu === sidebarnavItem.title" *ngFor="let sidebarnavItem of sidebarnavItems"
-      [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'">
+    <ng-container *ngFor="let sidebarnavItem of sidebarnavItems" >
+    <li [class.active]="showMenu === sidebarnavItem.title" 
+      [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'" *ngIf="sidebarnavItem.label==='starter' || urlPermission.includes(sidebarnavItem.label)">
       <!-- <div class="nav-small-cap" *ngIf="sidebarnavItem.extralink === true">{{sidebarnavItem.title}}</div> -->
       <a [routerLink]="sidebarnavItem.class === '' ? [sidebarnavItem.path] : null" [ngClass]="[sidebarnavItem.class]"
         *ngIf="!sidebarnavItem.extralink;" (click)="addExpandClass(sidebarnavItem.title)">
         <i [ngClass]="[sidebarnavItem.icon]"></i>
         <span class="hide-menu">{{sidebarnavItem.title}}
-          <span *ngIf="sidebarnavItem.label != '' " [ngClass]="[sidebarnavItem.labelClass]">{{sidebarnavItem.label}}</span>
+          <!-- <span *ngIf="sidebarnavItem.label != '' " [ngClass]="[sidebarnavItem.labelClass]">{{sidebarnavItem.label}}</span> -->
         </span>
       </a>
       <!-- Second level menu -->
@@ -35,6 +42,7 @@
         </li>
       </ul>
     </li>
+  </ng-container>
     <li class="nav-devider"></li>
     <!-- First level menu -->
     <li class="user-profile" [class.active]="showMenu === 'user'">

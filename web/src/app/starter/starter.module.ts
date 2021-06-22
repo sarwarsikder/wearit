@@ -7,6 +7,7 @@ import { StarterComponent } from './starter.component';
 
 import { ProductModule } from '../product/product.module';
 import { ShopModule } from '../shop/shop.module';
+import { MallModule } from '../mall/mall.module';
 import { ProfileModule } from '../profile/profile.module';
 import { BannerModule } from '../banner/banner.module';
 import { OrderModule } from '../order/order.module';
@@ -28,6 +29,7 @@ const routes: Routes = [{
     RouterModule.forChild(routes),
     ProductModule,
     ShopModule,
+    MallModule,
     ProfileModule,
     BannerModule,
     OrderModule,

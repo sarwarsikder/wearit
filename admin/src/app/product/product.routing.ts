@@ -6,6 +6,10 @@ import { ProductListingComponent } from './product/listing.component';
 import { ProductUpdateComponent } from './product/update.component';
 import { ProductCreateComponent } from './product/create.component';
 import { ReviewsComponent } from './reviews/listing.component';
+import { BrandComponent, } from './brand/brand.component'
+import { ProductBrandCreateComponent } from './brand/brand.component'
+import { ProductBrandUpdateComponent } from './brand/brand.component'
+import { ProductPendingListingComponent } from './product/pending-listing.component';
 
 const routes: Routes = [
   {
@@ -14,6 +18,14 @@ const routes: Routes = [
     data: {
       title: 'Product Listing',
       urls: [{ title: 'Products', url: '/products' }, { title: 'Manage Products' }]
+    }
+  },
+  {
+    path: 'pending',
+    component: ProductPendingListingComponent,
+    data: {
+      title: 'pending Product',
+      urls: [{ title: 'Products', url: '/products' }, { title: 'Pending Product', url: '/products/pending' }, { title: 'Manage pending Product' }]
     }
   },
   {
@@ -56,6 +68,38 @@ const routes: Routes = [
       urls: [{ title: 'Products', url: '/products' }, { title: 'Categories', url: '/products/categories' }, { title: 'Update category' }]
     }
   },
+  {
+    path: 'brands',
+    component: BrandComponent,
+    data: {
+      title: 'Product brands manager',
+      urls: [{ title: 'Brands', url: '/brands' }, { title: 'Brand', url: '/products/brands' }, { title: 'Manage brands' }]
+    }
+  },
+  {
+    path: 'brands/create',
+    component: ProductBrandCreateComponent,
+    data: {
+      title: 'Product brands manager',
+      urls: [{ title: 'Brand', url: '/brands' }, { title: 'Brand', url: '/products/brands' }, { title: 'Create new brand' }]
+    }
+  },
+  {
+    path: 'brands/update/:id',
+    component: ProductBrandUpdateComponent,
+    data: {
+      title: 'Product brands manager',
+      urls: [{ title: 'Brand', url: '/brands' }, { title: 'Brand', url: '/products/brands' }, { title: 'Update new brand' }]
+    }
+  },
+  // {
+  //   path: 'brands',
+  //   component: BrandComponent,
+  //   data: {
+  //     title: 'Options managner',
+  //     urls: [{ title: 'Brands', url: '/products/brands' }, { title: 'Manage Brands' }]
+  //   }
+  // },
   {
     path: 'options',
     component: OptionsComponent,

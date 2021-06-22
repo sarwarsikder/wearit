@@ -4,11 +4,16 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build --prod",
+    "dev": "ng serve --port 4201",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "engines": {
+    "node": "12.18.3",
+    "npm": "6.14.6"
   },
   "private": true,
   "dependencies": {
@@ -31,11 +36,13 @@
     "@swimlane/ngx-datatable": "^13.0.0",
     "angular-calendar": "^0.22.1",
     "angular-froala-wysiwyg": "^2.8.4",
+    "angular-ng-autocomplete": "^2.0.5",
     "angularx-social-login": "^3.2.1",
     "bootstrap": "^4.1.1",
     "chart.js": "^2.7.1",
     "chartist": "^0.11.0",
     "core-js": "^3.6.5",
+    "express": "^4.17.1",
     "immutable": "^3.8.2",
     "jasmine": "^3.1.0",
     "jquery": "^3.2.1",
@@ -43,7 +50,7 @@
     "lodash": "^4.17.20",
     "moment-timezone": "^0.5.23",
     "ng-chartist": "^1.1.1",
-    "ng2-charts": "^1.6.0",
+    "ng2-charts": "^2.4.2",
     "ng2-dragula": "^1.5.0",
     "ng2-file-upload": "^1.4.0",
     "ng2-smart-table": "^1.2.2",
@@ -86,6 +93,6 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "^4.0.2"
+    "typescript": "^3.9.2"
   }
 }

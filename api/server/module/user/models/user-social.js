@@ -4,6 +4,9 @@ const schema = new Schema({
   userId: {
     type: Schema.Types.ObjectId
   },
+  userName: {
+    type: String
+  },
   social: {
     type: String // google, facebook etc
   },

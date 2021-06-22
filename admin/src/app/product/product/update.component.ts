@@ -4,7 +4,11 @@ import { ProductService } from '../services/product.service';
 import { LocationService } from '../../shared/services';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
+
 import * as _ from 'lodash';
+import { BrandService } from '../services/brand.service';
 
 @Component({
   selector: 'product-update',
@@ -18,6 +22,7 @@ export class ProductUpdateComponent implements OnInit {
     value: ''
   };
   public imageUrl: any = '';
+  public videoUrl: any = '';
   public images: any = [];
   public mainImage: any = '';
   public tab = 'info';
@@ -31,12 +36,47 @@ export class ProductUpdateComponent implements OnInit {
   public freeState: any;
   public freeCity: any;
   public dealDate: any;
+  public brand: any;
+  public sizeChart: any = '';
+
   public imagesOptions: any = {
     multiple: true
   };
   public isUpdate: any = true;
   public fileOptions: any = {};
-  constructor(private router: Router, private route: ActivatedRoute, private categoryService: ProductCategoryService,
+
+  public searching: any = false;
+  public searchFailed: any = false;
+
+  formatter_brand = (x: {
+    name: string,
+    owner: {
+      name: string
+    }
+  }) => {
+    
+  }
+
+  search_brand = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(500),
+    distinctUntilChanged(),
+    tap(() => this.searching = true),
+    switchMap(term =>
+      this.drandService.search({ name: term }).then((res) => {
+        if (res) {
+          this.searchFailed = false;
+          this.searching = false;
+          return res.data.items;
+        }
+        this.searchFailed = true;
+        this.searching = false;
+        return of([]);
+      })
+    )
+  )
+
+  constructor(private router: Router, private route: ActivatedRoute, private categoryService: ProductCategoryService,private drandService: BrandService,
     private productService: ProductService, private toasty: ToastyService, private location: LocationService) {
     if (route.snapshot.queryParams.tab) {
       this.tab = route.snapshot.queryParams.tab;
@@ -67,6 +107,13 @@ export class ProductUpdateComponent implements OnInit {
         this.freeShipAreas = resp.data.restrictFreeShipAreas;
         this.mainImage = resp.data.mainImage ? resp.data.mainImage._id : null;
         this.images = this.product.images;
+
+        this.sizeChart = this.product.sizeChart ? this.product.sizeChart.thumbUrl : null;
+        this.product.sizeChart = this.product.sizeChart ? this.product.sizeChart._id : null;
+
+
+        console.log( this.product.sizeChart.thumbUrl );
+
       });
     this.categoryService.tree()
       .then(resp => (this.tree = this.categoryService.prettyPrint(resp.data)));
@@ -85,6 +132,15 @@ export class ProductUpdateComponent implements OnInit {
       return this.toasty.error('Price or sale price is invalid.');
     }
 
+    if (this.product.minimumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0) {
+      return this.toasty.error('Minimum purchase quantity is invalid.');
+    }
+
+    if (this.product.maximumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0 || this.product.minimumPurchaseQuantity < this.product.minimumPurchaseQuantity) {
+      return this.toasty.error('Maximum purchase quantity is invalid.');
+    }
+
+
     if (this.product.dailyDeal && this.dealDate) {
       this.product.dealTo = new Date(this.dealDate.year, this.dealDate.month - 1, this.dealDate.day).toUTCString();
     }
@@ -93,13 +149,20 @@ export class ProductUpdateComponent implements OnInit {
       return this.toasty.error('Please select Digital file path!');
     }
 
+    if (this.brand) {
+      this.product.brandId = this.brand._id;
+    }
+
     this.product.restrictFreeShipAreas = [];
     this.freeShipAreas.forEach((item) => {
       const data = _.pick(item, ['areaType', 'value', 'name']);
       this.product.restrictFreeShipAreas.push(data);
     });
+   
+
     this.product.images = this.images.map(i => i._id);
     this.product.mainImage = this.mainImage || null;
+    
     this.productService.update(this.product._id, this.product).then(resp => {
       this.toasty.success('Updated successfully.');
       // this.router.navigate(['/products']);
@@ -124,6 +187,11 @@ export class ProductUpdateComponent implements OnInit {
     }
 
     this.images.push(media);
+  }
+
+  selectSizeImage(media: any) {
+    this.product.sizeChart = media._id;
+    this.sizeChart = media.fileUrl;
   }
 
   setMain(media: any) {
@@ -156,6 +224,7 @@ export class ProductUpdateComponent implements OnInit {
       this.cities = res.data;
     });
   }
+
 
   addFreeShipAreas() {
     if (this.zipCode) {

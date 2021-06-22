@@ -1,4 +1,10 @@
+<div class="logo-admin">
+  <!-- <img [src]="appConfig?.siteLogo" class="logo" width="65px" /> -->
+  <img src="/assets/images/wearit-white-logo.png" class="logo" width="65px" />
+  <span>Wearit</span>
+</div>
 <nav class="sidebar-nav">
+
   <ul id="sidebarnav">
     <li [class.active]="showMenu === sidebarnavItem.title" *ngFor="let sidebarnavItem of sidebarnavItems"
       [routerLinkActive]="sidebarnavItem.submenu.length != 0 ? '' : 'active'">
@@ -31,7 +37,6 @@
         </li>
       </ul>
     </li>
-    <li class="nav-devider"></li>
     <!-- First level menu -->
     <li class="user-profile" [class.active]="showMenu === 'user'">
       <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" (click)="addExpandClass('user')"

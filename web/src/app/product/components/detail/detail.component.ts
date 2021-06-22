@@ -1,17 +1,25 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService, CartService, AuthService } from '../../../shared/services';
-import { ProductVariantService } from '../../services';
+import { ProductService, ProductVariantService } from '../../services';
 import { WishlistService } from '../../../profile/services';
 import { ToastyService } from 'ng2-toasty';
 import { TranslateService } from '@ngx-translate/core';
 import { ShareButtons } from '@ngx-share/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
+import { WishListService } from '../../../shared/services/wish-list.service';
+import { Lightbox } from 'ngx-lightbox';
+import { Router } from "@angular/router"
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DomSanitizer, SafeResourceUrl,SafeUrl } from '@angular/platform-browser';
 
 @Component({
   templateUrl: './detail.html'
 })
 export class ProductDetailComponent implements OnDestroy {
+  public safeSrc : SafeUrl;
+  public iframeURL: any = '';
   public product: any;
   public discount: any = 100;
   public discountVal: any = 100;
@@ -33,35 +41,151 @@ export class ProductDetailComponent implements OnDestroy {
   public stockQuantity: any = 0;
   public isShowVar: any = false;
   public userID: any;
+  @Input() showDeal: any = 0;
 
-  constructor(private translate: TranslateService, private route: ActivatedRoute,
+  public shop: any;
+  public products = [];
+  public take: any = 12;
+  public totalProducts: any = 0;
+  public isLoading: Boolean = false;
+  public searchFields: any = {
+    q: ''
+  };
+
+  public sizeChartImageUrl: any = '';
+  private _album: any = [];
+  private _album_video: any = [];
+  private inputnumber: any = 0;
+
+  constructor(private translate: TranslateService, private route: ActivatedRoute, private productService: ProductService,
     private authService: AuthService, private seoService: SeoService, private variantService: ProductVariantService,
     public share: ShareButtons, private wishlistService: WishlistService, private toasty: ToastyService,
-    private cartService: CartService) {
+    private cartService: CartService, private wishListService: WishListService, private _lightbox: Lightbox,
+    private router: Router, private modalService: NgbModal, private sanitizer: DomSanitizer) {
     if (this.authService.isLoggedin()) {
       this.authService.getCurrentUser().then(res => this.userID = res._id);
     }
 
     this.product = route.snapshot.data.product;
 
+
+
+    if (this.product.shop) {
+      this.shop = this.product.shop;
+      this.shop.id = this.product.shop._id;
+      this.query();
+    }
+
     if (this.product.shop && this.product.shop.gaCode) {
       seoService.trackPageViewForShop(this.product.shop._id, this.product.shop.gaCode);
     }
+
     this.productSubscription = this.route.data.subscribe(data => {
       this.product = data.product;
       this.updateSeo();
       this.selectedVariant = {};
       this.isVariant = false;
-      this.quantity = 1;
+      this.quantity = this.product.minimumPurchaseQuantity ? this.product.minimumPurchaseQuantity : 1;
       if (this.product.images.length) {
         this.activeSlide = this.product.images[0];
       } else if (!this.product.images.length && this.product.mainImage) {
         this.activeSlide = this.product.mainImage;
       }
 
+    
+      if (this.product.sizeChart) {
+        this.sizeChartImageUrl = this.product.sizeChart.mediumUrl;
+
+        const src = this.sizeChartImageUrl;
+        const caption = "";
+        const thumb = this.sizeChartImageUrl;
+        const album = {
+          src: src,
+          caption: caption,
+          thumb: thumb
+        };
+
+        this._album.push(album);
+      }
+
       this.setPrice(this.product);
       this.getVariants();
     });
+  }
+
+  ngOnInit() {
+
+    if (this.product.videoUrl) {
+      var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
+      var url = this.product.videoUrl;
+      var matches = regex.exec(url);
+      var videoId = matches[1];
+      console.log(videoId)
+      var videos = {
+        fileUrl: this.product.videoUrl,
+        thumbUrl: "http://img.youtube.com/vi/" + videoId + "/default.jpg",
+        type: "video",
+      };
+
+
+      this.product.images.push(videos);
+      var _id = this.getYoutubeId(this.product.videoUrl);
+      console.log(_id);
+      var _url = 'https://www.youtube.com/embed/'+ _id;
+      this.iframeURL = _url;
+      console.log(this.iframeURL);
+
+    }
+
+  }
+
+  getYoutubeId(url) {
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+
+    if (match && match[2].length == 11) {
+        return match[2];
+    } else {
+        return 'error';
+    }
+}
+
+  query() {
+    const params = Object.assign({
+      shopId: this.shop.id,
+      page: this.page,
+      take: this.take
+    }, this.searchFields);
+
+    this.productService.search(params).then((res) => {
+      let index = res.data.items.indexOf(this.product);
+      res.data.items.splice(index, 1);
+      this.products = this.shuffle(res.data.items);
+      this.totalProducts = res.data.count;
+      const n = 2;
+      this.products = this.products
+        .map(x => ({ x, r: Math.random() }))
+        .sort((a, b) => a.r - b.r)
+        .map(a => a.x)
+        .slice(0, n);
+
+    })
+      .catch(() => this.toasty.error(this.translate.instant('Something went wrong, please try again!')));
+  }
+
+
+  shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
+
+  plus() {
+    this.quantity = this.quantity + 1;
+  }
+  minus() {
+    if (this.quantity != 0) {
+      this.quantity = this.quantity - 1;
+    }
+
   }
 
   updateSeo() {
@@ -99,7 +223,9 @@ export class ProductDetailComponent implements OnDestroy {
 
   changeSlide(index: number) {
     this.slidePosition = index;
-    this.activeSlide = this.product.images[index];
+    if (this.product.images[index].type == 'photo') {
+      this.activeSlide = this.product.images[index];
+    }
   }
 
   selectVariant(val: any, index: any) {
@@ -123,8 +249,16 @@ export class ProductDetailComponent implements OnDestroy {
     if (!this.authService.isLoggedin()) {
       return this.toasty.error(this.translate.instant('Please login before adding to wishlist.'));
     }
+    console.log("Add WiseList");
+    console.log(item._id);
     this.wishlistService.create({ productId: item._id })
-      .then(resp => this.toasty.success(this.translate.instant('Added to wishlist successfully.')))
+      .then(resp => {
+        console.log(resp.data._id);
+        this.toasty.success(this.translate.instant('Added to wishlist successfully.'));
+        this.wishListService.add({
+          productId: resp.data._id
+        });
+      })
       .catch(err => this.toasty.error(err.data.data.message || this.translate.instant('Error occured, please try again later.')));
   }
 
@@ -134,19 +268,55 @@ export class ProductDetailComponent implements OnDestroy {
       return this.toasty.error(this.translate.instant('This item is out of stock.'));
     }
 
-    if (this.quantity > this.stockQuantity) {
+    if (this.quantity < this.product.minimumPurchaseQuantity || this.quantity > this.product.maximumPurchaseQuantity || this.quantity > this.stockQuantity) {
       return this.toasty.error(this.translate.instant('Quantity is not valid, please check and try again!'));
     }
     this.cartService.add({
       productId: this.isVariant ? this.selectedVariant.productId : this.product._id,
       productVariantId: this.isVariant ? this.selectedVariant._id : null,
-      variant : this.isVariant ? this.selectedVariant : null,
+      variant: this.isVariant ? this.selectedVariant : null,
       product: this.product
     }, this.quantity);
+  }
+
+  shopNow() {
+
+    if (!this.stockQuantity) {
+      return this.toasty.error(this.translate.instant('This item is out of stock.'));
+    }
+
+    if (this.quantity < this.product.minimumPurchaseQuantity || this.quantity > this.product.maximumPurchaseQuantity || this.quantity > this.stockQuantity) {
+      return this.toasty.error(this.translate.instant('Quantity is not valid, please check and try again!'));
+    }
+    this.cartService.addShop({
+      productId: this.isVariant ? this.selectedVariant.productId : this.product._id,
+      productVariantId: this.isVariant ? this.selectedVariant._id : null,
+      variant: this.isVariant ? this.selectedVariant : null,
+      product: this.product
+    }, this.quantity);
+
+    this.router.navigate(['/cart/checkout'])
   }
 
 
   onlyNumberKey(event) {
     return (event.charCode === 8 || event.charCode === 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+  }
+
+  open(index: number): void {
+    // open lightbox
+    console.log(index);
+    console.log(this._album);
+    this._lightbox.open(this._album, index);
+  }
+
+
+  close(): void {
+    // close lightbox programmatically
+    this._lightbox.close();
+  }
+
+  open_video(content): void {
+    this.modalService.open(content, { size: 'lg' });
   }
 }

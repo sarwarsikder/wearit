@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-block table-responsive">
-    <table class="table">
+    <table class="table table-custom">
       <thead>
         <tr>
           <th>
@@ -48,8 +48,9 @@
           <th>
             Actions
           </th>
+          
         </tr>
-        <tr>
+        <tr class="sub-th">
           <td>
             <input type="text" name="name" class="form-control" [(ngModel)]="searchFields.name" placeholder="Enter name" />
           </td>
@@ -57,12 +58,13 @@
             <input type="text" name="email" class="form-control" [(ngModel)]="searchFields.email" placeholder="Enter email" />
           </td>
           <td>
-            <select class="form-control" [(ngModel)]="searchFields.role">
+            <!-- <select class="form-control" [(ngModel)]="searchFields.role">
               <option value="">All</option>
               <option value="user">User</option>
               <option value="seller">Seller</option>
               <option value="admin">Admin</option>
-            </select>
+              <option value="courier">Courier</option>
+            </select> -->
           </td>
           <td>
             <select class="form-control" [(ngModel)]="searchFields.isActive">
@@ -79,8 +81,12 @@
             </select>
           </td>
           <td></td>
-          <td>
+          <td *ngIf="userType === 'admin'">
             <button class="btn btn-primary" (click)="query()">Filter</button>
+          </td>
+          <td *ngIf="userType !== 'admin'">
+            <button class="btn btn-primary" (click)="query()">Filter</button>
+            <button class="btn btn-primary" style="margin-left: 10px;" (click)="exportUsers()">Export</button>
           </td>
         </tr>
       </thead>
@@ -91,7 +97,8 @@
           <td>
             <span class="badge badge-danger" *ngIf="item.role === 'admin'">Admin</span>
             <span class="badge badge-warning" *ngIf="item.role !== 'admin' && item.isShop">Seller</span>
-            <span class="badge badge-info" *ngIf="item.role !== 'admin' && !item.isShop">User</span>
+            <span class="badge badge-info" *ngIf="item.role !== 'admin' && item.role !== 'courier' && !item.isShop">User</span>
+            <span class="badge badge-info" *ngIf="item.role === 'courier'">Courier</span>
           </td>
           <td>
             <span class="badge badge-warning" *ngIf="!item.isActive">N</span>

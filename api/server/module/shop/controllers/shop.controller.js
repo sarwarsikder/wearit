@@ -16,6 +16,12 @@ exports.getUserShop = async (req, res, next) => {
       .populate('verificationIssue');
 
     const data = shop.toObject();
+    
+    const selectedMall = await DB.Mall.findOne({ _id: shop.mallId });
+    
+    if (selectedMall) {
+      data.mallInfo = selectedMall;
+    }
     data.logo = shop.logo;
     data.banner = shop.banner;
     data.verificationIssue = shop.verificationIssue;
@@ -88,6 +94,15 @@ exports.search = async (req, res, next) => {
     if (req.query.q) {
       query.name = { $regex: req.query.q.trim(), $options: 'i' };
     }
+    if (req.query.area) {
+      query.area = { $regex: req.query.area.trim(), $options: 'i' };
+    }
+    if (req.query.mallId) {
+      query.mallId = {
+        $in: req.query.mallId
+      };
+      //query.mallId = { $regex: req.query.mallId.trim(), $options: 'i' };
+    }
     const sort = Object.assign(defaultSort ? {} : { featured: -1 }, Helper.App.populateDBSort(req.query));
     const lat = parseFloat(req.query.latitude);
     const lng = parseFloat(req.query.longitude);
@@ -158,6 +173,7 @@ exports.create = async (req, res, next) => {
       email: Joi.string().email().required(),
       phoneNumber: Joi.string().allow([null, '']).optional(),
       address: Joi.string().required(),
+      tailor: Joi.boolean().optional(),
       city: Joi.string().allow([null, '']).optional(),
       state: Joi.string().allow([null, '']).optional(),
       country: Joi.string().allow([null, '']).optional(),
@@ -215,7 +231,8 @@ exports.create = async (req, res, next) => {
         refundPolicy: Joi.string().optional(),
         shipFrom: Joi.string().optional(),
       }).optional(),
-      announcement: Joi.string().allow([null, '']).optional()
+      announcement: Joi.string().allow([null, '']).optional(),
+      mallId: Joi.string().optional(),
     });
     const validate = Joi.validate(req.body, schema);
     if (validate.error) {
@@ -301,6 +318,7 @@ exports.update = async (req, res, next) => {
       }).optional(),
       logoId: Joi.string().allow([null, '']).optional(),
       bannerId: Joi.string().allow([null, '']).optional(),
+      mallId: Joi.string().allow([null, '']).optional(),
       verified: Joi.boolean().optional(), // valid with admin only
       activated: Joi.boolean().optional(), // valid with admin only
       featured: Joi.boolean().optional(), // valid with admin only
@@ -320,7 +338,8 @@ exports.update = async (req, res, next) => {
         refundPolicy: Joi.string().optional(),
         shipFrom: Joi.string().optional(),
       }).optional(),
-      announcement: Joi.string().allow([null, '']).optional()
+      announcement: Joi.string().allow([null, '']).optional(),
+      mallId: Joi.string().optional(),
     });
 
     const validate = Joi.validate(req.body, schema);

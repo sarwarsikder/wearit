@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body table-responsive">
-    <table class="table">
+    <table class="table table-custom">
       <thead>
         <tr>
           <th>
@@ -47,8 +47,8 @@
           <td>
             <span>{{item.createdAt | date}}</span>
           </td>
-          <td>
-            <a [routerLink]="['/orders/view', item.orderDetailId ]"><i class="fa fa-pencil"></i></a>
+          <td class="text-right">
+            <a class="btn btn-sm btn-danger" [routerLink]="['/orders/view', item.orderDetailId ]"><i class="fa fa-pencil"></i></a>
           </td>
         </tr>
       </tbody>
