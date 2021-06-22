@@ -221,7 +221,6 @@
             </svg>
             <!-- <img [src]="currentUser?.avatarUrl" class="avatar-circle" /><span>{{currentUser.name}}</span> -->
            <span *ngIf="currentUser.name; else elseBlock">Hi, {{currentUser.name}}</span>
-           <span #elseBlock>Hi, {{(currentUser.email).split('@')[0]}}</span>
           </a>
           <div class="dropdown-menu cstm-dropdown-al" ngbDropdownMenu aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" appLocationHref [url]="'/profile/update'">

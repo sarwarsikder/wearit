@@ -18,9 +18,13 @@ export class GoogleLoginButtonComponent {
 
   signInWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then((resp) => {
-        this.Auth.socialLogin('google', resp.authToken);
+      .then(async (resp) => {
+        this.toasty.success(this.translate.instant('Please wait...You will redirect soon.'))
+        await this.Auth.socialLogin('google', resp.authToken);
         this.router.navigate(['/']);
-      }).catch(err => this.toasty.error(this.translate.instant('Something went wrong, please try again.')));
+      }).catch(err => {
+        console.log(err)
+        this.toasty.error(this.translate.instant('Something went wrong, please try again.'))
+      });
   }
 }

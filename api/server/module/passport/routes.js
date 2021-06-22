@@ -1,5 +1,6 @@
 const authController = require('./auth.controller');
 const facebookController = require('./social/facebook');
+const instagramController = require('./social/instagram')
 const googleController = require('./social/google');
 const localController = require('./local');
 
@@ -50,6 +51,13 @@ module.exports = (router) => {
   router.post(
     '/v1/auth/login/facebook',
     facebookController.login,
+    Middleware.Response.success('login')
+  );
+  
+
+  router.post(
+    '/v1/auth/login/instagram',
+    instagramController.login,
     Middleware.Response.success('login')
   );
 

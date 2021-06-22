@@ -27,8 +27,15 @@ exports.connectFacebook = async (req, res, next) => {
         socialId: data.id
       });
     }
+
+    // if(social){
+    //   console.log('aisi to')
+    //   console.log(social)
+    // }
+
     social.accessToken = validate.value.accessToken;
     social.socialInfo = data;
+    // console.log('fb',social)
     await social.save();
     await Service.Shop.updateTrustedSocialAccount(social);
 
