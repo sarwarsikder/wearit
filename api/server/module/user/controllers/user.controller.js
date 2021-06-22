@@ -4,14 +4,15 @@ const fs = require('fs');
 const path = require('path');
 const Image = require('../../media/components/image');
 const formidable = require('formidable');
-const s3 = require("../../media/services/s3");
+const s3 = require('../../media/services/s3');
 const ip = require('ip');
+const axios = require('axios')
+const oauth = require('axios-oauth-client')
 
 /**
  * Create a new user
  */
 exports.create = async (req, res, next) => {
-  console.log('new req',req)
   try {
     const schema = Joi.object().keys({
       email: Joi.string().email(),
@@ -42,6 +43,9 @@ exports.create = async (req, res, next) => {
 };
 
 
+
+
+
 /**
  * do update for user profile or admin update
  */
@@ -49,7 +53,7 @@ exports.update = async (req, res, next) => {
   try {
     const user = req.params.id ? await DB.User.findOne({ _id: req.params.id }) : req.user;
     let publicFields = [
-      'name', 'password', 'address', 'phoneNumber', 'photo', 'nid', 'wholeSeller'
+      'name', 'email', 'password', 'address', 'phoneNumber', 'photo', 'nid', 'wholeSeller'
     ];
     if (req.user.role === 'admin') {
       publicFields = publicFields.concat([
