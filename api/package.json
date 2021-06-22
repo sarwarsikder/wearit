@@ -14,8 +14,6 @@
     "apidoc": "^0.27.1",
     "async": "^2.6.1",
     "aws-sdk": "^2.355.0",
-    "axios": "^0.21.1",
-    "axios-oauth-client": "^1.4.2",
     "base64-img": "^1.0.4",
     "bee-queue": "^1.2.2",
     "body-parser": "^1.18.2",

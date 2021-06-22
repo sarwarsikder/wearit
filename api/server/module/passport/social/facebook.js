@@ -57,7 +57,7 @@ exports.login = async (req, res, next) => {
       token,
       expiredAt
     };
-    
+
     return next();
   } catch (e) {
     return next(e);

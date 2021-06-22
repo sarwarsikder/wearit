@@ -18,7 +18,7 @@ export class AuthService {
   private _getUser: any;
 
   constructor(private restangular: Restangular, private router: Router) { }
-  
+
   getCurrentUser() {
     if (this.currentUser) {
       return new Promise(resolve => resolve(this.currentUser));
@@ -69,7 +69,6 @@ export class AuthService {
           });
       });
   }
-  
 
   register(info: any): Promise<any> {
     return this.restangular.all('auth/register').post(info).toPromise();

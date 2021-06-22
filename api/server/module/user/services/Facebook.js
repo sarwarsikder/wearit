@@ -13,7 +13,6 @@ exports.getProfile = async (accessToken) => {
         }
 
         const data = JSON.parse(body);
-
         if (data.error) {
           return reject(data);
         }
