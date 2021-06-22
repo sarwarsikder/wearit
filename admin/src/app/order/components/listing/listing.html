@@ -47,7 +47,7 @@
               </a>
             </span>
           </th>
-          <th>
+          <!-- <th>
             <a (click)="sortBy('userIP', 'desc')" translate>User IP </a>
             <span *ngIf="sortOption.sortBy=='userIP'">
               <a (click)="sortBy('userIP', 'asc')" *ngIf="sortOption.sortType=='desc'">
@@ -57,7 +57,7 @@
                 <i class="fa fa-caret-up"></i>
               </a>
             </span>
-          </th>
+          </th> -->
           <th>
             <a (click)="sortBy('createdAt', 'desc')" translate>Created At </a>
             <span *ngIf="sortOption.sortBy=='createdAt'">
@@ -96,9 +96,9 @@
             <span class="label label-warning" *ngIf="item.paymentMethod === 'stripe'">Stripe</span>
             <span class="label label-primary" *ngIf="item.paymentMethod === 'paypal'">Paypal</span>
           </td>
-          <td>
+          <!-- <td>
             <span>{{item?.userIP}}</span>
-          </td>
+          </td> -->
           <td>
             <span>{{item?.createdAt | date:'short'}}</span>
           </td>

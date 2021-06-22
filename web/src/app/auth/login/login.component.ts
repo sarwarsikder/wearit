@@ -97,7 +97,7 @@ export class LoginComponent {
     }
   }
 
-  signInWithInsta(code){
+  signInWithInsta(){
 
   //   const data = { client_id: '819247062130628',
   //           redirect_url: 'https://www.google.com',
