@@ -1,10 +1,10 @@
 <div class="padding-main">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-12">
         <div class="row mar-bot-25">
           <div class="col-md-6">
-            <div class="slider-for product-slider">
+            <div class="slider-for product-slider" style="display: none;">
               <img src="/assets/images/noImage.jpg" width="100%" title="No-Image" *ngIf="!product.images.length">
               <div *ngIf="product.images.length && activeSlide"
                 [ngStyle]="{'background-image': 'url(' + activeSlide.mediumUrl + ')'}" class="slide-img-custom">
@@ -19,18 +19,36 @@
                 (click)="changeSlide(slidePosition - 1);slickModal.slickGoTo(slidePosition)"
                 [hidden]="slidePosition == 0 || product.images.length == 1"></span>
             </div>
-            <div class="ps-list" [hidden]="!product.images.length">
+            <div class="ps-list" [hidden]="!product.images.length" style="display: none;">
               <ngx-slick-carousel class="carousel carousel-row" #slickModal="slick-carousel" [config]="slideConfig">
                 <div ngxSlickItem *ngFor="let slide of product.images, let i = index" class="slide">
-                  <img [src]="slide.thumbUrl" alt="" width="100%" [ngClass]="{'active': slidePosition === i}"
-                    (click)="changeSlide(i)">
+                  <img [src]="slide.thumbUrl" *ngIf="slide.type=='photo'" alt="" height="" width="100%"
+                    [ngClass]="{'active': slidePosition === i}" (click)="changeSlide(i)">
+                  <img [src]="slide.thumbUrl" *ngIf="slide.type=='video'" alt="" width="100%"
+                    (click)="open_video(open_video_content)">
                 </div>
               </ngx-slick-carousel>
             </div>
+            <!-- New Design For Product Details -->
+            <div>
+              <div class="product-detail-images">
+                <img src="/assets/images/noImage.jpg" width="100%" title="No-Image" *ngIf="!product.images.length">
+                <div class="half-w-image">
+                  <img src="http://via.placeholder.com/800x800" alt="">
+                </div>
+                <div class="half-w-image">
+                  <img src="http://via.placeholder.com/800x800" alt="">
+                </div>
+                <div class="half-w-image">
+                  <img src="http://via.placeholder.com/800x800" alt="">
+                </div>
+              </div>
+            </div>
+            <!-- New Design For Product Details End -->
           </div>
           <div class="col-md-6">
             <div class="box-detail product-information detail-block">
-              <h2>{{product?.name}}</h2>
+              <h2 style="font-weight: 500;">{{product?.name}}</h2>
               <div class="rate-seller">
                 <star-rating [rate]="product.ratingAvg" [total]="product?.totalRating"></star-rating>
               </div>
@@ -47,21 +65,35 @@
                   <span *ngIf="!stockQuantity" class="badge badge-danger" translate>SOLD OUT!</span>
                 </strong>
               </div>
-              <div class="highlight-info">
-                <span translate class="mar-right-5">Tax: </span>
+              <div translate class="highlight-info" *ngIf="stockQuantity">Minimum Puchase Quantity:
+                <strong>
+                  <span *ngIf="stockQuantity">{{product.minimumPurchaseQuantity?product.minimumPurchaseQuantity:1 |
+                    number}}</span>
+                </strong>
+              </div>
+              <div translate class="highlight-info" *ngIf="stockQuantity">Maximum Puchase Quantity:
+                <strong>
+                  <span *ngIf="stockQuantity">{{product.maximumPurchaseQuantity?product.maximumPurchaseQuantity:1 |
+                    number}}</span>
+                </strong>
+              </div>
+              <!-- <div class="highlight-info">
+                Tax: &nbsp;
                 <strong>
                   <span *ngIf="product.taxClass && product.taxPercentage"> {{product?.taxClass}}
                     {{product?.taxPercentage}}%</span>
                   <span *ngIf="!product.taxPercentage"> 0%</span>
                 </strong>
-              </div>
+              </div> -->
               <div [innerHtml]="product?.shortDescription | safeHtml"></div>
               <hr />
               <div class="prod-variants">
+                <button *ngIf="sizeChartImageUrl" class="size-box" (click)="open(0)">
+                  Size Guideline
+                </button>
                 <div class="price-detial" *ngIf="salePrice">
                   <span class="salePrice-format">{{salePrice | currency | async}}</span>
                   <label class="shipping-status" *ngIf="product?.freeShip" translate>Free Shipping</label>
-                  <label class="shipping-status" *ngIf="product?.isTailor" translate>Tailor Product</label>
                   <div class="through-line">
                     {{price | currency | async}} <span class="discount-text">{{discountVal}}% <a
                         translate>OFF</a></span>
@@ -70,7 +102,6 @@
                 <div class="price-detial" *ngIf="!salePrice">
                   <span class="salePrice-format">{{price | currency | async}}</span>
                   <label class="shipping-status" *ngIf="product?.freeShip" translate>Free Shipping</label>
-                  <label class="shipping-status" *ngIf="product?.isTailor" translate>Tailor Product</label>
                 </div>
                 <div class="mar-bot-15" *ngIf="variants.length">
                   <button type="button" class="collapse-btn" (click)="openVariant()">Variants <i class="fa fa-bars"
@@ -94,90 +125,116 @@
                   </div>
                 </div>
               </div>
+              <!-- <div class="color-variant">
+                 <div class="color-choose">
+                  <p class="fsize-label">Color : </p>
+                  <p>
+                    <input type="radio" id="test1" name="radio-group" checked>
+                    <label for="test1">Red</label>
+                  </p>
+                  <p>
+                    <input type="radio" id="test2" name="radio-group">
+                    <label for="test2">Grey</label>
+                  </p>
+                  <p>
+                    <input type="radio" id="test3" name="radio-group">
+                    <label for="test3">Black</label>
+                  </p>
+                </div>
 
-              <div class="quantity" *ngIf="stockQuantity">
-                <span translate>Quantity:&nbsp;</span> <input (keypress)="onlyNumberKey($event)" type="number" min="1"
-                  max="{{stockQuantity}}" [(ngModel)]="quantity" name="quantity" />
               </div>
-              <hr>
-              <div class="button-detail">
-                <div *ngIf="!product.isTailor">
-                  <button class="btn-add-cart btn-cstm add-cart" (click)="addCart()"
-                    *ngIf="product.stockQuantity && !isVariant || isVariant && selectedVariant.stockQuantity" translate>
-                    <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M4.31343 3.85688C3.57496 3.85688 2.61021 3.85688 1.88707 3.85688C1.31579 3.85688 0.853271 4.31999 0.853271 4.89127V10.3095C0.853271 12.0233 2.2426 13.4126 3.95643 13.4126H8.92149C10.6353 13.4126 12.0247 12.0233 12.0247 10.3095V4.89127C12.0247 4.31999 11.5621 3.85688 10.9909 3.85688C10.2677 3.85688 9.30297 3.85688 8.56449 3.85688M4.31343 3.85688C4.31343 2.87175 4.33321 1 6.38953 1C8.44586 1 8.56449 2.87175 8.56449 3.85688M4.31343 3.85688C5.97357 3.85688 6.90435 3.85688 8.56449 3.85688M4.31343 3.85688H8.56449"
-                        stroke="white" />
-                      <path
-                        d="M4.47339 5.43359C4.47329 6.46433 4.57683 8.11351 6.74904 8.11351C8.71437 8.11351 8.92128 6.46433 8.92128 5.43359"
-                        stroke="white" stroke-linecap="round" />
-                    </svg>
-                    SHOP NOW
-                  </button>&nbsp;
-                  <button class="btn-wishlist btn-cstm" (click)="addWishList(product)" translate>
-                    <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M6.62754 11.8481C6.76695 11.9642 6.94584 12.0282 7.13138 12.0282C7.31683 12.0282 7.49582 11.9642 7.63513 11.8483C8.16283 11.4094 8.67125 10.9972 9.11991 10.6337L9.12008 10.6336C10.4329 9.5695 11.5666 8.6506 12.3555 7.74521C13.2374 6.7332 13.648 5.77359 13.648 4.72526C13.648 3.70673 13.2809 2.76707 12.6142 2.07925C11.9395 1.3833 11.0137 1 10.0072 1C9.25484 1 8.56585 1.22621 7.95939 1.67231C7.68669 1.87287 7.43686 2.11343 7.21273 2.39076C7.17107 2.44231 7.09171 2.4423 7.05006 2.39075C6.82598 2.11342 6.57609 1.87287 6.30348 1.67231C5.69702 1.22621 5.00803 1 4.2557 1C3.2491 1 2.32336 1.3833 1.64868 2.07925C0.981963 2.76707 0.614746 3.70673 0.614746 4.72526C0.614746 5.77359 1.02552 6.7332 1.90741 7.7453C2.69634 8.65064 3.83021 9.56968 5.14326 10.6339L5.14555 10.6358C5.59341 10.9987 6.10103 11.4102 6.62754 11.8481Z"
-                        stroke="black" />
-                    </svg>
-                    ADD TO WISHLIST
-                  </button> &nbsp;
-                </div>
+              <div class="size-variant">
 
-                <div *ngIf="product.isTailor">
-                  <ng-template #content let-modal>
-                    <div class="modal-header">
-                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="form-group">
-                            <div *ngFor="let field of measurementForm.fields; let i = index">
-                              <div [ngStyle]="{'display': 'flex'}">
-                                <label>{{field.label}}</label>
-                                <input type="text" *ngIf="field.type=='string'" name="Form-label" class="form-control"
-                                  [(ngModel)]="measurementValues[i]" placeholder="Enter value" />
-                                <input type="number" *ngIf="field.type=='int'" name="Form-label" class="form-control"
-                                  [(ngModel)]="measurementValues[i]" placeholder="Enter value" />
-                                <label>{{field.unit}}</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button class="btn-add-cart btn-cstm add-cart" (click)="addCart()"
-                        (click)="modal.dismiss('Cross click')"
-                        *ngIf="product.stockQuantity && !isVariant || isVariant && selectedVariant.stockQuantity"
-                        translate>
-                        <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M4.31343 3.85688C3.57496 3.85688 2.61021 3.85688 1.88707 3.85688C1.31579 3.85688 0.853271 4.31999 0.853271 4.89127V10.3095C0.853271 12.0233 2.2426 13.4126 3.95643 13.4126H8.92149C10.6353 13.4126 12.0247 12.0233 12.0247 10.3095V4.89127C12.0247 4.31999 11.5621 3.85688 10.9909 3.85688C10.2677 3.85688 9.30297 3.85688 8.56449 3.85688M4.31343 3.85688C4.31343 2.87175 4.33321 1 6.38953 1C8.44586 1 8.56449 2.87175 8.56449 3.85688M4.31343 3.85688C5.97357 3.85688 6.90435 3.85688 8.56449 3.85688M4.31343 3.85688H8.56449"
-                            stroke="white" />
-                          <path
-                            d="M4.47339 5.43359C4.47329 6.46433 4.57683 8.11351 6.74904 8.11351C8.71437 8.11351 8.92128 6.46433 8.92128 5.43359"
-                            stroke="white" stroke-linecap="round" />
-                        </svg>
-                        SHOP NOW
-                      </button>&nbsp;
-                      <button class="btn-wishlist btn-cstm" (click)="addWishList(product)" translate>
-                        <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M6.62754 11.8481C6.76695 11.9642 6.94584 12.0282 7.13138 12.0282C7.31683 12.0282 7.49582 11.9642 7.63513 11.8483C8.16283 11.4094 8.67125 10.9972 9.11991 10.6337L9.12008 10.6336C10.4329 9.5695 11.5666 8.6506 12.3555 7.74521C13.2374 6.7332 13.648 5.77359 13.648 4.72526C13.648 3.70673 13.2809 2.76707 12.6142 2.07925C11.9395 1.3833 11.0137 1 10.0072 1C9.25484 1 8.56585 1.22621 7.95939 1.67231C7.68669 1.87287 7.43686 2.11343 7.21273 2.39076C7.17107 2.44231 7.09171 2.4423 7.05006 2.39075C6.82598 2.11342 6.57609 1.87287 6.30348 1.67231C5.69702 1.22621 5.00803 1 4.2557 1C3.2491 1 2.32336 1.3833 1.64868 2.07925C0.981963 2.76707 0.614746 3.70673 0.614746 4.72526C0.614746 5.77359 1.02552 6.7332 1.90741 7.7453C2.69634 8.65064 3.83021 9.56968 5.14326 10.6339L5.14555 10.6358C5.59341 10.9987 6.10103 11.4102 6.62754 11.8481Z"
-                            stroke="black" />
-                        </svg>
-                        ADD TO WISHLIST
-                      </button> &nbsp;
-                    </div>
-                  </ng-template>
-                  <button class="btn-add-cart btn-cstm add-cart" (click)="open(content)" translate>
-                    Fill Measurement
-                  </button>
+                <p class="size-holder">
+                  <strong  class="fsize-label" for="">Size : </strong>
+                  <input type="radio" id="small" name="size" value="" />
+                  <label for="small">S</label>
+
+                  <input type="radio" id="medium" name="size" value="" />
+                  <label for="medium">M</label>
+
+                  <input type="radio" id="large" name="size" value="" />
+                  <label for="large">L</label>
+
+                  <input type="radio" id="extraLarge" name="size" value="" />
+                  <label for="extraLarge">XL</label>
+                  
+                </p>
+              </div> -->
+              <!-- <div class="quantity-spinner">
+                <label for="" class="fsize-label">Quantity:</label>
+                <button class="">-</button><input type="text" value="1" /><button class="">+</button>
+              </div> -->
+              <div class="quantity" *ngIf="stockQuantity">
+                <!-- <span translate>Quantity:&nbsp;</span> <input (keypress)="onlyNumberKey($event)" type="number" min="1"
+                  max="{{stockQuantity}}" [(ngModel)]="quantity" name="quantity" /> -->
+
+
+                <div class="form-check-inline">
+                  <button class="btn" (click)="minus()"><i class="fa fa-minus"></i></button>
                 </div>
+                <div class="form-check-inline">
+                  <input type="text" type="number"
+                    min="{{product.minimumPurchaseQuantity?product.minimumPurchaseQuantity:1}}"
+                    max="{{(product.maximumPurchaseQuantity && product.maximumPurchaseQuantity <= stockQuantity) ? product.maximumPurchaseQuantity:stockQuantity}}"
+                    [(ngModel)]="quantity" name="quantity">
+                </div>
+                <div class="form-check-inline">
+                  <button class="btn" (click)="plus()"><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+
+              <hr>
+              <div class="button-detail" *ngIf="!product.isTailor">
+                <button class="btn-add-cart btn-cstm add-cart" (click)="shopNow()"
+                  *ngIf="product.stockQuantity && !isVariant || isVariant && selectedVariant.stockQuantity" translate>
+                  <!-- <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M4.31343 3.85688C3.57496 3.85688 2.61021 3.85688 1.88707 3.85688C1.31579 3.85688 0.853271 4.31999 0.853271 4.89127V10.3095C0.853271 12.0233 2.2426 13.4126 3.95643 13.4126H8.92149C10.6353 13.4126 12.0247 12.0233 12.0247 10.3095V4.89127C12.0247 4.31999 11.5621 3.85688 10.9909 3.85688C10.2677 3.85688 9.30297 3.85688 8.56449 3.85688M4.31343 3.85688C4.31343 2.87175 4.33321 1 6.38953 1C8.44586 1 8.56449 2.87175 8.56449 3.85688M4.31343 3.85688C5.97357 3.85688 6.90435 3.85688 8.56449 3.85688M4.31343 3.85688H8.56449"
+                      stroke="white" />
+                    <path
+                      d="M4.47339 5.43359C4.47329 6.46433 4.57683 8.11351 6.74904 8.11351C8.71437 8.11351 8.92128 6.46433 8.92128 5.43359"
+                      stroke="white" stroke-linecap="round" />
+                  </svg> -->
+                  <!-- <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.4 3.80078C3.7 3.80078 2.7 3.80078 2 3.80078C1.4 3.80078 1 4.20078 1 4.80078V10.2008C1 11.9008 2.3 13.2008 4 13.2008H9C10.7 13.2008 12 11.9008 12 10.2008V4.80078C12 4.20078 11.6 3.80078 11 3.80078C10.3 3.80078 9.2 3.80078 8.5 3.80078H4.4Z" stroke="white"/>
+                    <path d="M4.40039 3.8C4.40039 2.8 4.40039 1 6.40039 1C8.40039 1 8.50039 2.8 8.50039 3.8H4.40039Z" stroke="white"/>
+                    <path d="M3.7002 5.59961V10.7996H5.7002V8.79961" stroke="white"/>
+                    <path d="M7.2998 8.79961V10.8996H9.2998V5.59961" stroke="white"/>
+                    <path d="M5.2998 7.59961H7.5998" stroke="white"/>
+                  </svg>                    -->
+                  SHOP NOW
+                </button>&nbsp;
+                <button class="btn-add-cart btn-cstm add-cart" (click)="addCart()"
+                  *ngIf="product.stockQuantity && !isVariant || isVariant && selectedVariant.stockQuantity" translate>
+                  <!-- <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M4.31343 3.85688C3.57496 3.85688 2.61021 3.85688 1.88707 3.85688C1.31579 3.85688 0.853271 4.31999 0.853271 4.89127V10.3095C0.853271 12.0233 2.2426 13.4126 3.95643 13.4126H8.92149C10.6353 13.4126 12.0247 12.0233 12.0247 10.3095V4.89127C12.0247 4.31999 11.5621 3.85688 10.9909 3.85688C10.2677 3.85688 9.30297 3.85688 8.56449 3.85688M4.31343 3.85688C4.31343 2.87175 4.33321 1 6.38953 1C8.44586 1 8.56449 2.87175 8.56449 3.85688M4.31343 3.85688C5.97357 3.85688 6.90435 3.85688 8.56449 3.85688M4.31343 3.85688H8.56449"
+                      stroke="white" />
+                    <path
+                      d="M4.47339 5.43359C4.47329 6.46433 4.57683 8.11351 6.74904 8.11351C8.71437 8.11351 8.92128 6.46433 8.92128 5.43359"
+                      stroke="white" stroke-linecap="round" />
+                  </svg> -->
+                  <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M4.4 3.80078C3.7 3.80078 2.7 3.80078 2 3.80078C1.4 3.80078 1 4.20078 1 4.80078V10.2008C1 11.9008 2.3 13.2008 4 13.2008H9C10.7 13.2008 12 11.9008 12 10.2008V4.80078C12 4.20078 11.6 3.80078 11 3.80078C10.3 3.80078 9.2 3.80078 8.5 3.80078H4.4Z"
+                      stroke="white" />
+                    <path d="M4.40039 3.8C4.40039 2.8 4.40039 1 6.40039 1C8.40039 1 8.50039 2.8 8.50039 3.8H4.40039Z"
+                      stroke="white" />
+                    <path d="M3.7002 5.59961V10.7996H5.7002V8.79961" stroke="white" />
+                    <path d="M7.2998 8.79961V10.8996H9.2998V5.59961" stroke="white" />
+                    <path d="M5.2998 7.59961H7.5998" stroke="white" />
+                  </svg>
+
+                  Add To Cart
+                </button>&nbsp;
+                <button class="btn-wishlist btn-cstm add-cart" (click)="addWishList(product)" translate>
+                  <svg width="17" height="17" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M6.62754 11.8481C6.76695 11.9642 6.94584 12.0282 7.13138 12.0282C7.31683 12.0282 7.49582 11.9642 7.63513 11.8483C8.16283 11.4094 8.67125 10.9972 9.11991 10.6337L9.12008 10.6336C10.4329 9.5695 11.5666 8.6506 12.3555 7.74521C13.2374 6.7332 13.648 5.77359 13.648 4.72526C13.648 3.70673 13.2809 2.76707 12.6142 2.07925C11.9395 1.3833 11.0137 1 10.0072 1C9.25484 1 8.56585 1.22621 7.95939 1.67231C7.68669 1.87287 7.43686 2.11343 7.21273 2.39076C7.17107 2.44231 7.09171 2.4423 7.05006 2.39075C6.82598 2.11342 6.57609 1.87287 6.30348 1.67231C5.69702 1.22621 5.00803 1 4.2557 1C3.2491 1 2.32336 1.3833 1.64868 2.07925C0.981963 2.76707 0.614746 3.70673 0.614746 4.72526C0.614746 5.77359 1.02552 6.7332 1.90741 7.7453C2.69634 8.65064 3.83021 9.56968 5.14326 10.6339L5.14555 10.6358C5.59341 10.9987 6.10103 11.4102 6.62754 11.8481Z"
+                      stroke="white" />
+                  </svg>
+                </button> &nbsp;
 
                 <hr>
                 <div class="text-center" style="display: none;">
@@ -193,13 +250,99 @@
                   </div>
                 </div>
               </div>
+
+              <div *ngIf="product.isTailor">
+                <ng-template #content let-modal>
+                  <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="form-group">
+                          <div *ngFor="let field of measurementForm.fields; let i = index">
+                            <div [ngStyle]="{'display': 'flex'}">
+                              <label>{{field.label}}</label>
+                              <input type="text" *ngIf="field.type=='string'" name="Form-label" class="form-control"
+                                [(ngModel)]="measurementValues[i]" placeholder="Enter value" />
+                              <input type="number" *ngIf="field.type=='int'" name="Form-label" class="form-control"
+                                [(ngModel)]="measurementValues[i]" placeholder="Enter value" />
+                              <label>{{field.unit}}</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn-add-cart btn-cstm add-cart" (click)="shopNow()"
+                      (click)="modal.dismiss('Cross click')"
+                      *ngIf="product.stockQuantity && !isVariant || isVariant && selectedVariant.stockQuantity"
+                      translate>
+                      <!-- <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M4.31343 3.85688C3.57496 3.85688 2.61021 3.85688 1.88707 3.85688C1.31579 3.85688 0.853271 4.31999 0.853271 4.89127V10.3095C0.853271 12.0233 2.2426 13.4126 3.95643 13.4126H8.92149C10.6353 13.4126 12.0247 12.0233 12.0247 10.3095V4.89127C12.0247 4.31999 11.5621 3.85688 10.9909 3.85688C10.2677 3.85688 9.30297 3.85688 8.56449 3.85688M4.31343 3.85688C4.31343 2.87175 4.33321 1 6.38953 1C8.44586 1 8.56449 2.87175 8.56449 3.85688M4.31343 3.85688C5.97357 3.85688 6.90435 3.85688 8.56449 3.85688M4.31343 3.85688H8.56449"
+                      stroke="white" />
+                    <path
+                      d="M4.47339 5.43359C4.47329 6.46433 4.57683 8.11351 6.74904 8.11351C8.71437 8.11351 8.92128 6.46433 8.92128 5.43359"
+                      stroke="white" stroke-linecap="round" />
+                  </svg> -->
+                      <!-- <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.4 3.80078C3.7 3.80078 2.7 3.80078 2 3.80078C1.4 3.80078 1 4.20078 1 4.80078V10.2008C1 11.9008 2.3 13.2008 4 13.2008H9C10.7 13.2008 12 11.9008 12 10.2008V4.80078C12 4.20078 11.6 3.80078 11 3.80078C10.3 3.80078 9.2 3.80078 8.5 3.80078H4.4Z" stroke="white"/>
+                    <path d="M4.40039 3.8C4.40039 2.8 4.40039 1 6.40039 1C8.40039 1 8.50039 2.8 8.50039 3.8H4.40039Z" stroke="white"/>
+                    <path d="M3.7002 5.59961V10.7996H5.7002V8.79961" stroke="white"/>
+                    <path d="M7.2998 8.79961V10.8996H9.2998V5.59961" stroke="white"/>
+                    <path d="M5.2998 7.59961H7.5998" stroke="white"/>
+                  </svg>                    -->
+                      SHOP NOW
+                    </button>&nbsp;
+                    <button class="btn-add-cart btn-cstm add-cart" (click)="addCart()"
+                      *ngIf="product.stockQuantity && !isVariant || isVariant && selectedVariant.stockQuantity"
+                      translate>
+                      <!-- <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M4.31343 3.85688C3.57496 3.85688 2.61021 3.85688 1.88707 3.85688C1.31579 3.85688 0.853271 4.31999 0.853271 4.89127V10.3095C0.853271 12.0233 2.2426 13.4126 3.95643 13.4126H8.92149C10.6353 13.4126 12.0247 12.0233 12.0247 10.3095V4.89127C12.0247 4.31999 11.5621 3.85688 10.9909 3.85688C10.2677 3.85688 9.30297 3.85688 8.56449 3.85688M4.31343 3.85688C4.31343 2.87175 4.33321 1 6.38953 1C8.44586 1 8.56449 2.87175 8.56449 3.85688M4.31343 3.85688C5.97357 3.85688 6.90435 3.85688 8.56449 3.85688M4.31343 3.85688H8.56449"
+                      stroke="white" />
+                    <path
+                      d="M4.47339 5.43359C4.47329 6.46433 4.57683 8.11351 6.74904 8.11351C8.71437 8.11351 8.92128 6.46433 8.92128 5.43359"
+                      stroke="white" stroke-linecap="round" />
+                  </svg> -->
+                      <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M4.4 3.80078C3.7 3.80078 2.7 3.80078 2 3.80078C1.4 3.80078 1 4.20078 1 4.80078V10.2008C1 11.9008 2.3 13.2008 4 13.2008H9C10.7 13.2008 12 11.9008 12 10.2008V4.80078C12 4.20078 11.6 3.80078 11 3.80078C10.3 3.80078 9.2 3.80078 8.5 3.80078H4.4Z"
+                          stroke="white" />
+                        <path
+                          d="M4.40039 3.8C4.40039 2.8 4.40039 1 6.40039 1C8.40039 1 8.50039 2.8 8.50039 3.8H4.40039Z"
+                          stroke="white" />
+                        <path d="M3.7002 5.59961V10.7996H5.7002V8.79961" stroke="white" />
+                        <path d="M7.2998 8.79961V10.8996H9.2998V5.59961" stroke="white" />
+                        <path d="M5.2998 7.59961H7.5998" stroke="white" />
+                      </svg>
+                      Add To Cart
+                    </button>&nbsp;
+                    <button class="btn-wishlist btn-cstm add-cart" (click)="addWishList(product)" translate>
+                      <svg width="17" height="17" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M6.62754 11.8481C6.76695 11.9642 6.94584 12.0282 7.13138 12.0282C7.31683 12.0282 7.49582 11.9642 7.63513 11.8483C8.16283 11.4094 8.67125 10.9972 9.11991 10.6337L9.12008 10.6336C10.4329 9.5695 11.5666 8.6506 12.3555 7.74521C13.2374 6.7332 13.648 5.77359 13.648 4.72526C13.648 3.70673 13.2809 2.76707 12.6142 2.07925C11.9395 1.3833 11.0137 1 10.0072 1C9.25484 1 8.56585 1.22621 7.95939 1.67231C7.68669 1.87287 7.43686 2.11343 7.21273 2.39076C7.17107 2.44231 7.09171 2.4423 7.05006 2.39075C6.82598 2.11342 6.57609 1.87287 6.30348 1.67231C5.69702 1.22621 5.00803 1 4.2557 1C3.2491 1 2.32336 1.3833 1.64868 2.07925C0.981963 2.76707 0.614746 3.70673 0.614746 4.72526C0.614746 5.77359 1.02552 6.7332 1.90741 7.7453C2.69634 8.65064 3.83021 9.56968 5.14326 10.6339L5.14555 10.6358C5.59341 10.9987 6.10103 11.4102 6.62754 11.8481Z"
+                          stroke="white" />
+                      </svg>
+                    </button>
+                  </div>
+                </ng-template>
+                <button class="btn-add-cart btn-cstm add-cart" (click)="modalOpen(content)" translate>
+                  Fill Measurement
+                </button>
+              </div>
+
             </div>
           </div>
         </div>
 
         <div class="panel panel-default">
           <div class="panel-body">
-            <ul class="nav nav-tabs products-tab">
+            <ul class="nav nav-tabs products-tab" style="display: none;">
               <li class="nav-item">
                 <a class="nav-link" (click)="tab = 'detail'" [ngClass]="{active: tab === 'detail'}"
                   translate>Information</a>
@@ -220,7 +363,7 @@
               </li>
             </ul>
 
-            <div class="prod-description pt-3 pb-3" [hidden]="tab !== 'detail'">
+            <div class="prod-description pt-3 pb-3">
               <h5 class="prd-title" translate>Information</h5>
               <div class="mar-top-15" [innerHTML]="product?.description | safeHtml"></div>
               <div *ngIf="!product?.description">
@@ -240,17 +383,21 @@
               </div>
             </div>
 
-            <div class="pb-3" [hidden]="tab !== 'reviews'">
+
+            <div class="pb-3 review-bg">
+              <h5 class="prd-title" translate>Reviews</h5>
               <review-list [options]="{productId: product?._id, type: 'product'}"></review-list>
             </div>
 
-            <div class="prod-description pt-3 pb-3" [hidden]="tab !== 'shippingPolicy'">
+            <div class="prod-description pt-3 pb-3">
+              <h5 class="prd-title" translate>Shipping Policy</h5>
               <p class="pre-line">{{product?.shop?.shippingSettings?.shippingPolicy}}</p>
               <div *ngIf="!product.shop.shippingSettings.shippingPolicy">
                 <p>No shipping policy for product!</p>
               </div>
             </div>
-            <div class="prod-description pt-3 pb-3" [hidden]="tab !== 'refundPolicy'">
+            <div class="prod-description pt-3 pb-3">
+              <h5 class="prd-title" translate>Refund Policy</h5>
               <p class="pre-line">{{product?.shop?.shippingSettings?.refundPolicy}}</p>
               <div *ngIf="!product.shop.shippingSettings.refundPolicy">
                 <p>No refund policy for product!</p>
@@ -258,18 +405,84 @@
             </div>
           </div>
         </div>
+
+        <app-faq [productId]="product?.id"></app-faq>
         <div class="title-main">
-          <h4 translate>Related goods</h4>
+          <h4 translate>Similar Products</h4>
         </div>
-        <div class="body-box-main">
-          <featured-products [options]="{productId: product?._id}"></featured-products>
+        <div class="body-box-main related-goods">
+          <related-products [options]="{productId: product?._id}"></related-products>
         </div>
+
+
+        <div class="col-md-12" style="padding: 0px;">
+          <!-- <send-message-btn [hidden]="product.shop?.ownerId === userID" [recipientId]="product.shop?.ownerId">
+          </send-message-btn> -->
+          <a appLocationHref [url]="'/shops/'+ product.shop.alias" class="btn-send-block">Go to vendor Store</a>
+          <div class="row related-sidebar" style="margin: 0px;">
+            <div class="title-main col-md-12">
+              <h4 style="margin-bottom: 10px;">More from the Shop</h4>
+            </div>
+            <div class="box-product col-sm-6 col-md-3 list-item-single" *ngFor="let item of products">
+              <div class="img-prod"><a appLocationHref [url]="'/products/' + product.alias">
+                  <img [src]="item?.mainImage?.thumbUrl | checkImage"></a>
+              </div>
+              <div class="text-product">
+                <div class="name-product"><a appLocationHref [url]="'/products/' + product.alias"
+                    title="{{item?.name}}">{{product?.name}}</a></div>
+                <div class="price-product" *ngIf="item.salePrice">
+                  <span>
+                    <price-convert [price]="item.salePrice"></price-convert>
+                  </span> <br />
+                  <span class="line-through">
+                    <price-convert [price]="item.price"></price-convert>
+                  </span>
+                </div>
+                <div class="price-product" *ngIf="!item.salePrice">
+                  <span>
+                    <price-convert [price]="item.price"></price-convert>
+                  </span>
+                </div>
+                <div class="clear"></div>
+                <!-- <button class="btn-add-cart btn-cstm add-cart btn-add-cart-hollow" (click)="addCart()"
+                  *ngIf="item.stockQuantity && !item.sVariant || item.isVariant && item.selectedVariant.stockQuantity" translate>
+                  <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.31343 3.85688C3.57496 3.85688 2.61021 3.85688 1.88707 3.85688C1.31579 3.85688 0.853271 4.31999 0.853271 4.89127V10.3095C0.853271 12.0233 2.2426 13.4126 3.95643 13.4126H8.92149C10.6353 13.4126 12.0247 12.0233 12.0247 10.3095V4.89127C12.0247 4.31999 11.5621 3.85688 10.9909 3.85688C10.2677 3.85688 9.30297 3.85688 8.56449 3.85688M4.31343 3.85688C4.31343 2.87175 4.33321 1 6.38953 1C8.44586 1 8.56449 2.87175 8.56449 3.85688M4.31343 3.85688C5.97357 3.85688 6.90435 3.85688 8.56449 3.85688M4.31343 3.85688H8.56449" stroke="white"/>
+                    <path d="M4.47339 5.43359C4.47329 6.46433 4.57683 8.11351 6.74904 8.11351C8.71437 8.11351 8.92128 6.46433 8.92128 5.43359" stroke="white" stroke-linecap="round"/>
+                  </svg>
+                  SHOP NOW
+                </button> -->
+                <!-- <star-rating [rate]="product.ratingAvg" [total]="product.totalRating"></star-rating> -->
+                <div class="deal-time" *ngIf="item.dailyDeal && item.dealTo && item.showDeal"><span>Deal to</span>
+                  {{product.dealTo | date: 'medium'}}</div>
+
+                <!-- <div class="deal-time custom" *ngIf="!isOwner"><span translate>Sold by</span> <a
+                    [routerLink]="['/shops', product?.shop?.alias]"> {{product?.shop?.name}}</a></div> -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
-      <div class="col-md-3">
-        <send-message-btn [hidden]="product.shop?.ownerId === userID" [recipientId]="product.shop?.ownerId">
-        </send-message-btn>
-        <a appLocationHref [url]="'/shops/'+ product.shop.alias" class="btn-send-block">Go to vendor Store</a>
-      </div>
+
     </div>
   </div>
 </div>
+
+
+<ng-template #open_video_content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div class="modal-body mb-0 p-0">
+      <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+        <iframe width="100%" height="100%" frameBorder="0" [src]="iframeURL | safe: 'resourceUrl'"></iframe>
+      </div>
+    </div>
+  </div>
+</ng-template>

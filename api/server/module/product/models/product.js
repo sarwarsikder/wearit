@@ -61,6 +61,179 @@ const schema = new Schema(
       type: Number,
       default: 0,
     },
+    minimumPurchaseQuantity: {
+      type: Number,
+      default: 0,
+    },
+    maximumPurchaseQuantity: {
+      type: Number,
+      default: 0,
+    },
+    // base on  the category
+    specifications: [
+      {
+        _id: false,
+        key: String, // eg color, weight
+        value: String,
+      },
+    ],
+    featured: {
+      type: Boolean,
+      default: false,
+    },
+    hot: {
+      type: Boolean,
+      default: false,
+    },
+    bestSell: {
+      type: Boolean,
+      default: false,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    publishStatus: {
+      type: String,
+      enum: ["pending", "accepted", "rejected"],
+    },
+    // stock keeping unit
+    sku: {
+      type: String,
+      default: "",
+    },
+    // univeral product code
+    upc: {
+      type: String,
+      default: "",
+    },
+    // manufater part number
+    mpn: {
+      type: String,
+      default: "",
+    },
+    // european article number
+    ean: {
+      type: String,
+      default: "",
+    },
+    // japanese artical number
+    jan: {
+      type: String,
+      default: "",
+    },
+    // international standard book number
+    isbn: {
+      type: String,
+      default: "",
+    },
+    metaSeo: {
+      keywords: {
+        type: String,
+      },
+      description: {
+        type: String,
+        default: "",
+      },
+    },
+    images: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Media",
+      },
+    ],
+    mainImage: {
+      type: Schema.Types.ObjectId,
+      ref: "Media",
+    },
+    logo: {
+      type: Schema.Types.ObjectId,
+      ref: "Media",
+    },
+    sizeChart: {
+      type: Schema.Types.ObjectId,
+      ref: "Media",
+    },
+    videoUrl: {
+      type: String,
+    },
+    shopVerified: {
+      type: Boolean,
+      default: false,
+    },
+    shopActivated: {
+      type: Boolean,
+      default: false,
+    },
+    shopFeatured: {
+      type: Boolean,
+      default: false,
+    },
+    taxClass: {
+      type: String,
+    },
+    taxPercentage: {
+      type: Number,
+      default: 0,
+    },
+    digitalFileId: {
+      type: Schema.Types.ObjectId,
+      ref: "Media",
+    },
+    restrictCODAreas: [
+      {
+        type: String,
+        default: [],
+      },
+    ],
+    freeShip: {
+      type: Boolean,
+      default: true,
+    },
+    restrictFreeShipAreas: [
+      {
+        _id: false,
+        areaType: {
+          type: String,
+          enum: ["physical", "digital"],
+          default: "physical",
+        },
+      },
+    ],
+    price: {
+      type: Number,
+      default: 0,
+    },
+    salePrice: {
+      type: Number,
+      default: null,
+    },
+    discounted: {
+      type: Boolean,
+      default: false,
+    },
+    // base on shop country
+    // it is not editable but fill from profile automatically
+    currency: {
+      type: String,
+      uppercase: true,
+    },
+    categoryId: {
+      type: Schema.Types.ObjectId,
+      ref: "ProductCategory",
+    },
+    brandId: {
+      type: Schema.Types.ObjectId,
+      ref: "Brand",
+    },
+    shopId: {
+      type: Schema.Types.ObjectId,
+      ref: "Shop",
+    },
+    stockQuantity: {
+      type: Number,
+      default: 0,
+    },
     // base on  the category
     specifications: [
       {
@@ -251,6 +424,13 @@ schema.virtual("form", {
 schema.virtual("digitalFile", {
   ref: "Media",
   localField: "digitalFileId",
+  foreignField: "_id",
+  justOne: true,
+});
+
+schema.virtual("sizeCharts", {
+  ref: "Media",
+  localField: "sizeChart",
   foreignField: "_id",
   justOne: true,
 });

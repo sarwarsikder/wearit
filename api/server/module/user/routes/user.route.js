@@ -69,6 +69,7 @@ module.exports = (router) => {
     Middleware.Response.success('user')
   );
 
+
   /**
    * @apiGroup User
    * @apiVersion 1.0.0

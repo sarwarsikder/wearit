@@ -1,5 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,700i');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,700i');
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Vidaloka&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@300;400;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -11,10 +15,10 @@ html {
 
 body {
   background: #fff;
-  color: #000;
+  color: #1C1C1C !important;
   font-size: 14px;
   line-height: 23px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1,
@@ -23,9 +27,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 400;
   color: #333;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 a {
@@ -170,12 +175,12 @@ img {
 
   span {
     position: absolute;
-    width: 15px;
-    height: 15px;
+    min-width: 15px;
+    min-height: 15px;
     line-height: 15px;
     text-align: center;
     border-radius: 50%;
-    color: #000;
+    color: #1C1C1C;
     top: -3px;
     right: -5px;
     background: white;
@@ -258,43 +263,63 @@ img {
   margin-left: 15px;
   a {
     display: inline-block;
-    color: #7F1D1D !important;
-    text-decoration: none !important
+    color: #fff!important;
+    background: #dc2626 !important;
+    text-decoration: none !important;
+    margin-top: 3px;
+    font-weight: 500;
+    padding: 0px 8px 0px 14px;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-radius: 33px;
   }
 }
 .padding-main {
-  padding: 40px 0px;
+  padding: 20px 0px;
+  padding-bottom: 10px;
 }
 
 .box-product {
-  background: #FAFAFA;
-  border: 1px solid #ddd;
+  // background: #F9FAFB;
   border-radius: 0px;
   margin-bottom: 20px;
   margin-left: 10px;
   margin-right: 10px;
-  box-shadow: 1px 1px 4px 0px #00000042;
-  padding-top: 10px !important;
+  // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  padding-top: 0px !important;
+  padding: 0px !important;
+  .img-prod{
+   
+  }
 
   img {
     width: 100%;
     max-height: 100%;
+    height: 250px;
+    object-fit: cover;
   }
 
   .text-product {
-    padding: 15px;
+    padding: 10px ​5px 5px 5px !important;
   }
 
   .name-product {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: #333;
     display: block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    
+    .price-product > span{
+      font-size: 18px;
+    }
 
     a {
-      color: #333;
+      // font-family: 'Vidaloka', serif;
+      color: #1C1C1C;
+      font-weight: 400;
+      font-size: 16px;
     }
   }
 
@@ -315,7 +340,7 @@ img {
 .price-product {
   font-size: 15px;
   font-weight: bold;
-  color: #000;
+  color: #1C1C1C;
 
   span.line-through {
     color: red;
@@ -413,8 +438,16 @@ img {
   border: 1px solid #ddd;
   border-radius: 0px;
   margin-bottom: 20px;
-  box-shadow: 1px 1px 4px 0px #00000042;
-  padding-top: 10px !important;
+  box-shadow: 1px 1px 4px 0px #1C1C1C42;
+  .img-prod{
+    height: 200px !important;
+    padding: 10px !important;
+    img{
+      height: 200px;
+      object-fit: cover;
+    }
+  }
+  // padding-top: 10px !important;
 }
 .card-shop-name{
   font-size: 14px;
@@ -422,14 +455,14 @@ img {
 }
 
 .btn-shop-now{
-    border: 1px solid #000;
+    border: 1px solid #1C1C1C;
     padding: 1px 7px 1px 4px;
     font-size: 13px;
   svg{
     width: 20px;
     margin-top: -2px;
     path{
-      // fill: #000;
+      // fill: #1C1C1C;
     }
   }
   &.btn-align-fix{
@@ -608,8 +641,17 @@ img {
 
 .filter-left h4 {
   border-bottom: 1px solid #ddd;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   padding-bottom: 10px;
+  background: #1C1C1C;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.filter-left{
+  background: #fafafa;
 }
 
 .rate-seller {
@@ -628,7 +670,7 @@ img {
   }
 
   .star i {
-    font-size: 20px;
+    font-size: 15px;
   }
 }
 
@@ -652,6 +694,7 @@ img {
     font-size: 20px;
     display: inline-block;
     margin-right: 10px;
+    font-weight: 700;
     color: #566b95;
   }
 }
@@ -705,6 +748,7 @@ img {
 
 .form-review {
   margin-bottom: 30px;
+  background: #FAFAFA;
 }
 
 .title-comment {
@@ -754,6 +798,28 @@ img {
   margin-bottom: 20px;
   display: table;
   width: 100%;
+  background: #F5F5F5;
+  padding: 20px;
+  h4{
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0px;
+  }
+}
+.form-filter{
+  display: flex;
+  flex-direction: row;
+  margin-top: 7px;
+  select{
+    width: 120px;
+    border: 1px solid #333;
+    border-radius: 3px;
+    margin-left: 10px;
+  }
+  label{
+    font-weight: 500;
+  }
+
 }
 
 .list-cart .media-left img {
@@ -804,3 +870,74 @@ img {
   }
 }
 
+.filter-left{
+  .list-categories{
+    padding: 0px;
+  }
+  .cate-list-items{
+    font-weight: 500;
+    background: transparent;
+    border-bottom: 0px;
+    padding: 0px;
+    padding-left: 0px !important;
+    a{
+      display: block;
+      padding: 0.75rem 1em;
+      &:hover{
+        background: #fef2f2;
+        color: red !important;
+        svg{
+          path{
+            fill: red;
+          }
+        }
+      }
+    }
+  }
+  svg{
+    width: 24px;
+    height: 24px;
+    margin-top: -1px;
+    margin-right: 10px;
+  }
+}
+
+.block-action{
+  display: block;
+  .btn{
+    width: 100%;
+  }
+}
+.remove-container{
+  position: relative;
+  .block-action{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    .btn-danger{
+      background: transparent;
+      border: 0px;
+      padding: 0px;
+      background: #ef4444;
+      height: 40px;
+      width: 40px;
+      border-radius: 20px;
+      svg{
+        path{
+          fill: #ffc6c6;
+        }
+      }
+    }
+  }
+}
+.btn-send{
+  background: #1C1C1C;
+  border: 1px solid #1C1C1C;
+  &:hover{
+    background: #333;
+    border-color: #333;
+  }
+}

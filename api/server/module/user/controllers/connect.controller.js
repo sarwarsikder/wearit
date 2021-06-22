@@ -27,8 +27,15 @@ exports.connectFacebook = async (req, res, next) => {
         socialId: data.id
       });
     }
+
+    // if(social){
+    //   console.log('aisi to')
+    //   console.log(social)
+    // }
+
     social.accessToken = validate.value.accessToken;
     social.socialInfo = data;
+    // console.log('fb',social)
     await social.save();
     await Service.Shop.updateTrustedSocialAccount(social);
 
@@ -43,6 +50,7 @@ exports.connectFacebook = async (req, res, next) => {
 
 exports.connectGoogle = async (req, res, next) => {
   try {
+      console.log(req);
     const schema = Joi.object().keys({
       accessToken: Joi.string().required()
     });
@@ -75,6 +83,7 @@ exports.connectGoogle = async (req, res, next) => {
     };
     return next();
   } catch (e) {
+    console.log(e);
     return next(e);
   }
 };

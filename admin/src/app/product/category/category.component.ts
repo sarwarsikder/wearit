@@ -97,6 +97,7 @@ export class ProductCategoryUpdateComponent implements OnInit {
     this.categoryService.findOne(this.groupId)
       .then(resp => {
         this.category = resp.data;
+        this.category.splice('totalProduct',1);
         if (typeof this.category.mainImage === 'string') {
           this.imageUrl = this.category.mainImage;
         } else if (this.category.mainImage) {

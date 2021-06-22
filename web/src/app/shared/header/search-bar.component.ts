@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../product/services';
 
+
 @Component({
   selector: 'search-bar',
   templateUrl: './search-bar.html'
 })
 export class SearchbarComponent implements OnInit {
+  public appConfig: any = {};
   public tree: any = [];
+  public isMenuCollapsed:any = '';
 
   constructor(public router: Router, private categoryService: CategoryService) { }
 

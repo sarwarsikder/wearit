@@ -8,6 +8,7 @@ import { ProductRoutingModule } from "./product.routing";
 import { MediaModule } from "../media/media.module";
 
 import { ProductListingComponent } from "./product/listing.component";
+import { ProductPendingListingComponent } from "./product/pending-listing.component";
 import { ProductUpdateComponent } from "./product/update.component";
 import { ProductCreateComponent } from "./product/create.component";
 import { ReviewsComponent } from "./reviews/listing.component";
@@ -25,12 +26,18 @@ import {
   VariantUpdateModalComponent,
   ProductVariantsComponent,
 } from "./variants/product-variants.component";
+import { BrandComponent } from './brand/brand.component';
+import { ProductBrandCreateComponent } from './brand/brand.component';
+import { ProductBrandUpdateComponent } from './brand/brand.component';
+
 
 import { ProductCategoryService } from "./services/category.service";
 import { OptionService } from "./services/option.service";
 import { ProductService } from "./services/product.service";
 import { ProductVariantService } from "./services/variant.service";
 import { ReviewService } from "./services/review.service";
+import { BrandService } from "./services/brand.service";
+
 
 @NgModule({
   imports: [
@@ -52,11 +59,15 @@ import { ReviewService } from "./services/review.service";
     OptionCreateComponent,
     OptionUpdateComponent,
     ProductListingComponent,
-    ProductUpdateComponent,
+    ProductPendingListingComponent,
     ProductCreateComponent,
+    ProductUpdateComponent,
     VariantUpdateModalComponent,
     ProductVariantsComponent,
     ReviewsComponent,
+    BrandComponent,
+    ProductBrandCreateComponent,
+    ProductBrandUpdateComponent
   ],
   providers: [
     ProductCategoryService,
@@ -64,6 +75,8 @@ import { ReviewService } from "./services/review.service";
     ProductService,
     ProductVariantService,
     ReviewService,
+    BrandService
+
   ],
   exports: [],
   entryComponents: [VariantUpdateModalComponent],

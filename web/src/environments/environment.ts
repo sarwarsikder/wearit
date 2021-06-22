@@ -8,11 +8,41 @@ export const environment = {
   version: '0.0.1',
   build: 27,
   apiBaseUrl: 'http://localhost:9000/v1',
+  // apiBaseUrl: 'http://localhost:8080/v1',
+  //apiBaseUrl: 'https://wearit-shop-api.herokuapp.com/v1',
+
   apiProxy: '',
-  sellerUrl: 'https://seller.genstore.info',
+  // sellerUrl: 'https://wearit-shop-api.herokuapp.com/api',
+  sellerUrl: 'https://wearit-seller.herokuapp.com/',
   platform: 'web',
-  googleClientId: '917195124089-hp1m6g5fbotlkbipmrejrapt9uh0lhhl.apps.googleusercontent.com',
-  facebookAppId: '113570925979091',
+  
+
+  /**Social Login Credentials Start */
+  /**
+   * Google Drive Login Credential Start
+   */
+  googleClientId: '724717586536-4aafue6065jpciebbkh94hb41gmm4tsv.apps.googleusercontent.com',
+  /**
+   * Google Drive Login Credential End
+   */
+
+  /**
+   * Facebook Login Credential Start
+   */
+  facebookAppId: '195619922437219',
+  /**
+   * Facebook Login Credential End
+   */
+  /**
+   * Instagram Login Credential Start
+   */
+  instagramClientId: '493159371753638',
+  instagramRedirectUri: 'https://wearit-web.herokuapp.com/',
+  /**
+   * Instagram Login Credential End
+   */
+    /**Social Login Credentials End */
+
   paymentRedirectSuccessUrl: 'http://localhost:4200/cart/checkout/success',
   paymentRedirectCancelUrl: 'http://localhost:4200/cart/checkout/cancel',
   stripeKey: 'pk_test_Z3rf3HSfsokHl4lLFTBxhZrZ',

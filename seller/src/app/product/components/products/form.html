@@ -16,11 +16,13 @@
             <a class="nav-link" data-toggle="tab" role="tab" aria-controls="catalogs" aria-selected="false"
               [ngClass]="{active: tab == 'catalogs'}" (click)="changeTab('catalogs')">Variants</a>
 
+            <a class="nav-link" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false"
+              [ngClass]="{active: tab == 'size-chart'}" (click)="changeTab('size-chart')">Size Chart</a>
             <a class="nav-link" data-toggle="tab" role="tab" aria-controls="measurement" aria-selected="false"
               [ngClass]="{active: tab == 'measurement'}" (click)="changeTab('measurement')">Measurement</a>
-
             <a [hidden]="!product._id" class="nav-link" data-toggle="tab" role="tab" aria-controls="review"
-              aria-selected="false" [ngClass]="{active: tab == 'review'}" (click)="changeTab('review')">Reviews From
+              aria-selected="false" [ngClass]="{active: tab == 'review'}" (click)="changeTab('review')">Reviews
+              From
               User</a>
           </div>
         </div>
@@ -45,8 +47,10 @@
                     <label>Alias</label>
                     <input type="text" name="alias" class="form-control"
                       placeholder="no space, special chars, alias name for seo" [(ngModel)]="product.alias" />
-                    <small class="text-muted">If the alias is exist, the system automatically adds any character at the
-                      end of alias.</small>
+                    <small class="text-muted">If the alias is exist, the system automatically adds
+                      any character at the
+                      end of alias.
+                    </small>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -89,8 +93,6 @@
                   </div>
                 </div>
                 <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
                   <div class="form-group">
                     <label>Price (*)</label>
                     <input type="number" name="price" min="0.1" class="form-control" [(ngModel)]="product.price"
@@ -98,6 +100,32 @@
                     <div *ngIf="price.errors && (price.dirty || price.touched || isSubmitted)">
                       <p [hidden]="!price.errors.required" class="required-text">
                         Price is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Minimum Purchase Quantity (*)</label>
+                    <input type="number" name="minimumPurchaseQuantity" min="1" class="form-control"
+                      [(ngModel)]="product.minimumPurchaseQuantity" required #minimumPurchaseQuantity="ngModel" />
+                    <div
+                      *ngIf="minimumPurchaseQuantity.errors && (minimumPurchaseQuantity.dirty || minimumPurchaseQuantity.touched || isSubmitted)">
+                      <p [hidden]="!minimumPurchaseQuantity.errors.required" class="required-text">
+                        Minimum Purchase Quantity quantity is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Maximum Purchase Quantity (*)</label>
+                    <input type="number" name="maximumPurchaseQuantity" min="1" class="form-control"
+                      [(ngModel)]="product.maximumPurchaseQuantity" required #maximumPurchaseQuantity="ngModel" />
+                    <div
+                      *ngIf="maximumPurchaseQuantity.errors && (maximumPurchaseQuantity.dirty || maximumPurchaseQuantity.touched || isSubmitted)">
+                      <p [hidden]="!maximumPurchaseQuantity.errors.required" class="required-text">
+                        Maximum Purchase Quantity quantity is required
                       </p>
                     </div>
                   </div>
@@ -114,6 +142,7 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Tax Name</label>
@@ -128,7 +157,7 @@
                       [(ngModel)]="product.taxPercentage" />
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label>Restrict COD areas</label>
                     <ng-select bindValue="label" placeholder="Fill out restrict COD areas here" name="restrictCODAreas"
@@ -201,6 +230,23 @@
                     </select>
                   </div>
                 </div>
+
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Brand</label>
+                    <input type="text" name="brand" class="form-control" [class.is-invalid]="searchFailed"
+                      [(ngModel)]="product.brand" [ngbTypeahead]="search_brand" placeholder="Search brand"
+                      [resultTemplate]="rt" [inputFormatter]="formatter_brand" />
+                    <span *ngIf="searching">searching...</span>
+                    <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+                    <ng-template #rt let-r="result" let-t="term">
+                      <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+                    </ng-template>
+                  </div>
+                </div>
+
+
                 <div class="col-md-6" *ngIf="product.metaSeo">
                   <div class="form-group">
                     <label>Meta keywords</label>
@@ -273,12 +319,14 @@
                     </div>
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="checkbox" name="freeShip" [(ngModel)]="product.freeShip" /> Free ship for all
+                        <input type="checkbox" name="freeShip" [(ngModel)]="product.freeShip" />
+                        Free ship for all
                       </label>
                     </div>
                     <div class="form-check">
                       <label class="form-check-label">
-                        <input type="checkbox" name="active" [(ngModel)]="product.isActive" /> Active
+                        <input type="checkbox" name="active" [(ngModel)]="product.isActive" />
+                        Active
                       </label>
                     </div>
                   </div>
@@ -332,8 +380,8 @@
                             <input type="text" class="form-control" placeholder="Enter specification value"
                               name="newChemicalValue" [(ngModel)]="newSpecification.value" />
                             <div class="input-group-append">
-                              <button class="btn btn-outline-secondary" type="button"
-                                (click)="addSpecification()">Add</button>
+                              <button class="btn btn-outline-secondary" type="button" (click)="addSpecification()">Add
+                              </button>
                             </div>
                           </div>
                         </td>
@@ -366,6 +414,21 @@
             <hr />
             <media-select (onSelect)="selectImage($event)" [options]="imagesOptions"></media-select>
           </div>
+
+
+          <div class="tab-pane fade show active" role="tabpanel" [ngClass]="{'show active': tab === 'size-chart'}">
+            <h3>Click to set Size Chart image.</h3>
+            <div class="row">
+              <div class="form-group">
+                <label>
+                  <media-select (onSelect)="selectSizeImage($event)"></media-select>
+                </label>
+                <hr />
+                <img *ngIf="sizeChart" width="150" [src]="sizeChart" />
+              </div>
+            </div>
+          </div>
+
 
           <div class="tab-pane" role="tabpanel"
             [ngClass]="{'show active': tab === 'catalogs', hide: tab !== 'catalogs'}">

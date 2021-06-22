@@ -1,0 +1,127 @@
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-7">
+            <div class="card cstm-sign-area">
+                <div class="card-body">
+                    <h3 class="title-head">Insert you Information</h3>
+                    <form #frm="ngForm" (submit)="submit(frm)">
+                        <div class="mb-3">
+                            <label for="" class="form-label required">First name<span class="ng-star-required"> *</span></label>
+                            <input type="text" class="form-control" placeholder="{{'Enter your first name'}}"
+                            #firstName="ngModel" name="firstName" required [(ngModel)]="name.firstName" />
+                            <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched || submitted)">
+                              <p [hidden]="!firstName.errors.required" class="error" > First name is required </p>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label required">Last name<span class="ng-star-required"> *</span></label>
+                            <input type="text" class="form-control" placeholder="{{'Enter your last name'}}"
+                            #lastName="ngModel" name="lastName" required [(ngModel)]="name.lastName" />
+                            <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched || submitted)">
+                                <p [hidden]="!lastName.errors.required" class="error" > Last name is required </p>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label required">Email address<span class="ng-star-required"> *</span></label>
+                            <input type="text" class="form-control" id="email" aria-describedby="emailHelp"
+                            placeholder="{{'Enter your email'}}" #email="ngModel" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" required [(ngModel)]="account.email" />
+                            <div *ngIf="email.errors && (email.dirty || email.touched || submitted)">
+                                <p [hidden]="!email.errors.required" class="error" > Email is required </p>
+                                <p [hidden]="!email.errors.pattern" class="error" translate> Email format is wrong </p>
+                            </div>
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label required">Phone Number<span class="ng-star-required"> *</span></label>
+                            <input type="text" onkeypress="return event.charCode >= 43 && event.charCode <= 57" class="form-control" id="phone"
+                            placeholder="{{'Enter your phone number'}}" #phone="ngModel" name="phone" required [minlength]="11" [(ngModel)]="account.phone" />
+                            <div *ngIf="phone.errors && (phone.dirty || phone.touched || submitted)">
+                                <p [hidden]="!phone.errors.required" class="error" > Phone is required </p>
+                                <p [hidden]="!phone.errors.minlength" class="error">
+                                    Phone Number should be at least 11 digit!
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Address</label>
+                            <textarea style="height: auto;" placeholder="{{'Enter your address'}}"
+                            #address="ngModel" name="address" [(ngModel)]="account.address"  class="form-control" id="" cols="30" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label required">Password<span class="ng-star-required"> *</span></label>
+                            <input type="password" class="form-control" id="password"
+                            placeholder="{{'Enter your password'}}" #password="ngModel" name="password" required [minlength]="8" [(ngModel)]="account.password" />
+                            <div *ngIf="password.errors && (password.dirty || password.touched || submitted)">
+                                <p [hidden]="!password.errors.required" class="error" > password is required </p>
+                                <p [hidden]="!password.errors.minlength" class="error">
+                                    Password must be at least 8 characters!
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label required">Confirm password<span class="ng-star-required"> *</span></label>
+                            <input type="password" class="form-control" id="rePassword"
+                            placeholder="{{'Enter your password again'}}" #rePassword="ngModel" name="rePassword" required [minlength]="6" [(ngModel)]="input.rePassword" />
+                            <div *ngIf="rePassword.errors && (rePassword.dirty || rePassword.touched || submitted)">
+                                <p [hidden]="!rePassword.errors.required" class="error" > password is required </p>
+                                <p [hidden]="!rePassword.errors.minlength" class="error">
+                                    Password must be at least 8 characters!
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label  required">NID/Passport ID<span class="ng-star-required"> *</span></label>
+                            <div class="upload-btn-wrapper attach-file">
+                                <div class="custom-dropzone" ngx-dropzone
+                                [multiple]="false"
+                                [accept]="'image/jpeg,image/jpg,image/png,image/gif'"
+                                (change)="onSelect($event, 'file')">
+                                    <ngx-dropzone-label>
+                                        <div>
+                                            <h2>Drop your NID / Passport
+                                            </h2>
+                                        </div>
+                                    </ngx-dropzone-label>
+                                    <ngx-dropzone-image-preview class="image-drop-signup" ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f, 'file')">
+                                        <!-- <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label> -->
+                                    </ngx-dropzone-image-preview>
+                                </div>
+                            </div>
+
+                            <div *ngIf="!account.isFileUploaded && (submitted || firstUploadRemove > 0)">
+                                <p class="error" > NID / Passport is required </p>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="">Profile Image</label>
+                            <div class="upload-btn-wrapper attach-file">
+                                <div class="custom-dropzone" ngx-dropzone
+                                [multiple]="false"
+                                [accept]="'image/jpeg,image/jpg,image/png,image/gif'"
+                                (change)="onSelect($event, 'picture')">
+                                    <ngx-dropzone-label>
+                                        <div>
+                                            <h2>Drop your profile picture here
+                                            </h2>
+                                        </div>
+                                    </ngx-dropzone-label>
+                                    <ngx-dropzone-image-preview class="image-drop-signup" ngProjectAs="ngx-dropzone-preview" *ngFor="let f of pictures" [file]="f" [removable]="true" (removed)="onRemove(f, 'picture')">
+                                        <!-- <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label> -->
+                                    </ngx-dropzone-image-preview>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-login">Create delivery account</button>
+                        <p class="text-center">
+                            Already have an account?
+                        </p>
+                    </form>
+
+                    <button routerLink="/auth/sign-in" class="btn btn-login btn-hollow">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

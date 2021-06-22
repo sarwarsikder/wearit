@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="row" style="padding: 25px">
+  <div class="row req-pay-container" style="padding: 25px">
     <div class="col-md-3">
       <div class="input-group input-date">
         <label>From &nbsp;</label>
@@ -16,7 +16,7 @@
         <input class="form-control br-l" placeholder="yyyy-mm-dd" class="form-control" name="toDate" [(ngModel)]="dateFilter.toDate"
           ngbDatepicker #toDate="ngbDatepicker">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary fa fa-calendar br-r" (click)="toDate.toggle()" type="button"></button>
+          <button class="btn btn-outline-secondary fa fa-calendar br-r" style="color: #fff; !important" (click)="toDate.toggle()" type="button"></button>
         </div>
       </div>
     </div>

@@ -16,6 +16,7 @@ export class SearchResolver implements Resolve<Observable<any>> {
     state: RouterStateSnapshot
   ): Observable<any>|Promise<any>|any {
     // TODO - parse query string here
+    
     return this.service.search({});
   }
 }

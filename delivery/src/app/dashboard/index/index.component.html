@@ -1,0 +1,125 @@
+<div class="container-fluid">
+    <div class="row card-stream">
+        <div class="col-sm">
+            <div class="card">
+            <div class="card-body">
+                <p class="card-title">Complete Delivery</p>
+                <strong class="card-meta">{{count?.completed}}</strong>
+                <hr class="margin-control">
+                <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('completed')">View Now</a>
+            </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Shipped delivery</p>
+                    <strong class="card-meta">{{count?.shipping}}</strong>
+                    <hr class="margin-control">
+                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('shipping')">View Now</a>
+                </div>
+                </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Refunded</p>
+                    <strong class="card-meta">{{ count?.refunded }}</strong>
+                    <hr class="margin-control">
+                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('refunded')">View Now</a>
+                </div>
+                </div>
+        </div>
+        <div class="col-sm">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">Cancelled</p>
+                    <strong class="card-meta">{{count?.cancelled}}</strong>
+                    <hr class="margin-control">
+                    <a class="card-link" style="cursor: pointer;" (click)="onStatusChange('cancelled')">View Now</a>
+                </div>
+                </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <h2 class="title-head">Delivery Overview</h2>
+        </div>
+        <div class="col-6 col-sm-6">
+            <input type="text" class="form-control" placeholder="Search Products/Categories/Brands">
+        </div>
+        <div class="col-2 col-sm-2">
+            <select name="" class="form-control" id="">
+                <option value="">1</option>
+            </select>
+        </div>
+        <div class="col-2 col-sm-2">
+            <select name="" class="form-control" id="">
+                <option value="">1</option>
+            </select>
+        </div>
+        <div class="col-2 col-sm-2">
+            <select name="" class="form-control" id="">
+                <option value="">1</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-hover table-striped cstm-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <!-- <th>Order ID</th> -->
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Taxes</th>
+                        <th>Shipped Price</th>
+                        <th>Total</th>
+                        <th>Commission Rate Price</th>
+                        <th>Balance</th>
+                        <th>Status</th>
+                        <th>Code</th>
+                        <th>User IP</th>
+                        <th>Created At</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders| paginate: { itemsPerPage: 10, currentPage: pageNo, totalItems: totalCount }">
+                        <td>
+                            <div>
+                                <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1" value="" aria-label="...">
+                            </div>
+                        </td>
+                        <!-- <td>
+                            <span>{{ order?._id}}</span>
+                        </td> -->
+                        <td>
+                            <span>{{ order?.productDetails?.name }}</span>
+                        </td>
+                        <td>{{ order?.quantity }}</td>
+                        <td>{{ order?.taxPrice }}</td>
+                        <td>{{ order?.shippingPrice }}</td>
+                        <td>{{ order?.totalPrice }}</td>
+                        <td>{{ order?.commissionRate }}</td>
+                        <td>{{ order?.balance }}</td>
+                        <td>{{ order?.status }}</td>
+                        <td>{{ order?.trackingCode }}</td>
+                        <td>{{ order?.userIP }}</td>
+                        <td>{{ getFormattedDateTime(order?.createdAt) }}</td>
+                        <td>
+                            <button class="td-btn">Invoice</button>
+                            <button *ngIf="status!='completed'" (click)="onStatusSet(order?._id, 'completed')" class="td-btn">Complete</button>
+                            <button *ngIf="status!='shipping'" (click)="onStatusSet(order?._id, 'shipping')" class="td-btn">Ship</button>
+                            <button *ngIf="status!='refunded'" (click)="onStatusSet(order?._id, 'refunded')" class="td-btn">Refund</button>
+                            <button *ngIf="status!='cancelled'" (click)="onStatusSet(order?._id, 'cancelled')" class="td-btn">Cancel</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls (pageChange)="onPageChange($event)" style="text-align: center;"></pagination-controls>
+        </div>
+    </div>
+</div>

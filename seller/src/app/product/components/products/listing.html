@@ -1,21 +1,17 @@
 <div class="card">
   <div class="card-body table-responsive">
-    <div class="row">
-      <div class="col-md-4">
+    <div class="row prod-action">
+      <div class="col-md-12">
         <a class="btn btn-danger button-custom" href="../../../../assets/Sample.csv" download><i class="fa fa-file"></i>
           Sample File</a>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-danger button-custom" (click)="exportCSV()" style="color: #fff"><i class="fa fa-cloud-download"></i>
-          Export Data</a>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-danger button-custom">
-          <span (click)="openFile()" style="color: #fff"><i class="fa fa-cloud-upload"></i> Import Data</span>
-          <div class="import-button" *ngIf="showImport">
-            <file-upload [options]="importOptions"></file-upload>
-          </div>
-        </a>
+          <a class="btn btn-danger button-custom" (click)="exportCSV()" style="color: #fff"><i class="fa fa-cloud-download"></i>
+            Export Data</a>
+            <a class="btn btn-danger button-custom">
+              <span (click)="openFile()" style="color: #fff"><i class="fa fa-cloud-upload"></i> Import Data</span>
+              <div class="import-button" *ngIf="showImport">
+                <file-upload [options]="importOptions"></file-upload>
+              </div>
+            </a>
       </div>
     </div>
     <table class="table table-custom">
@@ -74,6 +70,13 @@
             </span>
           </th>
           <th>
+            <a (click)="sortBy('publishStatus', 'desc')">Publish Status</a>
+            <span *ngIf="sortOption.sortBy=='publishStatus'">
+              <a (click)="sortBy('publishStatus', 'asc')" *ngIf="sortOption.sortType=='desc'"><i class="fa fa-caret-down"></i></a>
+              <a (click)="sortBy('publishStatus', 'desc')" *ngIf="sortOption.sortType=='asc'"><i class="fa fa-caret-up"></i></a>
+            </span>
+          </th>
+          <th>
             <a (click)="sortBy('createdAt', 'desc')">Created at</a>
             <span *ngIf="sortOption.sortBy=='createdAt'">
               <a (click)="sortBy('createdAt', 'asc')" *ngIf="sortOption.sortType=='desc'"><i class="fa fa-caret-down"></i></a>
@@ -85,8 +88,7 @@
           </th>
         </tr>
         <tr>
-          <th class="min-w-40"></th>
-          <th>
+          <th colspan="12">
             <div class="input-group">
               <input class="form-control" [(ngModel)]="searchText" placeholder="search..." (keypress)="keyPress($event)" />
               <div class="input-group-append">
@@ -94,15 +96,7 @@
               </div>
             </div>
           </th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>
-          </th>
-          <th></th>
+          
         </tr>
       </thead>
       <tbody>
@@ -138,13 +132,16 @@
             <span class="label label-warning" *ngIf="!item.isActive">N</span>
           </td>
           <td>
+            <span>{{item.publishStatus}}</span>
+          </td>
+          <td>
             <span>{{item.createdAt | date}}</span>
           </td>
           <td>
-            <a [routerLink]="['/products/update', item?._id ]">
-              <i class="fa fa-pencil"></i>
-            </a> &nbsp;
-            <a (click)="remove(item?._id, i)">
+            <a class="btn btn-sm btn-danger" [routerLink]="['/products/update', item?._id ]">
+              <i style="color: #fff;" class="fa fa-pencil"></i>
+            </a>&nbsp;
+            <a class="btn btn-sm btn-danger" (click)="remove(item?._id, i)">
               <i class="fa fa-trash"></i>
             </a>
           </td>

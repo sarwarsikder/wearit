@@ -19,9 +19,11 @@ exports.stats = async (req, res, next) => {
     const promises = queries.map(query => DB.Shop.count(query.query)
       .then(count => ({ count, name: query.name })));
     const data = await Promise.all(promises);
+    console.log(data);
     const result = {};
     data.forEach((item) => {
       result[item.name] = item.count;
+      console.log(item);
     });
     result.all = result.verified + result.unverified;
 

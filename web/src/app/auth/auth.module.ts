@@ -11,10 +11,11 @@ import { SignupComponent } from './signup/signup.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { GoogleLoginButtonComponent } from './socials-login/google-login-button.component';
 import { FacebookLoginButtonComponent } from './socials-login/facebook-login-button.component';
+// import {InstagramLoginButtonComponent} from './socials-login/instagram-login-button.component';
 
 // social login, check document here https://github.com/abacritt/angularx-social-login#readme
-import { SocialAuthService, SocialLoginModule, SocialAuthServiceConfig } from "angularx-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
 
 import { UtilsModule } from '../utils/utils.module';
 
@@ -29,6 +30,20 @@ const routes: Routes = [{
   component: ForgotComponent
 }
 ];
+
+const fbLoginOptions = {
+  scope: 'email',
+  return_scopes: true,
+  enable_profile_selector: true,
+  version: 'v2.11'
+};
+
+// const instaLoginOptions = {
+//   scope: 'username',
+//   return_scopes: true,
+//   enable_profile_selector: true,
+//   version: 'v2.11'
+// };
 
 @NgModule({
   imports: [
@@ -47,10 +62,12 @@ const routes: Routes = [{
     ForgotComponent,
     GoogleLoginButtonComponent,
     FacebookLoginButtonComponent
+    // InstagramLoginButtonComponent
   ],
   exports: [
     GoogleLoginButtonComponent,
     FacebookLoginButtonComponent
+    // InstagramLoginButtonComponent
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
@@ -70,13 +87,16 @@ const routes: Routes = [{
           id: FacebookLoginProvider.PROVIDER_ID,
           provider: new FacebookLoginProvider(
             window.appConfig.facebookAppId,
-            {
-              scope: 'email',
-              return_scopes: true,
-              enable_profile_selector: true
-            } as any
+            fbLoginOptions
           ),
         }
+        // {
+        //   id: InstagramLoginProvider.PROVIDER_ID,
+        //   provider: new InstagramLoginProvider(
+        //     window.appConfig.instagramAppId,
+        //     instaLoginOptions
+        //   ),
+        // }
       ],
     } as SocialAuthServiceConfig,
   }]

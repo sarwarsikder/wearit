@@ -24,11 +24,17 @@ const validateSchema = Joi.object().keys({
   zipCode: Joi.string().allow([null, '']).optional(),
   country: Joi.string().allow([null, '']).optional(),
   userCurrency: Joi.string().optional(),
-  phoneVerifyCode: Joi.string().allow([null, '']).when('paymentMethod', {
-    is: 'cod',
-    then: Joi.required(),
-    otherwise: Joi.optional()
-  })
+  userNote: Joi.string().allow([null, '']).optional(),
+  // phoneVerifyCode: Joi.string().allow([null, '']).when('paymentMethod', {
+  //   is: 'cod',
+  //   then: Joi.required(),
+  //   otherwise: Joi.optional()
+  // })
+});
+
+const validateSchemaDelivery = Joi.object().keys({
+  courierId: Joi.string().required()
+    
 });
 
 /**
@@ -37,18 +43,18 @@ const validateSchema = Joi.object().keys({
 exports.create = async (req, res, next) => {
   try {
     const validate = Joi.validate(req.body, validateSchema);
-    if (validate.error) {
-      return next(PopulateResponse.validationError(validate.error));
-    }
+    // if (validate.error) {
+    //   return next(PopulateResponse.validationError(validate.error));
+    // }
 
-    // verify code
-    if (validate.value.paymentMethod === 'cod') {
-      await Service.Order.verifyPhoneCheck({
-        phoneNumber: validate.value.phoneNumber,
-        userId: req.user ? req.user._id : null,
-        code: validate.value.phoneVerifyCode
-      });
-    }
+    // // verify code
+    // if (validate.value.paymentMethod === 'cod') {
+    //   await Service.Order.verifyPhoneCheck({
+    //     phoneNumber: validate.value.phoneNumber,
+    //     userId: req.user ? req.user._id : null,
+    //     // code: validate.value.phoneVerifyCode
+    //   });
+    // }
 
     // assign user agent and IP address here
     const userIP = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -113,6 +119,39 @@ exports.list = async (req, res, next) => {
   }
 };
 
+/**
+ * do update for offer
+ */
+ exports.update = async (req, res, next) => {
+  try {
+    
+    const validate = Joi.validate(req.body, validateSchemaDelivery);
+    if (validate.error) {
+      return next(PopulateResponse.validationError(validate.error));
+    }
+
+    const query = {
+      _id: req.params.orderId
+    };
+
+    const item = await DB.Order.findOne(query).populate('details');
+    if (!item) {
+      return next(PopulateResponse.notFound());
+    }
+    var order = item;
+    order.courierId =req.body.courierId;
+    order.details.courierId =req.body.courierId;
+    order.courierId
+    console.log(order);
+
+    await item.save();
+    res.locals.update = req.order;
+    return next();
+  } catch (e) {
+    return next();
+  }
+};
+
 exports.details = async (req, res, next) => {
   try {
     // TODO - check admin role here
@@ -125,7 +164,7 @@ exports.details = async (req, res, next) => {
       query.customerId = req.user._id;
     }
 
-    const item = await DB.Order.findOne(query).populate('details').populate('customer');
+    const item = await DB.Order.findOne(query).populate('details').populate('customer').populate('courier');
     if (!item) {
       return next(PopulateResponse.notFound());
     }
@@ -137,6 +176,16 @@ exports.details = async (req, res, next) => {
         data.customer = customer.toJSON();
       }
     }
+
+
+    if (data.courierId) {
+      const courier = await DB.User.findOne({ _id: data.courierId });
+      if (courier) {
+        data.courier = courier.toJSON();
+      }
+    }
+
+    console.log(data.courier);
 
     res.locals.order = data;
     return next();

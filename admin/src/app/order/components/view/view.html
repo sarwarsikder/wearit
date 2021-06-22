@@ -6,7 +6,7 @@
           <div class="panel-heading resume-heading">
             <div class="row">
               <div class="col-lg-12">
-                <h3 translate>General information</h3>
+                <h3 class="extra-head">General information</h3>
                 <ul class="list-group">
                   <li class="list-group-item">
                     <div class="row">
@@ -51,6 +51,16 @@
                   <li class="list-group-item">
                     <div class="row">
                       <div class="col-md-2" translate>
+                        Customer note
+                      </div>
+                      <div class="col-md-10">
+                        {{order.userNote}}
+                      </div>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-md-2" translate>
                         Payment method
                       </div>
                       <div class="col-md-10">
@@ -85,7 +95,7 @@
                   </li>
                 </ul>
                 <br>
-                <h3 translate>Shipping details</h3>
+                <h3 class="extra-head">Shipping details</h3>
                 <ul class="list-group">
                   <li class="list-group-item">
                     <div class="row">
@@ -147,7 +157,7 @@
                   </li>
                 </ul>
                 <br>
-                <h3 translate>Products</h3>
+                <h3 class="extra-head">Products</h3>
                 <table class="table table-hover bg-white">
                   <thead>
                     <tr>
@@ -227,13 +237,31 @@
                         {{item.balance | currency}}
                       </td>
                       <td>
-                        <button class="btn btn-success" (click)="updateStatus(item, i)">Update Status</button>
+                        <button class="btn btn-success btn-black" (click)="updateStatus(item, i)">Update Status</button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
                 <br>
-                <button class="btn btn-warning" [routerLink]="['/orders/list']" translate>Cancel</button>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Delivery / Courier</label>
+                    <input type="text" name="seller" class="form-control" [class.is-invalid]="searchFailed" [(ngModel)]="courier" [ngbTypeahead]="search" placeholder="Search Courier" [resultTemplate]="rt" [inputFormatter]="formatter" />
+                    <br>
+                    <br>
+                    <br>
+                    <input type="text" name="seller" class="form-control" *ngIf="order.courier" readonly [(ngModel)]="order.courier.name"/>
+                    <span *ngIf="searching">searching...</span>
+                    <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+                    <ng-template #rt let-r="result" let-t="term">
+                      <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>&nbsp;
+                      <small>({{r?.name?.name ? r.name : 'N/A'}})</small>
+                    </ng-template>
+                  </div>
+                  <button class="btn btn-success btn-black" (click)="addDelivery()">Add Courier</button>
+                </div>
+                <br>
+                <button class="btn btn-warning " [routerLink]="['/orders/list']" translate>Cancel</button>
               </div>
             </div>
           </div>

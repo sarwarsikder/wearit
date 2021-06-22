@@ -11,6 +11,12 @@ export class ProductCardComponent implements OnInit{
 
   public price: any = 0;
   public salePrice: any = 0;
+  
+  // Below variable  from product details componenet 
+  public isVariant: any = false;
+  public selectedVariant: any;
+
+
 
   constructor() { }
 

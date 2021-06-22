@@ -13,6 +13,7 @@ import { ForgotComponent } from './forgot/forgot.component';
 
 import { MediaModule } from '../media/media.module';
 import { UtilsModule } from '../utils/utils.module';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { UtilsModule } from '../utils/utils.module';
     JsonpModule,
     NgbModule,
     MediaModule,
-    UtilsModule
+    UtilsModule,
+    AutocompleteLibModule,
   ],
   declarations: [
     LoginComponent,

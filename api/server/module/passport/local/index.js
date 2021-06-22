@@ -30,6 +30,22 @@ exports.login = async (req, res, next) => {
         //   }));
         // }
       }
+      if(user.type == 'delivery'){
+        if(!(req.headers.platform && req.headers.platform=="delivery")){
+          console.log("Your account hasn't regsistered for delivery!");
+          return next(PopulateResponse.error({
+            message: "Your account hasn't regsistered for delivery!"
+          }));
+        }
+      }
+      if(user.type !='delivery'){
+        if((req.headers.platform && req.headers.platform=="delivery")){
+          console.log("Your account hasn't regsistered for delivery!");
+          return next(PopulateResponse.error({
+            message: "Your account hasn't regsistered for delivery!"
+          }));
+        }
+      }
 
       const expireTokenDuration = 60 * 60 * 24 * 7; // 7 days
       const now = new Date();

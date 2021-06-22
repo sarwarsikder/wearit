@@ -19,6 +19,7 @@ export const Approutes: Routes = [
     path: '',
     component: FullComponent,
     canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always',
     resolve: { appConfig: ConfigResolver },
     children: [
       { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
@@ -28,6 +29,8 @@ export const Approutes: Routes = [
       { path: 'measurement', loadChildren: './measurement/measurement.module#MeasurementModule' },
       { path: 'shops', loadChildren: './shop/shop.module#ShopModule' },
       { path: 'banners', loadChildren: './banner/banner.module#BannerModule' },
+      { path: 'malls', loadChildren: './mall/mall.module#MallModule' },
+      { path: 'offers', loadChildren: './offer/offer.module#OfferModule' },
       { path: 'refunds', loadChildren: './refund/refund.module#RefundModule' },
       { path: 'posts', loadChildren: './posts/post.module#PostModule' },
       { path: 'complaints', loadChildren: './complaint/complaint.module#ComplaintModule' },
@@ -37,7 +40,8 @@ export const Approutes: Routes = [
       { path: 'newsletter', loadChildren: './newsletter/newsletter.module#NewsletterModule' },
       { path: 'requestPayout', loadChildren: './request-payout/request-payout.module#RequestPayoutModule' },
       { path: 'packages', loadChildren: './package/package.module#PackageModule' },
-      { path: 'report', loadChildren: './report-sale/report.module#ReportModule' }
+      { path: 'report', loadChildren: './report-sale/report.module#ReportModule' },
+      { path: 'faqs', loadChildren: './faq/faq.module#FaqModule' },
     ]
   },
   {

@@ -14,6 +14,7 @@ export class SearchComponent implements OnInit {
   public searchFields: any = {
     q: '',
     categoryId: '',
+    brandId: '',
     shopId: '',
     featured: '',
     hot: '',
@@ -30,7 +31,7 @@ export class SearchComponent implements OnInit {
   constructor(private productService: ProductService, private route: ActivatedRoute,
     private utilService: UtilService) {
     this.route.queryParamMap.subscribe((params: Params) => {
-      if (params && (params.params.shopId ||  params.params.categoryId
+      if (params && (params.params.shopId ||  params.params.categoryId ||  params.params.brandId
          || params.params.q || params.params.featured || params.params.hot ||
          params.params.bestSell || params.params.dailyDeal || params.params.soldOut ||
          params.params.discounted)) {
@@ -49,6 +50,7 @@ export class SearchComponent implements OnInit {
         this.searchFields = {
           q: '',
           categoryId: '',
+          brandId: '',
           shopId: '',
           featured: '',
           hot: '',

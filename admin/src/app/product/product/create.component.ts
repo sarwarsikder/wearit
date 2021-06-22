@@ -7,6 +7,7 @@ import { ToastyService } from 'ng2-toasty';
 import * as _ from 'lodash';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
+import { BrandService } from '../services/brand.service';
 
 @Component({
   selector: 'product-create',
@@ -19,21 +20,27 @@ export class ProductCreateComponent implements OnInit {
     description: '',
     specifications: [],
     mainImage: null,
+    videoUrl: null,
     metaSeo: {
       keywords: '',
       description: ''
     },
     type: 'physical',
+    publishStatus: 'accepted',
     categoryId: '',
     freeShip: true,
     dailyDeal: false,
     featured: false,
     isActive: true,
+    stockQuantity: 0,
+    minimumPurchaseQuantity: 0,
+    maximumPurchaseQuantity: 0,
     price: 0,
     salePrice: 0,
     vat: 0,
     restrictFreeShipAreas: [],
-    restrictCODAreas: []
+    restrictCODAreas: [],
+    sizeChart: null
   };
   public tree: any = [];
   public countries: any = [];
@@ -58,9 +65,11 @@ export class ProductCreateComponent implements OnInit {
     multiple: true
   };
   public seller: any;
+  public brand: any;
   public searching: any = false;
   public searchFailed: any = false;
   public fileOptions: any = {};
+  public sizeChartUrl: any = '';
   // search seller
   formatter = (x: {
     name: string,
@@ -93,7 +102,35 @@ export class ProductCreateComponent implements OnInit {
       )
     )
 
-  constructor(private router: Router, private categoryService: ProductCategoryService,
+    formatter_brand = (x: {
+      name: string,
+      owner: {
+        name: string
+      }
+    }) => {
+      
+    }
+
+    search_brand = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap(() => this.searching = true),
+      switchMap(term =>
+        this.drandService.search({ name: term }).then((res) => {
+          if (res) {
+            this.searchFailed = false;
+            this.searching = false;
+            return res.data.items;
+          }
+          this.searchFailed = true;
+          this.searching = false;
+          return of([]);
+        })
+      )
+    )
+
+  constructor(private router: Router, private categoryService: ProductCategoryService, private drandService: BrandService,
     private productService: ProductService, private toasty: ToastyService, private location: LocationService) {
   }
 
@@ -114,6 +151,9 @@ export class ProductCreateComponent implements OnInit {
   }
 
   submit(frm: any) {
+    console.log("TEST")
+    console.log(this.product)
+    console.log("TEST")
     if (frm.invalid) {
       return this.toasty.error('Invalid form, please check again.');
     }
@@ -121,6 +161,15 @@ export class ProductCreateComponent implements OnInit {
     if (this.product.salePrice > this.product.price || this.product.salePrice < 0.1 || this.product.price < 0.1) {
       return this.toasty.error('Price or sale price is invalid.');
     }
+
+    if (this.product.minimumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0) {
+      return this.toasty.error('Minimum purchase quantity is invalid.');
+    }
+
+    if (this.product.maximumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0 || this.product.minimumPurchaseQuantity < this.product.minimumPurchaseQuantity) {
+      return this.toasty.error('Maximum purchase quantity is invalid.');
+    }
+
 
     if (this.product.dailyDeal && this.dealDate) {
       this.product.dealTo = new Date(this.dealDate.year, this.dealDate.month - 1, this.dealDate.day).toUTCString();
@@ -136,6 +185,10 @@ export class ProductCreateComponent implements OnInit {
       this.product.shopId = this.seller._id;
     } else if (!this.seller) {
       return this.toasty.error('Please select Seller');
+    }
+
+    if (this.brand) {
+      this.product.brandId = this.brand._id;
     }
 
     if (this.product.type === 'digital' && !this.product.digitalFileId) {
@@ -200,6 +253,10 @@ export class ProductCreateComponent implements OnInit {
     this.location.cities({ state: id }).then((res) => {
       this.cities = res.data;
     });
+  }
+  selectSizeImage(media: any) {
+    this.product.sizeChart = media._id;
+    this.sizeChartUrl = media.fileUrl;
   }
 
   addFreeShipAreas() {

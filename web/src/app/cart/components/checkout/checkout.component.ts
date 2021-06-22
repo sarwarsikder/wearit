@@ -27,7 +27,8 @@ export class CheckoutComponent implements OnInit {
   public totalShippingPrice: any = 0;
   public totalDiscountPrice: any = 0;
   public userInfo: any = {
-    country: ''
+    country: '',
+    userNote: ''
   };
   public phoneNumber: any;
   public isSubmitted: any = false;
@@ -36,6 +37,8 @@ export class CheckoutComponent implements OnInit {
   public orderId: any;
   public coupon: any = '';
   public countries: any = [];
+  public quantity: any = 1;
+
 
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
   public cardHolderName: any = '';
@@ -73,7 +76,7 @@ export class CheckoutComponent implements OnInit {
         this.userInfo.paymentMethod = 'stripe';
       }
     }
-
+    
     this.userInfo.userCurrency = config ? config.customerCurrency : 'USD';
   }
 
@@ -84,7 +87,20 @@ export class CheckoutComponent implements OnInit {
     this.stripeTest = this.fb.group({
       cardName: ['', [Validators.required]]
     });
-    this.locationService.countries().then(resp => this.countries = resp.data);
+    this.locationService.countries().then(
+      resp => this.countries = resp.data
+    );
+   
+  }
+
+  plus() {
+    this.quantity = this.quantity + 1;
+  }
+  minus() {
+    if (this.quantity != 0) {
+      this.quantity = this.quantity - 1;
+    }
+
   }
 
   remove(index: number) {
@@ -198,23 +214,24 @@ export class CheckoutComponent implements OnInit {
 
 
     if (this.userInfo.paymentMethod === 'cod') {
-      const phoneNumber = `${this.dialCode}${this.phoneNumber}`;
-      this.orderService.checkPhone(phoneNumber)
-        .then(resp => {
-          const modalRef = this.modalService.open(CodVerifyModalComponent, {
-            backdrop: 'static',
-            keyboard: false
-          });
-          modalRef.componentInstance.phoneNumber = phoneNumber;
-          modalRef.result.then(result => {
-            this.userInfo.phoneVerifyCode = result.verifyCode;
-            if (!this.userInfo.phoneVerifyCode) {
-              return this.toasty.error(this.translate.instant('Look like you dont get any verify code, please click the link above to retry again.'));
-            }
-            this.doPost();
-          }, () => { });
-        })
-        .catch((err) => this.toasty.error(this.translate.instant('An error occurred, please recheck your phone number!')));
+      this.doPost();
+      // const phoneNumber = `${this.dialCode}${this.phoneNumber}`;
+      // this.orderService.checkPhone(phoneNumber)
+      //   .then(resp => {
+      //     const modalRef = this.modalService.open(CodVerifyModalComponent, {
+      //       backdrop: 'static',
+      //       keyboard: false
+      //     });
+      //     modalRef.componentInstance.phoneNumber = phoneNumber;
+      //     modalRef.result.then(result => {
+      //       this.userInfo.phoneVerifyCode = result.verifyCode;
+      //       if (!this.userInfo.phoneVerifyCode) {
+      //         return this.toasty.error(this.translate.instant('Look like you dont get any verify code, please click the link above to retry again.'));
+      //       }
+      //       this.doPost();
+      //     }, () => { });
+      //   })
+      //   .catch((err) => this.toasty.error(this.translate.instant('An error occurred, please recheck your phone number!')));
     } else if (this.userInfo.paymentMethod === 'stripe') {
       const name = this.stripeTest.get('cardName').value;
       if (!name) {
@@ -251,7 +268,9 @@ export class CheckoutComponent implements OnInit {
       streetAddress: this.userInfo.streetAddress,
       city: this.userInfo.city,
       state: this.userInfo.state,
-      country: this.userInfo.country,
+      userNote: this.userInfo.userNote,
+      // country: this.userInfo.country,
+      country: 'BD',
       shippingAddress: this.userInfo.shippingAddress,
       userCurrency: this.userInfo.userCurrency,
       phoneVerifyCode: this.userInfo.phoneVerifyCode,
@@ -318,4 +337,5 @@ export class CheckoutComponent implements OnInit {
         });
     });
   }
+  
 }

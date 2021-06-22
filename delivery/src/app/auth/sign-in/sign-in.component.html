@@ -1,0 +1,48 @@
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-7">
+            <div class="card cstm-sign-area">
+                <div class="card-body">
+                    <h3 class="title-head">Please login to continue</h3>
+                    <form #frm="ngForm" (submit)="submit(frm)">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address<span class="ng-star-required"> *</span></label>
+                            <input type="text" class="form-control" id="email" aria-describedby="emailHelp"
+                            placeholder="{{'Enter your email'}}" #email="ngModel" name="email"
+                            pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required [(ngModel)]="credentials.email" />
+                            <div *ngIf="email.errors && (email.dirty || email.touched || submitted)">
+                                <p [hidden]="!email.errors.required" class="error" > Email is required </p>
+                                <p [hidden]="!email.errors.pattern" class="error" translate>
+                                    Invalid email format
+                                  </p>
+                            </div>
+                            <div class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password<span class="ng-star-required"> *</span></label>
+                            <input type="password" class="form-control" id="password"
+                            placeholder="{{'Enter your password'}}" #password="ngModel" name="password" 
+                            [minlength]="8" required [(ngModel)]="credentials.password" />
+                            <div *ngIf="password.errors && (password.dirty || password.touched || submitted)">
+                                <p [hidden]="!password.errors.required" class="error" > password is required </p>
+                                <p [hidden]="!password.errors.minlength" class="error" translate>
+                                    Password must be at least 8 characters!
+                                  </p>
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="signedIn">
+                            <label class="form-check-label" for="signedIn">Stay Sign in</label>
+                        </div>
+                        <button type="submit" class="btn btn-login">Login</button>
+                        <p class="text-center">
+                            New in wearit?
+                        </p>
+                    </form>
+                    <button routerLink="/auth/sign-up" class="btn btn-login btn-hollow">Create delivery account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

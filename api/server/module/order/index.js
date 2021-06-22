@@ -9,6 +9,7 @@ exports.model = {
 exports.router = (router) => {
   // NOTE - add oder details in order
   require('./routes/order-details')(router);
+  require('./routes/order-delivery')(router);
   require('./routes/order')(router);
   require('./routes/stats.route')(router);
   require('./routes/refund-request.route')(router);

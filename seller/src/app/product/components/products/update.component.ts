@@ -6,6 +6,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import * as _ from 'lodash';
 
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
+import { BrandService } from '../../services/brand.service';
+
 @Component({
   selector: 'product-update',
   templateUrl: './form.html'
@@ -37,8 +41,33 @@ export class ProductUpdateComponent implements OnInit {
   };
   public fileType: any = '';
   public fileOptions: any = {};
+  public brand: any;
+  public sizeChart: any = '';
 
-  constructor(private router: Router, private route: ActivatedRoute, private categoryService: ProductCategoryService,
+  public searching: any = false;
+  public searchFailed: any = false;
+  formatter_brand = (x: { name: string }) => x.name;
+
+  search_brand = (text$: Observable<string>) =>
+      text$.pipe(
+          debounceTime(500),
+          distinctUntilChanged(),
+          tap(() => this.searching = true),
+          switchMap(term =>
+              this.brandService.search({ name: term }).then((res) => {
+                if (res) {
+                  this.searchFailed = false;
+                  this.searching = false;
+                  return res.data.items;
+                }
+                this.searchFailed = true;
+                this.searching = false;
+                return of([]);
+              })
+          )
+      )
+
+  constructor(private router: Router, private route: ActivatedRoute, private categoryService: ProductCategoryService, private brandService: BrandService,
     private productService: ProductService, private toasty: ToastyService, private location: LocationService) {
     if (route.snapshot.queryParams.tab) {
       this.tab = route.snapshot.queryParams.tab;
@@ -83,6 +112,11 @@ export class ProductUpdateComponent implements OnInit {
           this.fileType = resp.data.digitalFile.type;
         }
         this.images = this.product.images;
+
+        this.sizeChart = this.product.sizeChart ? this.product.sizeChart.thumbUrl : null;
+        this.product.sizeChart = this.product.sizeChart ? this.product.sizeChart._id : null;
+
+        console.log( this.product.sizeChart.thumbUrl );
         if (this.product.dealTo) {
           const date = new Date(this.product.dealTo);
           this.dealDate = {
@@ -113,6 +147,14 @@ export class ProductUpdateComponent implements OnInit {
       return this.toasty.error('Price or sale price is invalid.');
     }
 
+    if (this.product.minimumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0) {
+      return this.toasty.error('Minimum purchase quantity is invalid.');
+    }
+
+    if (this.product.maximumPurchaseQuantity > this.product.stockQuantity || this.product.minimumPurchaseQuantity < 0 || this.product.minimumPurchaseQuantity < this.product.minimumPurchaseQuantity) {
+      return this.toasty.error('Maximum purchase quantity is invalid.');
+    }
+
     if (this.product.taxPercentage < 0) {
       return this.toasty.error('Tax value is invalid.');
     }
@@ -123,6 +165,10 @@ export class ProductUpdateComponent implements OnInit {
 
     if (this.product.type === 'digital' && !this.product.digitalFileId) {
       return this.toasty.error('Please select Digital file path!');
+    }
+
+    if (this.product.brand) {
+      this.product.brandId = this.product.brand._id;
     }
 
     this.product.restrictFreeShipAreas = [];
@@ -153,6 +199,11 @@ export class ProductUpdateComponent implements OnInit {
     }
 
     this.images.push(media);
+  }
+
+  selectSizeImage(media: any) {
+    this.product.sizeChart = media._id;
+    this.sizeChart = media.fileUrl;
   }
 
   setMain(media: any) {

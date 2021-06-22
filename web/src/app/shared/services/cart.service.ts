@@ -52,6 +52,28 @@ export class CartService {
     this.cartChanged.next(this.cart);
   }
 
+  addShop(data: any, quantity: number) {
+    // TODO - not duplicate for existing product
+    let checked = false;
+    const existProduct = _.find(this.cart, function(c: any) {
+      checked = true;
+      return c.productId === data.productId;
+    });
+    if (checked && existProduct && data.productVariantId && data.productVariantId === existProduct.productVariantId
+       || checked && existProduct && !data.productVariantId) {
+      return this.toasty.error(this.translate.instant('This item has already been added to cart'));
+    } 
+    // TODO - not duplicate for existing product
+    this.cart.unshift({
+      productId: data.productId,
+      productVariantId: data.productVariantId,
+      product: data.product,
+      quantity
+    });
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+    this.cartChanged.next(this.cart);
+  }
+
   remove(product: any) {
     const index = _.findIndex(this.cart, (c: any) => c.productId === product.productId);
     if (index > -1) {

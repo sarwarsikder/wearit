@@ -36,11 +36,11 @@
             <label translate class="required">Phone number</label>
             <div class="input-group mb-3">
               <dial-code (selectCode)="selectDial($event)"></dial-code>
-              <input type="text" class="form-control" placeholder="{{'Enter your phone' | translate}}" required name="phoneNumber" [minlength]="9" [maxlength]="10" pattern="\d*" #phone="ngModel" (keypress)="onlyNumberKey($event)" [(ngModel)]="account.phoneNumber" />
+              <input type="text" class="form-control" placeholder="{{'Enter your phone' | translate}}" required name="phoneNumber" [minlength]="11" [maxlength]="11" pattern="\d*" #phone="ngModel" (keypress)="onlyNumberKey($event)" [(ngModel)]="account.phoneNumber" />
             </div>
             <small class="form-text text-muted" translate>We'll never share your phone with anyone else.</small>
             <div *ngIf="phone.errors && (phone.dirty || phone.touched || submitted)">
-              <p [hidden]="!phone.errors.minlength" class="error" translate> Phone must be 9 characters </p>
+              <p [hidden]="!phone.errors.minlength" class="error" translate> Phone must be 11 characters </p>
               <p [hidden]="!phone.errors.pattern" class="error" translate> Phone must be number </p>
               <p [hidden]="!phone.errors.required" class="error" translate> Phone number is required </p>
             </div>

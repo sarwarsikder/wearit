@@ -10,6 +10,9 @@ import { MediaModule } from '../media/media.module';
 import { StatService } from '../shared/services';
 import { RequestPayoutService } from '../request-payout/request-payout.service';
 
+import {ChartsModule} from 'ng2-charts'
+
+
 const routes: Routes = [{
   path: '',
   data: {
@@ -24,7 +27,9 @@ const routes: Routes = [{
     FormsModule,
     CommonModule,
     RouterModule.forChild(routes),
-    MediaModule
+    MediaModule,
+    ChartsModule,
+
   ],
   declarations: [
     StarterComponent,

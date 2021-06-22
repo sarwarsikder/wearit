@@ -8,7 +8,9 @@ export class AuthGuard implements CanActivate {
 
   constructor(private router: Router, private Auth: AuthService) { }
 
+
   canActivate() {
+    
     if (!this.Auth.isLoggedin()) {
       this.router.navigate(['/auth/login']);
       return false;
@@ -21,8 +23,12 @@ export class AuthGuard implements CanActivate {
           this.router.navigate(['/auth/login']);
           return false;
         }
-
         return true;
       });
   }
+
+  // checkEmailPhone(email, phone){
+  //   if (!this.)
+  // }
+
 }

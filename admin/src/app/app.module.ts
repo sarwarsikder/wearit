@@ -37,6 +37,7 @@ import { SpinnerComponent } from "./shared/spinner.component";
 import { MediaModule } from "./media/media.module";
 import { ConfigResolver } from "./shared/resolver";
 
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 2,
@@ -90,7 +91,7 @@ export function RestangularConfigFactory(RestangularProvider) {
     FormsModule,
     HttpClientModule,
     NgbModule,
-    RouterModule.forRoot(Approutes, { useHash: false }),
+    RouterModule.forRoot(Approutes, { useHash: false}),
     PerfectScrollbarModule,
     // Importing RestangularModule and making default configs for restanglar
     RestangularModule.forRoot(RestangularConfigFactory),
@@ -100,7 +101,7 @@ export function RestangularConfigFactory(RestangularProvider) {
     NgSelectModule,
     SortablejsModule.forRoot({ animation: 150 }),
     ImageCropperModule,
-    MediaModule,
+    MediaModule
   ],
   providers: [
     {

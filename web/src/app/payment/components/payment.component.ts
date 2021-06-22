@@ -11,7 +11,7 @@ export class PaymentComponent implements OnInit {
   public paymentInfo: any = {
     service: 'order',
     gateway: 'paypal',
-    redirectSuccessUrl: 'https://genstore.iospot.top/cart/checkout/success',
+    redirectSuccessUrl: 'https://wearit-web.herokuapp.com/cart/checkout/success',
     itemId: this.route.snapshot.params.orderId
   };
 

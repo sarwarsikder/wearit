@@ -14,6 +14,8 @@ import { ReviewModule } from '../review/review.module';
 
 import { MessageService } from '../message/services/message.service';
 import { StatService } from '../shared/services';
+import { ChartsModule } from 'ng2-charts';
+
 
 const routes: Routes = [{
   path: '',
@@ -33,7 +35,8 @@ const routes: Routes = [{
     OrderModule,
     ProductModule,
     ShopModule,
-    ReviewModule
+    ReviewModule,
+    ChartsModule
   ],
   declarations: [
     StarterComponent,

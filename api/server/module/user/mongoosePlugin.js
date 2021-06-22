@@ -4,6 +4,9 @@ const _ = require('lodash');
 exports.User = (schema) => {
   schema.add({
     avatar: { type: String, default: '' },
+    email: { type: String, default: '' },
+    userName: {type: String } ,
+    nid: { type: String, default: '' },
     emailVerifiedToken: {
       type: String,
       index: true
@@ -21,6 +24,10 @@ exports.User = (schema) => {
       type: Boolean,
       default: true
     },
+    wholeSeller: {
+      type: Boolean,
+      default: false
+    },
     emailVerified: {
       type: Boolean,
       default: false
@@ -34,6 +41,10 @@ exports.User = (schema) => {
     phoneVerified: {
       type: Boolean,
       default: false
+    },
+    permission: {
+      type: [String],
+      default: []
     },
     countryCode: {
       type: String
@@ -75,6 +86,7 @@ exports.User = (schema) => {
     }
 
     const newFilePath = filePath || 'public/assets/default-avatar.jpg';
-    return Helper.App.getPublicFileUrl(newFilePath);
+    // return Helper.App.getPublicFileUrl(newFilePath);
+      return newFilePath;
   });
 };

@@ -11,9 +11,16 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 import { ProductDetailComponent } from './components/detail/detail.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { RelatedProductCardComponent } from './components/product-card/related-product-card.component';
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
+import { RelatedProductsComponent } from './components/featured-products/related-products.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchSidebarComponent } from './components/search-sidebar/search-sidebar.component';
+import { BrandsComponent} from './components/brands/brands.component';
+import { BrandCardComponent} from './components/brand-card/brand-card.component'
+
+import { OfferComponent } from './components/offer/offer.component';
+import { OfferCardComponent } from './components/offer-card/offer-card.component';
 
 import { CategoryService, ProductService, ProductVariantService } from './services';
 import { ReviewService, GoogleAnalyticsService } from '../shared/services';
@@ -23,8 +30,13 @@ import { ProductResolver } from './resolvers/product.resolver';
 import { SearchResolver } from './resolvers/search.resolver';
 import { CurrencyPipe } from '../shared/pipes';
 
-import { UtilsModule } from '../utils/utils.module';
 import { MessageModule } from '../message/message.module';
+import { from } from 'rxjs';
+import { UtilsModule } from '../utils/utils.module';
+import { LightboxModule } from 'ngx-lightbox';
+import {SafePipeModule} from 'safe-pipe'
+import { FaqComponent } from './components/faq/faq.component';
+
 
 @NgModule({
   imports: [
@@ -37,15 +49,24 @@ import { MessageModule } from '../message/message.module';
     CartModule,
     UtilsModule,
     SlickCarouselModule,
-    MessageModule
+    MessageModule,
+    LightboxModule,
+    SafePipeModule
   ],
   declarations: [
     ProductDetailComponent,
     FeaturedProductsComponent,
+    RelatedProductCardComponent,
+    RelatedProductsComponent,
     ProductCardComponent,
     SearchSidebarComponent,
     SearchComponent,
-    CurrencyPipe
+    BrandsComponent,
+    OfferComponent,
+    OfferCardComponent,
+    BrandCardComponent,
+    CurrencyPipe,
+    FaqComponent,
   ],
   providers: [
     CategoryService, ProductService, ProductResolver, SearchResolver,
@@ -53,9 +74,15 @@ import { MessageModule } from '../message/message.module';
   ],
   exports: [
     FeaturedProductsComponent,
+    RelatedProductCardComponent,
+    RelatedProductsComponent,
     ProductCardComponent,
     SearchSidebarComponent,
-    SearchComponent
+    BrandsComponent,
+    BrandCardComponent,
+    OfferComponent,
+    OfferCardComponent,
+    SearchComponent,
   ]
 })
 export class ProductModule { }

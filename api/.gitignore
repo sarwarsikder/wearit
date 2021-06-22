@@ -42,7 +42,7 @@ styles
 vendors
 .build
 .vscode
-#.env*
+.env*
 yarn.lock
 SPHRS.note.txt
 .yo-rc.json

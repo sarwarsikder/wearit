@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+body{
+    // background: RED;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    padding-top: 100px;
+}
+
+hr.margin-control{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-color: #808080;
+}
+.card-stream{
+    .card{
+        min-height: 120px;
+        background: #FFDEDE;
+        &-title{
+            font-weight: 500;
+            font-size: 16px;
+            margin-bottom: 0px;
+        }
+        &-meta{
+            font-size: 35px;
+            font-weight: 700;
+        }
+        &-link{
+            color: #454545;
+            text-decoration: none;
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-top: 10px;
+            border: 1px solid #454545;
+            display: inline-block;
+            align-self: baseline;
+            padding: 2px 10px;
+            &:hover{
+                background: #454545;
+                color: #fff;
+            }
+        }
+    }
+}
+.head-title{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.form-control{
+    border: 1px solid #868686;
+    border-radius: 0px;
+}
+
+.cstm-table{
+    font-size: 12px;
+    margin-top: 30px;
+    thead{
+        th{
+            background: #E8E8E8;
+            color: #454545;
+            text-transform: uppercase;
+        }
+    }
+    tbody{
+        td{
+            background: #FAFAFA;
+            font-weight: 500;
+            .form-check-input{
+                margin-left:0px;
+            }
+        }
+        
+        .td-btn{
+            border: 1px solid #454545;
+            margin-right: 5px;
+            text-transform: uppercase;
+            background: transparent;
+            &:hover{
+                background: #000;
+                color: #fff;
+            }
+        }
+    }
+}
+
+.panel-info{
+    display: flex;
+    flex-direction: row;
+    border: 0px !important;
+    background: #fafafa;
+    min-height: 500px;
+    .card-body{
+        display: flex;
+        flex-direction: row;
+        padding: 30px;
+    }
+    .image-container{
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        position: relative;
+        display: flex;
+        flex-basis: 250px;
+        align-items: flex-end;
+        justify-content: center;
+        img{
+            border: 2px solid #fff;
+            border-radius: 50%;
+        }
+    }
+    .info-container{
+        padding-left: 40px;
+        flex-grow: 1;
+        p{
+            font-size: 16px;
+        }
+        .name{
+            font-size: 25px;
+            font-weight: 600;
+        }
+        .form-control{
+            background: #E8E8E8;
+            border: 0px;
+            min-height: 50px;
+            margin-bottom: 20px;
+        }
+        select.form-control{
+            width:50%;
+        }
+        label{
+            font-size: 16px;
+            font-weight: 600;
+        }
+    }
+}
+
+.btn-general{
+    background: #1C1C1C;
+    color: #fff;
+    padding: 10px 15px;
+    border: 0px;
+    border-radius: 0px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+.upload-btn-wrapper {
+    position: absolute;
+    overflow: hidden;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    bottom: -30px;
+    display: flex;
+    justify-content: center;
+    border-radius: 30px;
+    border: 2px solid #000;
+    box-shadow: 0px 0px 2px #d8d8d8;
+    &.attach-file{
+        position: relative;
+        width: 150px;
+        height: 40px;
+        border-radius: 0px;
+        border: 0px;
+        bottom: 0px;
+        display: block;
+        margin-top: 15px;
+        box-shadow: none;
+        margin-bottom: 30px;
+        button{
+            border-radius: 0px;
+            color: #fff;
+            font-size: 13px;
+            background: #454545;
+            font-weight: 400;
+            padding: 0px 20px;
+            cursor: pointer;
+            svg{
+                width: 15px;
+                path{
+                    fill: #fff;
+                }
+            }
+        }
+    }
+    button {
+        background-color: #fff;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 20px;
+        font-weight: bold;
+        border: 0px;
+      }
+      input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+      }
+  }
+  
+  .cstm-navbar{
+      background: #EF4444 !important;
+      .navbar-brand{
+          color: #fff !important;
+      }
+      .navbar-nav{
+          a{
+              color: #fff !important;
+            //   font-size: 14px;
+          }
+      }
+  }
+  .title-head{
+      font-size: 22px;
+      text-transform: uppercase;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-weight: 700;
+  }
+
+  .cstm-sign-area{
+      padding: 30px;
+      margin-bottom: 20px;
+      .title-head{
+          text-align: center;
+          margin-bottom: 50px;
+      }
+      label{
+          font-weight: 600;
+          font-size: 14px;
+      }
+      .form-control{
+          background: #e8e8e8;
+          border: 0px;
+          height: 50px;
+      }
+      .btn-login{
+          height: 50px;
+          width: 100%;
+          text-transform: uppercase;
+          background: #333;
+          color: #fff;
+          margin-top: 25px;
+          margin-bottom: 25px;
+          border-radius: 0px;
+          font-weight: 600;
+          &.btn-hollow{
+            border: 2px solid #333;
+            color: #000;
+            background: transparent;
+        }
+      }
+      
+  }

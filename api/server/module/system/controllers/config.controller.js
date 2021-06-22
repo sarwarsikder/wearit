@@ -6,6 +6,8 @@ const validateSchema = Joi.object().keys({
 });
 
 exports.findOne = async (req, res, next) => {
+  console.log("Find");
+
   try {
     const id = req.params.id || req.params.configId || req.body.configId;
     if (!id) {
@@ -29,6 +31,11 @@ exports.findOne = async (req, res, next) => {
  * do update
  */
 exports.update = async (req, res, next) => {
+
+
+  console.log("Update");
+  console.log("RES " + res);
+
   try {
     const validate = Joi.validate(req.body, validateSchema);
     if (validate.error) {

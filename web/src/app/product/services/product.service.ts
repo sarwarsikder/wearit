@@ -36,4 +36,15 @@ export class ProductService {
   related(productId: string, params: any): Promise<any> {
     return this.restangular.one(`products/${productId}`, 'related').get(params).toPromise();
   }
+
+  // 
+  
+  brands(params: any): Promise<any> {
+    return this.restangular.one('brands').get(params).toPromise();
+  }
+
+  offer(params: any): Promise<any> {
+    console.log("TEST");
+    return this.restangular.one('offers').get(params).toPromise();
+  }
 }
