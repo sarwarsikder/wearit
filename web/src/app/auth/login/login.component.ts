@@ -5,12 +5,13 @@ import { ToastyService } from 'ng2-toasty';
 import { FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http"
 import { Router, ActivatedRoute } from '@angular/router';
-import { SocialAuthService } from 'angularx-social-login';
+// import { environment } from '../../../environments/environment';
+// import { tap } from 'rxjs/operators/tap';
+// import { HttpClientModule } from '@angular/common/http';
 
-
-// const httpOptions = {
-//   headers: new HttpHeaders({'Access-Control-Allow-Origin':'*', 'Content-Type': 'application/json' })
-// };
+const httpOptions = {
+  headers: new HttpHeaders({'Access-Control-Allow-Origin':'*', 'Content-Type': 'application/json' })
+};
 
 @Component({
   templateUrl: 'login.component.html'
@@ -25,12 +26,10 @@ export class LoginComponent {
   };
   public submitted: boolean = false;
 
-  constructor(auth: AuthService, private router: Router, 
+  constructor(auth: AuthService, public router: Router, 
     private translate: TranslateService, 
     private toasty: ToastyService, fb: FormBuilder, public http: HttpClient,
-    private socialAuthService : SocialAuthService,
     private route: ActivatedRoute) {
-
     this.Auth = auth;
 
 
@@ -58,6 +57,7 @@ export class LoginComponent {
   }
 
   ngOnInit() {
+
     this.route
              .queryParams
              .subscribe(params => {
@@ -97,46 +97,82 @@ export class LoginComponent {
     }
   }
 
-async  signInWithInsta(){
-    let auth = this.Auth;
-    let router = this.router;
-    let toastify = this.toasty;
-    let instagramRedirectUri = window.appConfig.instagramRedirectUri;
-    let instagramClientId = window.appConfig.instagramClientId;
-    let popupWidth = 700,
-    popupHeight = 500,
-    popupLeft = (window.screen.width - popupWidth) / 2,
-    popupTop = (window.screen.height - popupHeight) / 2;
-// Url needs to point to instagram_auth.php
-    let popup = window.open('instagram_auth.php', '', 'width='+popupWidth+',height='+popupHeight+',left='+popupLeft+',top='+popupTop+'');
-    popup.onload = function() {
-  // console.log("here I am 1")
-    // Open authorize url in pop-up
-    if(window.location.hash.length == 0) {
-        popup.open('https://api.instagram.com/oauth/authorize?client_id='+instagramClientId+'&redirect_uri='+instagramRedirectUri+'&scope=user_profile&response_type=code', '_self');
+  signInWithInsta(code){
+
+  //   const data = { client_id: '819247062130628',
+  //           redirect_url: 'https://www.google.com',
+  //           scope: 'user_profile,user_media',
+  //           response_type: 'code'
+  //  }
+    
+    // this.http.post('http://localhost:8080/v1/users/insta', data)
+
+    try {
+      const body = new HttpParams()
+        .set('client_id', '819247062130628')
+        .set('redirect_uri', 'https://www.google.com/')
+        .set('scope', 'user_profile,user_media')
+        .set('response_type', 'code');
+  
+      return this.http
+        .post('https://api.instagram.com/oauth/authorize?client_id=819247062130628&redirect_uri=https://www.google.com&scope=user_profile,user_media&response_type=code', null, httpOptions)
+        .subscribe(res => console.log('res', res))
+    } catch (err) {
+      return err;
     }
-    // An interval runs to get the access token from the pop-up
-    let interval = setInterval(async function() {
-        try {
+  
+  
 
-          const urlParams = new URLSearchParams(popup.location.search);
-          const myParam = urlParams.get('code');
-          if(myParam){
-            console.log('code', myParam)
-            // console.log("here I am final")
-            clearInterval(interval);
-            popup.close();
-            toastify.success(this.translate.instant('Please wait...You will redirect soon.'))
-            let data = await auth.socialLogin('instagram', myParam);
-            
-            window.location.href = "/";
-        }
-        }
-        catch(evt) {
+    // let url = `https://api.instagram.com/oauth/authorize?client_id=819247062130628&redirect_uri=https://www.google.com/&scope=user_profile,user_media&response_type=code`;
+    // console.log(url);
+    // window.location.href = url;
 
-        }
-    }, 300);
-};
+
+  //   let url = `https://api.instagram.com/oauth/authorize?client_id=819247062130628&redirect_uri=https://www.google.com/&scope=user_profile,user_media&response_type=code`
+
+  //   window.location.href = url
+  //   console.log(window.location.href)
+  //  const data = { client_id: '819247062130628',
+  //           redirect_url: 'https://www.google.com',
+  //           scope: 'user_profile,user_media',
+  //           response_type: 'code'
+  //  }
+
+//   console.log(data)
+
+    // this.http.post<any>('https://api.instagram.com/oauth/authorize',data).subscribe({
+    //     next: data => {
+    //        console.log(data) 
+    //     },
+    //     error: error => {
+    //         console.error('There was an error!', error);
+    //     }
+    // })
+
+    // window.location.href = `https://api.instagram.com/oauth/authorize?client_id=${environment.instagramClientId}&redirect_uri=${environment.instagramRedirectUri}&scope=user_profile,user_media&response_type=code`
+    //let url = `https://api.instagram.com/oauth/authorize?client_id=${environment.instagramClientId}&redirect_uri=${environment.instagramRedirectUri}&scope=user_profile,user_media&response_type=code`
+    // return this.http.get(url)
+    // this.router.navigateByUrl(`https://api.instagram.com/oauth/authorize?client_id=${environment.instagramClientId}&redirect_uri=${environment.instagramRedirectUri}&scope=user_profile,user_media&response_type=code`);
+    // console.log('Waiting')
+    
+      // const body = new HttpParams()
+      //   .set('client_id', "2353717724782027")
+      //   .set('client_secret', "197b319ce7ead80bd914a7237d11b65d")
+      //   .set('grant_type', 'authorization_code')
+      //   .set('redirect_uri', "https://www.google.com/")
+      //   .set('code', code)
+      //   // .set('auth', 'no-auth');
+
+      //   // console.log('AGAIN')
+      //    this.http
+      //   .post('https://api.instagram.com/oauth/access_token', body.toString(), {
+      //     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      //   }).pipe(
+      //     tap(res => {
+      //       console.log('found?',res)
+      //     })
+      //   );
+
     }
     
 
@@ -151,4 +187,26 @@ async  signInWithInsta(){
       }
     });
   }
+
+
+  // login(frm: any) {
+  //   this.submitted = true;
+  //   if (frm.invalid) {
+  //     return;
+  //   }
+
+  //   this.Auth.login(this.credentials).then(() => {
+  //     const redirectUrl = sessionStorage.getItem('redirectUrl');
+  //     if (redirectUrl) {
+  //       sessionStorage.removeItem('redirectUrl');
+  //       this.router.navigate([redirectUrl]);
+  //     } else {
+  //       this.router.navigate(['/']);
+  //     }
+  //   })
+  //     .catch(() => {
+  //       this.toasty.error(this.translate.instant('Your account is not activated or register. Please recheck again or contact to our admin to resolve it.'));
+  //     });
+  // }
+  
 }

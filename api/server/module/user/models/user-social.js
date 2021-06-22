@@ -4,7 +4,7 @@ const schema = new Schema({
   userId: {
     type: Schema.Types.ObjectId
   },
-  userName: {
+  username: {
     type: String
   },
   social: {
