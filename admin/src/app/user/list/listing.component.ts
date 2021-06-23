@@ -19,7 +19,7 @@ export class UserListingComponent implements OnInit {
     sortBy: 'createdAt',
     sortType: 'desc'
   };
-  private userType: string;
+  public userType: string;
 
   constructor(private router: Router, private userService: UserService, private toasty: ToastyService, private route: ActivatedRoute) {
     route.params.subscribe(params => {
