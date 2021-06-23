@@ -2809,6 +2809,62 @@ textarea {
   border-radius: 3px !important;
 } */
 
+.slick-prev{
+  width: 50px !important;
+  height: 50px !important;
+}
+.slick-next{
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.slick-prev:before{
+  content: " " !important;
+  width: 40px !important;
+  height: 40px !important;
+  background: url(../images/carousel-left.png)no-repeat !important;
+  background-position: center !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  top: 0px;
+  left: 10px;
+  background-size: 45px !important;
+}
+.slick-next:before{
+  content: " " !important;
+  width: 40px !important;
+  height: 40px !important;
+  background: url(../images/carousel-left.png)no-repeat !important;
+  background-position: center !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  top: 0px;
+  right: 10px;
+  transform: rotate(180deg);
+  background-size:45px !important;
+}
+
+.carousel-row .next-1{
+  background: black url(../images/carousel-right-small.png)no-repeat !important;
+  background-size: 14px 35px!important;
+  background-position: center!important;
+  color: transparent !important;
+}
+.carousel-row .next-1:hover{
+  background-color: #dc2626 !important;
+}
+.carousel-row .prev-1{
+  background: black url(../images/carousel-right-small.png)no-repeat !important;
+  background-size: 14px 35px!important;
+  background-position: center!important;
+  color: transparent !important;
+  transform: rotate(180deg) !important;
+}
+.carousel-row .prev-1:hover{
+  background-color: #dc2626 !important;
+}
+
+
 @media only screen and (min-width: 340px) and (max-width: 768px) {
   .shop-menu{
     position: absolute !important;
@@ -2881,3 +2937,4 @@ textarea {
     width: 100% !important;
   }
 }
+

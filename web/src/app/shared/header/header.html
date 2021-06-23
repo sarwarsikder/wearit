@@ -85,19 +85,30 @@
               fill="white" />
           </svg>
         </button>
-        <a class="icon-flex " style="margin-top: -4px !important;display: block;">
-          <span>
-            <svg class="shake" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M46 26V51H6V26" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M51 14H1V26H51V14Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M26 51V14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M26 13H14.4286C12.7236 13 11.0885 12.3679 9.88288 11.2426C8.67729 10.1174 8 8.5913 8 7C8 5.4087 8.67729 3.88258 9.88288 2.75736C11.0885 1.63214 12.7236 1 14.4286 1C23.4286 1 26 13 26 13Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M26 13H36.9286C38.5388 13 40.0831 12.3679 41.2217 11.2426C42.3603 10.1174 43 8.5913 43 7C43 5.4087 42.3603 3.88258 41.2217 2.75736C40.0831 1.63214 38.5388 1 36.9286 1C28.4286 1 26 13 26 13Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              
-          </span>
-          <label for="">Offer</label>
-        </a>
+        <div class="dropdown" ngbDropdown>
+          <a class="icon-flex " ngbDropdownToggle style="margin-top: -4px !important;display: block;">
+            <span>
+              <svg class="shake" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M46 26V51H6V26" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M51 14H1V26H51V14Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M26 51V14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M26 13H14.4286C12.7236 13 11.0885 12.3679 9.88288 11.2426C8.67729 10.1174 8 8.5913 8 7C8 5.4087 8.67729 3.88258 9.88288 2.75736C11.0885 1.63214 12.7236 1 14.4286 1C23.4286 1 26 13 26 13Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M26 13H36.9286C38.5388 13 40.0831 12.3679 41.2217 11.2426C42.3603 10.1174 43 8.5913 43 7C43 5.4087 42.3603 3.88258 41.2217 2.75736C40.0831 1.63214 38.5388 1 36.9286 1C28.4286 1 26 13 26 13Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                
+            </span>
+            <label for="">Offer</label>
+          </a>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <a class="dropdown-item" href="">
+              Campaign
+            </a>
+            <a class="dropdown-item" href="">
+              Discounted Products
+            </a>
+          </div>
+        </div>
+        
       </div>
       <div class="shop-menu pull-right ">
         <div class="cart-top">
