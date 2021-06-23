@@ -70,11 +70,13 @@ export class ProductDetailComponent implements OnDestroy {
     }
 
     this.product = route.snapshot.data.product;
+    console.log(this.product)
 
     if (this.product.isTailor) {
       measurementService.findOne(this.product.measurementFormId)
         .then((res) => {
           this.measurementForm = res.data;
+          console.log(this.measurementForm)
           for (const item in this.measurementForm.fields) {
             this.measurementValues.push('')
           };
@@ -288,7 +290,7 @@ export class ProductDetailComponent implements OnDestroy {
     if (this.quantity < this.product.minimumPurchaseQuantity || this.quantity > this.product.maximumPurchaseQuantity || this.quantity > this.stockQuantity) {
       return this.toasty.error(this.translate.instant('Quantity is not valid, please check and try again!'));
     }
-    //console.log(this.measurementValues)
+    console.log(this.measurementValues)
     for (let i = 0; i < this.measurementForm.fields.length; i++) {
       this.measurementForm.fields[i].type = this.measurementValues[i]
     }
@@ -311,11 +313,15 @@ export class ProductDetailComponent implements OnDestroy {
     if (this.quantity < this.product.minimumPurchaseQuantity || this.quantity > this.product.maximumPurchaseQuantity || this.quantity > this.stockQuantity) {
       return this.toasty.error(this.translate.instant('Quantity is not valid, please check and try again!'));
     }
+    for (let i = 0; i < this.measurementForm.fields.length; i++) {
+      this.measurementForm.fields[i].type = this.measurementValues[i]
+    }
     this.cartService.addShop({
       productId: this.isVariant ? this.selectedVariant.productId : this.product._id,
       productVariantId: this.isVariant ? this.selectedVariant._id : null,
       variant: this.isVariant ? this.selectedVariant : null,
-      product: this.product
+      product: this.product,
+      measurementForm: this.measurementForm
     }, this.quantity);
 
     this.router.navigate(['/cart/checkout'])

@@ -35,7 +35,7 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '/measurement', title: 'Measurement', icon: 'fa fa-edit', class: 'has-arrow', label: '', labelClass: '', extralink: false, submenu: [
+    path: '/measurement', title: 'Measurement', icon: 'fa fa-edit', class: 'has-arrow', label: 'measurement', labelClass: '', extralink: false, submenu: [
       {
         path: '/measurement', title: 'Add Measurement', icon: 'fa fa-plus', class: '', label: '', labelClass: '', extralink: false, submenu: []
       },

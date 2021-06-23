@@ -37,6 +37,7 @@ export class SidebarComponent implements OnInit {
       this.urlPermission = this.authService.getCurrentUser().__zone_symbol__value.permission;
     }
     this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
+    console.log(this.sidebarnavItems)
     $(function () {
       $('.sidebartoggler').on('click', function () {
         if ($('#main-wrapper').hasClass('mini-sidebar')) {

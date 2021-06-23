@@ -94,6 +94,7 @@
                 <div class="price-detial" *ngIf="salePrice">
                   <span class="salePrice-format">{{salePrice | currency | async}}</span>
                   <label class="shipping-status" *ngIf="product?.freeShip" translate>Free Shipping</label>
+                  <label class="shipping-status" *ngIf="product?.isTailor" translate>Tailor Product</label>
                   <div class="through-line">
                     {{price | currency | async}} <span class="discount-text">{{discountVal}}% <a
                         translate>OFF</a></span>
@@ -102,6 +103,7 @@
                 <div class="price-detial" *ngIf="!salePrice">
                   <span class="salePrice-format">{{price | currency | async}}</span>
                   <label class="shipping-status" *ngIf="product?.freeShip" translate>Free Shipping</label>
+                  <label class="shipping-status" *ngIf="product?.isTailor" translate>Tailor Product</label>
                 </div>
                 <div class="mar-bot-15" *ngIf="variants.length">
                   <button type="button" class="collapse-btn" (click)="openVariant()">Variants <i class="fa fa-bars"
@@ -267,7 +269,7 @@
                               <label>{{field.label}}</label>
                               <input type="text" *ngIf="field.type=='string'" name="Form-label" class="form-control"
                                 [(ngModel)]="measurementValues[i]" placeholder="Enter value" />
-                              <input type="number" *ngIf="field.type=='int'" name="Form-label" class="form-control"
+                              <input type="number" *ngIf="field.type=='number'" name="Form-label" class="form-control"
                                 [(ngModel)]="measurementValues[i]" placeholder="Enter value" />
                               <label>{{field.unit}}</label>
                             </div>

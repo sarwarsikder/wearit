@@ -43,7 +43,8 @@
                             Status:
                           </div>
                           <div class="col-md-10">
-                            <select class="form-control" name="status" style="width: 200px;min-height: 28px;" (change)="query()" [(ngModel)]="order.status" #status="ngModel">
+                            <select class="form-control" name="status" style="width: 200px;min-height: 28px;"
+                              (change)="query()" [(ngModel)]="order.status" #status="ngModel">
                               <option value="completed">Completed</option>
                               <option value="shipping">Shipping</option>
                               <option value="pending">Pending</option>
@@ -95,7 +96,8 @@
                         Type:
                       </div>
                       <div class="col-md-3">
-                        <span class="label label-primary" *ngIf="order.productDetails?.type === 'physical'">Physical</span>
+                        <span class="label label-primary"
+                          *ngIf="order.productDetails?.type === 'physical'">Physical</span>
                         <span class="label label-danger" *ngIf="order.productDetails?.type === 'digital'">Digital</span>
                       </div>
                     </div>
@@ -150,6 +152,22 @@
                   </li>
                 </ul>
                 <br>
+                <h3 *ngIf="order?.measurementForm?.fields.length > 0">Measurement details</h3>
+                <ul class="list-group" *ngIf="order?.measurementForm?.fields.length > 0">
+                  <li class="list-group-item" *ngFor="let field of order.measurementForm.fields">
+                    <div class="row">
+                      <div class="col-md-2">
+                        {{field.label}}
+                      </div>
+                      <div class="col-md-6">
+                        {{field.type}}
+                      </div>
+                      <div class="col-md-1">
+                        {{field.unit}}
+                      </div>
+                    </div>
+                  </li>
+                </ul>
                 <h3>Shipping details</h3>
                 <ul class="list-group">
                   <li class="list-group-item">
@@ -232,9 +250,10 @@
                         Shipping Type (*):
                       </div>
                       <div class="col-md-4">
-                        <input required type="text" class="form-control" placeholder="Enter shipping type" [(ngModel)]="order.shippingMethod"
-                          name="shippingMethod" #shippingMethod="ngModel" />
-                        <div *ngIf="shippingMethod.errors && (shippingMethod.dirty || shippingMethod.touched || isSubmitted)">
+                        <input required type="text" class="form-control" placeholder="Enter shipping type"
+                          [(ngModel)]="order.shippingMethod" name="shippingMethod" #shippingMethod="ngModel" />
+                        <div
+                          *ngIf="shippingMethod.errors && (shippingMethod.dirty || shippingMethod.touched || isSubmitted)">
                           <p [hidden]="!shippingMethod.errors.required" class="required-text">
                             Please enter shipping method!
                           </p>
@@ -244,8 +263,8 @@
                         Code (*):
                       </div>
                       <div class="col-md-4">
-                        <input required type="text" class="form-control" placeholder="Enter shipping code" [(ngModel)]="order.shippingCode"
-                          name="shippingCode" #shippingCode="ngModel" />
+                        <input required type="text" class="form-control" placeholder="Enter shipping code"
+                          [(ngModel)]="order.shippingCode" name="shippingCode" #shippingCode="ngModel" />
                         <div *ngIf="shippingCode.errors && (shippingCode.dirty || shippingCode.touched || isSubmitted)">
                           <p [hidden]="!shippingCode.errors.required" class="required-text">
                             Please enter shipping code!
@@ -263,8 +282,8 @@
                   <div class="card" style="width: 18rem;">
                     <div class="card-body" *ngIf="order.courier">
                       <h5 class="card-title"> {{order?.courier.name}}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">  {{order?.courier.email}}</h6>
-                      <p class="card-text">  {{order?.courier.phoneNumber}}</p>
+                      <h6 class="card-subtitle mb-2 text-muted"> {{order?.courier.email}}</h6>
+                      <p class="card-text"> {{order?.courier.phoneNumber}}</p>
                     </div>
                     <div class="card-body" *ngIf="!order.courier">
                       <h6 class="card-subtitle mb-2 text-muted">Courier Not Assign Yet.</h6>
