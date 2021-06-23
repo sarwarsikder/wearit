@@ -173,7 +173,7 @@ a#scrollUp i {
 .shop-menu ul li {
   display: inline-block;
   padding-left: 0px;
-  padding-right: 15px;
+  padding-right: 5px;
 }
 
 .shop-menu ul li:last-child {
@@ -2864,6 +2864,26 @@ textarea {
   background-color: #dc2626 !important;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+ }
+ ::-webkit-scrollbar-thumb {
+  background: #ffe5ed;
+  border-radius: 7px;
+ }
+ ::-webkit-scrollbar-thumb:hover{
+  background: #ffd4e8;
+ }
+ ::-webkit-scrollbar-track{
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: inset 5px 4px 12px #f0f0f0;
+ }
+
+ .autocomplete-container .input-container input{
+   border: 0px !important;
+ }
 
 @media only screen and (min-width: 340px) and (max-width: 768px) {
   .shop-menu{
