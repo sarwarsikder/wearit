@@ -101,6 +101,7 @@ async  signInWithInsta(){
     let auth = this.Auth;
     let router = this.router;
     let toastify = this.toasty;
+    let translate = this.translate;
     let instagramRedirectUri = window.appConfig.instagramRedirectUri;
     let instagramClientId = window.appConfig.instagramClientId;
     let popupWidth = 700,
@@ -126,7 +127,7 @@ async  signInWithInsta(){
             // console.log("here I am final")
             clearInterval(interval);
             popup.close();
-            toastify.success(this.translate.instant('Please wait...You will redirect soon.'))
+            toastify.success(translate.instant('Please wait...You will redirect soon.'))
             let data = await auth.socialLogin('instagram', myParam);
             
             window.location.href = "/";
