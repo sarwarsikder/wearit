@@ -94,12 +94,14 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-  plus() {
-    this.quantity = this.quantity + 1;
+  plus(index: number) {
+    this.cart.products[index].quantity = this.cart.products[index].quantity + 1;
+    this.updateTotalPrice();
   }
-  minus() {
+  minus(index: number) {
     if (this.quantity != 0) {
-      this.quantity = this.quantity - 1;
+      this.cart.products[index].quantity = this.cart.products[index].quantity - 1;
+      this.updateTotalPrice();
     }
 
   }
