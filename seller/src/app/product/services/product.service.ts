@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 @Injectable()
 export class ProductService {
   private allowFields = [
-    'name', 'alias', 'description', 'shortDescription', 'categoryId', 'brandId', 'specifications',
+    'name', 'isTailor', 'measurementFormId', 'alias', 'description', 'shortDescription', 'categoryId', 'brandId', 'specifications',
     'chemicalIdentifiers', 'safetyHandling', 'isActive', 'metaSeo', 'ordering', 'freeShip',
     'images', 'mainImage', 'type', 'price', 'salePrice', 'stockQuantity', 'sku', 'upc', 'mpn', 'ean', 'sizeChart', 'digitalFileId',
     'jan', 'isbn', 'taxClass', 'taxPercentage', 'restrictCODAreas', 'restrictFreeShipAreas', 'dailyDeal', 'dealTo', 'publishStatus',

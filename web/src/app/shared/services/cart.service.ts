@@ -30,12 +30,12 @@ export class CartService {
   add(data: any, quantity: number) {
     // TODO - not duplicate for existing product
     let checked = false;
-    const existProduct = _.find(this.cart, function(c: any) {
+    const existProduct = _.find(this.cart, function (c: any) {
       checked = true;
       return c.productId === data.productId;
     });
     if (checked && existProduct && data.productVariantId && data.productVariantId === existProduct.productVariantId
-       || checked && existProduct && !data.productVariantId) {
+      || checked && existProduct && !data.productVariantId) {
       return this.toasty.error(this.translate.instant('This item has already been added to cart'));
     } else {
       this.toasty.success(this.translate.instant('This item has been added to cart.'));
@@ -44,9 +44,10 @@ export class CartService {
     // TODO - not duplicate for existing product
     this.cart.unshift({
       productId: data.productId,
+      measurementForm: data.measurementForm,
       productVariantId: data.productVariantId,
       product: data.product,
-      quantity
+      quantity,
     });
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.cartChanged.next(this.cart);
@@ -54,22 +55,25 @@ export class CartService {
 
   addShop(data: any, quantity: number) {
     // TODO - not duplicate for existing product
+    console.log(data)
     let checked = false;
-    const existProduct = _.find(this.cart, function(c: any) {
+    const existProduct = _.find(this.cart, function (c: any) {
       checked = true;
       return c.productId === data.productId;
     });
     if (checked && existProduct && data.productVariantId && data.productVariantId === existProduct.productVariantId
-       || checked && existProduct && !data.productVariantId) {
+      || checked && existProduct && !data.productVariantId) {
       return this.toasty.error(this.translate.instant('This item has already been added to cart'));
-    } 
+    }
     // TODO - not duplicate for existing product
     this.cart.unshift({
       productId: data.productId,
+      measurementForm: data.measurementForm,
       productVariantId: data.productVariantId,
       product: data.product,
-      quantity
+      quantity,
     });
+    console.log(this.cart)
     localStorage.setItem('cart', JSON.stringify(this.cart));
     this.cartChanged.next(this.cart);
   }
@@ -91,7 +95,9 @@ export class CartService {
   }
 
   checkout(params: any): Promise<any> {
+    //console.log(params)
     return this.restangular.one('orders').customPOST(params).toPromise();
+    return
   }
 
   verifyCOD(params: any): Promise<any> {
@@ -107,7 +113,7 @@ export class CartService {
         });
       }
       return this.restangular.one('cart', 'calculate').customPOST({
-        products: this.cart.map(product => _.pick(product, ['productId', 'productVariantId', 'quantity'])),
+        products: this.cart.map(product => _.pick(product, ['productId', 'productVariantId', 'quantity', 'measurementForm.fields'])),
         userCurrency: systemConfig.customerCurrency
       }).toPromise();
     });

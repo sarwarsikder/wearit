@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-body">
+        <div class="col-md-12">
+            <form (ngSubmit)="submit()">
+                <div class="form-group">
+                    <label>Form Name</label>
+                    <input type="text" name="Form-label" [(ngModel)]="label" class="form-control"
+                        placeholder="Enter form name" />
+                </div>
+                <div class="row" *ngFor="let field of fields">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Field Name</label>
+                            <input type="text" name="Field-label" [(ngModel)]="field.label" class="form-control"
+                                placeholder="Enter field name" value="field.label" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Type</label>
+                            <select type="text" name="type" class="form-control" placeholder="String or Number"
+                                [(ngModel)]="field.type">
+                                <option value="string">String</option>
+                                <option value="number">Number</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <input type="text" name="Field-unit" [(ngModel)]="field.unit" class="form-control"
+                                placeholder="Enter unit" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" (click)="addField()">Add Field</button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <hr />
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

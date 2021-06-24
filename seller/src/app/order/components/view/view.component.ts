@@ -27,6 +27,7 @@ export class ViewComponent implements OnInit {
     this.orderService.findOne(id).then((res) => {
       this.order = res.data;
       this.avatarUrl = res.data.productDetails.mainImage ? res.data.productDetails.mainImage.mediumUrl : '/assets/images/background/user-info.jpg';
+      //console.log(this.order)
     })
   }
 
@@ -38,10 +39,10 @@ export class ViewComponent implements OnInit {
     name: string,
   }) => {
     if (x.name) {
-      x.name ;
-      console.log( x);
-      console.log( x.name);
-      this.order.courier= x;
+      x.name;
+      console.log(x);
+      console.log(x.name);
+      this.order.courier = x;
     }
   }
   search = (text$: Observable<string>) =>
@@ -74,7 +75,7 @@ export class ViewComponent implements OnInit {
     this.orderService.updateShipping(this.order._id, data).then(resp => {
       this.toasty.success('Updated shipping type successfuly!');
     }).catch((err) =>
-    this.toasty.error('Something went wrong, please try again!'));
+      this.toasty.error('Something went wrong, please try again!'));
   }
 
   query() {

@@ -15,7 +15,8 @@
     "no-console": 0,
     "max-len": 0,
     "global-require": 0,
-    "no-bitwise": 0
+    "no-bitwise": 0,
+    "linebreak-style": 0,
   },
   "parserOptions": {
     "ecmaVersion": 8

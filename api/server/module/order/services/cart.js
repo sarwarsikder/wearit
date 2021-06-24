@@ -8,6 +8,7 @@ const SITE_CURRENCY = process.env.SITE_CURRENCY || 'USD';
  * @param {*} data
  */
 exports.calculate = async (data) => {
+  console.log(data);
   try {
     // get currency if have
     const currency = SITE_CURRENCY;
@@ -61,6 +62,7 @@ exports.calculate = async (data) => {
         shopId: product.shop._id,
         productId: product.product._id,
         productVariantId: product.productVariantId,
+        measurementForm: product.measurementForm,
         quantity: product.quantity || 1,
         unitPrice,
         currency: SITE_CURRENCY,
