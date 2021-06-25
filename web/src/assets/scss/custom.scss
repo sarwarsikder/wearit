@@ -1504,15 +1504,28 @@ span {
   input {
     background: #fff;
   }
-  .search-top-btn {
-    background: #1a1a1a;
-    border: 0px;
+  .search-top-btn{
+    background: #fff;
+    border: 1px solid #fff;
     width: 43px;
     height: 36px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    &:hover {
+    border-left: 1px solid #e6e6e6;
+    svg{
+      fill: #000 !important;
+      path{
+        fill: #000 !important;
+      }
+    }
+    &:hover{
       background: #000;
+      border: 1px solid #000;
+      svg{
+        path{
+          fill: #fff !important;
+        }
+      }
     }
   }
 }
@@ -2647,12 +2660,12 @@ input {
   // padding-right:30px;
 }
 
-.custom-brand-box {
-  .img-prod {
-    padding: 7px !important;
-    height: 350px !important;
-    background: #f6f5f8;
-    img {
+.custom-brand-box{
+  .img-prod{
+    padding: 0px !important;
+    height:350px !important;
+    background: transparent;
+    img{
       height: 360px !important;
       object-fit: cover !important;
       border-radius: 0px !important;
@@ -2662,7 +2675,7 @@ input {
     text-transform: uppercase;
     a {
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 600;
     }
     small {
       display: block;
@@ -2743,10 +2756,11 @@ input {
 .list-shop {
   .box-shop {
     border: 0px !important;
+    box-shadow: none !important;
     // position: relative;
-    .img-prod {
-      height: 250px !important;
-      padding: 7px !important;
+    .img-prod{
+      height: 215px !important;
+      padding: 0px !important;
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -2799,6 +2813,7 @@ input {
 .title-main h4 {
   font-size: 24px;
   padding-bottom: 0px;
+  letter-spacing: -0.5px;
 }
 
 // sumon work date: 29-04-21
@@ -2985,9 +3000,9 @@ input {
   margin-top: 0px !important;
   color: #fff !important;
   font-size: 12px;
-
-  svg {
-    height: 23px;
+  
+  svg{
+    height: 22px;
     display: block;
   }
 }
@@ -3133,7 +3148,7 @@ input {
   background: #fff;
   border-radius: 0px;
   padding: 15px;
-  z-index: 99;
+  z-index: 9999;
   box-shadow: 0px 2px 16px -4px #00000047;
   &::before {
     content: "";
