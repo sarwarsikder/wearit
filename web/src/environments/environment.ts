@@ -15,7 +15,7 @@ export const environment = {
   // sellerUrl: 'https://wearit-shop-api.herokuapp.com/api',
   sellerUrl: 'https://wearit-seller.herokuapp.com/',
   platform: 'web',
-  
+
 
   /**Social Login Credentials Start */
   /**
@@ -41,7 +41,7 @@ export const environment = {
   /**
    * Instagram Login Credential End
    */
-    /**Social Login Credentials End */
+  /**Social Login Credentials End */
 
   paymentRedirectSuccessUrl: 'http://localhost:4200/cart/checkout/success',
   paymentRedirectCancelUrl: 'http://localhost:4200/cart/checkout/cancel',
