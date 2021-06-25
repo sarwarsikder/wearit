@@ -19,7 +19,8 @@ export class PriceConvert implements OnInit {
     this.systemService.configs().then(resp => {
       const value = Number(this.price) || 0;
       // https://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-dollars-currency-string-in-javascript
-      this.priceFormat = resp.customerCurrencySymbol + ' ' + (value * resp.customerRate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      // this.priceFormat = resp.customerCurrencySymbol + ' ' + (value * resp.customerRate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+      this.priceFormat = resp.customerCurrency + ' ' + (value * resp.customerRate).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     });
   }
 }

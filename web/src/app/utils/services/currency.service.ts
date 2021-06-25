@@ -122,9 +122,9 @@ export class CurrencyService {
       "namePlural": "Bosnia-Herzegovina convertible marks"
     },
     "BDT": {
-      "symbol": "Tk",
+      "symbol": "BDT",
       "name": "Bangladeshi Taka",
-      "symbolNative": "৳",
+      "symbolNative": "BDT",
       "dicimalDigits": 2,
       "rounding": 0,
       "code": "BDT",
