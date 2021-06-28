@@ -18,7 +18,7 @@ export const environment = {
   // googleClientId: '137828882328-lk6q22rskp5v3a30q1701h5mk9hhvrhq.apps.googleusercontent.com',
   // facebookAppId: '115398973981786',
   // facebookAppId: '113570925979091',
-  facebookAppId: '241327981130767',
+  facebookAppId: '115398973981786',
   instagramClientId: '2353717724782027',
   instagramClientSecret: '197b319ce7ead80bd914a7237d11b65d',
   instagramGrantType: 'authorization_code',

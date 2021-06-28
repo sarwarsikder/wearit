@@ -127,14 +127,14 @@ async  signInWithInsta(){
             popup.close();
 
 
-            fetch('http://localhost:8080/v1/auth/login/instagram', {
+            fetch('http://localhost:8080/v1/connect/instagram', {
               method: "POST",
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
               },
               body:  myParam
             } ).then(res => {
-              console.log(res)
+              window.location.href = '/'
             }).catch(err => console.log(err))
     }
 
