@@ -4,7 +4,8 @@ const _ = require('lodash');
 exports.User = (schema) => {
   schema.add({
     avatar: { type: String, default: '' },
-    username: {type: String } ,
+    email: { type: String, default: '' },
+    userName: {type: String } ,
     nid: { type: String, default: '' },
     emailVerifiedToken: {
       type: String,

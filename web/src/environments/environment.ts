@@ -7,22 +7,41 @@ export const environment = {
   production: false,
   version: '0.0.1',
   build: 27,
-  apiBaseUrl: 'http://localhost:8080/v1',
-  // apiBaseUrl: 'https://wearit-shop-api.herokuapp.com/v1',
+  // apiBaseUrl: 'http://localhost:8080/v1',
+  apiBaseUrl: 'https://wearit-shop-api.herokuapp.com/v1',
 
   apiProxy: '',
   // sellerUrl: 'https://wearit-shop-api.herokuapp.com/api',
   sellerUrl: 'https://wearit-seller.herokuapp.com/',
   platform: 'web',
-  googleClientId: '65008936034-b8nn9u1d0nitk5qlbtc91iqbv841cp21.apps.googleusercontent.com',
-  // googleClientId: '137828882328-lk6q22rskp5v3a30q1701h5mk9hhvrhq.apps.googleusercontent.com',
-  // facebookAppId: '115398973981786',
-  // facebookAppId: '113570925979091',
-  facebookAppId: '115398973981786',
-  instagramClientId: '2353717724782027',
-  instagramClientSecret: '197b319ce7ead80bd914a7237d11b65d',
-  instagramGrantType: 'authorization_code',
-  instagramRedirectUri: 'http://localhost:4200',
+  
+
+  /**Social Login Credentials Start */
+  /**
+   * Google Drive Login Credential Start
+   */
+  googleClientId: '724717586536-4aafue6065jpciebbkh94hb41gmm4tsv.apps.googleusercontent.com',
+  /**
+   * Google Drive Login Credential End
+   */
+
+  /**
+   * Facebook Login Credential Start
+   */
+  facebookAppId: '195619922437219',
+  /**
+   * Facebook Login Credential End
+   */
+  /**
+   * Instagram Login Credential Start
+   */
+  instagramClientId: '493159371753638',
+  instagramRedirectUri: 'https://wearit-web.herokuapp.com/',
+  /**
+   * Instagram Login Credential End
+   */
+    /**Social Login Credentials End */
+
   paymentRedirectSuccessUrl: 'http://localhost:4200/cart/checkout/success',
   paymentRedirectCancelUrl: 'http://localhost:4200/cart/checkout/cancel',
   stripeKey: 'pk_test_Z3rf3HSfsokHl4lLFTBxhZrZ',

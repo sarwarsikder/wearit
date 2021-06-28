@@ -166,16 +166,17 @@
                 <!-- <span translate>Quantity:&nbsp;</span> <input (keypress)="onlyNumberKey($event)" type="number" min="1"
                   max="{{stockQuantity}}" [(ngModel)]="quantity" name="quantity" /> -->
 
+
                   <div class="form-check-inline">
-                    <button class="btn" (click)="plus()"><i class="fa fa-plus"></i></button>
+                    <button class="btn" (click)="minus()"><i class="fa fa-minus"></i></button>
                   </div>
                   <div class="form-check-inline">
                     <input type="text" type="number" min="{{product.minimumPurchaseQuantity?product.minimumPurchaseQuantity:1}}"
                     max="{{(product.maximumPurchaseQuantity && product.maximumPurchaseQuantity <= stockQuantity) ? product.maximumPurchaseQuantity:stockQuantity}}" [(ngModel)]="quantity" name="quantity">
                   </div>
                   <div class="form-check-inline">
-                    <button class="btn" (click)="minus()"><i class="fa fa-minus"></i></button>
-                  </div>
+                    <button class="btn" (click)="plus()"><i class="fa fa-plus"></i></button>
+                  </div>                 
               </div>
 
               <hr>

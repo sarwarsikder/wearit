@@ -51,6 +51,13 @@ export class UpdateComponent implements OnInit, OnDestroy {
     this.authService.updateMe(this.info).then(resp => {
       window.location.href = '/'
       this.toasty.success(this.translate.instant('Updated successfuly!'));
-    }).catch((err) => this.toasty.error(this.translate.instant('Something went wrong, please check and try again!')));
+    }).catch((err) => {
+      console.log(err)
+      this.toasty.error(this.translate.instant('Something went wrong, please check and try again!'))
+      if(err && err.error && err.error.message){
+        this.toasty.error(err.error.message)
+      }
+      
+    });
   }
 }

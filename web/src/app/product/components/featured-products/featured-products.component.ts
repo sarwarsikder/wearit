@@ -16,8 +16,8 @@ export class FeaturedProductsComponent implements OnChanges {
   public sort: any = 'random';
   public sortType: any = '';
   public slideConfig: any = {
-    slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToShow: 5,
+    slidesToScroll: 5,
     dots: false,
     arrows: true,
     autoplay: false,

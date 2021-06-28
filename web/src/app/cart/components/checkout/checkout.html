@@ -53,6 +53,9 @@
                     
                   </td> -->
                   <td class="cart_quantity">
+                    <div class="form-check-inline">
+                      <button class="btn" (click)="minus()"><i class="fa fa-minus"></i></button>
+                    </div>
                     
                     <input type="number" name="number{{i}}" class="form-control" [(ngModel)]="item.quantity" (change)="updateTotalPrice()"
                       [disabled]="item.error" />
@@ -60,6 +63,9 @@
                       <span translate class="label label-error">Out of stock</span>
                       <span translate>Please remove this product from the cart!</span>
                     </p>
+                    <div class="form-check-inline">
+                      <button class="btn" (click)="plus()"><i class="fa fa-plus"></i></button>
+                    </div> 
                   </td>
                   
                   <td class="cart_total"> {{item.calculatedData?.total | priceCurrency:item.userCurrency}} </td>

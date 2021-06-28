@@ -37,6 +37,8 @@ export class CheckoutComponent implements OnInit {
   public orderId: any;
   public coupon: any = '';
   public countries: any = [];
+  public quantity: any = 1;
+
 
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
   public cardHolderName: any = '';
@@ -89,6 +91,16 @@ export class CheckoutComponent implements OnInit {
       resp => this.countries = resp.data
     );
    
+  }
+
+  plus() {
+    this.quantity = this.quantity + 1;
+  }
+  minus() {
+    if (this.quantity != 0) {
+      this.quantity = this.quantity - 1;
+    }
+
   }
 
   remove(index: number) {
