@@ -42,9 +42,9 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: '/orders/list', title: 'Orders', icon: 'fa fa-bars', class: 'has-arrow', label: '', labelClass: '', extralink: false, submenu: [
-      { path: '/orders/list', title: 'Orders', icon: 'fa fa-usd', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
-      { path: '/refunds', title: 'Refunds', icon: 'fa fa-undo', class: '', label: '', labelClass: '', extralink: false, submenu: [] }
+    path: '/orders/list', title: 'Orders', icon: 'fa fa-bars', class: 'has-arrow', label: 'orders', labelClass: '', extralink: false, submenu: [
+      { path: '/orders/list', title: 'Orders', icon: 'fa fa-usd', class: '', label: 'orders', labelClass: '', extralink: false, submenu: [] },
+      { path: '/refunds', title: 'Refunds', icon: 'fa fa-undo', class: '', label: 'orders', labelClass: '', extralink: false, submenu: [] }
     ]
   },
   {
