@@ -41,7 +41,7 @@
     <div class="container-fluid flex-flow">
       <div class="logo pull-left logo-mango">
         <a [routerLink]="['/']">
-          <img src="/assets/images/wearit-logo.svg" height="45" style="margin-top: -7px;"  *ngIf="appConfig?.siteLogo" />
+          <img src="/assets/images/wearit-logo.svg" height="45" style="margin-top: -10px;"  *ngIf="appConfig?.siteLogo" />
           <!-- <img [src]="appConfig?.siteLogo" *ngIf="appConfig?.siteLogo" /> -->
           <span *ngIf="!appConfig?.siteLogo">{{appConfig?.siteName}}</span>
         </a>
@@ -85,7 +85,7 @@
               fill="white" />
           </svg>
         </button>
-        <div class="dropdown" ngbDropdown>
+        <!-- <div class="dropdown" ngbDropdown>
           <a class="icon-flex " ngbDropdownToggle style="margin-top: -4px !important;display: block;">
             <span>
               <svg class="shake" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,6 +105,35 @@
             </a>
             <a class="dropdown-item" href="">
               Discounted Products
+            </a>
+          </div>
+        </div> -->
+        <div class="wholesale dropdown" ngbDropdown>
+          <a class="wholesale-flex" ngbDropdownToggle>
+            <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0)">
+              <path d="M9.47331 11.2149C9.16054 11.2149 8.9069 11.4685 8.9069 11.7813V18.9179C8.9069 19.2306 9.16054 19.4843 9.47331 19.4843C9.78608 19.4843 10.0397 19.2306 10.0397 18.9179V11.7813C10.0397 11.4685 9.78608 11.2149 9.47331 11.2149Z" fill="white"/>
+              <path d="M14.0045 11.2149C13.6918 11.2149 13.4381 11.4685 13.4381 11.7813V18.9179C13.4381 19.2306 13.6918 19.4843 14.0045 19.4843C14.3173 19.4843 14.5709 19.2306 14.5709 18.9179V11.7813C14.5709 11.4685 14.3173 11.2149 14.0045 11.2149Z" fill="white"/>
+              <path d="M18.5358 11.2149C18.223 11.2149 17.9694 11.4685 17.9694 11.7813V18.9179C17.9694 19.2306 18.223 19.4843 18.5358 19.4843C18.8485 19.4843 19.1022 19.2306 19.1022 18.9179V11.7813C19.1022 11.4685 18.8485 11.2149 18.5358 11.2149Z" fill="white"/>
+              <path d="M23.067 11.2149C22.7543 11.2149 22.5006 11.4685 22.5006 11.7813V18.9179C22.5006 19.2306 22.7543 19.4843 23.067 19.4843C23.3798 19.4843 23.6334 19.2306 23.6334 18.9179V11.7813C23.6334 11.4685 23.3798 11.2149 23.067 11.2149Z" fill="white"/>
+              <path d="M26.726 21.5192L28.9916 9.16393C29.0219 8.99859 28.9772 8.82827 28.8697 8.69919C28.7621 8.57005 28.6026 8.49534 28.4345 8.49534H25.9423V3.62499C25.9423 3.31222 25.6887 3.05859 25.3759 3.05859H15.0674V0.566405C15.0674 0.253636 14.8137 0 14.501 0H8.61035C8.29758 0 8.04395 0.253636 8.04395 0.566405V8.49534H5.03798L4.18418 3.52904C4.13745 3.25723 3.90177 3.05859 3.62599 3.05859H0.567404C0.254636 3.05859 0.000999451 3.31222 0.000999451 3.62499V5.89061C0.000999451 6.20338 0.254636 6.45702 0.567404 6.45702H3.53808L6.11817 21.4654V22.2028C6.11817 23.844 7.37106 25.1981 8.97058 25.3589C8.74045 25.725 8.60673 26.1577 8.60673 26.6211C8.60673 27.9328 9.67389 29 10.9856 29C12.2974 29 13.3645 27.9328 13.3645 26.6211C13.3645 26.1645 13.2349 25.7377 13.011 25.375H19.8424C19.6184 25.7377 19.4888 26.1645 19.4888 26.6211C19.4888 27.9328 20.556 29 21.8677 29C23.1795 29 24.2466 27.9328 24.2466 26.6211C24.2466 26.1645 24.117 25.7377 23.8931 25.375H26.1689C26.4817 25.375 26.7353 25.1214 26.7353 24.8086C26.7353 24.4958 26.4817 24.2422 26.1689 24.2422H9.29038C8.16584 24.2421 7.25098 23.3273 7.25098 22.2027V21.9834H26.1689C26.4423 21.9834 26.6767 21.7881 26.726 21.5192ZM1.13381 5.32421V4.1914H3.14862L3.34335 5.32421H1.13381ZM21.8678 25.375C22.555 25.375 23.1139 25.9339 23.1139 26.621C23.1139 27.3081 22.555 27.8671 21.8678 27.8671C21.1807 27.8671 20.6218 27.3081 20.6218 26.621C20.6218 25.9339 21.1807 25.375 21.8678 25.375ZM10.9857 25.375C11.6728 25.375 12.2318 25.9339 12.2318 26.621C12.2318 27.3081 11.6728 27.8671 10.9857 27.8671C10.2986 27.8671 9.73959 27.3081 9.73959 26.621C9.73959 25.9339 10.2986 25.375 10.9857 25.375ZM15.0746 6.45702H19.996C20.3088 6.45702 20.5624 6.20338 20.5624 5.89061C20.5624 5.57784 20.3088 5.32421 19.996 5.32421H15.0746V4.1914H24.8095V8.49534H15.0746V6.45702ZM9.17676 1.13281H13.9346V8.49534H9.17676V1.13281ZM25.6969 20.8506H7.16194L5.23271 9.62815H27.7548L25.6969 20.8506Z" fill="white"/>
+              <path d="M23.2894 5.49018C23.1835 5.38482 23.0374 5.32422 22.889 5.32422C22.74 5.32422 22.5939 5.38477 22.488 5.49018C22.3827 5.59553 22.3226 5.74166 22.3226 5.89062C22.3226 6.03959 22.3827 6.18572 22.488 6.29102C22.5939 6.39642 22.7401 6.45703 22.889 6.45703C23.0374 6.45703 23.1835 6.39642 23.2894 6.29102C23.3948 6.18572 23.4554 6.03959 23.4554 5.89062C23.4554 5.74166 23.3949 5.59553 23.2894 5.49018Z" fill="white"/>
+              </g>
+              <defs>
+              <clipPath id="clip0">
+              <rect width="29" height="29" fill="white"/>
+              </clipPath>
+              </defs>
+              </svg>
+              
+            <label for="">Sell on wearit</label>
+          </a>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <a class="dropdown-item" href="">
+              Become a Seller
+            </a>
+            <a class="dropdown-item" href="">
+              Become a wholeseller
             </a>
           </div>
         </div>
@@ -214,7 +243,7 @@
             <label for="">Wishlist</label>
           </a>
         </div>
-        <div class="pull-right wholesale dropdown" ngbDropdown>
+        <!-- <div class="pull-right wholesale dropdown" ngbDropdown>
           <a class="wholesale-flex" ngbDropdownToggle>
             <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0)">
@@ -240,6 +269,29 @@
             </a>
             <a class="dropdown-item" href="">
               Become a wholeseller
+            </a>
+          </div>
+        </div> -->
+        <div class="pull-right dropdown" ngbDropdown>
+          <a class="icon-flex " ngbDropdownToggle style="display: block;">
+            <span>
+              <svg  width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M46 26V51H6V26" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M51 14H1V26H51V14Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M26 51V14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M26 13H14.4286C12.7236 13 11.0885 12.3679 9.88288 11.2426C8.67729 10.1174 8 8.5913 8 7C8 5.4087 8.67729 3.88258 9.88288 2.75736C11.0885 1.63214 12.7236 1 14.4286 1C23.4286 1 26 13 26 13Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M26 13H36.9286C38.5388 13 40.0831 12.3679 41.2217 11.2426C42.3603 10.1174 43 8.5913 43 7C43 5.4087 42.3603 3.88258 41.2217 2.75736C40.0831 1.63214 38.5388 1 36.9286 1C28.4286 1 26 13 26 13Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                
+            </span>
+            <label for="">Offers</label>
+          </a>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <a class="dropdown-item" href="">
+              Campaign
+            </a>
+            <a class="dropdown-item" href="">
+              Discounted Products
             </a>
           </div>
         </div>
@@ -286,7 +338,7 @@
         </div>
         
         <div class="dropdown pull-right user-dropdown" *ngIf="currentUser" ngbDropdown>
-          <a class="btn btn-secondary dropdown-toggle toggle-user user-toggle-flex" ngbDropdownToggle role="button" (click)="dropdown()"
+          <a class="btn btn-secondary dropdown-toggle toggle-user user-toggle-flex" style="line-height: 23px;" ngbDropdownToggle role="button" (click)="dropdown()"
             id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12.4094 13.4707C12.4352 13.4707 12.4611 13.4707 12.4922 13.4707C12.5025 13.4707 12.5129 13.4707 12.5232 13.4707C12.5388 13.4707 12.5595 13.4707 12.575 13.4707C14.0919 13.4448 15.3189 12.9116 16.2248 11.8917C18.218 9.64485 17.8867 5.79313 17.8504 5.42555C17.721 2.66618 16.4164 1.34603 15.3396 0.729965C14.5371 0.269207 13.6001 0.0207082 12.5543 0H12.5181C12.5129 0 12.5025 0 12.4974 0H12.4663C11.8916 0 10.763 0.093187 9.68104 0.709257C8.59386 1.32533 7.26853 2.64548 7.13911 5.42555C7.10287 5.79313 6.77154 9.64485 8.7647 11.8917C9.66551 12.9116 10.8925 13.4448 12.4094 13.4707ZM8.52138 5.55498C8.52138 5.53945 8.52656 5.52392 8.52656 5.51356C8.6974 1.80162 11.3325 1.40298 12.4611 1.40298H12.4818C12.4922 1.40298 12.5077 1.40298 12.5232 1.40298C13.9211 1.43404 16.2973 2.00352 16.4578 5.51356C16.4578 5.5291 16.4578 5.54463 16.463 5.55498C16.4682 5.59122 16.8306 9.11162 15.1843 10.965C14.5319 11.7001 13.6622 12.0625 12.5181 12.0729C12.5077 12.0729 12.5025 12.0729 12.4922 12.0729C12.4818 12.0729 12.4767 12.0729 12.4663 12.0729C11.3273 12.0625 10.4524 11.7001 9.80529 10.965C8.16417 9.12197 8.51621 5.58604 8.52138 5.55498Z" fill="white"/>
@@ -295,7 +347,7 @@
               
               
             <!-- <img [src]="currentUser?.avatarUrl" class="avatar-circle" /><span>{{currentUser.name}}</span> -->
-           <span *ngIf="currentUser.name; else elseBlock">Hi, {{currentUser.name.split(" ")[0]}}</span>
+           <label *ngIf="currentUser.name; else elseBlock">Hi, {{currentUser.name.split(" ")[0]}}</label>
           </a>
           <div class="dropdown-menu cstm-dropdown-al" ngbDropdownMenu aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" appLocationHref [url]="'/profile/update'">

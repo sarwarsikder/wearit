@@ -13,7 +13,7 @@
     }
 
     .slick-dots {
-      bottom:8px;
+      bottom:-35px;
 
       li {
         // background: #000;
@@ -21,7 +21,7 @@
 
         button {
           &::before {
-            font-size: 14px;
+            font-size: 8px;
             color: #000;
             opacity: 1 !important;
           }

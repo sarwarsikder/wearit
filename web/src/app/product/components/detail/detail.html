@@ -425,7 +425,7 @@
             <div class="title-main col-md-12">
               <h4 style="margin-bottom: 10px;">More from the Shop</h4>
             </div>
-            <div class="box-product col-sm-6 col-md-3 list-item-single" *ngFor="let item of products">
+            <div class="box-product col-sm-4 col-md-2 list-item-single" *ngFor="let item of products">
               <div class="img-prod"><a appLocationHref [url]="'/products/' + product.alias">
                   <img [src]="item?.mainImage?.thumbUrl | checkImage"></a>
               </div>

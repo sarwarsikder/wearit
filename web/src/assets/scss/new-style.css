@@ -2326,7 +2326,7 @@ textarea {
   position: absolute;
   top:38%;
   z-index: 9;
-  right: 7px;
+  right: 10px;
   font-size: 27px;
   color: #999;
   cursor: pointer;
@@ -2354,7 +2354,7 @@ textarea {
 .header-middle {
   display: table;
   width: 100%;
-  padding: 20px 0px 0px 0px;
+  padding: 10px 0px 0px 0px;
   background: #DC2626;
 }
 
@@ -2845,23 +2845,25 @@ textarea {
 }
 
 .carousel-row .next-1{
-  background: black url(../images/carousel-right-small.png)no-repeat !important;
+  background: transparent url(../images/carousel-right-small.png)no-repeat !important;
   background-size: 14px 35px!important;
   background-position: center!important;
   color: transparent !important;
+  box-shadow: none !important;
 }
 .carousel-row .next-1:hover{
-  background-color: #dc2626 !important;
+  background-color:transparent !important;
 }
 .carousel-row .prev-1{
-  background: black url(../images/carousel-right-small.png)no-repeat !important;
+  background: transparent url(../images/carousel-right-small.png)no-repeat !important;
   background-size: 14px 35px!important;
   background-position: center!important;
   color: transparent !important;
   transform: rotate(180deg) !important;
+  box-shadow: none !important;
 }
 .carousel-row .prev-1:hover{
-  background-color: #dc2626 !important;
+  background-color: transparent !important;
 }
 
 ::-webkit-scrollbar {

@@ -1508,7 +1508,7 @@ span {
     background: #fff;
     border: 1px solid #fff;
     width: 43px;
-    height: 36px;
+    height: 40px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-left: 1px solid #e6e6e6;
@@ -1550,7 +1550,7 @@ span {
 }
 
 .wholesale {
-  margin-top: 0px;
+  margin-top: 4px;
   position: relative;
   margin-left: 15px;
   span {
@@ -1673,8 +1673,19 @@ span {
   background: #fafafa !important;
 }
 .related-goods {
+  
+  a{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+  }
   .img-prod {
     height: 290px !important;
+    position: relative;
+    height: 0px !important;
+    width: 100%;
+    padding-bottom: 100% !important;
   }
 }
 
@@ -1744,7 +1755,7 @@ span {
       }
       .price-product {
         font-size: 14px;
-        font-weight: 700;
+        font-weight: 600;
         span.line-through {
           font-size: 10px;
         }
@@ -2010,14 +2021,15 @@ span {
 
 .pre-selector {
   width: 100px;
-  height: 36px;
+  height: 40px;
   border-right: 0px;
   background: #eaeaea;
   color: #000;
-  padding-right: 10px;
+  padding-right: 12px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   font-size: 12px;
+  border-right: 3px solid #eaeaea;
 }
 
 .stv-radio-tabs-wrapper {
@@ -2663,8 +2675,17 @@ input {
 .custom-brand-box{
   .img-prod{
     padding: 0px !important;
-    height:350px !important;
+    height:0px !important;
+    padding-bottom: 100% !important;
+    width: 100% !important;
     background: transparent;
+    position: relative;
+    a{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+    }
     img{
       height: 360px !important;
       object-fit: cover !important;
@@ -2675,7 +2696,8 @@ input {
     text-transform: uppercase;
     a {
       font-size: 16px;
-      font-weight: 600;
+      font-family: "Helvetica Neue Cn Bold", Arial, sans-serif;
+      // font-weight: 600;
     }
     small {
       display: block;
@@ -2686,9 +2708,16 @@ input {
 }
 
 .img-prod {
-  height: 350px;
+  height: 0px;
   line-height: 145px;
   padding: 0px !important;
+  padding-bottom: 100% !important;
+  position: relative;
+  a{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
 
   img {
     border-radius: 0px;
@@ -2744,8 +2773,17 @@ input {
     padding-left: 15px;
     padding-right: 15px;
     .img-prod {
-      height: 260px;
+      height: 0px;
+      position: relative;
+      padding-bottom: 100% !important;
+      width: 100% !important;
       display: block;
+      a{
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+      }
       img {
         height: 260px !important;
       }
@@ -2753,20 +2791,32 @@ input {
   }
 }
 
+.offer-slider{
+  margin-top: 20px;
+}
 .list-shop {
   .box-shop {
     border: 0px !important;
     box-shadow: none !important;
     // position: relative;
     .img-prod{
-      height: 215px !important;
+      height: 0px !important;
       padding: 0px !important;
+      padding-bottom: 100% !important;
+      width: 100% !important;
       display: flex;
       align-items: center;
       overflow: hidden;
       justify-content: center;
+      position: relative;
+      a{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+      }
       img {
-        height: 200px !important;
+        // height: 200px !important;
         object-fit: cover;
         border-radius: 0px !important;
       }
@@ -2969,9 +3019,10 @@ input {
 .flex-flow {
   display: flex;
   flex-direction: row;
+  margin-top: 8px;
   .search_box {
     flex-grow: 1;
-    margin-top: -3px;
+    margin-top: -7px;
     padding-left: 25px;
     padding-right: 100px;
   }
@@ -3002,7 +3053,7 @@ input {
   font-size: 12px;
   
   svg{
-    height: 22px;
+    height: 18px;
     display: block;
   }
 }
@@ -3015,7 +3066,7 @@ input {
   font-size: 12px;
   svg {
     display: block;
-    height: 23px;
+    height: 18px;
   }
 }
 .wholesale-flex {
@@ -3031,7 +3082,8 @@ input {
   }
   svg {
     display: block;
-    height: 23px;
+    height: 18px;
+    margin-top: -2px;
   }
 }
 .wish-top {
@@ -3048,7 +3100,7 @@ input {
     margin-top: 0px !important;
     font-size: 12px;
     svg {
-      height: 22px;
+      height: 18px;
     }
   }
 }
@@ -3094,7 +3146,7 @@ input {
 }
 
 .ng-autocomplete .autocomplete-container .input-container input {
-  height: 36px !important;
+  height: 40px !important;
   border-radius: 0px;
 }
 .ng-autocomplete {
@@ -3111,6 +3163,12 @@ input {
 
 .user-dropdown {
   margin-top: 0px;
+  & > label{
+    margin-bottom: 0px;
+  }
+  a > svg{
+    height: 18px;
+  }
 }
 .user-toggle-flex {
   display: flex;
