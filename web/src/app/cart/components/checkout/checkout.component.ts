@@ -76,12 +76,13 @@ export class CheckoutComponent implements OnInit {
         this.userInfo.paymentMethod = 'stripe';
       }
     }
-    
+
     this.userInfo.userCurrency = config ? config.customerCurrency : 'USD';
   }
 
   ngOnInit() {
     this.cart = this.route.snapshot.data.cart;
+    console.log(this.route.snapshot.data)
     this.updateTotalPrice();
     this.stripeService.setKey(window.appConfig.stripeKey);
     this.stripeTest = this.fb.group({
@@ -90,15 +91,17 @@ export class CheckoutComponent implements OnInit {
     this.locationService.countries().then(
       resp => this.countries = resp.data
     );
-   
+
   }
 
-  plus() {
-    this.quantity = this.quantity + 1;
+  plus(index: number) {
+    this.cart.products[index].quantity = this.cart.products[index].quantity + 1;
+    this.updateTotalPrice();
   }
-  minus() {
+  minus(index: number) {
     if (this.quantity != 0) {
-      this.quantity = this.quantity - 1;
+      this.cart.products[index].quantity = this.cart.products[index].quantity - 1;
+      this.updateTotalPrice();
     }
 
   }
@@ -257,7 +260,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   doPost() {
-    const products = this.cart.products.map(item => _.pick(item, ['productId', 'productVariantId', 'quantity', 'userNote', 'couponCode']));
+    //console.log(this.cart)
+    const products = this.cart.products.map(item => _.pick(item, ['productId', 'productVariantId', 'quantity', 'userNote', 'couponCode', 'measurementForm']));
+    //console.log(products)
     this.userInfo.phoneNumber = `${this.dialCode}${this.phoneNumber}`;
     this.cartService.checkout({
       products,
@@ -337,5 +342,5 @@ export class CheckoutComponent implements OnInit {
         });
     });
   }
-  
+
 }

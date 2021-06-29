@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductCategoryService } from '../../services/category.service';
 import { ProductService } from '../../services/product.service';
 import { LocationService } from '../../../shared/services';
+import { MeasurementService } from '../../services/measurement.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import * as _ from 'lodash';
@@ -16,6 +17,8 @@ import { BrandService } from '../../services/brand.service';
 export class ProductCreateComponent implements OnInit {
   public product: any = {
     name: '',
+    isTailor: false,
+    measurementFormId: '',
     description: '',
     specifications: [],
     mainImage: null,
@@ -69,6 +72,8 @@ export class ProductCreateComponent implements OnInit {
   public searchFailed: any = false;
   public fileType: any = '';
   public fileOptions: any = {};
+  public measurementForms: any = [];
+  public selectedForm: any = null;
   public sizeChartUrl: any = '';
 
   // formatter_brand = (x: {
@@ -80,26 +85,26 @@ export class ProductCreateComponent implements OnInit {
   formatter_brand = (x: { name: string }) => x.name;
 
   search_brand = (text$: Observable<string>) =>
-      text$.pipe(
-          debounceTime(500),
-          distinctUntilChanged(),
-          tap(() => this.searching = true),
-          switchMap(term =>
-              this.brandService.search({ name: term }).then((res) => {
-                if (res) {
-                  this.searchFailed = false;
-                  this.searching = false;
-                  return res.data.items;
-                }
-                this.searchFailed = true;
-                this.searching = false;
-                return of([]);
-              })
-          )
+    text$.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap(() => this.searching = true),
+      switchMap(term =>
+        this.brandService.search({ name: term }).then((res) => {
+          if (res) {
+            this.searchFailed = false;
+            this.searching = false;
+            return res.data.items;
+          }
+          this.searchFailed = true;
+          this.searching = false;
+          return of([]);
+        })
       )
+    )
 
   constructor(private router: Router, private categoryService: ProductCategoryService, private brandService: BrandService,
-    private productService: ProductService, private toasty: ToastyService, private location: LocationService) {
+    private productService: ProductService, private toasty: ToastyService, private location: LocationService, private measurementService: MeasurementService) {
   }
 
   ngOnInit() {
@@ -127,12 +132,23 @@ export class ProductCreateComponent implements OnInit {
     this.categoryService.tree()
       .then(resp => (this.tree = this.categoryService.prettyPrint(resp.data)));
 
+    this.measurementService.getAll()
+      .then((res) => {
+        this.measurementForms = res.data
+        console.log(this.measurementForms)
+      })
+      .catch((err) => this.toasty.error(err.data.data.details[0].message || err.data.message || 'Something went wrong!'))
   }
 
   submit(frm: any) {
     this.isSubmitted = true;
     if (frm.invalid) {
       return this.toasty.error('Form is invalid, please try again.');
+    }
+
+    if (this.selectedForm) {
+      this.product.isTailor = true
+      this.product.measurementFormId = this.selectedForm
     }
 
     if (this.product.salePrice > this.product.price || this.product.salePrice <= 0 || this.product.price <= 0) {
@@ -165,7 +181,6 @@ export class ProductCreateComponent implements OnInit {
     });
     this.product.images = this.images.map(i => i._id);
     this.product.mainImage = this.mainImage || null;
-   
     this.productService.create(this.product)
       .then(() => {
         this.toasty.success('Product has been created');

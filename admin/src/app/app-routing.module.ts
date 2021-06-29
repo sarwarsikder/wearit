@@ -26,6 +26,7 @@ export const Approutes: Routes = [
       { path: 'starter', loadChildren: './starter/starter.module#StarterModule' },
       { path: 'users', loadChildren: './user/user.module#UserModule' },
       { path: 'products', loadChildren: './product/product.module#ProductModule' },
+      { path: 'measurement', loadChildren: './measurement/measurement.module#MeasurementModule' },
       { path: 'shops', loadChildren: './shop/shop.module#ShopModule' },
       { path: 'banners', loadChildren: './banner/banner.module#BannerModule' },
       { path: 'malls', loadChildren: './mall/mall.module#MallModule' },
