@@ -33,15 +33,15 @@
             <div>
               <div class="product-detail-images">
                 <img src="/assets/images/noImage.jpg" width="100%" title="No-Image" *ngIf="!product.images.length">
-                <div class="half-w-image">
-                  <img src="http://via.placeholder.com/800x800" alt="">
+                <div class="half-w-image" *ngFor="let image of product.images; let i = index">
+                  <img src={{image.fileUrl}} alt={{product?.name}}>
+                </div>
+                <!-- <div class="half-w-image">
+                  <img src={{product.images[1].fileUrl}} alt="">
                 </div>
                 <div class="half-w-image">
-                  <img src="http://via.placeholder.com/800x800" alt="">
-                </div>
-                <div class="half-w-image">
-                  <img src="http://via.placeholder.com/800x800" alt="">
-                </div>
+                  <img src={{product.images[2].fileUrl}} alt="">
+                </div> -->
               </div>
             </div>
             <!-- New Design For Product Details End -->
@@ -61,8 +61,8 @@
               </div> -->
               <div translate class="highlight-info">Instock:
                 <strong>
-                  <span *ngIf="stockQuantity">{{stockQuantity | number}}</span>
-                  <span *ngIf="!stockQuantity" class="badge badge-danger" translate>SOLD OUT!</span>
+                  <span *ngIf="product.stockQuantity">{{product.stockQuantity | number}}</span>
+                  <span *ngIf="!product.stockQuantity" class="badge badge-danger" translate>SOLD OUT!</span>
                 </strong>
               </div>
               <div translate class="highlight-info" *ngIf="stockQuantity">Minimum Puchase Quantity:
@@ -92,7 +92,7 @@
                   Size Guideline
                 </button>
                 <div class="price-detial" *ngIf="salePrice">
-                  <span class="salePrice-format">{{salePrice | currency | async}}</span>
+                  <span class="salePrice-format">{{product.salePrice | currency | async}}</span>
                   <label class="shipping-status" *ngIf="product?.freeShip" translate>Free Shipping</label>
                   <label class="shipping-status" *ngIf="product?.isTailor" translate>Tailor Product</label>
                   <div class="through-line">
@@ -101,7 +101,7 @@
                   </div>
                 </div>
                 <div class="price-detial" *ngIf="!salePrice">
-                  <span class="salePrice-format">{{price | currency | async}}</span>
+                  <span class="salePrice-format">{{product.price | currency | async}}</span>
                   <label class="shipping-status" *ngIf="product?.freeShip" translate>Free Shipping</label>
                   <label class="shipping-status" *ngIf="product?.isTailor" translate>Tailor Product</label>
                 </div>
