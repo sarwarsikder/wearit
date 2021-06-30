@@ -568,12 +568,15 @@ a.dropdown-item {
   color: #333;
 
   &:hover {
-    color: #fe980f;
+    color: #000;
   }
 
   i {
     margin-right: 7px;
   }
+}
+.dropdown-item:hover, .dropdown-item:focus{
+  background: #e2e2e2;
 }
 
 .header-title {
@@ -1370,6 +1373,7 @@ span.no-span {
 .title-main {
   position: relative;
   overflow: hidden;
+  margin-top: -25px;
   // border-bottom: 3px solid #df1a32;
 
   h4,
@@ -2283,10 +2287,10 @@ input.stv-radio-tab {
     color: #1c1c1c !important;
     font-weight: 500 !important;
     &:hover {
-      color: red !important;
+      color: #000 !important;
       svg {
         path {
-          fill: red;
+          fill: #000;
         }
       }
     }

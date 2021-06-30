@@ -2820,20 +2820,20 @@ textarea {
 
 .slick-prev:before{
   content: " " !important;
-  width: 40px !important;
-  height: 40px !important;
+  width: 50px !important;
+  height: 50px !important;
   background: url(../images/carousel-left.png)no-repeat !important;
   background-position: center !important;
   opacity: 1 !important;
   position: absolute !important;
   top: 0px;
   left: 10px;
-  background-size: 45px !important;
+  background-size: 60px !important;
 }
 .slick-next:before{
   content: " " !important;
-  width: 40px !important;
-  height: 40px !important;
+  width: 50px !important;
+  height: 50px !important;
   background: url(../images/carousel-left.png)no-repeat !important;
   background-position: center !important;
   opacity: 1 !important;
@@ -2841,7 +2841,7 @@ textarea {
   top: 0px;
   right: 10px;
   transform: rotate(180deg);
-  background-size:45px !important;
+  background-size:60px !important;
 }
 
 .carousel-row .next-1{
